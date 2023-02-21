@@ -1,0 +1,41 @@
+header {
+    min-width: 100%;
+}
+
+div.inner-header {
+    max-width: 900px;
+    height: 50px;
+    margin: 0 auto;
+    line-height: 50px;
+
+    position: relative;
+}
+
+p#header-logo {
+    font-family: 'Berkshire Swash';
+    font-size: 24px;
+    font-weight: bold;
+
+    position: absolute;
+    left: 0;
+}
+
+div.inner-header ul.header-links {
+    display: flex;
+    gap: 40px;
+
+
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+div.inner-header div {
+    position: absolute;
+    right: 0;
+}
+
+div.inner-header div.header-user ul.header-user-ul {
+    display: flex;
+    gap: 10px;
+}

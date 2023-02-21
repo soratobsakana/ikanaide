@@ -1,0 +1,33 @@
+index.php
+    show unlogged main page if user is not logged in
+    show ikanaide feed if logged in
+profile.php
+    show feed by default
+    show follows and followers (not sure if to make a friends system or follow, probably follow)
+    tabs: timeline, anime, manga, reviews and favorites
+anime.php
+    show each anime here (not sure if I should do a main page for this, im pretty sure I will do it)
+manga.php
+    same stuff
+rankings.php
+    show rankings for each category
+community.php
+    not sure if to call it community (maybe ill go with `explore`). show everything community related here
+
+--- back-end ---
+sql
+    tables structure must allow:
+        login system and user information
+        user property for website content
+        social interaction
+database
+    ranking score calculation
+    auto-update status of shows
+
+--- singles ---
+timeline feed
+
+
+--- extras ---
+I would like to do something like Taiga for Ikanaide, though I feel like asking Taiga for Ikanaide implementation would be better at the start; taiga users could discover the website through the app.
+If this ends up happening, I would never develop my own and instead promote theirs on the Ikanaide website.

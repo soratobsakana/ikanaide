@@ -1,0 +1,24 @@
+section.ikanaide-body {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 0;
+
+    display: flex;
+    gap: 10px;
+}
+
+section.ikanaide-body-left-column {
+    width: 27%;
+}
+
+section.ikanaide-body-right-column {
+    min-width: 77%;
+}
+
+.box {
+    padding: 10px;
+    background-color: var(--box-bg-color);
+    border-radius: 9px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
