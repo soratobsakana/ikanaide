@@ -1,3 +1,25 @@
+220223
+    [] Implement anime and manga submission system.
+    [] Complete design constants in the css (e.g. styles for boxes, links, titles, highlighting...).
+    [] Complete the anime and manga queried pages. Redesign is important (headers for each box and different buttons for users).
+    [] Read fucking Sakura no Uta ye?
+
+220222
+    [X] Read PDO documentation from http://web.archive.org/web/20190330214051/http://wiki.hashphp.org/PDO_Tutorial_for_MySQL_Developers
+            Noticed PDO works basically the same way as mysqli but is compatible with more drivers than mysql. Also, that OO mysqli is like an alias to procedural style.
+            Result: I will use Object Oriended mysqli.
+    [X] Understand how to call the conexion on multiples files (for example, through a global variable?).
+            This can be investigated further, and it will be in the future. For now, I'll store credentials on a separate file and include it in .gitignore.
+    [] Complete design constants in the css (e.g. styles for boxes, links, titles, highlighting...).
+    [X] Complete `anime`, `manga` and `user` tables.
+
+
+
+
+
+
+
+
 index.php
     show unlogged main page if user is not logged in
     show ikanaide feed if logged in

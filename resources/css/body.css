@@ -8,11 +8,11 @@ section.ikanaide-body {
 }
 
 section.ikanaide-body-left-column {
-    width: 27%;
+    width: 23%;
 }
 
 section.ikanaide-body-right-column {
-    min-width: 77%;
+    width: 77%;
 }
 
 .box {
