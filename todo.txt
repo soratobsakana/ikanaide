@@ -1,4 +1,5 @@
 220223
+    [] Continue to learn about mysqli and code safety.
     [] Implement anime and manga submission system.
     [] Complete design constants in the css (e.g. styles for boxes, links, titles, highlighting...).
     [] Complete the anime and manga queried pages. Redesign is important (headers for each box and different buttons for users).
