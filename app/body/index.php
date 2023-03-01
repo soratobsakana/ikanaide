@@ -10,6 +10,6 @@
         ?>
     </section>
     <section class="ikanaide-body-right-column">
-
+        <p>something</p>
     </section>
 </section>

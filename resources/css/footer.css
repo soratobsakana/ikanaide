@@ -16,3 +16,7 @@ footer {
      gap: 20px;
      font-weight: bold;
  }
+
+ footer p.footer_copyright {
+     opacity: var(--font_low-opacity);
+ }

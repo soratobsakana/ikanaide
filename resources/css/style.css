@@ -7,7 +7,7 @@
 
 a {
     color: inherit;
-    transition: 1s;
+    transition: .1s;
 }
 
 body {
@@ -20,6 +20,16 @@ body {
 img {
     max-width: 100%;
     display: block; /* El display predeterminado (inline-block) de las imagenes provoca un problema de diseño si la imagen se encuentra dentro de un div. */
+}
+
+h1 {
+    font-size: 28px !important;
+    font-weight:700;
+}
+
+h3 {
+    font-size: 16px !important;
+    font-weight: 700;
 }
 
 /* Divido la página en dos divs principales: uno con el header y cuerpo principal, y el otro con el footer. */

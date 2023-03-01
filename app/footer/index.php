@@ -13,5 +13,5 @@
             }
         ?>
     </ul>
-    <p>© Ikanaide All rights reserved.</p>
+    <p class="footer_copyright">© Ikanaide All rights reserved.</p>
 </footer>

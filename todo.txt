@@ -1,9 +1,40 @@
+22030X
+    [] Learn to use JSON:
+        [] Understand what it is,
+        [] think of possible usages and implement it (first usage will be to fetch information from the anime's submit page).
+    [] Create a general entry submit page:
+        [] Think if doing a single general submit page (where the user could submit every submittable thing of the website) is feasible,
+        [] Implement it, inluding JSON data.
+    [] Continue to learn about mysqli and code safety.
+
+220301
+    [X] Work on anime query page.
+            `user`, `anime`, `character`, `character_anime`, `staff`, `staff_anime`, `review` and `review_anime` have been worked on. They are functional, but pretty much not final.
+            The page is written, but the CSS classes should probably be simplified. I'm not too sure about that since what I've done could also be beneficial in a redesign case, and not many CSS lines got repeated tbh.
+            PHP should definitely be rewritten though, especially the info fetching; that seems so redundant.
+220226
+    [] Continue to learn about mysqli and code safety.
+    [] Implement moderator's anime and manga submission system.
+    [] Complete the anime and manga query pages. Redesign is important (headers for each box and different buttons for users)
+            `character` has been finished. relational tables will be `character_anime`, `character_manga` and `character_vn` for now.
+            I feel like this system should be simplified, but for now it works.
+
+220225
+    [] Continue to learn about mysqli and code safety.
+    [] Implement moderator's anime and manga submission system.
+    [-] Complete the anime and manga query pages. Redesign is important (headers for each box and different buttons for users)
+            I don't think I'll redesign for now. Headers didn't seem to work out.
+            `character` and `reviews` tables need to be made for this. I'm thinking on adding JSON to this table, as a character can have much information not worthy of a database column.
+
+220224
+    [] Continue to learn about mysqli and code safety.
+    [] Implement moderator's anime and manga submission system.
+    [] Complete the anime and manga query pages. Redesign is important (headers for each box and different buttons for users).
+
 220223
     [] Continue to learn about mysqli and code safety.
     [] Implement anime and manga submission system.
-    [] Complete design constants in the css (e.g. styles for boxes, links, titles, highlighting...).
     [] Complete the anime and manga queried pages. Redesign is important (headers for each box and different buttons for users).
-    [] Read fucking Sakura no Uta ye?
 
 220222
     [X] Read PDO documentation from http://web.archive.org/web/20190330214051/http://wiki.hashphp.org/PDO_Tutorial_for_MySQL_Developers
@@ -11,7 +42,6 @@
             Result: I will use Object Oriended mysqli.
     [X] Understand how to call the conexion on multiples files (for example, through a global variable?).
             This can be investigated further, and it will be in the future. For now, I'll store credentials on a separate file and include it in .gitignore.
-    [] Complete design constants in the css (e.g. styles for boxes, links, titles, highlighting...).
     [X] Complete `anime`, `manga` and `user` tables.
 
 
