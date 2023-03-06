@@ -1,0 +1,212 @@
+/* Propósito: añadir un estilo general para todos los títulos de sección de, principalmente, la columna derecha de anime.php */
+div.header {
+    padding: 2px 0 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+div.header span.view-all {
+    opacity: var(--font_low-opacity);
+    transition: .2s;
+    cursor: pointer;
+}
+
+div.header span.view-all:hover {
+    opacity: 1;
+}
+
+/************* Estilos específicos *************/
+/* Propósito: dividir el cuerpo en dos columnas de 23% y 77% de tamaño. */
+main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 10px 0 20px;
+
+    display: flex;
+    gap: var(--gap);
+}
+
+section.left_column {
+    width: 22%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+}
+
+section.right_column {
+    width: 78%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+}
+
+/***** Columna izquierda. *****/
+/* Propósito: separar el indice de su valor en las cajas de la columna izquierda (.left_column) y aplicado de estilos varios. */
+div.two-column-list ul li{
+    display: flex;
+    justify-content: space-between;
+}
+
+div.two-column-list ul li span.ul_first-column {
+    opacity: var(--font_low-opacity);
+}
+
+div.animepage_edit {
+    padding: 7px;
+    text-align: center;
+    transition: .2s;
+    cursor: pointer;
+}
+
+div.animepage_edit p {
+    opacity: var(--font_low-opacity);
+    transition: .2s;
+}
+
+div.animepage_edit:hover {
+    background: var(--box-bg-color-hover);
+}
+
+div.animepage_edit:hover p {
+    opacity: 1;
+}
+
+/***** Columna derecha. *****/
+/* Propósito: aplicado de estilos a la sección del título del anime. */
+div.animepage_title h1 {
+    margin-bottom: -7px; /* Reducir los 10px del gap en section.right-column por motivos de diseño */
+}
+
+/* Propósito: aplicado de estilos a la sección de personajes. */
+div.animepage_char {
+    font-size: var(--box-font-size);
+}
+
+div.animepage_char-entry_wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 5px;
+}
+
+div.animepage_char-entry {
+    display: flex;
+    border-radius: 9px;
+    overflow: hidden;
+
+    border: 1px solid var(--box-bg-color-hover);
+}
+
+div.animepage_char-entry_pic {
+    min-width: 40px;
+    max-width: 40px;
+}
+
+div.animepage_char-entry_pic img {
+    border-radius: 0;
+}
+
+div.animepage_char-entry_info {
+    background: var(--box-bg-color);
+    width: 100%;
+    padding: 5px;
+    font-size: calc(var(--box-font-size) - 2px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+div.animepage_char-entry_info-role {
+    opacity: var(--font_low-opacity);
+}
+
+/* Propósito: aplicado de estilos a la sección de staff. Son los mismos que la sección de personajes. Aun así creo dos clases distintas en caso de que modifique el diseño de una de ellas en el futuro. */
+div.animepage_staff {
+    font-size: var(--box-font-size);
+}
+
+div.animepage_staff-entry_wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 5px;
+}
+
+div.animepage_staff-entry {
+    display: flex;
+    border-radius: 9px;
+    overflow: hidden;
+
+    border: 1px solid var(--box-bg-color-hover);
+}
+
+div.animepage_staff-entry_pic {
+    min-width: 40px;
+    max-width: 40px;
+}
+
+div.animepage_staff-entry_pic img {
+    border-radius: 0;
+}
+
+div.animepage_staff-entry_info {
+    background: var(--box-bg-color);
+    width: 100%;
+    padding: 5px;
+    font-size: calc(var(--box-font-size) - 2px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+div.animepage_staff-entry_info-role {
+    opacity: var(--font_low-opacity);
+}
+
+/* Propósito: aplicado de estilos a la sección de reviews. */
+div.animepage_review {
+    font-size: var(--box-font-size);
+}
+
+div.animepage_review-entry_wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5px;
+}
+
+div.animepage_review-entry {
+    display: flex;
+    border-radius: 9px;
+    overflow: hidden;
+
+    border: 1px solid var(--box-bg-color-hover);
+}
+
+div.animepage_review-entry_pic {
+    min-width: 60px;
+    max-width: 60px;
+}
+
+div.animepage_review-entry_pic img {
+    border-radius: 0;
+}
+
+div.animepage_review-entry_info {
+    background: var(--box-bg-color);
+    width: 100%;
+    padding: 10px;
+    font-size: var(--box-font-size);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+div.animepage_review-entry_info-role a{
+    opacity: var(--font_low-opacity);
+    transition: 0.2s;
+}
+
+div.animepage_review-entry_info-role a:hover {
+    opacity: 1;
+}

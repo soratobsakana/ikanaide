@@ -85,11 +85,8 @@ alter table `character` auto_increment = 2;
 select * from `character`;
 
 insert into `character` values
-(null, 'Sakata', 'Gintoki', null,  null,  null, 'storage/public/character/gintoki.jpg');
+    (null, 'Sakata', 'Gintoki', null,  null,  null, 'storage/public/character/gintoki.jpg');
 
-
-
-select * from `character`;
 
 CREATE TABLE `character_anime` (
     `character_id` INT UNSIGNED NOT NULL,

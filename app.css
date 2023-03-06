@@ -1,7 +1,12 @@
-@import url(resources/css/style.css);
 @import url(resources/css/variables.css);
 @import url(resources/css/fonts.css);
+@import url(resources/css/style.css);
+
 @import url(resources/css/header.css);
-@import url(resources/css/profile.css);
+@import url(resources/css/main.css);
 @import url(resources/css/footer.css);
-@import url(resources/css/body.css);
+
+@import url('resources/css/anime.css');
+@import url(resources/css/profile.css);
+
+

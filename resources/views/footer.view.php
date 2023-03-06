@@ -6,11 +6,11 @@
         <li>Donate</li>
         <li>Twitter</li>
         <?php
-            if (isset($_SESSION["loggedin"])) {
-                ?>
-                <li>Logout</li>
-                <?php
-            }
+        if (isset($_SESSION["loggedin"])) {
+            ?>
+            <li>Logout</li>
+            <?php
+        }
         ?>
     </ul>
     <p class="footer_copyright">© Ikanaide All rights reserved.</p>

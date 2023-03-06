@@ -8,20 +8,17 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <div class="main">
-            <?php
-                include "app/header/index.php";
-            ?>
-            <section class="ikanaide-body">
-                <?php
-                    include "app/body/anime.php";
-                ?>
-            </section>
-        </div>
-        <?php
-            include "app/footer/index.php";
-        ?>
+<div class="container">
+    <!-- Este wrapper sirve para colocar el header y  cuerpo en la parte superior de la web y el footer en la inferior, mediante la propiedad flex 'space-between' en div.container -->
+    <div class="wrapper">
+        <?php require 'resources/views/header.view.php' ?>
+
+        <main>
+            <?php require 'routes/web.php' ?>
+        </main>
+
     </div>
+        <?php require "resources/views/footer.view.php" ?>
+</div>
 </body>
 </html>

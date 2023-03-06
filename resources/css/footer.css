@@ -14,7 +14,7 @@ footer {
  footer ul.footer-links {
      display: flex;
      gap: 20px;
-     font-weight: bold;
+     font-weight: var(--bold);
  }
 
  footer p.footer_copyright {

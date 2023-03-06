@@ -1,10 +1,16 @@
+220306
+    [] Create the submit page (basic for now).
+    [] Create the manga page.
+    [] Start thinking about the profile tab.
+
 22030X
-    [] Learn to use JSON:
-        [] Understand what it is,
-        [] think of possible usages and implement it (first usage will be to fetch information from the anime's submit page).
+    [X] Learn to use JSON:
+        [X] Understand what it is,
+        [-] think of possible usages and implement it (first usage will be to fetch information from the anime's submit page).
+                json_encode & json_decode for everything I need I feel like. JSON will be inserted in the database through these two functions. I will not yet implement it.
     [] Create a general entry submit page:
         [] Think if doing a single general submit page (where the user could submit every submittable thing of the website) is feasible,
-        [] Implement it, inluding JSON data.
+        [] implement it, inluding JSON data.
     [] Continue to learn about mysqli and code safety.
 
 220301

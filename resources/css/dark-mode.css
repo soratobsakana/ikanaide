@@ -1,13 +1,13 @@
 :root {
-    --body-bg: white;
-    --main-font-color: black;
+    --body-bg: #090A0C;
+    --main-font-color: #f1f1f1;
     --bold: 600;
     --font_low-opacity: 0.7;
     --box-font-size: 14px;
-    --box-bg-color: #ebebeb;
-    --box-bg-color-hover: #dedede;
+    --box-bg-color: #13161a;
+    --box-bg-color-hover: rgb(27, 31, 37);
     --box-title-bg-color: #d0d0d0;
     --box-title-bg-color-border: #969696;
 
-    --gap: 10px;
+    --gap: 8px;
 }

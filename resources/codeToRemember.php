@@ -14,3 +14,14 @@ if ($result -> num_rows > 0) {
         $animeTitle = $row['title'];
     }
 }
+
+
+// Shorten an if statement
+if ($something === 'something') {
+    echo 'first';
+} else {
+    echo 'second';
+}
+// is the same as...
+echo $something === 'something' ? 'first' : 'second';
+

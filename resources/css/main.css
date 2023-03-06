@@ -1,0 +1,16 @@
+/************* Estilos generales *************/
+.box {
+    padding: 10px;
+    background-color: var(--box-bg-color);
+    border-radius: 9px;
+    box-sizing: border-box;
+    overflow: hidden;
+    font-size: var(--box-font-size);
+
+    border: 1px solid var(--box-bg-color-hover);
+}
+
+img {
+    border-radius: 9px;
+}
+

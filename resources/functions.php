@@ -49,3 +49,11 @@ function dateFormat ($date) {
 
     return $month . ' ' . $day . ', ' . $year;
 }
+
+// Preformatea el resultado de var_dump y termina el script de después para leer los resultados con mayor claridad.
+function pre($v) {
+    print '<pre>';
+        var_dump($v);
+    print '</pre>';
+    die();
+}

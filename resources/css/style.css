@@ -24,17 +24,14 @@ img {
 
 h1 {
     font-size: 28px !important;
-    font-weight:700;
+    font-weight: var(--bold);
 }
 
 h3 {
     font-size: 16px !important;
-    font-weight: 700;
+    font-weight: var(--bold);
 }
 
-/* Divido la página en dos divs principales: uno con el header y cuerpo principal, y el otro con el footer. */
-/* div.container agrupa a los dos y los aleja lo máximo posible mediante space-between. De esta manera, el footer siempre permanece en la parte inferior de la página. */
-/* Este método es mejor que hacer uso de una posición absoluta por motivos de responsividad. */
 div.container {
     width: 100%;
     height: 100vh;
