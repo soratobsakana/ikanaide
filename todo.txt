@@ -1,5 +1,11 @@
-220306
-    [] Create the submit page (basic for now).
+220309
+    [] Fix submit page not working when no anime_id provided.
+    [] Finish up the submit.php controller. (It will deliver information to a submit_x table).
+    [] Do the manga query page and maybe change name to anime.view.php css classes for this.
+
+220307
+    [-] Create the submit page (basic for now).
+        The HTML has been created (it displays one input field for each column that can be edited by the user)
     [] Create the manga page.
     [] Start thinking about the profile tab.
 

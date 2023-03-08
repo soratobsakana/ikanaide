@@ -111,7 +111,7 @@
                                 <i><?=$reviews[$i]['title']?></i>
                             </div>
                             <div class="animepage_review-entry_info-role">
-                                Written by <a href="user">nagisa</a>
+                                <span>Written by <a href="user">nagisa</a></span>
                             </div>
                         </div>
                     </div>

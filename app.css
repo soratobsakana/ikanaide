@@ -1,4 +1,4 @@
-@import url(resources/css/variables.css);
+@import url(resources/css/dark-mode.css);
 @import url(resources/css/fonts.css);
 @import url(resources/css/style.css);
 
@@ -6,7 +6,8 @@
 @import url(resources/css/main.css);
 @import url(resources/css/footer.css);
 
-@import url('resources/css/anime.css');
+@import url(resources/css/anime.css);
+@import url(resources/css/submit.css);
 @import url(resources/css/profile.css);
 
 

@@ -17,15 +17,6 @@ div.header span.view-all:hover {
 
 /************* Estilos específicos *************/
 /* Propósito: dividir el cuerpo en dos columnas de 23% y 77% de tamaño. */
-main {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 10px 0 20px;
-
-    display: flex;
-    gap: var(--gap);
-}
-
 section.left_column {
     width: 22%;
     display: flex;
@@ -74,7 +65,7 @@ div.animepage_edit:hover p {
 /***** Columna derecha. *****/
 /* Propósito: aplicado de estilos a la sección del título del anime. */
 div.animepage_title h1 {
-    margin-bottom: -7px; /* Reducir los 10px del gap en section.right-column por motivos de diseño */
+    margin: 2px 0 -5px;
 }
 
 /* Propósito: aplicado de estilos a la sección de personajes. */
@@ -183,8 +174,8 @@ div.animepage_review-entry {
 }
 
 div.animepage_review-entry_pic {
-    min-width: 60px;
-    max-width: 60px;
+    min-width: 50px;
+    max-width: 50px;
 }
 
 div.animepage_review-entry_pic img {
@@ -202,7 +193,11 @@ div.animepage_review-entry_info {
     justify-content: space-between;
 }
 
-div.animepage_review-entry_info-role a{
+div.animepage_review-entry_info-role span {
+    font-size: calc(var(--box-font-size) - 2px);
+}
+
+div.animepage_review-entry_info-role span a{
     opacity: var(--font_low-opacity);
     transition: 0.2s;
 }
