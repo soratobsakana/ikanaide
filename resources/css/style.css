@@ -58,6 +58,17 @@ label {
     opacity: calc(var(--font_low-opacity) - .2);
 }
 
+textarea {
+    resize: vertical;
+    overflow-y: scroll;
+    background: transparent;
+    font-family: inherit;
+    font-size: var(--box-font-size);
+    border: none;
+    outline: none;
+    color: inherit;
+}
+
 /* La explicación de los estilos de div.container está en /index.php. */
 div.container {
     width: 100%;

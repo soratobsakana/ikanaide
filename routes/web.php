@@ -8,7 +8,7 @@ $routes = array(
     '/' => 'resources/views/home.view.php',
     '/anime' => 'resources/views/anime.view.php',
     '/manga' => 'resources/views/manga.view.php',
-    '/submit' => 'resources/views/submit.view.php',
+    '/submit' => 'resources/views/submit/submit.view.php',
     '/profile' => 'resources/views/profile.view.php',
     '/404' => 'resources/views/404.view.php'
 );

@@ -2,7 +2,7 @@
 .box {
     padding: 10px;
     background-color: var(--box-bg-color);
-    border-radius: 9px;
+    border-radius: var(--border-radius);
     box-sizing: border-box;
     overflow: hidden;
     font-size: var(--box-font-size);
@@ -12,7 +12,7 @@
 }
 
 img {
-    border-radius: 9px;
+    border-radius: var(--border-radius);
 }
 
 main {

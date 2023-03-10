@@ -57,3 +57,14 @@ function pre($v) {
     print '</pre>';
     die();
 }
+
+// Intercambia las barrabajas por espacios en el nombre de las columnas de una tabla. (e.g. start_date -> start date).
+// $array contiene las keys con barrabaja y en $newArray se guardan las de sin barrabaja.
+function replaceUnderscore(array $array,  $newArray) {
+    foreach ($array as $key => $value) {
+        if (strpos($key, '_') > 0) {
+            $key = str_replace('_', ' ', $key);
+        }
+        $newArray[$key] = $value;
+    }
+}

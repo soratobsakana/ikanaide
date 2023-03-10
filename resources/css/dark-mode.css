@@ -8,6 +8,7 @@
     --box-bg-color-hover: rgba(27, 31, 37, 0.95);
     --box-title-bg-color: #d0d0d0;
     --box-title-bg-color-border: #969696;
+    --border-radius: 8px;
 
     --gap: 8px;
     --transition: .15s;

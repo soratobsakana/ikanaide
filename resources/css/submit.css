@@ -31,7 +31,8 @@ form.submit-form div.submit-form_wrapper label {
 form.submit-form input[type='submit'] {
     width: 200px;
     align-self: center;
-    margin-top: 5px;
+    font-weight: var(--bold);
+    margin-top: 10px;
     background-image: linear-gradient(to right, #8e2de2, #3A73F3);
     background-size: 180%;
 
@@ -40,4 +41,18 @@ form.submit-form input[type='submit'] {
 
 form.submit-form input[type='submit']:hover {
     background-size: 100%;
+}
+
+
+form.submit-form div.wrapper {
+    display: flex;
+    gap: 5px;
+}
+
+form.submit-form div.wrapper div {
+    width: 100%;
+}
+
+textarea {
+    min-height: 5em;
 }

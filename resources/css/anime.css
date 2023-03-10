@@ -81,7 +81,7 @@ div.animepage_char-entry_wrapper {
 
 div.animepage_char-entry {
     display: flex;
-    border-radius: 9px;
+    border-radius: var(--border-radius);
     overflow: hidden;
 
     border: 1px solid var(--box-bg-color-hover);
@@ -124,7 +124,7 @@ div.animepage_staff-entry_wrapper {
 
 div.animepage_staff-entry {
     display: flex;
-    border-radius: 9px;
+    border-radius: var(--border-radius);
     overflow: hidden;
 
     border: 1px solid var(--box-bg-color-hover);
@@ -167,7 +167,7 @@ div.animepage_review-entry_wrapper {
 
 div.animepage_review-entry {
     display: flex;
-    border-radius: 9px;
+    border-radius: var(--border-radius);
     overflow: hidden;
 
     border: 1px solid var(--box-bg-color-hover);
