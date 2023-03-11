@@ -27,10 +27,27 @@ div.inner-header ul.header-links {
 
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, 0);
+    /* Fixes safari transition issue. It bugs out when just the general transform is applied. */
+
+
+    transition: var(--transition);
 }
 
-div.inner-header div {
+div.inner-header ul.header-links a li{
+    transition: var(--transition);
+    width: 100%;
+}
+
+div.inner-header ul.header-links:hover a li{
+    opacity: var(--font_low-opacity);
+}
+
+div.inner-header ul.header-links a li:hover {
+    opacity: 1;
+}
+
+div.inner-header div.header-user {
     position: absolute;
     right: 0;
 }
@@ -39,3 +56,4 @@ div.inner-header div.header-user ul.header-user-ul {
     display: flex;
     gap: 10px;
 }
+

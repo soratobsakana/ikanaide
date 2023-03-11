@@ -1,7 +1,7 @@
-220309
-    [] Fix submit page not working when no anime_id provided.
+220311
+    [X] Fix submit page not working when no anime_id provided.
     [] Finish up the submit.php controller. (It will deliver information to a submit_x table).
-    [] Do the manga query page and maybe change name to anime.view.php css classes for this.
+    [X] Create an anime home page that displays the database entries that link to ?anime_id=X and show its information.
 
 220307
     [-] Create the submit page (basic for now).

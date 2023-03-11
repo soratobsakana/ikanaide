@@ -44,14 +44,18 @@ div.two-column-list ul li span.ul_first-column {
 
 div.animepage_edit {
     padding: 7px;
-    text-align: center;
     transition: .2s;
     cursor: pointer;
 }
 
 div.animepage_edit p {
     opacity: var(--font_low-opacity);
+    text-align: center;
     transition: .2s;
+}
+
+div.animepage_edit p span {
+    font-size: var(--box-font-size);
 }
 
 div.animepage_edit:hover {
@@ -204,4 +208,23 @@ div.animepage_review-entry_info-role span a{
 
 div.animepage_review-entry_info-role a:hover {
     opacity: 1;
+}
+
+div.animehome {
+    min-width: 100%;
+}
+
+div.animehome_all-anime {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+div.animehome_all-anime_content {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-gap: 5px;
+
+    box-sizing: border-box;
 }

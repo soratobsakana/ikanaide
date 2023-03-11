@@ -1,5 +1,3 @@
-<?php require 'app/controllers/anime.php' ?>
-
 <section class="left_column">
     <img src="<?=$animeInfo['cover']?>" alt="<?=$animeInfo['title']?>"/>
     <div class="animepage_info two-column-list box">
@@ -22,7 +20,7 @@
         </ul>
     </div>
     <div class="animepage_edit box">
-        <a href="submit"><p>edit this page</p></a>
+        <a href="submit"><p>Edit this page </p></a>
     </div>
 </section>
 
@@ -121,7 +119,6 @@
             } else {
                 print "<i style='opacity: var(--font_low-opacity)'>No reviews yet...</i>";
             }
-            $db -> close();
             ?>
         </div>
     </div>

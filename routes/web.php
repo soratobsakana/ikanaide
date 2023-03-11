@@ -6,7 +6,7 @@ $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 // Array con las todas las rutas de la página web.
 $routes = array(
     '/' => 'resources/views/home.view.php',
-    '/anime' => 'resources/views/anime.view.php',
+    '/anime' => 'app/controllers/anime.php',
     '/manga' => 'resources/views/manga.view.php',
     '/submit' => 'resources/views/submit/submit.view.php',
     '/profile' => 'resources/views/profile.view.php',
