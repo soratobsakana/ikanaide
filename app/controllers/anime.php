@@ -2,10 +2,10 @@
 require_once('database/conn.php');
 require('resources/functions.php');
 
-$anime_id = $_GET['anime_id'] ?? null;
+$anime_id = $_GET['id'] ?? null;
 $user_id = 1;
 
-// Si existe un anime_id, se extrae la información del anime correspondiente a ese ID y se muestra al usuario mediante la vista 'anime.view.php'.
+// Si existe un anime_id, se extrae la información del anime correspondiente a ese ID y se muestra al usuario mediante la vista '_animequery.view.php'.
 if (isset($anime_id)) {
     $stmt = $db -> prepare("SELECT * FROM anime WHERE anime_id = ?");
     $stmt -> bind_param('i', $anime_id);
@@ -74,9 +74,10 @@ if (isset($anime_id)) {
             }
         }
 
-        // Una vez la información ha sido recopilada, mostramos la página al usuario.
-        require('resources/views/anime.view.php');
+        // Una vez la información ha sido recopilada, cierro la conexión y muestro la página al usuario.
         $db -> close();
+        require('resources/views/anime/_animequery.view.php');
+
     } else {
         header('Location: /404');
     }
@@ -86,22 +87,5 @@ if (isset($anime_id)) {
     $stmt -> execute();
     $result = $stmt -> get_result();
 
-    ?>
-    <div class="animehome">
-        <div class="animehome_all-anime">
-            <h3>All Anime</h3>
-            <div class="animehome_all-anime_content">
-                <?php
-                if ($result -> num_rows > 0) {
-                    while ($row = $result -> fetch_assoc()) {
-                        ?>
-                        <a href="/anime?anime_id=<?=$row['anime_id']?>"><img src="<?=$row['cover']?>" alt="<?=$row['title']?>"></a>
-                        <?php
-                    }
-                }
-                ?>
-            </div>
-        </div>
-    </div>
-    <?php
+    require('resources/views/anime/_animehome.view.php');
 }

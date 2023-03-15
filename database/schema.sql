@@ -43,6 +43,25 @@ CREATE TABLE `anime` (
     PRIMARY KEY(`anime_id`)
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `manga` (
+     `manga_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+     `title` VARCHAR(150) NOT NULL UNIQUE,
+     `english_title` VARCHAR(150) UNIQUE,
+     `japanese_title` NVARCHAR(150) UNIQUE,
+     `format` VARCHAR(25) NOT NULL,
+     `volumes` TINYINT UNSIGNED NOT NULL,
+     `chapters` SMALLINT UNSIGNED NOT NULL,
+     `status` VARCHAR(25) NOT NULL,
+     `start_date` DATE,
+     `end_date` DATE,
+     `description` VARCHAR(3000) NOT NULL,
+     `members` INT UNSIGNED NOT NULL DEFAULT 0,
+     `favorited` INT UNSIGNED NOT NULL DEFAULT 0,
+     `cover` VARCHAR(200) NOT NULL DEFAULT 'storage/sys/default_cover.png',
+     `header` VARCHAR(200) NULL DEFAULT NULL,
+     PRIMARY KEY(`manga_id`)
+) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
 insert into anime values(
 null, 'Gintama', null, null, 'TV', 49, 'finished', '2011-04-04', '2012-03-26', 'spring 2011', 'After a one-year hiatus, Shinpachi Shimura returns to Edo, only to stumble upon a shocking surprise: Gintoki and Kagura, his fellow Yorozuya members, have become completely different characters! Fleeing from the Yorozuya headquarters in confusion, Shinpachi finds that all the denizens of Edo have undergone impossibly extreme changes, in both appearance and personality. Most unbelievably, his sister Otae has married the Shinsengumi chief and shameless stalker Isao Kondou and is pregnant with their first child.', 0, 0, 'storage/img/gintama.webp', 'storage/img/gintama_header.webp');
 insert into anime values(
@@ -97,6 +116,15 @@ CREATE TABLE `character_anime` (
     FOREIGN KEY (`anime_id`) REFERENCES `anime`(`anime_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+CREATE TABLE `character_manga` (
+   `character_id` INT UNSIGNED NOT NULL,
+   `manga_id` INT UNSIGNED NOT NULL,
+   `role` ENUM('Main', 'Supporting') NOT NULL DEFAULT 'Supporting',
+   PRIMARY KEY(`character_id`, `manga_id`),
+   FOREIGN KEY (`character_id`) REFERENCES `character`(`character_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+   FOREIGN KEY (`manga_id`) REFERENCES `manga`(`manga_id`) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 insert into `character_anime` values(1,1, 'Main');
 
 select `character`.* from `character`, `character_anime` where `character_anime`.`anime_id` = 1 AND `character`.`character_id`=`character_anime`.character_id;
@@ -130,6 +158,15 @@ CREATE TABLE `staff_anime` (
     FOREIGN KEY (`anime_id`) REFERENCES `anime`(`anime_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+CREATE TABLE `staff_manga` (
+   `staff_id` INT UNSIGNED NOT NULL,
+   `manga_id` INT UNSIGNED NOT NULL,
+   `role` VARCHAR(50) NOT NULL DEFAULT 'Participant',
+   PRIMARY KEY(`staff_id`, `manga_id`),
+   FOREIGN KEY (`staff_id`) REFERENCES `staff`(`staff_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+   FOREIGN KEY (`manga_id`) REFERENCES `manga`(`manga_id`) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 alter table `staff_anime` auto_increment=1;
 insert into `staff_anime` VALUES (1,1, 'director');
 select * from staff_anime;
@@ -147,12 +184,21 @@ insert into `review` values (null, 'This is my review', 1);
 update review set title ='This is my title';
 select * from review
 alter table `review` add column `title` VARCHAR(50) after `review_id`;
+
 CREATE TABLE `review_anime` (
     `review_id` SMALLINT UNSIGNED NOT NULL,
     `anime_id` INT UNSIGNED NOT NULL,
     PRIMARY KEY (`review_id`, `anime_id`),
     FOREIGN KEY (`review_id`) REFERENCES `review`(`review_id`) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (`anime_id`) REFERENCES `anime`(`anime_id`) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE `review_manga` (
+    `review_id` SMALLINT UNSIGNED NOT NULL,
+    `manga_id` INT UNSIGNED NOT NULL,
+    PRIMARY KEY (`review_id`, `manga_id`),
+    FOREIGN KEY (`review_id`) REFERENCES `review`(`review_id`) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (`manga_id`) REFERENCES `manga`(`manga_id`) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 insert into `review_anime` VALUES (1,1);

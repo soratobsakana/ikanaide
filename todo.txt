@@ -1,3 +1,8 @@
+220313
+    [] Simplify listing stuff. Probably covert every query stuff into a class.
+    [] Finish up everything needed before starting with user stuff tomorrow.
+    [] Do the controller for anime submission form.
+
 220311
     [X] Fix submit page not working when no anime_id provided.
     [] Finish up the submit.php controller. (It will deliver information to a submit_x table).
