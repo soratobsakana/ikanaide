@@ -34,13 +34,13 @@ form.submit-form input[type='submit'] {
     font-weight: var(--bold);
     margin-top: 10px;
     background-image: linear-gradient(to right, #8e2de2, #3A73F3);
-    background-size: 180%;
+    background-size: 100%;
 
     transition: var(--transition);
 }
 
 form.submit-form input[type='submit']:hover {
-    background-size: 100%;
+    background-size: 200%;
 }
 
 

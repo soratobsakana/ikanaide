@@ -1,6 +1,6 @@
 <div class="querypage_left-column">
     <img src="<?=$animeInfo['cover']?>" alt="<?=$animeInfo['title']?>"/>
-    <div class="querypage_info two-column-list box">
+    <section class="querypage_info two-column-list box">
         <?php
         $info = [];
         foreach ($animeInfo as $key => $value) {
@@ -16,18 +16,18 @@
             <li><span class="ul_first-column">season</span><span><?=$animeInfo['season']?></span></li>
             <li><span class="ul_first-column">studios</span><span><?=$animeInfo['studios']?></span></li>
         </ul>
-    </div>
-    <div class="querypage_people two-column-list box">
+    </section>
+    <section class="querypage_people two-column-list box">
         <ul>
             <li><span class="ul_first-column">members</span><span><?=$animeInfo['members']?></span></li>
             <li><span class="ul_first-column">loved</span><span><?=$animeInfo['favorited']?></span></li>
             <li><span class="ul_first-column">ranked</span><span></span></li>
             <li><span class="ul_first-column">popularity</span><span></span></li>
         </ul>
-    </div>
-    <div class="querypage_edit box">
+    </section>
+    <section class="querypage_edit box">
         <a href="../submit?aid=<?=$animeInfo['anime_id']?>"><p>Edit this page </p></a>
-    </div>
+    </section>
 </div>
 
 <div class="querypage_right-column">
@@ -36,9 +36,9 @@
         print "<img src=".$animeInfo['header']." alt=".$animeInfo['title'].">";
     }
     ?>
-    <div class="querypage_title"><h1><?=$animeInfo['title']?></h1></div>
-    <div class="querypage_desc box"><?=$animeInfo['description']?></div>
-    <div class="querypage_char">
+    <section class="querypage_title"><h1><?=$animeInfo['title']?></h1></section>
+    <section class="querypage_desc box"><?=$animeInfo['description']?></section>
+    <section class="querypage_char">
         <div class="header"><h3>Characters</h3><span class="view-all">view all</span></div>
         <div class="querypage_char-entry_wrapper">
             <?php
@@ -67,8 +67,8 @@
             }
             ?>
         </div>
-    </div>
-    <div class="querypage_staff">
+    </section>
+    <section class="querypage_staff">
         <div class="header"><h3>Staff</h3><span class="view-all">view all</span></div>
         <div class="querypage_staff-entry_wrapper">
             <?php
@@ -97,8 +97,8 @@
             }
             ?>
         </div>
-    </div>
-    <div class="querypage_review">
+    </section>
+    <section class="querypage_review">
         <div class="header"><h3>Reviews</h3><span class="view-all">view all</span></div>
         <div class="querypage_review-entry_wrapper">
             <?php
@@ -127,5 +127,5 @@
             }
             ?>
         </div>
-    </div>
+    </section>
 </div>

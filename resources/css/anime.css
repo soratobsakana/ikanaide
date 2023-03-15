@@ -33,47 +33,47 @@ div.querypage_right-column {
 
 /***** Columna izquierda. *****/
 /* Propósito: separar el indice de su valor en las cajas de la columna izquierda (.left_column) y aplicado de estilos varios. */
-div.two-column-list ul li{
+section.two-column-list ul li{
     display: flex;
     justify-content: space-between;
 }
 
-div.two-column-list ul li span.ul_first-column {
+section.two-column-list ul li span.ul_first-column {
     opacity: var(--font_low-opacity);
 }
 
-div.querypage_edit {
+section.querypage_edit {
     padding: 7px;
     transition: .2s;
     cursor: pointer;
 }
 
-div.querypage_edit p {
+section.querypage_edit p {
     opacity: var(--font_low-opacity);
     text-align: center;
     transition: .2s;
 }
 
-div.querypage_edit p span {
+section.querypage_edit p span {
     font-size: var(--box-font-size);
 }
 
-div.querypage_edit:hover {
+section.querypage_edit:hover {
     background: var(--box-bg-color-hover);
 }
 
-div.querypage_edit:hover p {
+section.querypage_edit:hover p {
     opacity: 1;
 }
 
 /***** Columna derecha. *****/
 /* Propósito: aplicado de estilos a la sección del título del anime. */
-div.querypage_title h1 {
+section.querypage_title h1 {
     margin: 2px 0 -5px;
 }
 
 /* Propósito: aplicado de estilos a la sección de personajes. */
-div.querypage_char {
+section.querypage_char {
     font-size: var(--box-font-size);
 }
 
@@ -116,7 +116,7 @@ div.querypage_char-entry_info-role {
 }
 
 /* Propósito: aplicado de estilos a la sección de staff. Son los mismos que la sección de personajes. Aun así creo dos clases distintas en caso de que modifique el diseño de una de ellas en el futuro. */
-div.querypage_staff {
+section.querypage_staff {
     font-size: var(--box-font-size);
 }
 
@@ -159,7 +159,7 @@ div.querypage_staff-entry_info-role {
 }
 
 /* Propósito: aplicado de estilos a la sección de reviews. */
-div.querypage_review {
+section.querypage_review {
     font-size: var(--box-font-size);
 }
 
@@ -214,7 +214,7 @@ div.animehome {
     min-width: 100%;
 }
 
-div.animehome_all-anime {
+section.animehome_all-anime {
     width: 100%;
     display: flex;
     flex-direction: column;
