@@ -220,3 +220,23 @@ CREATE TABLE `score` (
     FOREIGN KEY ('anime_id') REFERENCES anime('anime_id') ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY ('user_id') REFERENCES user('user_id') ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+CREATE TABLE `edit_anime` (
+    `edit_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `anime_id` INT UNSIGNED NOT NULL,
+    `title` VARCHAR(150),
+    `english_title` VARCHAR(150),
+    `japanese_title` NVARCHAR(150),
+    `type` VARCHAR(25),
+    `episodes` SMALLINT UNSIGNED,
+    `status` VARCHAR(25),
+    `start_date` DATE,
+    `end_date` DATE,
+    `description` VARCHAR(3000),
+    `cover` VARCHAR(400),
+    `header` VARCHAR(400),
+    PRIMARY KEY (`edit_id`, `anime_id`),
+    FOREIGN KEY (`anime_id`) REFERENCES `anime`(`anime_id`) ON UPDATE CASCADE
+) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+drop table `edit_anime`;

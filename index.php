@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Home / Ikanaide</title>
+    <?php
+    $page = parse_url($_SERVER['REQUEST_URI'])['path'];
+    if ($page === '/') {
+        $page = '/home';
+    }
+    ?>
+    <title><?=ucfirst(substr($page, 1))?> / Ikanaide</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/app.css">
