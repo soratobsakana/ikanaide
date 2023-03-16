@@ -7,6 +7,7 @@
             $info = replaceUnderscore($animeInfo);
         }
         ?>
+
         <ul>
             <li><span class="ul_first-column">type</span><span><?=$animeInfo['type']?></span></li>
             <li><span class="ul_first-column">episodes</span><span><?=$animeInfo['episodes']?></span></li>

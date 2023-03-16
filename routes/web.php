@@ -7,10 +7,9 @@ $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 $routes = array(
     '/' => 'resources/views/home.view.php',
     '/home' => 'resources/views/home.view.php',
-    '/anime' => 'app/controllers/anime.php',
+    '/anime' => 'controllers/anime.php',
     '/manga' => 'resources/views/manga.view.php',
-    '/submit' => 'app/controllers/submit/submit_page.php',
-    '/submit_edit' => 'app/controllers/submit/submit_page.php',
+    '/submit' => 'controllers/edit.php',
     '/profile' => 'resources/views/profile.view.php',
     '/404' => 'resources/views/404.view.php'
 );

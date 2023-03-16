@@ -40,7 +40,7 @@ form.submit-form input[type='submit'] {
 }
 
 form.submit-form input[type='submit']:hover {
-    background-size: 200%;
+    background-size: 150%;
 }
 
 

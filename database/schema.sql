@@ -230,13 +230,15 @@ CREATE TABLE `edit_anime` (
     `type` VARCHAR(25),
     `episodes` SMALLINT UNSIGNED,
     `status` VARCHAR(25),
-    `start_date` DATE,
-    `end_date` DATE,
+    `start_date` VARCHAR(50),
+    `end_date` VARCHAR(50),
     `description` VARCHAR(3000),
     `cover` VARCHAR(400),
     `header` VARCHAR(400),
-    PRIMARY KEY (`edit_id`, `anime_id`),
+    PRIMARY KEY (`edit_id`),
     FOREIGN KEY (`anime_id`) REFERENCES `anime`(`anime_id`) ON UPDATE CASCADE
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 drop table `edit_anime`;
+
+SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'edit_anime';
