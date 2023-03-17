@@ -10,6 +10,7 @@ $routes = array(
     '/anime' => 'controllers/anime.php',
     '/manga' => 'resources/views/manga.view.php',
     '/edit' => 'controllers/edit.php',
+    '/submit' => 'controllers/submit.php',
     '/profile' => 'resources/views/profile.view.php',
     '/404' => 'resources/views/404.view.php'
 );

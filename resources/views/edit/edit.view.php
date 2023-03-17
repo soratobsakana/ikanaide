@@ -1,5 +1,5 @@
 <form action="edit?<?=$medium . '=' . $id?>" method="POST" class="edit-form">
-    <div class="edit-form_title">Edit or add information to the database. A moderator will review it and inform you about any possible changes. Thanks for the effort!</div>
+    <div class="edit-form_title">Edit information to the database. A moderator will review it and inform you about any possible changes. Thanks for the effort!</div>
         <?php
 
         if (isset($animeForm)) {

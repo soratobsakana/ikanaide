@@ -76,5 +76,5 @@ if (isset($_POST['submit'])) {
         default:
             header('Location: /404');
     }
-    require('resources/views/submit/submit.view.php');
+    require('resources/views/edit/edit.view.php');
 }
