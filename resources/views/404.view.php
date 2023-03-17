@@ -1,4 +1,5 @@
 <?php
-    print "This is a 404 mate. The page you requested doesn't exist...";
+    http_response_code(404);
+    print "Error 404";
     print "<br/>";
     print "<a href='/'>You can go back clicking here.</a>";

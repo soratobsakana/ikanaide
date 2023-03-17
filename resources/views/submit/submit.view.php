@@ -1,15 +1,15 @@
-<form action="submit?<?=$medium . '=' . $id?>" method="POST" class="submit-form">
-    <div class="submit-form_title">Edit or add information to the database. A moderator will review it and inform you about any possible changes. Thanks for the effort!</div>
+<form action="edit?<?=$medium . '=' . $id?>" method="POST" class="edit-form">
+    <div class="edit-form_title">Edit or add information to the database. A moderator will review it and inform you about any possible changes. Thanks for the effort!</div>
         <?php
 
         if (isset($animeForm)) {
-            require('resources/views/submit/_submit_anime.view.php');
+            require('resources/views/edit/_edit_anime.view.php');
         } else if (isset($mangaForm)) {
-            require('resources/views/submit/_submit_manga.view.php');
+            require('resources/views/edit/_edit_manga.view.php');
         } else if (isset($vnForm)) {
-            require('resources/views/submit/_submit_vn.view.php');
-        } else if (isset($manyColumns)) {
-            print ($manyColumns[0]);
+            require('resources/views/edit/_edit_vn.view.php');
+        } else {
+            header('Location: /404');
         }
 
         ?>

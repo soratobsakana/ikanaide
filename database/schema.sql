@@ -19,7 +19,7 @@ CREATE TABLE `user` (
     PRIMARY KEY(`user_id`)
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
-insert into `user` values (null, 'nagisa', 'pw', 'pw@pw.pw', null, 'spain', 'This is my biography', default, null);
+insert into `user` values (null, 'nagisa', 'pw', 'pw@pw.pw', default, 'spain', 'This is my biography', default, null);
 
 -- `members` and `favorited` will both be added 1 each time anyone clicks their respective buttons -
 -- them both will be stored here just as a way to quickly display the number on it's anime page. user property will be treated in JSON -
@@ -69,24 +69,6 @@ null, 'Gintadma', null, null, 'TV', 49, 'finished', '2011-04-04', '2012-03-26', 
 select * from anime;
 
 update anime set `header` = 'storage/img/gintama_header.jpg' where anime_id=1;
-
-
-CREATE TABLE `manga` (
-    `manga_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `title` VARCHAR(150) NOT NULL UNIQUE,
-    `english_title` VARCHAR(150) UNIQUE,
-    `japanese_title` NVARCHAR(150) COLLATE Japanese_CI_AS_KS_WS UNIQUE,
-    `type` VARCHAR(25) NOT NULL,
-    `episodes` INT NOT NULL,
-    `status` VARCHAR(25) NOT NULL,
-    `start_date` DATE NOT NULL DEFAULT 'N/A',
-    `end_date` DATE NOT NULL DEFAULT 'N/A',
-    `season` VARCHAR(30) NOT NULL,
-    `description` VARCHAR(3000) NOT NULL,
-    `members` INT UNSIGNED NOT NULL DEFAULT 0,
-    `favorited` INT UNSIGNED NOT NULL DEFAULT 0,
-    PRIMARY KEY(`manga_id`)
-) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `character` (
     `character_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,

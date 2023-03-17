@@ -9,7 +9,7 @@ $routes = array(
     '/home' => 'resources/views/home.view.php',
     '/anime' => 'controllers/anime.php',
     '/manga' => 'resources/views/manga.view.php',
-    '/submit' => 'controllers/edit.php',
+    '/edit' => 'controllers/edit.php',
     '/profile' => 'resources/views/profile.view.php',
     '/404' => 'resources/views/404.view.php'
 );
@@ -20,6 +20,6 @@ if (array_key_exists($uri, $routes)) {
 } else {
     // En caso de no existir el URI solicitado, envía un error 404 al usuario y le avisa por pantalla.
     http_response_code(404);
-    echo '? [404]';
+    include('resources/views/404.view.php');
     die();
 }

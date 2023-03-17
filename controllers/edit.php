@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
     $animeSubmission['anime_id'] = $id;
     foreach ($_POST as $key => $value) {
         if ($key !== 'submit') {
-            // Current `edit_anime`'s column number: 12 (1 is ID which will query as null, 11 are form data)
+            // Current `edit_anime`'s column number: 13 (1 is ID which will query as null, 1 is anime_id foreign key, 11 are form data)
             $animeSubmission[$key] = $value;
         }
     }

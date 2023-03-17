@@ -69,6 +69,26 @@ CREATE TABLE `character` (
     PRIMARY KEY (`character_id`)
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `staff` (
+     `staff_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+     `family_name` VARCHAR(50) NULL DEFAULT NULL,
+     `given_name` VARCHAR(50) NULL DEFAULT NULL,
+     `alias` VARCHAR(50) NULL DEFAULT NULL,
+     `japanese_name` NVARCHAR(50),
+     `data` JSON,
+     `picture` VARCHAR(200) NOT NULL DEFAULT 'storage/sys/default_cover.png',
+     PRIMARY KEY (`staff_id`)
+) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `review` (
+    `review_id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `title` VARCHAR(50),
+    `text` TEXT NOT NULL,
+    `user_id` INT UNSIGNED NOT NULL,
+    PRIMARY KEY(`review_id`),
+    FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE
+) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE `character_anime` (
     `character_id` INT UNSIGNED NOT NULL,
     `anime_id` INT UNSIGNED NOT NULL,
@@ -87,17 +107,6 @@ CREATE TABLE `character_manga` (
    FOREIGN KEY (`manga_id`) REFERENCES `manga`(`manga_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE `staff` (
-     `staff_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-     `family_name` VARCHAR(50) NULL DEFAULT NULL,
-     `given_name` VARCHAR(50) NULL DEFAULT NULL,
-     `alias` VARCHAR(50) NULL DEFAULT NULL,
-     `japanese_name` NVARCHAR(50),
-     `data` JSON,
-     `picture` VARCHAR(200) NOT NULL DEFAULT 'storage/sys/default_cover.png',
-     PRIMARY KEY (`staff_id`)
-) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
-
 CREATE TABLE `staff_anime` (
     `staff_id` INT UNSIGNED NOT NULL,
     `anime_id` INT UNSIGNED NOT NULL,
@@ -115,15 +124,6 @@ CREATE TABLE `staff_manga` (
    FOREIGN KEY (`staff_id`) REFERENCES `staff`(`staff_id`) ON DELETE CASCADE ON UPDATE CASCADE,
    FOREIGN KEY (`manga_id`) REFERENCES `manga`(`manga_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
-CREATE TABLE `review` (
-    `review_id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `title` VARCHAR(50),
-    `text` TEXT NOT NULL,
-    `user_id` INT UNSIGNED NOT NULL,
-    PRIMARY KEY(`review_id`),
-    FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE
-) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `review_anime` (
     `review_id` SMALLINT UNSIGNED NOT NULL,
@@ -162,7 +162,7 @@ CREATE TABLE `edit_anime` (
 -- data -
 
 insert into `user` values (null, 'nagisa', 'pw', 'pw@pw.pw', null, 'spain', 'This is my biography', default, null);
-insert into anime values(null, 'Gintama', null, null, 'TV', 49, 'finished', '2011-04-04', '2012-03-26', 'spring 2011', 'After a one-year hiatus, Shinpachi Shimura returns to Edo, only to stumble upon a shocking surprise: Gintoki and Kagura, his fellow Yorozuya members, have become completely different characters! Fleeing from the Yorozuya headquarters in confusion, Shinpachi finds that all the denizens of Edo have undergone impossibly extreme changes, in both appearance and personality. Most unbelievably, his sister Otae has married the Shinsengumi chief and shameless stalker Isao Kondou and is pregnant with their first child.', 0, 0, 'storage/img/gintama.webp', 'storage/img/gintama_header.webp');
+insert into anime values(null, 'Gintama', null, null, 'TV', 49, 'finished', '2011-04-04', '2012-03-26', 'spring 2011', 'After a one-year hiatus, Shinpachi Shimura returns to Edo, only to stumble upon a shocking surprise: Gintoki and Kagura, his fellow Yorozuya members, have become completely different characters! Fleeing from the Yorozuya headquarters in confusion, Shinpachi finds that all the denizens of Edo have undergone impossibly extreme changes, in both appearance and personality. Most unbelievably, his sister Otae has married the Shinsengumi chief and shameless stalker Isao Kondou and is pregnant with their first child.', 0, 0, 'storage/img/gintama.webp', 'storage/img/gintama_header.jpg');
 insert into `character` values(null, 'Sakata', 'Gintoki', null,  null,  null, 'storage/public/character/gintoki.jpg');
 insert into `character_anime` values(1,1, 'Main');
 insert into `staff` values(null, 'Sorachi', 'Hideaki', null, null, null, 'storage/public/staff/Sorachi-Hideaki.jpg');

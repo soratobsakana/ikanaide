@@ -27,7 +27,7 @@
         </ul>
     </section>
     <section class="querypage_edit box">
-        <a href="../submit?aid=<?=$animeInfo['anime_id']?>"><p>Edit this page </p></a>
+        <a href="../edit?aid=<?=$animeInfo['anime_id']?>"><p>Edit this page </p></a>
     </section>
 </div>
 
