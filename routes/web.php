@@ -11,6 +11,11 @@ $routes = array(
     '/manga' => 'resources/views/manga.view.php',
     '/edit' => 'controllers/edit.php',
     '/submit' => 'controllers/submit.php',
+    '/submit/anime' => 'controllers/submit.php',
+    '/submit/manga' => 'controllers/submit.php',
+    '/submit/vn' => 'controllers/submit.php',
+    '/submit/character' => 'controllers/submit.php',
+    '/submit/staff' => 'controllers/submit.php',
     '/profile' => 'resources/views/profile.view.php',
     '/404' => 'resources/views/404.view.php'
 );

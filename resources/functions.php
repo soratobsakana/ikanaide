@@ -69,3 +69,17 @@ function replaceUnderscore(array $array, $newArray = []) {
     }
     return $newArray;
 }
+
+// En un menú de navegación, coloca el <li> correspondiente a la página actual con opacity: 1 y a los demás con opacidad baja.
+// $nav será un array que contiene cada entrada del menú de navegación deseado. (e.g. $nav = ['entrada1', 'entrada2']).
+// $substrStart define a partir de que posicion del string $page cortar. (e.g. en /submit/anime busco la palabra anime, por lo que he de cortar a partir de la posición 8 para conseguirla).
+function highlightNav(array $nav, $substrStart) {
+    $page = parse_url($_SERVER['REQUEST_URI'])['path'];
+    for ($i=0; $i < count($nav); $i++) {
+        if ($nav[$i] === substr($page, $substrStart, strlen($page))) {
+            print "<a href='/submit/".$nav[$i]."'><li class='current'>$nav[$i]</li></a>";
+        } else {
+            print "<a href='/submit/".$nav[$i]."'><li>$nav[$i]</li></a>";
+        }
+    }
+}

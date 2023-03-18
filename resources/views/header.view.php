@@ -11,7 +11,6 @@
                         print "<a href='/".$nav[$i]."'><li>$nav[$i]</li></a>";
                     }
                 }
-
             ?>
         </ul>
         <div class="header-user">

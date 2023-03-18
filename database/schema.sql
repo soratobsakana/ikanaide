@@ -62,6 +62,8 @@ CREATE TABLE `manga` (
      PRIMARY KEY(`manga_id`)
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
+show columns from `anime`;
+
 insert into anime values(
 null, 'Gintama', null, null, 'TV', 49, 'finished', '2011-04-04', '2012-03-26', 'spring 2011', 'After a one-year hiatus, Shinpachi Shimura returns to Edo, only to stumble upon a shocking surprise: Gintoki and Kagura, his fellow Yorozuya members, have become completely different characters! Fleeing from the Yorozuya headquarters in confusion, Shinpachi finds that all the denizens of Edo have undergone impossibly extreme changes, in both appearance and personality. Most unbelievably, his sister Otae has married the Shinsengumi chief and shameless stalker Isao Kondou and is pregnant with their first child.', 0, 0, 'storage/img/gintama.webp', 'storage/img/gintama_header.webp');
 insert into anime values(
@@ -223,4 +225,65 @@ CREATE TABLE `edit_anime` (
 
 drop table `edit_anime`;
 
-SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'edit_anime';
+SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'submit_manga';
+
+CREATE TABLE `submit_anime` (
+     `said` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+     `title` VARCHAR(150),
+     `english_title` VARCHAR(150),
+     `japanese_title` NVARCHAR(150),
+     `type` VARCHAR(25),
+     `episodes` SMALLINT UNSIGNED,
+     `status` VARCHAR(25),
+     `start_date` VARCHAR(50),
+     `end_date` VARCHAR(50),
+     `description` VARCHAR(3000),
+     `cover` VARCHAR(400),
+     `header` VARCHAR(400),
+     PRIMARY KEY(`said`)
+) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `submit_manga` (
+    `smid` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `title` VARCHAR(150),
+    `english_title` VARCHAR(150),
+    `japanese_title` NVARCHAR(150),
+    `format` VARCHAR(25),
+    `volumes` TINYINT UNSIGNED,
+    `chapters` SMALLINT UNSIGNED,
+    `status` VARCHAR(25),
+    `start_date` VARCHAR(50),
+    `end_date` VARCHAR(50),
+    `description` VARCHAR(3000),
+    `cover` VARCHAR(400),
+    `header` VARCHAR(400),
+    PRIMARY KEY (`smid`)
+) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+select * from submit_manga;
+
+CREATE TABLE `submit_character` (
+    `scid` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `family_name` VARCHAR(50),
+    `given_name` VARCHAR(50),
+    `alias` VARCHAR(200),
+    `japanese_name` NVARCHAR(50),
+    `biography` text,
+    `picture` VARCHAR(200) NOT NULL DEFAULT 'storage/sys/default_cover.png',
+    PRIMARY KEY (`scid`)
+) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `submit_staff` (
+    `ssid` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `family_name` VARCHAR(50) NULL DEFAULT NULL,
+    `given_name` VARCHAR(50) NULL DEFAULT NULL,
+    `alias` VARCHAR(200) NULL DEFAULT NULL,
+    `japanese_name` NVARCHAR(50),
+    `biography` text,
+    `picture` VARCHAR(200) NOT NULL DEFAULT 'storage/sys/default_cover.png',
+    PRIMARY KEY (`ssid`)
+) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+select * from submit_anime;
+select * from submit_staff;
+select * from submit_character;

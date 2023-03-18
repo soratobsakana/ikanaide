@@ -1,9 +1,34 @@
-<form action="submit?<?=$medium . '=' . $id?>" method="POST" class="submit-form">
+<?php $page = parse_url($_SERVER['REQUEST_URI'])['path']; ?>
+<form action="/submit?<?=substr($page, 8, strlen($page))?>" method="POST" class="submit-form">
     <div class="submit-form_title">Submit information to the database. A moderator will review it and inform you about any possible changes. Thanks for the effort!</div>
-        <?php
-
-        print 'A';
-
-        ?>
+    <nav class="submit-form_selector">
+        <ul class="box">
+            <?php
+                $nav = ['anime', 'manga', 'vn', 'character', 'staff'];
+                highlightNav($nav, 8);
+            ?>
+        </ul>
+    </nav>
+    <?php
+    switch ($page) {
+        case '/submit/anime':
+            require('resources/views/submit/_submit_anime.view.php');
+            break;
+        case '/submit/manga':
+            require('resources/views/submit/_submit_manga.view.php');
+            break;
+        case '/submit/vn':
+            require('resources/views/submit/_submit_vn.view.php');
+            break;
+        case '/submit/character':
+            require('resources/views/submit/_submit_character.view.php');
+            break;
+        case '/submit/staff':
+            require('resources/views/submit/_submit_staff.view.php');
+            break;
+        default:
+            header('Location: /submit/anime');
+    }
+    ?>
     <input class="box" type="submit" value="Submit the entry" name="submit">
 </form>

@@ -12,6 +12,48 @@ div.submit-form_title {
     opacity: var(--font_low-opacity);
 }
 
+nav.submit-form_selector ul {
+    display: flex;
+    justify-content: space-around;
+    padding: 6px 10px!important; /* lower padding */
+    font-size: inherit; /* .box class font-size seemed too low for this nav */
+}
+
+
+nav.submit-form_selector ul a li{
+    transition: var(--transition);
+    width: 100%;
+    opacity: var(--font_low-opacity);
+}
+
+nav.submit-form_selector ul:hover a li{
+    opacity: var(--font_low-opacity);
+}
+
+nav.submit-form_selector ul a li:hover {
+    opacity: 1!important;
+}
+
+nav.submit-form_selector ul  li.current {
+    opacity: 1;
+}
+
+nav.submit-form_selector ul :hover a li.current{
+    opacity: var(--font_low-opacity)!important;
+}
+
+nav.submit-form_selector ul  li.current:hover {
+    opacity: 1!important;
+}
+
+
+
+
+
+
+
+
+
 form.submit-form div.submit-form_wrapper {
     display: flex;
     flex-direction: column;

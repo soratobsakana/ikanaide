@@ -1,7 +1,15 @@
-220313
+220318/19
+    [] Add timestamp to relational data tables (review_X, submit_X, etc.).
+    [] Finish up the manga and vn pages for once...
+    [] First steps to user system.
+        [] Registration and login.
+        [] Session management with the purpose of adding autorship to things.
+22031X
     [] Simplify listing stuff. Probably covert every query stuff into a class.
-    [] Finish up everything needed before starting with user stuff tomorrow.
-    [] Do the controller for anime submission form.
+    [X] Finish up everything needed before starting with user stuff tomorrow.
+        Edition and submission is partly completed, so user system implementation can be started.
+    [X] Do the controller for anime submission form.
+        This was referring to the edit part of user data submission. It has been changed to an independent edit page and that is currently completed.
 
 220311
     [X] Fix submit page not working when no anime_id provided.

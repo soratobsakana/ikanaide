@@ -3,8 +3,26 @@
 <head>
     <?php
     $page = parse_url($_SERVER['REQUEST_URI'])['path'];
-    if ($page === '/') {
-        $page = '/home';
+    // For the root path and URI's that have more than one word.
+    switch ($page) {
+        case '/':
+            $page = '/home';
+            break;
+        case '/submit/anime':
+            $page = '/submit a new anime';
+            break;
+        case '/submit/manga':
+            $page = '/submit a new manga';
+            break;
+        case '/submit/vn':
+            $page = '/submit a new visual novel';
+            break;
+        case '/submit/character':
+            $page = '/submit a new character';
+            break;
+        case '/submit/staff':
+            $page = '/submit a new staff';
+            break;
     }
     ?>
     <title><?=ucfirst(substr($page, 1))?> / Ikanaide</title>
