@@ -25,3 +25,5 @@ if ($something === 'something') {
 // is the same as...
 echo $something === 'something' ? 'first' : 'second';
 
+// This will print HTML or JS just plain text, and not format anything or display alerts, etc.
+// htmlspecialchars($string);

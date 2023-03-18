@@ -4,6 +4,7 @@
     [] First steps to user system.
         [] Registration and login.
         [] Session management with the purpose of adding autorship to things.
+    [] Header into /submit after inserting data in the submit form and closing the connections.
 22031X
     [] Simplify listing stuff. Probably covert every query stuff into a class.
     [X] Finish up everything needed before starting with user stuff tomorrow.

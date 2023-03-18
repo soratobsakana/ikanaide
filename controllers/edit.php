@@ -14,12 +14,12 @@ if (isset($_POST['submit'])) {
     $animeSubmission['anime_id'] = $id;
     foreach ($_POST as $key => $value) {
         if ($key !== 'submit') {
-            // Current `edit_anime`'s column number: 13 (1 is ID which will query as null, 1 is anime_id foreign key, 11 are form data)
             $animeSubmission[$key] = $value;
         }
     }
+    $animeSubmission['user'] = 1;
 
-    $stmt = $db -> prepare('INSERT INTO `edit_anime` VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    $stmt = $db -> prepare('INSERT INTO `edit_anime` VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default)');
     $stmt -> bind_param('issssissssss',
         $animeSubmission['anime_id'],
         $animeSubmission['title'],
@@ -32,7 +32,8 @@ if (isset($_POST['submit'])) {
         $animeSubmission['end_date'],
         $animeSubmission['desc'],
         $animeSubmission['cover'],
-        $animeSubmission['header']
+        $animeSubmission['header'],
+        $animeSubmission['user']
     );
     $stmt -> execute();
 

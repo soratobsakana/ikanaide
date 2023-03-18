@@ -62,6 +62,21 @@ CREATE TABLE `manga` (
      PRIMARY KEY(`manga_id`)
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `vn` (
+      `vn_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+      `title` VARCHAR(150) NOT NULL UNIQUE,
+      `english_title` VARCHAR(150) UNIQUE,
+      `japanese_title` NVARCHAR(150) UNIQUE,
+      `duration` INT UNSIGNED,
+      `released` DATE,
+      `description` VARCHAR(3000) NOT NULL,
+      `members` INT UNSIGNED NOT NULL DEFAULT 0,
+      `favorited` INT UNSIGNED NOT NULL DEFAULT 0,
+      `cover` VARCHAR(200) NOT NULL DEFAULT 'storage/sys/default_cover.png',
+      `header` VARCHAR(200) NULL DEFAULT NULL,
+      PRIMARY KEY(`vn_id`)
+) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
 show columns from `anime`;
 
 insert into anime values(
@@ -160,9 +175,15 @@ CREATE TABLE `review` (
     `title` VARCHAR(50),
     `text` TEXT NOT NULL,
     `user_id` INT UNSIGNED NOT NULL,
+    `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY(`review_id`),
     FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+alter table `review` drop column `joined_at`;
+alter table `review` add column `date` DATETIME DEFAULT CURRENT_TIMESTAMP after `user_id`;
+
+alter table
 
 insert into `review` values (null, 'This is my review', 1);
 update review set title ='This is my title';
@@ -206,84 +227,121 @@ CREATE TABLE `score` (
 );
 
 CREATE TABLE `edit_anime` (
-    `edit_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `anime_id` INT UNSIGNED NOT NULL,
-    `title` VARCHAR(150),
-    `english_title` VARCHAR(150),
-    `japanese_title` NVARCHAR(150),
-    `type` VARCHAR(25),
-    `episodes` SMALLINT UNSIGNED,
-    `status` VARCHAR(25),
-    `start_date` VARCHAR(50),
-    `end_date` VARCHAR(50),
-    `description` VARCHAR(3000),
-    `cover` VARCHAR(400),
-    `header` VARCHAR(400),
-    PRIMARY KEY (`edit_id`),
-    FOREIGN KEY (`anime_id`) REFERENCES `anime`(`anime_id`) ON UPDATE CASCADE
+      `edit_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+      `anime_id` INT UNSIGNED NOT NULL,
+      `title` VARCHAR(150),
+      `english_title` VARCHAR(150),
+      `japanese_title` NVARCHAR(150),
+      `type` VARCHAR(25),
+      `episodes` SMALLINT UNSIGNED,
+      `status` VARCHAR(25),
+      `start_date` VARCHAR(50),
+      `end_date` VARCHAR(50),
+      `description` VARCHAR(3000),
+      `cover` VARCHAR(400),
+      `header` VARCHAR(400),
+      `user_id` INT UNSIGNED NOT NULL,
+      `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+      PRIMARY KEY (`edit_id`, `anime_id`, `user_id`),
+      FOREIGN KEY (`anime_id`) REFERENCES `anime`(`anime_id`) ON UPDATE CASCADE ON DELETE CASCADE,
+      FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
-drop table `edit_anime`;
-
-SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'submit_manga';
-
 CREATE TABLE `submit_anime` (
-     `said` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-     `title` VARCHAR(150),
-     `english_title` VARCHAR(150),
-     `japanese_title` NVARCHAR(150),
-     `type` VARCHAR(25),
-     `episodes` SMALLINT UNSIGNED,
-     `status` VARCHAR(25),
-     `start_date` VARCHAR(50),
-     `end_date` VARCHAR(50),
-     `description` VARCHAR(3000),
-     `cover` VARCHAR(400),
-     `header` VARCHAR(400),
-     PRIMARY KEY(`said`)
+        `said` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+        `title` VARCHAR(150),
+        `english_title` VARCHAR(150),
+        `japanese_title` NVARCHAR(150),
+        `type` VARCHAR(25),
+        `episodes` SMALLINT UNSIGNED,
+        `status` VARCHAR(25),
+        `start_date` VARCHAR(50),
+        `end_date` VARCHAR(50),
+        `description` VARCHAR(3000),
+        `cover` VARCHAR(400),
+        `header` VARCHAR(400),
+        `user_id` INT UNSIGNED NOT NULL,
+        `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY(`said`),
+        FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `submit_manga` (
-    `smid` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `title` VARCHAR(150),
-    `english_title` VARCHAR(150),
-    `japanese_title` NVARCHAR(150),
-    `format` VARCHAR(25),
-    `volumes` TINYINT UNSIGNED,
-    `chapters` SMALLINT UNSIGNED,
-    `status` VARCHAR(25),
-    `start_date` VARCHAR(50),
-    `end_date` VARCHAR(50),
-    `description` VARCHAR(3000),
-    `cover` VARCHAR(400),
-    `header` VARCHAR(400),
-    PRIMARY KEY (`smid`)
+        `smid` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+        `title` VARCHAR(150),
+        `english_title` VARCHAR(150),
+        `japanese_title` NVARCHAR(150),
+        `format` VARCHAR(25),
+        `volumes` TINYINT UNSIGNED,
+        `chapters` SMALLINT UNSIGNED,
+        `status` VARCHAR(25),
+        `start_date` VARCHAR(50),
+        `end_date` VARCHAR(50),
+        `description` VARCHAR(3000),
+        `cover` VARCHAR(400),
+        `header` VARCHAR(400),
+        `user_id` INT UNSIGNED NOT NULL,
+        `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY (`smid`),
+        FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
-select * from submit_manga;
+CREATE TABLE `submit_vn` (
+         `vid` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+         `title` VARCHAR(150),
+         `english_title` VARCHAR(150),
+         `japanese_title` NVARCHAR(150),
+         `duration` INT UNSIGNED,
+         `released` VARCHAR(200),
+         `description` VARCHAR(3000),
+         `cover` VARCHAR(200),
+         `header` VARCHAR(200),
+         `user_id` INT UNSIGNED NOT NULL,
+         `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+         PRIMARY KEY(`vid`),
+         FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE
+) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `submit_character` (
-    `scid` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `family_name` VARCHAR(50),
-    `given_name` VARCHAR(50),
-    `alias` VARCHAR(200),
-    `japanese_name` NVARCHAR(50),
-    `biography` text,
-    `picture` VARCHAR(200) NOT NULL DEFAULT 'storage/sys/default_cover.png',
-    PRIMARY KEY (`scid`)
+        `scid` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+        `family_name` VARCHAR(50),
+        `given_name` VARCHAR(50),
+        `alias` VARCHAR(200),
+        `japanese_name` NVARCHAR(50),
+        `biography` text,
+        `picture` VARCHAR(200) NOT NULL DEFAULT 'storage/sys/default_cover.png',
+        `user_id` INT UNSIGNED NOT NULL,
+        `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY (`scid`),
+        FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `submit_staff` (
-    `ssid` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `family_name` VARCHAR(50) NULL DEFAULT NULL,
-    `given_name` VARCHAR(50) NULL DEFAULT NULL,
-    `alias` VARCHAR(200) NULL DEFAULT NULL,
-    `japanese_name` NVARCHAR(50),
-    `biography` text,
-    `picture` VARCHAR(200) NOT NULL DEFAULT 'storage/sys/default_cover.png',
-    PRIMARY KEY (`ssid`)
+        `ssid` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+        `family_name` VARCHAR(50) NULL DEFAULT NULL,
+        `given_name` VARCHAR(50) NULL DEFAULT NULL,
+        `alias` VARCHAR(200) NULL DEFAULT NULL,
+        `japanese_name` NVARCHAR(50),
+        `biography` text,
+        `picture` VARCHAR(200) NOT NULL DEFAULT 'storage/sys/default_cover.png',
+        `user_id` INT UNSIGNED NOT NULL,
+        `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY (`ssid`),
+        FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
+select * from `edit_anime`;
+
+drop table `edit_anime`;
+drop table `submit_anime`;
+drop table `submit_manga`;
+drop table `submit_character`;
+drop table `submit_staff`;
+drop table `edit_anime`;
+drop table `edit_anime`;
+SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'submit_manga';
+select * from submit_manga;
 select * from submit_anime;
 select * from submit_staff;
 select * from submit_character;
+select * from submit_vn;

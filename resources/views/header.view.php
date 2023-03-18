@@ -3,8 +3,9 @@
         <a href="/"><p id="header-logo">ikanaide</p></a>
         <ul class="header-links">
             <?php
-                $nav = ['home', 'anime', 'manga', 'rankings', 'community'];
+                $nav = ['home', 'anime', 'manga', 'vn', 'rankings', 'community'];
                 for ($i=0; $i < count($nav); $i++) {
+                    // $page comes from /index.php (it stores the current URI).
                     if ($nav[$i] === substr($page, 1, strlen($page))) {
                         print "<a href='/".$nav[$i]."'><li class='current'>$nav[$i]</li></a>";
                     } else {

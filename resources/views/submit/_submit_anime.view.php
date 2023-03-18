@@ -50,7 +50,3 @@
         <input type="text" name="header" id="header" placeholder="Please provide a link to your image.">
     </div>
 </div>
-<div class="submit-form_wrapper box">
-    <label for="studios">studios</label>
-    <input type="text" name="studios" id="studios">
-</div>
