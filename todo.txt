@@ -1,10 +1,18 @@
+220320
+    [] Learn about classes
+    [] Implement a Database class
+    [] Implement a Listing class
+    [] Implement an AddData class and merge the edit and submit form up.
+
 220318/19
-    [] Add timestamp to relational data tables (review_X, submit_X, etc.).
+    [X] Add timestamp to relational data tables (review_X, submit_X, etc.).
+        I've added timestamp to both individual data tables and relational ones. Just in case for now.
     [] Finish up the manga and vn pages for once...
     [] First steps to user system.
         [] Registration and login.
         [] Session management with the purpose of adding autorship to things.
-    [] Header into /submit after inserting data in the submit form and closing the connections.
+    [X] Header into /submit after inserting data in the submit form and closing the connections.
+        Decided to keep the ugly URI after submission (/submit?anime) and display an OK message to the user in that page.
 22031X
     [] Simplify listing stuff. Probably covert every query stuff into a class.
     [X] Finish up everything needed before starting with user stuff tomorrow.

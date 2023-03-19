@@ -4,7 +4,7 @@
         <li>Privacy</li>
         <li>Contact</li>
         <li>Donate</li>
-        <li>Twitter</li>
+        <a href="/submit"><li>Add Data</li></a>
         <?php
         if (isset($_SESSION["loggedin"])) {
             ?>

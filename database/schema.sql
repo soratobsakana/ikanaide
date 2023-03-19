@@ -62,12 +62,16 @@ CREATE TABLE `manga` (
      PRIMARY KEY(`manga_id`)
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
+update manga set `cover`='storage/img/punpun.jpg';
+select * from manga;
+insert into manga values (null, 'Oyasumi Punpun', null, null, 'manga', '13', '144', 'finished', '2007-03-15', '2013-11-02', 'Punpun Onodera is a normal 11-year-old boy living in Japan. Hopelessly idealistic and romantic, Punpun begins to see his life take a subtle—though nonetheless startling—turn to the adult when he meets the new girl in his class, Aiko Tanaka. It is then that the quiet boy learns just how fickle maintaining a relationship can be, and the surmounting difficulties of transitioning from a naïve boyhood to a convoluted adulthood. When his father assaults his mother one night, Punpun realizes another thing: those whom he looked up to were not as impressive as he once thought.', 0, 0, 'storage/img/punpun.jpeg', 'storage/img/punpun_header.png');
+
 CREATE TABLE `vn` (
       `vn_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
       `title` VARCHAR(150) NOT NULL UNIQUE,
       `english_title` VARCHAR(150) UNIQUE,
       `japanese_title` NVARCHAR(150) UNIQUE,
-      `duration` INT UNSIGNED,
+      `duration` INT UNSIGNED, -- Minutes -
       `released` DATE,
       `description` VARCHAR(3000) NOT NULL,
       `members` INT UNSIGNED NOT NULL DEFAULT 0,
@@ -77,12 +81,12 @@ CREATE TABLE `vn` (
       PRIMARY KEY(`vn_id`)
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
+insert into `vn` values (null, 'Sakura no Uta', null, null, 3000, '2015-10-23', 'Naoya Kusanagi lost his mother when he was a child. Naoyas father who is a famous artist is the only person that can help him cope with the loss of his friend, Rin Misakura who move while they were in elementary school. Later, Naoyas father died. After the funeral ends, Naoya is taken into the custody of Keis family in exchange for cooking meals at their home. 6 years later, Rin is transferred to Naoyas class.', 0, 0, 'storage/img/sakuta.jpeg', 'storage/img/sakuta_header.jpg');
+select * from vn;
 show columns from `anime`;
 
 insert into anime values(
 null, 'Gintama', null, null, 'TV', 49, 'finished', '2011-04-04', '2012-03-26', 'spring 2011', 'After a one-year hiatus, Shinpachi Shimura returns to Edo, only to stumble upon a shocking surprise: Gintoki and Kagura, his fellow Yorozuya members, have become completely different characters! Fleeing from the Yorozuya headquarters in confusion, Shinpachi finds that all the denizens of Edo have undergone impossibly extreme changes, in both appearance and personality. Most unbelievably, his sister Otae has married the Shinsengumi chief and shameless stalker Isao Kondou and is pregnant with their first child.', 0, 0, 'storage/img/gintama.webp', 'storage/img/gintama_header.webp');
-insert into anime values(
-null, 'Gintadma', null, null, 'TV', 49, 'finished', '2011-04-04', '2012-03-26', 'spring 2011', 'After a one-year hiatus, Shinpachi Shimura returns to Edo, only to stumble upon a shocking surprise: Gintoki and Kagura, his fellow Yorozuya members, have become completely different characters! Fleeing from the Yorozuya headquarters in confusion, Shinpachi finds that all the denizens of Edo have undergone impossibly extreme changes, in both appearance and personality. Most unbelievably, his sister Otae has married the Shinsengumi chief and shameless stalker Isao Kondou and is pregnant with their first child.', 0, 0, 'storage/img/gintamda.webp', 'storage/idmg/gintama_header.webp');
 select * from anime;
 
 update anime set `header` = 'storage/img/gintama_header.jpg' where anime_id=1;

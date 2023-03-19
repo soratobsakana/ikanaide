@@ -1,43 +1,39 @@
 <div class="querypage_left-column">
-    <img src="<?=$animeInfo['cover']?>" alt="<?=$animeInfo['title']?>"/>
+    <img src="<?=$vnInfo['cover']?>" alt="<?=$vnInfo['title']?>"/>
     <section class="querypage_info two-column-list box">
         <?php
         $info = [];
-        foreach ($animeInfo as $key => $value) {
-            $info = replaceUnderscore($animeInfo);
+        foreach ($vnInfo as $key => $value) {
+            $info = replaceUnderscore($vnInfo);
         }
         ?>
 
         <ul>
-            <li><span class="ul_first-column">type</span><span><?=$animeInfo['type']?></span></li>
-            <li><span class="ul_first-column">episodes</span><span><?=$animeInfo['episodes']?></span></li>
-            <li><span class="ul_first-column">status</span><span><?=$animeInfo['status']?></span></li>
-            <li><span class="ul_first-column">start date</span><span><?=$animeInfo['start_date']?></span></li>
-            <li><span class="ul_first-column">end date</span><span><?=$animeInfo['end_date']?></span></li>
-            <li><span class="ul_first-column">season</span><span><?=$animeInfo['season']?></span></li>
+            <li><span class="ul_first-column">duration</span><span><?=$vnInfo['duration']?></span></li>
+            <li><span class="ul_first-column">released</span><span><?=$vnInfo['released']?></span></li>
         </ul>
     </section>
     <section class="querypage_people two-column-list box">
         <ul>
-            <li><span class="ul_first-column">members</span><span><?=$animeInfo['members']?></span></li>
-            <li><span class="ul_first-column">loved</span><span><?=$animeInfo['favorited']?></span></li>
+            <li><span class="ul_first-column">members</span><span><?=$vnInfo['members']?></span></li>
+            <li><span class="ul_first-column">loved</span><span><?=$vnInfo['favorited']?></span></li>
             <li><span class="ul_first-column">ranked</span><span></span></li>
             <li><span class="ul_first-column">popularity</span><span></span></li>
         </ul>
     </section>
     <section class="querypage_edit box">
-        <a href="../edit?aid=<?=$animeInfo['anime_id']?>"><p>Edit this page </p></a>
+        <a href="../edit?aid=<?=$vnInfo['vn_id']?>"><p>Edit this page </p></a>
     </section>
 </div>
 
 <div class="querypage_right-column">
     <?php
-    if ($animeInfo['header'] !== null) {
-        print "<img src=".$animeInfo['header']." alt=".$animeInfo['title'].">";
+    if ($vnInfo['header'] !== null) {
+        print "<img src=".$vnInfo['header']." alt=".$vnInfo['title'].">";
     }
     ?>
-    <section class="querypage_title"><h1><?=$animeInfo['title']?></h1></section>
-    <section class="querypage_desc box"><?=$animeInfo['description']?></section>
+    <section class="querypage_title"><h1><?=$vnInfo['title']?></h1></section>
+    <section class="querypage_desc box"><?=$vnInfo['description']?></section>
     <section class="querypage_char">
         <div class="header"><h3>Characters</h3><span class="view-all">view all</span></div>
         <div class="querypage_char-entry_wrapper">
@@ -108,7 +104,7 @@
 
                     <div class="querypage_review-entry">
                         <div class="querypage_review-entry_pic">
-                            <img src="<?=$animeInfo['cover']?>" alt="<?=$animeInfo['title']?>">
+                            <img src="<?=$vnInfo['cover']?>" alt="<?=$vnInfo['title']?>">
                         </div>
                         <div class="querypage_review-entry_info">
                             <div class="querypage_review-entry_info-name">
