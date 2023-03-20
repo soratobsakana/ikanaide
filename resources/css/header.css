@@ -37,11 +37,11 @@ div.inner-header ul.header-links {
 div.inner-header ul.header-links a li{
     transition: var(--transition);
     width: 100%;
-    opacity: var(--font_low-opacity);
+    opacity: calc(var(--font_low-opacity) - 0.1);
 }
 
 div.inner-header ul.header-links:hover a li{
-    opacity: var(--font_low-opacity);
+    opacity: calc(var(--font_low-opacity) - 0.1);
 }
 
 div.inner-header ul.header-links a li:hover {
@@ -53,7 +53,7 @@ div.inner-header ul.header-links a li.current {
 }
 
 div.inner-header ul.header-links:hover a li.current{
-    opacity: var(--font_low-opacity)!important;
+    opacity: calc(var(--font_low-opacity) - 0.1)!important;
 }
 
 div.inner-header ul.header-links a li.current:hover {

@@ -1,7 +1,5 @@
 <?php
 
-require('app/Listing.php');
-
 $stmt = $db -> prepare("SELECT * FROM anime WHERE anime_id = ?");
 $stmt -> bind_param('i', $anime_id);
 $stmt -> execute();
