@@ -35,15 +35,11 @@
 <body>
 <script>0</script>
 <?php
-    include 'database/conn.php';
+    include 'app/Database.php';
     include 'resources/functions.php';
-    include 'app/Test.php';
-    $query = 'SELECT * FROM anime WHERE anime_id = ?';
-    $parameters = [1];
-    $database = new Test;
-    $animeInfo = $database -> animeInfo;
-    var_dump($database);
-    $database -> getInfo($query, $parameters);
+    $con = new Database;
+    $table = 'anime';
+    $animeInfo = $con -> selectAll($table);
     pre($animeInfo);
 ?>
 <div class="container">
