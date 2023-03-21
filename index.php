@@ -34,6 +34,18 @@
 </head>
 <body>
 <script>0</script>
+<?php
+    include 'database/conn.php';
+    include 'resources/functions.php';
+    include 'app/Test.php';
+    $query = 'SELECT * FROM anime WHERE anime_id = ?';
+    $parameters = [1];
+    $database = new Test;
+    $animeInfo = $database -> animeInfo;
+    var_dump($database);
+    $database -> getInfo($query, $parameters);
+    pre($animeInfo);
+?>
 <div class="container">
     <!-- Este wrapper sirve para colocar el header y  cuerpo en la parte superior de la web y el footer en la inferior, mediante la propiedad flex 'space-between' en div.container -->
     <div class="wrapper">
