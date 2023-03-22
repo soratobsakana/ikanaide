@@ -8,7 +8,7 @@ class Listing
     public array $queryInfo;
 
     // Devuelve todos los valores de la fila de una tabla indicada por parámetro.
-    public function selectAll(string $table, string $column, array $params): array|null
+    public function getAll(string $table, string $column, array $params): array|null
     {
         $con = new Database;
         $result =  $con -> db -> execute_query("SELECT * FROM `$table` WHERE `$column` = ?", $params);
@@ -28,7 +28,7 @@ class Listing
     }
 
     // Devuelve la información sobre los personajes asociados a una entrada de la base de datos.
-    public function selectChars(string $table, array $params): array|null
+    public function getChars(string $table, array $params): array|null
     {
         $con = new Database;
         $characters = [];
@@ -53,7 +53,7 @@ class Listing
     }
 
     // Devuelve la información sobre los miembros de staff asociados a una entrada de la base de datos.
-    public function selectStaff(string $table, array $params): array|null
+    public function getStaff(string $table, array $params): array|null
     {
         
         $con = new Database;
@@ -77,7 +77,7 @@ class Listing
     }
 
     // Devuelve la información sobre las reviews asociadas a una entrada de la base de datos.
-    public function selectReviews(string $table, array $params): array|null
+    public function getReviews(string $table, array $params): array|null
     {
         $con = new Database;
         $reviews = [];

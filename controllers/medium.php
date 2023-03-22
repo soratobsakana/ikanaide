@@ -12,10 +12,10 @@ if ($_GET) {
     $column = $medium . '_id';
     $id = $_GET['id'] ?? null;
 
-    $mediumInfo = $listing -> selectAll($medium, $column, [$id]);
-    $characters = $listing -> selectChars($medium, [$id]);
-    $staff = $listing -> selectStaff($medium, [$id]);
-    $reviews = $listing -> selectReviews($medium, [$id]);
+    $mediumInfo = $listing -> getAll($medium, $column, [$id]);
+    $characters = $listing -> getChars($medium, [$id]);
+    $staff = $listing -> getStaff($medium, [$id]);
+    $reviews = $listing -> getReviews($medium, [$id]);
     require('resources/views/' . $medium . '/_' . $medium . 'query.view.php');
     
 
