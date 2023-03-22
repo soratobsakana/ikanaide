@@ -35,12 +35,20 @@
 <body>
 <script>0</script>
 <?php
-    include 'app/Database.php';
-    include 'resources/functions.php';
-    $con = new Database;
-    $table = 'anime';
-    $animeInfo = $con -> selectAll($table);
-    pre($animeInfo);
+    include 'app/Listing.php';
+    $query = substr($page, 1);
+    $con = new Listing;
+    switch($query) {
+        case 'anime':
+            $queryInfo = $con -> selectAll('anime', 'anime_id', [1]);
+            break;
+        case 'manga':
+            $queryInfo = $con -> selectAll('manga', 'manga_id', [1]);
+            break;
+        case 'vn':
+            $queryInfo = $con -> selectAll('character_anime', 'character_id', [1]);
+            break;
+    }
 ?>
 <div class="container">
     <!-- Este wrapper sirve para colocar el header y  cuerpo en la parte superior de la web y el footer en la inferior, mediante la propiedad flex 'space-between' en div.container -->
