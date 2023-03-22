@@ -210,18 +210,18 @@ div.querypage_review-entry_info-role a:hover {
     opacity: 1;
 }
 
-div.animehome {
+div.mediumhome {
     min-width: 100%;
 }
 
-section.animehome_all-anime {
+section.mediumhome_all-medium {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-div.animehome_all-anime_content {
+div.mediumhome_all-medium_content {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-gap: 5px;

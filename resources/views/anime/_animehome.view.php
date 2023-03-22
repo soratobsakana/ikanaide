@@ -1,10 +1,10 @@
-<div class="animehome">
-    <div class="animehome_all-anime">
-        <div class="animehome_all-anime_content">
+<div class="mediumhome">
+    <div class="mediumhome_all-medium">
+        <div class="mediumhome_all-medium_content">
             <?php
 
-            if ($result -> num_rows > 0) {
-                while ($row = $result -> fetch_assoc()) {
+            if ($homeInfo -> num_rows > 0) {
+                while ($row = $homeInfo -> fetch_assoc()) {
                     switch ($page) {
                         case '/anime':
                             ?>

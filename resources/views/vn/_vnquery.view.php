@@ -1,39 +1,39 @@
 <div class="querypage_left-column">
-    <img src="<?=$vnInfo['cover']?>" alt="<?=$vnInfo['title']?>"/>
+    <img src="<?=$mediumInfo['cover']?>" alt="<?=$mediumInfo['title']?>"/>
     <section class="querypage_info two-column-list box">
         <?php
         $info = [];
-        foreach ($vnInfo as $key => $value) {
-            $info = replaceUnderscore($vnInfo);
+        foreach ($mediumInfo as $key => $value) {
+            $info = replaceUnderscore($mediumInfo);
         }
         ?>
 
         <ul>
-            <li><span class="ul_first-column">duration</span><span><?=$vnInfo['duration']?></span></li>
-            <li><span class="ul_first-column">released</span><span><?=$vnInfo['released']?></span></li>
+            <li><span class="ul_first-column">duration</span><span><?=$mediumInfo['duration']?></span></li>
+            <li><span class="ul_first-column">released</span><span><?=$mediumInfo['released']?></span></li>
         </ul>
     </section>
     <section class="querypage_people two-column-list box">
         <ul>
-            <li><span class="ul_first-column">members</span><span><?=$vnInfo['members']?></span></li>
-            <li><span class="ul_first-column">loved</span><span><?=$vnInfo['favorited']?></span></li>
+            <li><span class="ul_first-column">members</span><span><?=$mediumInfo['members']?></span></li>
+            <li><span class="ul_first-column">loved</span><span><?=$mediumInfo['favorited']?></span></li>
             <li><span class="ul_first-column">ranked</span><span></span></li>
             <li><span class="ul_first-column">popularity</span><span></span></li>
         </ul>
     </section>
     <section class="querypage_edit box">
-        <a href="../edit?aid=<?=$vnInfo['vn_id']?>"><p>Edit this page </p></a>
+        <a href="../edit?aid=<?=$mediumInfo['vn_id']?>"><p>Edit this page </p></a>
     </section>
 </div>
 
 <div class="querypage_right-column">
     <?php
-    if ($vnInfo['header'] !== null) {
-        print "<img src=".$vnInfo['header']." alt=".$vnInfo['title'].">";
+    if ($mediumInfo['header'] !== null) {
+        print "<img src=".$mediumInfo['header']." alt=".$mediumInfo['title'].">";
     }
     ?>
-    <section class="querypage_title"><h1><?=$vnInfo['title']?></h1></section>
-    <section class="querypage_desc box"><?=$vnInfo['description']?></section>
+    <section class="querypage_title"><h1><?=$mediumInfo['title']?></h1></section>
+    <section class="querypage_desc box"><?=$mediumInfo['description']?></section>
     <section class="querypage_char">
         <div class="header"><h3>Characters</h3><span class="view-all">view all</span></div>
         <div class="querypage_char-entry_wrapper">
@@ -104,7 +104,7 @@
 
                     <div class="querypage_review-entry">
                         <div class="querypage_review-entry_pic">
-                            <img src="<?=$vnInfo['cover']?>" alt="<?=$vnInfo['title']?>">
+                            <img src="<?=$mediumInfo['cover']?>" alt="<?=$mediumInfo['title']?>">
                         </div>
                         <div class="querypage_review-entry_info">
                             <div class="querypage_review-entry_info-name">

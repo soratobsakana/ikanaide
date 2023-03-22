@@ -1,43 +1,43 @@
 <div class="querypage_left-column">
-    <img src="<?=$mangaInfo['cover']?>" alt="<?=$mangaInfo['title']?>"/>
+    <img src="<?=$mediumInfo['cover']?>" alt="<?=$mediumInfo['title']?>"/>
     <section class="querypage_info two-column-list box">
         <?php
         $info = [];
-        foreach ($mangaInfo as $key => $value) {
-            $info = replaceUnderscore($mangaInfo);
+        foreach ($mediumInfo as $key => $value) {
+            $info = replaceUnderscore($mediumInfo);
         }
         ?>
 
         <ul>
-            <li><span class="ul_first-column">format</span><span><?=$mangaInfo['format']?></span></li>
-            <li><span class="ul_first-column">volumes</span><span><?=$mangaInfo['volumes']?></span></li>
-            <li><span class="ul_first-column">chapters</span><span><?=$mangaInfo['chapters']?></span></li>
-            <li><span class="ul_first-column">status</span><span><?=$mangaInfo['status']?></span></li>
-            <li><span class="ul_first-column">start date</span><span><?=$formattedStartDate?></span></li>
-            <li><span class="ul_first-column">end date</span><span><?=$formattedEndDate?></span></li>
+            <li><span class="ul_first-column">format</span><span><?=$mediumInfo['format']?></span></li>
+            <li><span class="ul_first-column">volumes</span><span><?=$mediumInfo['volumes']?></span></li>
+            <li><span class="ul_first-column">chapters</span><span><?=$mediumInfo['chapters']?></span></li>
+            <li><span class="ul_first-column">status</span><span><?=$mediumInfo['status']?></span></li>
+            <li><span class="ul_first-column">start date</span><span><?=$mediumInfo['start_date']?></span></li>
+            <li><span class="ul_first-column">end date</span><span><?=$mediumInfo['end_date']?></span></li>
         </ul>
     </section>
     <section class="querypage_people two-column-list box">
         <ul>
-            <li><span class="ul_first-column">members</span><span><?=$mangaInfo['members']?></span></li>
-            <li><span class="ul_first-column">loved</span><span><?=$mangaInfo['favorited']?></span></li>
+            <li><span class="ul_first-column">members</span><span><?=$mediumInfo['members']?></span></li>
+            <li><span class="ul_first-column">loved</span><span><?=$mediumInfo['favorited']?></span></li>
             <li><span class="ul_first-column">ranked</span><span></span></li>
             <li><span class="ul_first-column">popularity</span><span></span></li>
         </ul>
     </section>
     <section class="querypage_edit box">
-        <a href="../edit?aid=<?=$mangaInfo['manga_id']?>"><p>Edit this page </p></a>
+        <a href="../edit?aid=<?=$mediumInfo['manga_id']?>"><p>Edit this page </p></a>
     </section>
 </div>
 
 <div class="querypage_right-column">
     <?php
-    if ($mangaInfo['header'] !== null) {
-        print "<img src=".$mangaInfo['header']." alt=".$mangaInfo['title'].">";
+    if ($mediumInfo['header'] !== null) {
+        print "<img src=".$mediumInfo['header']." alt=".$mediumInfo['title'].">";
     }
     ?>
-    <section class="querypage_title"><h1><?=$mangaInfo['title']?></h1></section>
-    <section class="querypage_desc box"><?=$mangaInfo['description']?></section>
+    <section class="querypage_title"><h1><?=$mediumInfo['title']?></h1></section>
+    <section class="querypage_desc box"><?=$mediumInfo['description']?></section>
     <section class="querypage_char">
         <div class="header"><h3>Characters</h3><span class="view-all">view all</span></div>
         <div class="querypage_char-entry_wrapper">
@@ -108,7 +108,7 @@
 
                     <div class="querypage_review-entry">
                         <div class="querypage_review-entry_pic">
-                            <img src="<?=$mangaInfo['cover']?>" alt="<?=$mangaInfo['title']?>">
+                            <img src="<?=$mediumInfo['cover']?>" alt="<?=$mediumInfo['title']?>">
                         </div>
                         <div class="querypage_review-entry_info">
                             <div class="querypage_review-entry_info-name">
