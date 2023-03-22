@@ -8,7 +8,7 @@ class Listing
     public array $queryInfo;
 
     // Devuelve todos los valores de la fila de una tabla indicada por parámetro.
-    public function getAll(string $table, string $column, array $params): array|null
+    public function getInfo(string $table, string $column, array $params): array|null
     {
         $con = new Database;
         $result =  $con -> db -> execute_query("SELECT * FROM `$table` WHERE `$column` = ?", $params);
@@ -21,10 +21,8 @@ class Listing
         } else {
             return $queryInfo = null;
         }
-
         
-        
-    $con -> db -> close();
+        $con -> db -> close();
     }
 
     // Devuelve la información sobre los personajes asociados a una entrada de la base de datos.
@@ -50,6 +48,7 @@ class Listing
             return $characters = null;
         }
         
+        $con -> db -> close();
     }
 
     // Devuelve la información sobre los miembros de staff asociados a una entrada de la base de datos.
@@ -74,6 +73,8 @@ class Listing
         } else {
             return $staff = null;
         }
+
+        $con -> db -> close();
     }
 
     // Devuelve la información sobre las reviews asociadas a una entrada de la base de datos.
@@ -97,10 +98,12 @@ class Listing
         } else {
             return $reviews = null;
         }
+
+        $con -> db -> close();
     }
 
     // 
-    public function getHomeInfo($medium): object
+    public function getHome($medium): object
     {
         $con = new Database;
         $mediumHomeInfo = [];
@@ -108,6 +111,7 @@ class Listing
         $result = $con -> db -> execute_query($query);
         
         return $result;
-        
+
+        $con -> db -> close();
     }
 }

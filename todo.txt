@@ -1,7 +1,9 @@
-220320
-    [] Learn about classes
-    [] Implement a Database class
-    [] Implement a Listing class
+220322
+    [X] Learn about classes
+    [X] Implement a Database class
+        Implemented the database connection as a constructor for the class. The class will be called in Class definition files and not controllers.
+    [X] Implement a Listing class
+        Querying anime/manga/vn info is now completely dynamic. Only unifying the query page view is left.
     [] Implement an AddData class and merge the edit and submit form up.
 
 220318/19
