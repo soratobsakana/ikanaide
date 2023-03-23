@@ -50,3 +50,8 @@ div.logreg-wrapper a:hover {
 div.logreg-wrapper p {
     font-size: var(--box-font-size);
 }
+
+.form-mistake {
+    color: var(--red);
+    margin-bottom: 4px;
+}
