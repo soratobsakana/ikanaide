@@ -1,7 +1,16 @@
+220324
+    [] Add session management (auto-login if succeed) to the register form.
+    [] Make the login controller.
+    [] Work on the profile page. Start to think on the relation of users with data and make the design.
+    [] Think of user profile URI's.
+    [] Improve registration and login controllers.
+
 220323
     [X] Add an id colorful submit and style it just on main.css.
-    [] User registration validation form.
-    [] User login validation form.
+    [X] User registration validation form.
+        Should be a pretty premature one. It will change and be more specific and secure in the future, but it will do for now.
+    [-] User login validation form.
+        Simply the HTML is done. Authentication and session management is still needed.
     [] Make user profile page.
 
 220322
