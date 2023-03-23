@@ -5,6 +5,6 @@ $DB_SERVER = 'localhost';
 $DB_USER = 'root';
 $DB_PASS = '';
 $DB_NAME = 'ikanaide';
-$DB_PORT = '5555';
+$DB_PORT = '3306';
 
 $charset = 'utf8mb4';

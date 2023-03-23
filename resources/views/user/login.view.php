@@ -9,7 +9,7 @@
             <label for="password">password</label>
             <input type="password" name="password" id="password">
         </div>
-        <input class="box" type="submit" name='register' value="Submit">
+        <input class="box" id="submit-button__colorful" type="submit" name='register' value="Submit">
     </form>
     <p>... or <a href="register">register</a> if you don't have an account.</p>
 </div>

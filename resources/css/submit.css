@@ -47,13 +47,6 @@ nav.submit-form_selector ul  li.current:hover {
 }
 
 
-
-
-
-
-
-
-
 form.submit-form div.submit-form_wrapper {
     display: flex;
     flex-direction: column;
@@ -69,22 +62,6 @@ form.submit-form div.submit-form_wrapper label {
     margin: auto 0;
     font-size: var(--box-font-size);
 }
-
-form.submit-form input[type='submit'] {
-    width: 200px;
-    align-self: center;
-    font-weight: var(--bold);
-    margin-top: 10px;
-    background-image: linear-gradient(to right, #8e2de2, #3A73F3);
-    background-size: 100%;
-
-    transition: var(--transition);
-}
-
-form.submit-form input[type='submit']:hover {
-    background-size: 150%;
-}
-
 
 form.submit-form div.wrapper {
     display: flex;

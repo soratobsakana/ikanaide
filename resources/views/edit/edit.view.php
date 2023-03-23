@@ -13,5 +13,5 @@
         }
 
         ?>
-    <input class="box" type="submit" value="Submit the entry" name="submit">
+    <input class="box" id="submit-button__colorful" type="submit" value="Submit" name="submit">
 </form>

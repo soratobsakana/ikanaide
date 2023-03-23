@@ -25,8 +25,6 @@ class Listing
         } else {
             return $queryInfo = null;
         }
-        
-        $this -> con -> db -> close();
     }
 
     // Devuelve la información sobre los personajes asociados a una entrada de la base de datos.
@@ -50,8 +48,6 @@ class Listing
         } else {
             return $characters = null;
         }
-        
-        $this -> con -> db -> close();
     }
 
     // Devuelve la información sobre los miembros de staff asociados a una entrada de la base de datos.
@@ -75,8 +71,6 @@ class Listing
         } else {
             return $staff = null;
         }
-
-        $this -> con -> db -> close();
     }
 
     // Devuelve la información sobre las reviews asociadas a una entrada de la base de datos.
@@ -99,19 +93,12 @@ class Listing
         } else {
             return $reviews = null;
         }
-
-        $this -> con -> db -> close();
     }
 
     // 
     public function getHome($medium): object
     {
-        $mediumHomeInfo = [];
         $query = 'SELECT ' . $medium . '_id, title, cover FROM ' . $medium;
-        $result = $this -> con -> db -> execute_query($query);
-        
-        return $result;
-
-        $this -> con -> db -> close();
+        return $this -> con -> db -> execute_query($query);
     }
 }

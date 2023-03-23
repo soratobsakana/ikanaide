@@ -3,7 +3,7 @@
         <a href="/"><p id="header-logo">ikanaide</p></a>
         <ul class="header-links">
             <?php
-                $nav = ['home', 'anime', 'manga', 'rankings', 'community'];
+                $nav = ['home', 'anime', 'manga', 'vn', 'rankings', 'community'];
                 for ($i=0; $i < count($nav); $i++) {
                     // $page comes from /index.php (it stores the current URI).
                     if ($nav[$i] === substr($page, 1, strlen($page))) {
@@ -23,8 +23,8 @@
             } else {
                 ?>
                 <ul class="header-user-ul">
-                    <li>Sign in</li>
-                    <li>Sign up</li>
+                    <a href="/login"><li>Sign in</li></a>
+                    <a href="/register"><li>Sign up</li></a>
                 </ul>
                 <?php
             }

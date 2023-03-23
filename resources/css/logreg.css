@@ -30,31 +30,13 @@ div.logreg-wrapper div.logreg-input {
     width: 350px;
 }
 
-div.logreg-wrapper.div.logreg-input input, input[type="email"] {
-    width: 100%;
+div.logreg-wrapper div.logreg-input input {
+    width: 100%!important;
 }
 
 div.logreg-wrapper form div.logreg-input:focus-within {
     background: var(--box-bg-color-hover);
 }
-
-
-
-div.logreg-wrapper form input[type='submit'] {
-    width: 180px;
-    align-self: center;
-    font-weight: var(--bold);
-    margin-top: 10px;
-    background-image: linear-gradient(to right, #8e2de2, #3A73F3);
-    background-size: 100%;
-
-    transition: var(--transition);
-}
-div.logreg-wrapper form input[type='submit']:hover {
-    background-size: 150%;
-}
-
-
 
 div.logreg-wrapper a {
     transition: var(--transition);

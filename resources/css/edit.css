@@ -28,22 +28,6 @@ form.edit-form div.edit-form_wrapper label {
     font-size: var(--box-font-size);
 }
 
-form.edit-form input[type='submit'] {
-    width: 200px;
-    align-self: center;
-    font-weight: var(--bold);
-    margin-top: 10px;
-    background-image: linear-gradient(to right, #8e2de2, #3A73F3);
-    background-size: 100%;
-
-    transition: var(--transition);
-}
-
-form.edit-form input[type='submit']:hover {
-    background-size: 150%;
-}
-
-
 form.edit-form div.wrapper {
     display: flex;
     gap: 5px;

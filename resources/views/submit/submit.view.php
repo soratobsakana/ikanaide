@@ -12,23 +12,23 @@
     <?php
     switch ($page) {
         case '/submit/anime':
-            require('resources/views/submit/_submit_anime.view.php');
+            readfile('resources/views/submit/_submit_anime.view.html');
             break;
         case '/submit/manga':
-            require('resources/views/submit/_submit_manga.view.php');
+            readfile('resources/views/submit/_submit_manga.view.html');
             break;
         case '/submit/vn':
-            require('resources/views/submit/_submit_vn.view.php');
+            readfile('resources/views/submit/_submit_vn.view.html');
             break;
         case '/submit/character':
-            require('resources/views/submit/_submit_character.view.php');
+            readfile('resources/views/submit/_submit_character.view.html');
             break;
         case '/submit/staff':
-            require('resources/views/submit/_submit_staff.view.php');
+            readfile('resources/views/submit/_submit_staff.view.html');
             break;
         default:
             header('Location: /submit/anime');
     }
     ?>
-    <input class="box" type="submit" value="Submit the entry" name="submit">
+    <input class="box" id="submit-button__colorful" type="submit" value="Submit" name="submit">
 </form>

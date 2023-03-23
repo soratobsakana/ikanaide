@@ -1,4 +1,13 @@
-/************* Estilos generales *************/
+main {
+    width: 900px;
+    margin: 0 auto;
+    padding: 10px 0 20px;
+
+    display: flex;
+    gap: var(--gap);
+}
+
+/* Estilos generales usados en varias páginas */
 .box {
     padding: 10px;
     background-color: var(--box-bg-color);
@@ -15,11 +24,17 @@ img {
     border-radius: var(--border-radius);
 }
 
-main {
-    width: 900px;
-    margin: 0 auto;
-    padding: 10px 0 20px;
+/* Debe ser usado junto a la clase 'box' */
+#submit-button__colorful {
+    width: 180px;
+    align-self: center;
+    font-weight: var(--bold);
+    margin-top: 10px;
+    background-image: linear-gradient(to right, #8e2de2, #3A73F3);
+    background-size: 100%;
 
-    display: flex;
-    gap: var(--gap);
+    transition: var(--transition);
+}
+#submit-button__colorful:hover {
+    background-size: 150%;
 }
