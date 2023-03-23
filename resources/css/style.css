@@ -33,7 +33,7 @@ h3 {
     font-weight: var(--bold);
 }
 
-input[type='text'], input[type='submit'], select {
+input[type='text'], input[type='email'], input[type='password'], input[type='submit'], select {
     color: inherit;
     outline: none;
     border: none;

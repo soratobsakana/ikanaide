@@ -1,0 +1,70 @@
+/* Estilos para {login|register}.php */
+
+div.logreg-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+div.logreg-wrapper form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--gap);
+    margin-top: 40px;
+}
+
+div.logreg-wrapper form h1 {
+    font-size: 40px!important;
+    margin-bottom: 5px;
+    font-family: Inter;
+    font-weight: 900;
+}
+
+div.logreg-wrapper div.logreg-input {
+    display: flex;
+    gap: var(--gap);
+    border-radius: var(--border-radius);
+    width: 350px;
+}
+
+div.logreg-wrapper.div.logreg-input input, input[type="email"] {
+    width: 100%;
+}
+
+div.logreg-wrapper form div.logreg-input:focus-within {
+    background: var(--box-bg-color-hover);
+}
+
+
+
+div.logreg-wrapper form input[type='submit'] {
+    width: 180px;
+    align-self: center;
+    font-weight: var(--bold);
+    margin-top: 10px;
+    background-image: linear-gradient(to right, #8e2de2, #3A73F3);
+    background-size: 100%;
+
+    transition: var(--transition);
+}
+div.logreg-wrapper form input[type='submit']:hover {
+    background-size: 150%;
+}
+
+
+
+div.logreg-wrapper a {
+    transition: var(--transition);
+    opacity: var(--font_low-opacity);
+}
+
+div.logreg-wrapper a:hover {
+    opacity: 1;
+}
+
+div.logreg-wrapper p {
+    font-size: var(--box-font-size);
+}

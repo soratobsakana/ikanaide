@@ -1,3 +1,9 @@
+220323
+    [] Add an id colorful submit and style it just on main.css.
+    [] User registration validation form.
+    [] User login validation form.
+    [] Make user profile page.
+
 220322
     [X] Learn about classes
     [X] Implement a Database class

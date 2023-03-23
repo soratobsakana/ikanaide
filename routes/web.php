@@ -19,6 +19,8 @@ $routes = array(
     '/submit/vn' => 'controllers/submit.php',
     '/submit/character' => 'controllers/submit.php',
     '/submit/staff' => 'controllers/submit.php',
+    '/login' => 'controllers/logreg.php',
+    '/register' => 'controllers/logreg.php',
     '/profile' => 'resources/views/profile.view.php',
     '/404' => 'resources/views/404.view.php'
 );
