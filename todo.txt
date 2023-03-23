@@ -56,7 +56,7 @@
             I feel like this system should be simplified, but for now it works.
 
 220225
-    [] Continue to learn about mysqli and code safety.
+    [X] Continue to learn about mysqli and code safety.
     [] Implement moderator's anime and manga submission system.
     [-] Complete the anime and manga query pages. Redesign is important (headers for each box and different buttons for users)
             I don't think I'll redesign for now. Headers didn't seem to work out.
