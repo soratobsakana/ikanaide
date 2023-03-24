@@ -6,10 +6,12 @@
         <li>Donate</li>
         <a href="/submit"><li>Add Data</li></a>
         <?php
-        if (isset($_SESSION["loggedin"])) {
-            ?>
-            <li>Logout</li>
+        if (isset($_COOKIE["session"])) {
+            if ($_COOKIE['session'] === 'Yes') {
+                ?>
+            <a href="/logout"><li>Logout</li></a>
             <?php
+            }
         }
         ?>
     </ul>

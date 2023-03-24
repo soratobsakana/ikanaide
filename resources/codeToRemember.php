@@ -27,3 +27,11 @@ echo $something === 'something' ? 'first' : 'second';
 
 // This will print HTML or JS just plain text, and not format anything or display alerts, etc.
 // htmlspecialchars($string);
+
+// unset cookies https://stackoverflow.com/questions/2310558/how-to-delete-all-cookies-of-my-website-in-php
+if (isset($_COOKIES)) {
+    foreach ($_COOKIES as $key => $value) {
+        setcookie($key, '', time()-1000);
+        setcookie($key, '', time()-1000, '/');
+    }
+}

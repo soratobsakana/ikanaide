@@ -1,5 +1,7 @@
 <?php
 
+include 'resources/functions.php';
+
 // Recogida de valores del formulario resources/views/user/login.view.php.
 if ($_POST) {
     foreach ($_POST as $key => $value) {

@@ -1,6 +1,6 @@
 220324
-    [] Add session management (auto-login if succeed) to the register form.
-    [] Make the login controller.
+    [] Add session management and auto-login to the register and login methods.
+    [X] Make the login controller.
     [] Work on the profile page. Start to think on the relation of users with data and make the design.
     [] Think of user profile URI's.
     [] Improve registration and login controllers.

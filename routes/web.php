@@ -21,7 +21,8 @@ $routes = array(
     '/submit/staff' => 'controllers/submit.php',
     '/login' => 'controllers/login.php',
     '/register' => 'controllers/register.php',
-    '/profile' => 'resources/views/profile.view.php',
+    '/profile' => 'controllers/profile.php',
+    '/logout' => 'controllers/logout.php',
     '/404' => 'resources/views/404.view.php'
 );
 

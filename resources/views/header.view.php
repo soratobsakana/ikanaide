@@ -16,18 +16,25 @@
         </ul>
         <div class="header-user">
             <?php
-            if (isset($_SESSION['loggedin'])) {
-                ?>
-                <img src="/storage/testing/1.png" alt="">
-                <?php
-            } else {
+
+            // La cookie 'session' es generada en User::login() o User::register().
+            if (!isset($_COOKIE['session'])) {
                 ?>
                 <ul class="header-user-ul">
                     <a href="/login"><li>Sign in</li></a>
                     <a href="/register"><li>Sign up</li></a>
                 </ul>
                 <?php
+            } else {
+                if ($_COOKIE['session'] === "Yes") {
+                    ?>
+                    <ul class="header-user-ul">
+                        <a href="/profile"><li><?=$_COOKIE['username']?></li></a>
+                    </ul>
+                    <?php
+                }
             }
+
             ?>
         </div>
     </div>
