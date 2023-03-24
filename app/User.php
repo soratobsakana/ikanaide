@@ -96,4 +96,12 @@ class User
             return 'Please fill up the missing fields.';
         }
     }
+
+    public function getInfo(string $username): array
+    {
+        $result = $this -> con -> db -> execute_query('SELECT * FROM user WHERE user_id = ?', [$_COOKIE['user_id']]);
+        $userInfo = $result -> fetch_assoc();
+
+        return $userInfo;
+    }
 }

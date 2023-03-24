@@ -15,7 +15,7 @@ CREATE TABLE `user` (
     `joined_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
     `country` varchar(56),
     `biography` VARCHAR(4000),
-    `pfp` VARCHAR(250) NOT NULL DEFAULT 'storage/img/default/default.png',
+    `pfp` VARCHAR(250) NOT NULL DEFAULT 'storage/sys/default.png',
     data JSON,
     PRIMARY KEY(`user_id`)
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
