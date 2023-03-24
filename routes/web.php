@@ -12,6 +12,12 @@ $routes = array(
     '/vn' => 'controllers/medium.php',
     '/rankings' => 'controllers/rankings.php',
     '/community' => 'controllers/community.php',
+
+    '/terms' => 'resources/views/terms.view.php',
+    '/privacy' => 'resources/views/privacy.view.php',
+    '/contact' => 'resources/views/contact.view.php',
+    '/support' => 'resources/views/support.view.php',
+
     '/edit' => 'controllers/edit.php',
     '/submit' => 'controllers/submit.php',
     '/submit/anime' => 'controllers/submit.php',
@@ -19,10 +25,12 @@ $routes = array(
     '/submit/vn' => 'controllers/submit.php',
     '/submit/character' => 'controllers/submit.php',
     '/submit/staff' => 'controllers/submit.php',
+
     '/login' => 'controllers/login.php',
     '/register' => 'controllers/register.php',
     '/profile' => 'controllers/profile.php',
     '/logout' => 'controllers/logout.php',
+    
     '/404' => 'resources/views/404.view.php'
 );
 

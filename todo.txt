@@ -1,5 +1,6 @@
 220324
-    [] Add session management and auto-login to the register and login methods.
+    [X] Add session management and auto-login to the register and login methods.
+        For now I'm only using 3 cookies: session(Yes|No), user_id and username. Auto-login and logout both work.
     [X] Make the login controller.
     [] Work on the profile page. Start to think on the relation of users with data and make the design.
     [] Think of user profile URI's.

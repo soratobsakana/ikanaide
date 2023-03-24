@@ -17,6 +17,18 @@ footer {
      font-weight: var(--bold);
  }
 
+ footer ul.footer-links li {
+    transition: var(--transition);
+ }
+
+footer ul.footer-links:hover li {
+    opacity: var(--font_low-opacity);
+}
+
+footer ul.footer-links li:hover {
+    opacity: 1!important;
+}
+
  footer p.footer_copyright {
      opacity: var(--font_low-opacity);
  }

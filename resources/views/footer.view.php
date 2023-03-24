@@ -1,9 +1,9 @@
 <footer>
     <ul class="footer-links">
-        <li>Terms</li>
-        <li>Privacy</li>
-        <li>Contact</li>
-        <li>Donate</li>
+        <a href="/terms"><li>Terms</li></a>
+        <a href="/privacy"><li>Privacy</li></a>
+        <a href="/contact"><li>Contact</li></a>
+        <a href="/support"><li>Support</li></a>
         <a href="/submit"><li>Add Data</li></a>
         <?php
         if (isset($_COOKIE["session"])) {

@@ -96,9 +96,4 @@ class User
             return 'Please fill up the missing fields.';
         }
     }
-
-    public function authenticate()
-    {
-        
-    }
 }
