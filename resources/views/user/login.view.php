@@ -1,6 +1,7 @@
 <div class="logreg-wrapper">
-    <form action="controllers/logreg.php">
+    <form action="/login" method="POST">
         <h1>Login</h1>
+        <?php if (isset($message)) print '<p class="form-mistake">'.$message.'</p>'; ?>
         <div class="logreg-input box">
             <label for="username">username</label>
             <input type="text" name="username" id="username">

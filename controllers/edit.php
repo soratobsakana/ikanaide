@@ -38,7 +38,6 @@ if (isset($_POST['submit'])) {
     $stmt -> execute();
 
     print "<p style='margin: 40px auto;'>Your edit submission has been correctly submitted. Thanks!</p>";
-    $db -> close();
 } else {
     // Propósito: mostrar un formulario adecuado para cada medio.
     switch ($medium) {
@@ -65,7 +64,6 @@ if (isset($_POST['submit'])) {
                         $animeForm[$key] = $value;
                     }
                 }
-                $db -> close();
             }
             break;
         case 'mid':

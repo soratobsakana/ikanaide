@@ -53,9 +53,36 @@ class User
         }
     }
 
-    public function login()
+    public function login(array $loginInfo): string
     {
-        
+        if (isset($loginInfo['username'], $loginInfo['password'])) {
+            if (!(empty($loginInfo['username']) || empty($loginInfo['password']))) {
+                if (preg_match('/^[a-zA-Z0-9]+$/', $loginInfo['username']) === 1) {
+                    if (strlen($loginInfo['username']) > 3 && strlen($loginInfo['username']) < 16) {
+                        $result = $this -> con -> db -> execute_query('SELECT `user_id` FROM user WHERE username = ?', [$loginInfo['username']]);
+                        if ($result -> num_rows === 1) {
+                            $result = $this -> con -> db -> execute_query('SELECT `password` FROM user WHERE username = ?', [$loginInfo['username']]);
+                            $password = $result -> fetch_column();
+                            if (password_verify($loginInfo['password'], $password)) {
+                                return 'Ok';
+                            } else {
+                                return 'Incorrect username or password';
+                            }
+                        } else {
+                            return 'Incorrect username or password.';
+                        }
+                    } else {
+                        return 'Incorrect username or password.';
+                    }
+                } else {
+                    return 'Incorrect username or password.';
+                }
+            } else {
+                return 'Please fill up the missing fields.';
+            }
+        } else {
+            return 'Please fill up the missing fields.';
+        }
     }
 
     public function authenticate()
