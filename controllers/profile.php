@@ -2,6 +2,7 @@
 
 if (isset($_COOKIE['session'])) {
     if ($_COOKIE['session'] === "Yes") {
-        var_dump($_COOKIE);
+        $username = $_COOKIE['username'] ?? null;
+        $user_id = $_COOKIE['user_id'] ?? null;
     }
 }

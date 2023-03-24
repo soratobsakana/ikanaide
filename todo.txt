@@ -2,9 +2,9 @@
     [X] Add session management and auto-login to the register and login methods.
         For now I'm only using 3 cookies: session(Yes|No), user_id and username. Auto-login and logout both work.
     [X] Make the login controller.
-    [] Work on the profile page. Start to think on the relation of users with data and make the design.
     [] Think of user profile URI's.
-    [] Improve registration and login controllers.
+    [] Work on the profile page. Start to think on the relation of users with data and make the design.
+    [] Make submit and edit controllers assign $_COOKIE['user_id'] to the submission. DB tables need adjustment for that.
 
 220323
     [X] Add an id colorful submit and style it just on main.css.

@@ -31,9 +31,9 @@ class User
                                     ]);
                                     $result = $this -> con -> db -> execute_query('SELECT user_id FROM user WHERE username = ?', [$registerInfo['username']]);
                                     $user_id = $result -> fetch_column();
-                                    setcookie('username', $registerInfo['username']);
-                                    setcookie('user_id', $user_id);
-                                    setcookie('session', "Yes");
+                                    setcookie('username', $registerInfo['username'], strtotime('NOW+60DAYS'));
+                                    setcookie('user_id', $user_id, strtotime('NOW+60DAYS'));
+                                    setcookie('session', "Yes", strtotime('NOW+60DAYS'));
                                     return 'Ok';
                                 } else {
                                     return 'Sorry, that email is already taken';
@@ -73,9 +73,9 @@ class User
                             $password = $result -> fetch_column();
                             if (password_verify($loginInfo['password'], $password)) {
                                 // Todas las verificaciones han sido exitosas, por lo que se inicia una sesión al usuario autenticado.
-                                setcookie('username', $loginInfo['username']);
-                                setcookie('user_id', $user_id);
-                                setcookie('session', "Yes");
+                                setcookie('username', $loginInfo['username'], strtotime('NOW+60DAYS'));
+                                setcookie('user_id', $user_id, strtotime('NOW+60DAYS'));
+                                setcookie('session', "Yes", strtotime('NOW+60DAYS'));
                                 return 'Ok';
                             } else {
                                 return 'Incorrect username or password';
