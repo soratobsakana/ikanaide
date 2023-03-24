@@ -20,5 +20,5 @@
         </div>
         <input class="box" id="submit-button__colorful" type="submit" name='register' value="Submit">
     </form>
-    <p>... or <a href="login">login</a> if you don't have an account.</p>
+    <p>... or <a href="login">login</a> if you already have an account.</p>
 </div>
