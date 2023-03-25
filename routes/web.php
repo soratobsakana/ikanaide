@@ -28,9 +28,15 @@ $routes = array(
 
     '/login' => 'controllers/login.php',
     '/register' => 'controllers/register.php',
-    '/profile' => 'controllers/profile.php',
     '/logout' => 'controllers/logout.php',
-    
+
+    '/profile' => 'controllers/profile.php',
+    '/profile/overview' => 'controllers/profile.php',
+    '/profile/animelist' => 'controllers/profile.php',
+    '/profile/mangalist' => 'controllers/profile.php',
+    '/profile/reviews' => 'controllers/profile.php',
+    '/profile/favorites' => 'controllers/profile.php',
+
     '/404' => 'resources/views/404.view.php'
 );
 

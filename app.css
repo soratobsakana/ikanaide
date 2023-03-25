@@ -1,13 +1,13 @@
-@import url(resources/css/dark-mode.css);
-@import url(resources/css/fonts.css);
-@import url(resources/css/style.css);
+@import url(/resources/css/dark-mode.css);
+@import url(/resources/css/fonts.css);
+@import url(/resources/css/style.css);
 
-@import url(resources/css/header.css);
-@import url(resources/css/main.css);
-@import url(resources/css/footer.css);
+@import url(/resources/css/header.css);
+@import url(/resources/css/main.css);
+@import url(/resources/css/footer.css);
 
-@import url(resources/css/medium.css);
-@import url(resources/css/edit.css);
-@import url(resources/css/submit.css);
-@import url(resources/css/logreg.css);
-@import url(resources/css/profile.css);
+@import url(/resources/css/medium.css);
+@import url(/resources/css/edit.css);
+@import url(/resources/css/submit.css);
+@import url(/resources/css/logreg.css);
+@import url(/resources/css/profile.css);

@@ -1,3 +1,53 @@
-img {
-    max-width: 100px;
+div.profile-wrapper {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    gap: var(--gap);
 }
+
+/* Estilos de las dos columnas que conforman el diseño de la página. */
+div.profile_left-column {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+}
+
+div.profile_right-column {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+}
+
+/******** Estilos de cada sección. ********/
+/* Estilos para el menú de navegación de la columna derecha. */
+div.profile_right-column nav.profile_user-nav {
+    font-size: calc(var(--box-font-size) + 1px);
+    padding: 5px 10px
+}
+
+div.profile_right-column nav.profile_user-nav ul {
+    display: flex;
+    justify-content: space-around;
+}
+
+div.profile_right-column nav.profile_user-nav ul.profile_user-nav_ul a li {
+    opacity: var(--font_low-opacity);
+    height: 100%;
+    transition: var(--transition);
+}
+
+div.profile_right-column nav.profile_user-nav ul.profile_user-nav_ul a li.current {
+    opacity: 1;
+}
+
+div.profile_right-column nav.profile_user-nav ul.profile_user-nav_ul:hover a li {
+    opacity: var(--font_low-opacity);
+}
+
+div.profile_right-column nav.profile_user-nav ul.profile_user-nav_ul a li:hover {
+    opacity: 1;
+}
+
+/* Estilos para la sección de overview. */

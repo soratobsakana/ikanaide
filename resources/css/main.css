@@ -20,6 +20,16 @@ main {
     transition: .15s;
 }
 
+/* Propósito: separar el indice de su valor en las cajas de la columna izquierda (.ul_first-column). */
+section.two-column-list ul li{
+    display: flex;
+    justify-content: space-between;
+}
+
+section.two-column-list ul li span.ul_first-column {
+    opacity: var(--font_low-opacity);
+}
+
 img {
     border-radius: var(--border-radius);
 }

@@ -32,16 +32,6 @@ div.querypage_right-column {
 }
 
 /***** Columna izquierda. *****/
-/* Propósito: separar el indice de su valor en las cajas de la columna izquierda (.left_column) y aplicado de estilos varios. */
-section.two-column-list ul li{
-    display: flex;
-    justify-content: space-between;
-}
-
-section.two-column-list ul li span.ul_first-column {
-    opacity: var(--font_low-opacity);
-}
-
 section.querypage_edit {
     padding: 7px;
     transition: .2s;

@@ -1,0 +1,132 @@
+<div class="profile-wrapper">
+    <div class="profile_left-column">
+        <img src="/<?=$userInfo['pfp']?>" alt="<?=$userInfo['username']?>">
+        <section class="profile_user-info two-column-list box">
+            <ul>
+                <li><span class="ul_first-column">name</span><span><?=$userInfo['username']?></span></li>
+                <li><span class="ul_first-column">anime</span><span>0</span></li>
+                <li><span class="ul_first-column">manga</span><span>0</span></li>
+                <li><span class="ul_first-column">reviews</span><span>0</span></li>
+                <li><span class="ul_first-column">posts</span><span>0</span></li>
+            </ul>
+        </section>
+        <section class="profile_user-following two-column-list box">
+            <ul>
+                <li><span class="ul_first-column">following</span><span>0</span></li>
+                <li><span class="ul_first-column">followers</span><span>0</span></li>
+            </ul>
+        </section>
+        <?php
+
+        // Comprobación de los campos que contienen un link. Si existe al menos uno, se creará la sección con los links que han sido asignados por el usuario.
+        if (!empty($userInfo['twitter']) || !empty($userInfo['github']) || !empty($userInfo['discord']) || !empty($userInfo['website'])) {
+            ?>
+            <section class="profile_user-links two-column-list box">
+                <ul>
+                    <?php
+
+                    if (!empty($userInfo['twitter'])) {
+                        ?><li><span class="ul_first-column">twitter</span><span><?=$userInfo['twitter']?></span></li><?php
+                    }
+                    if (!empty($userInfo['github'])) {
+                        ?><li><span class="ul_first-column">github</span><span><?=$userInfo['github']?></span></li><?php
+                    }
+                    if (!empty($userInfo['discord'])) {
+                        ?><li><span class="ul_first-column">discord</span><span><?=$userInfo['discord']?></span></li><?php
+                    }
+                    if (!empty($userInfo['website'])) {
+                        ?><li><span class="ul_first-column">website</span><span><?=$userInfo['website']?></span></li><?php
+                    }
+
+                    ?>
+
+                </ul>
+            </section>
+            <?php
+        }
+
+        // Comprobación de los campos que contienen información sobre fechas. Si existe al menos uno, se creará la sección con las fechas  que han sido asignadas por el usuario.
+        if (!empty($userInfo['country']) || !empty($userInfo['born']) || !empty($userInfo['joined_at'])) {
+            ?>
+            <section class="profile_user-data two-column-list box">
+                <ul>
+                    <?php
+
+                    if (!empty($userInfo['country'])) {
+                        ?><li><span class="ul_first-column">from</span><span><?=$userInfo['country']?></span></li><?php
+                    }
+                    if (!empty($userInfo['born'])) {
+                        ?><li><span class="ul_first-column">born</span><span><?=lcfirst(dateFormat(substr($userInfo['born'], 0, 10)))?></span></li><?php
+                    }
+                    if (!empty($userInfo['joined_at'])) {
+                        ?><li><span class="ul_first-column">joined</span><span><?=lcfirst(dateFormat(substr($userInfo['joined_at'], 0, 10)))?></span></li><?php
+                    }
+
+                    ?>
+
+                </ul>
+            </section>
+            <?php
+        }
+
+        ?>
+
+    </div>
+    <div class="profile_right-column">
+        <?php
+
+        if (isset($userInfo['header'])) {
+            ?><img src="/<?=$userInfo['header']?>" alt="<?=$userInfo['username']?>"><?php
+        }
+
+        ?>
+
+        <nav class="profile_user-nav box">
+            <ul class="profile_user-nav_ul">
+                <?php
+
+                // Este bloque de código muestra un menú de navegación que dinamiza la clase .current en torno a la URI actual.
+                // He añadido dos condiciones específicas para 'overview' ya que pretendo mostrar esa pestaña por defecto en la URI '/profile' y no '/profile/overview' (lo cual se generaría sin estas dos condiciones).
+                $nav = ['overview', 'animelist', 'mangalist', 'reviews', 'favorites'];
+                $page = parse_url($_SERVER['REQUEST_URI'])['path'];
+                for ($i=0; $i < count($nav); $i++) {
+
+                    if ($nav[$i] === 'overview' && $page === '/profile') {
+                        print "<a href='/profile'><li class='current'>$nav[$i]</li></a>";
+                    } else if ($nav[$i] === substr($page, 9, strlen($page)) && $page !== '/profile') {
+                        print "<a href='/profile/".$nav[$i]."'><li class='current'>$nav[$i]</li></a>";
+                    } elseif ($nav[$i] === 'overview') {
+                        print "<a href='/profile'><li>$nav[$i]</li></a>";
+                    } else {
+                        print "<a href='/profile/" . $nav[$i] . "'><li>$nav[$i]</li></a>";
+                    }
+
+                }
+                
+                ?>
+            </ul>
+        </nav>
+        <?php
+
+        switch($page) {
+            case '/profile':
+            case '/profile/overview':
+                require('resources/views/user/_overviewprofile.view.php');
+                break;
+            case '/profile/animelist':
+                require('resources/views/user/_animelistprofile.view.php');
+                break;
+            case '/profile/mangalist':
+                require('resources/views/user/_mangalistprofile.view.php');
+                break;
+            case '/profile/reviews':
+                require('resources/views/user/_reviewsprofile.view.php');
+                break;
+            case '/profile/favorites':
+                require('resources/views/user/_favoritesprofile.view.php');
+                break;
+        }
+        
+        ?>
+    </div>
+</div>
