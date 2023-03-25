@@ -108,7 +108,20 @@ select * from `character`;
 
 insert into `character` values
     (null, 'Sakata', 'Gintoki', null,  null,  null, 'storage/public/character/gintoki.jpg');
+insert into `character` values
+    (null, 'Sakataa', 'Gintoki', null,  null,  null, 'storage/public/character/gintoki.jpg');
+insert into `character` values
+    (null, 'Sakataaa', 'Gintoki', null,  null,  null, 'storage/public/character/gintoki.jpg');
 
+insert into `character` values
+    (null, 'Sakataaaa', 'Gintoki', null,  null,  null, 'storage/public/character/gintoki.jpg');
+insert into `character` values
+    (null, 'Sakataaaaa', 'Gintoki', null,  null,  null, 'storage/public/character/gintoki.jpg');
+insert into `character` values
+    (null, 'Sakataaaaaa', 'Gintoki', null,  null,  null, 'storage/public/character/gintoki.jpg');
+insert into `character` values
+    (null, 'Onodera', 'Punpun', null,  null,  null, 'storage/public/character/punpun.jpg');
+select * from `character`;
 
 CREATE TABLE `character_anime` (
     `character_id` INT UNSIGNED NOT NULL,
@@ -129,6 +142,13 @@ CREATE TABLE `character_manga` (
 );
 
 insert into `character_anime` values(1,1, 'Main');
+insert into `character_anime` values(2,1, 'Supporting');
+insert into `character_anime` values(3,1, 'Supporting');
+insert into `character_anime` values(4,1, 'Supporting');
+insert into `character_anime` values(5,1, 'Supporting');
+insert into `character_anime` values(6,1, 'Supporting');
+insert into `character_manga` values(7,1, 'Supporting');
+select * from character_manga;
 
 select `character`.* from `character`, `character_anime` where `character_anime`.`anime_id` = 1 AND `character`.`character_id`=`character_anime`.character_id;
 
@@ -147,6 +167,12 @@ CREATE TABLE `staff` (
 
 insert into staff values
 (null, 'Sorachi', 'Hideaki', null, null, null, 'storage/public/staff/Sorachi-Hideaki.jpg');
+insert into staff values
+    (null, 'Sorachii', 'Hideaki', null, null, null, 'storage/public/staff/Sorachi-Hideaki.jpg');
+insert into staff values
+    (null, 'Sorachiii', 'Hideaki', null, null, null, 'storage/public/staff/Sorachi-Hideaki.jpg');
+insert into staff values
+    (null, 'Inio', 'Asano', null, null, null, 'storage/public/staff/asano.jpg');
 
 select * from staff;
 
@@ -172,7 +198,12 @@ CREATE TABLE `staff_manga` (
 
 alter table `staff_anime` auto_increment=1;
 insert into `staff_anime` VALUES (1,1, 'director');
+insert into `staff_anime` VALUES (2,1, 'director');
+insert into `staff_anime` VALUES (3,1, 'director');
+insert into `staff_manga` VALUES (4,1, 'creator');
 select * from staff_anime;
+select * from staff_manga;
+select * from staff;
 
 CREATE TABLE `review` (
     `review_id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,

@@ -1,17 +1,16 @@
 /* Propósito: añadir un estilo general para todos los títulos de sección de, principalmente, la columna derecha de anime.php */
-div.header {
-    padding: 2px 0 5px;
+div.querypage_title {
     display: flex;
     justify-content: space-between;
 }
 
-div.header span.view-all {
+div.querypage_title span.view-all {
     opacity: var(--font_low-opacity);
     transition: .2s;
     cursor: pointer;
 }
 
-div.header span.view-all:hover {
+div.querypage_title span.view-all:hover {
     opacity: 1;
 }
 
@@ -49,7 +48,7 @@ section.querypage_edit p span {
 }
 
 section.querypage_edit:hover {
-    background: var(--box-bg-color-hover);
+    background: var(--box-bg-hover);
 }
 
 section.querypage_edit:hover p {
@@ -57,11 +56,6 @@ section.querypage_edit:hover p {
 }
 
 /***** Columna derecha. *****/
-/* Propósito: aplicado de estilos a la sección del título del anime. */
-section.querypage_title h1 {
-    margin: 2px 0 -5px;
-}
-
 /* Propósito: aplicado de estilos a la sección de personajes. */
 section.querypage_char {
     font-size: var(--box-font-size);
@@ -70,15 +64,16 @@ section.querypage_char {
 div.querypage_char-entry_wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 5px;
+
 }
 
 div.querypage_char-entry {
     display: flex;
-    border-radius: var(--border-radius);
     overflow: hidden;
+}
 
-    border: 1px solid var(--box-bg-color-hover);
+div.querypage_char-entry:last-child {
+    border-bottom-right-radius: var(--border-radius);
 }
 
 div.querypage_char-entry_pic {
@@ -91,7 +86,7 @@ div.querypage_char-entry_pic img {
 }
 
 div.querypage_char-entry_info {
-    background: var(--box-bg-color);
+    background: var(--box-bg);
     width: 100%;
     padding: 5px;
     font-size: calc(var(--box-font-size) - 2px);
@@ -113,15 +108,15 @@ section.querypage_staff {
 div.querypage_staff-entry_wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 5px;
 }
 
 div.querypage_staff-entry {
     display: flex;
-    border-radius: var(--border-radius);
     overflow: hidden;
+}
 
-    border: 1px solid var(--box-bg-color-hover);
+div.querypage_staff-entry:last-child {
+    border-bottom-right-radius: var(--border-radius);
 }
 
 div.querypage_staff-entry_pic {
@@ -134,7 +129,7 @@ div.querypage_staff-entry_pic img {
 }
 
 div.querypage_staff-entry_info {
-    background: var(--box-bg-color);
+    background: var(--box-bg);
     width: 100%;
     padding: 5px;
     font-size: calc(var(--box-font-size) - 2px);
@@ -156,15 +151,15 @@ section.querypage_review {
 div.querypage_review-entry_wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 5px;
 }
 
 div.querypage_review-entry {
     display: flex;
-    border-radius: var(--border-radius);
     overflow: hidden;
+}
 
-    border: 1px solid var(--box-bg-color-hover);
+div.querypage_review-entry:last-child {
+    border-bottom-right-radius: var(--border-radius);
 }
 
 div.querypage_review-entry_pic {
@@ -177,7 +172,7 @@ div.querypage_review-entry_pic img {
 }
 
 div.querypage_review-entry_info {
-    background: var(--box-bg-color);
+    background: var(--box-bg);
     width: 100%;
     padding: 10px;
     font-size: var(--box-font-size);

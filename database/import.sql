@@ -25,9 +25,6 @@ CREATE TABLE `user` (
     PRIMARY KEY(`user_id`)
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
-select * from user;
-update `user` set `biography`='no idea' where `username`='nabuna';
-
 CREATE TABLE `anime` (
     `anime_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `title` VARCHAR(150) NOT NULL UNIQUE,

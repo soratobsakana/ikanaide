@@ -77,9 +77,9 @@ function highlightNav(array $nav, $substrStart) {
     $page = parse_url($_SERVER['REQUEST_URI'])['path'];
     for ($i=0; $i < count($nav); $i++) {
         if ($nav[$i] === substr($page, $substrStart, strlen($page))) {
-            print "<a href='/".$nav[$i]."'><li class='current'>$nav[$i]</li></a>";
+            print "<a href='".$nav[$i]."'><li class='current'>$nav[$i]</li></a>";
         } else {
-            print "<a href='/".$nav[$i]."'><li>$nav[$i]</li></a>";
+            print "<a href='".$nav[$i]."'><li>$nav[$i]</li></a>";
         }
     }
 }

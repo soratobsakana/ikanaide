@@ -20,7 +20,7 @@ if ($_GET) {
         $staff = $listing -> getStaff($medium, [$id]);
         $reviews = $listing -> getReviews($medium, [$id]);
         if ($mediumInfo !== null) {
-            require('resources/views/' . $medium . '/_' . $medium . 'query.view.php');
+            require('resources/views/medium/mediumpage.view.php');
         } else {
             header('Location: /404');
         }
@@ -34,5 +34,5 @@ if ($_GET) {
 
     $homeInfo = $listing -> getHome($medium);
 
-    require('resources/views/_mediumhome.view.php');
+    require('resources/views/medium/mediumhome.view.php');
 }

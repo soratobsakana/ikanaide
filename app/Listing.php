@@ -5,7 +5,6 @@ include 'Database.php';
 class Listing
 {
     private object $con;
-    public array $queryInfo;
 
     public function __construct()
     {
@@ -32,9 +31,9 @@ class Listing
     {
         $characters = [];
         
-        $result = $this -> con -> db -> execute_query("SELECT `character`.*, `character_anime`.`role` FROM `character`, `character_anime`
-        WHERE `character_anime`.`anime_id` = ?
-        AND `character`.`character_id`=`character_anime`.character_id", $params);
+        $result = $this -> con -> db -> execute_query("SELECT `character`.*, `character_".$table."`.`role` FROM `character`, `character_".$table."`
+        WHERE `character_".$table."`.`".$table."_id` = ?
+        AND `character`.`character_id`=`character_$table`.character_id", $params);
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
@@ -56,9 +55,9 @@ class Listing
         
         $staff = [];
 
-        $result = $this -> con -> db -> execute_query("SELECT `staff`.*, `staff_anime`.`role` FROM `staff`, `staff_anime`
-        WHERE `staff_anime`.`anime_id` = ?
-        AND `staff`.`staff_id`=`staff_anime`.staff_id", $params);
+        $result = $this -> con -> db -> execute_query("SELECT `staff`.*, `staff_".$table."`.`role` FROM `staff`, `staff_".$table."`
+        WHERE `staff_".$table."`.`".$table."_id` = ?
+        AND `staff`.`staff_id`=`staff_".$table."`.staff_id", $params);
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
@@ -78,9 +77,9 @@ class Listing
     {
         $reviews = [];
 
-        $result = $this -> con -> db -> execute_query("SELECT `review`.* FROM `review`, `review_anime`
-        WHERE `review_anime`.`anime_id` = ?
-        AND `review`.review_id = `review_anime`.`review_id`", $params);
+        $result = $this -> con -> db -> execute_query("SELECT `review`.* FROM `review`, `review_".$table."`
+        WHERE `review_".$table."`.`".$table."_id` = ?
+        AND `review`.review_id = `review_".$table."`.`review_id`", $params);
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {

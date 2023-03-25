@@ -20,7 +20,7 @@ form.edit-form div.edit-form_wrapper {
 }
 
 form.edit-form div.edit-form_wrapper:focus-within {
-    background: var(--box-bg-color-hover);
+    background: var(--box-bg-hover);
 }
 
 form.edit-form div.edit-form_wrapper label {

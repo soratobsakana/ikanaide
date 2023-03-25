@@ -48,7 +48,7 @@ select {
 }
 
 select:hover {
-    background-color: var(--box-bg-color-hover);
+    background-color: var(--box-bg-hover);
 }
 
 select, option, input[type='submit'] {

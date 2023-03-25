@@ -6,7 +6,6 @@ require('database/conn.php');
 // Propósito: distinguir el medio mediante la query de la URL (proveniente de los links 'Edit this page' de las views de query) y recoger el ID correspondiente.
 if ($_GET) {
     $medium = substr(parse_url($_SERVER['REQUEST_URI'])['query'], 0, 3);
-    // Resultado: array $uriQuery[aid|mid|vid] => table row id
     $id = $_GET[$medium];
 }
 

@@ -1,32 +1,47 @@
 <div class="querypage_left-column">
     <img src="<?=$mediumInfo['cover']?>" alt="<?=$mediumInfo['title']?>"/>
-    <section class="querypage_info two-column-list box">
-        <?php
-        $info = [];
-        foreach ($mediumInfo as $key => $value) {
-            $info = replaceUnderscore($mediumInfo);
-        }
-        ?>
+    <section class="querypage_info box-wrapper">
+        <div class="box-title">
+            <h3>Information</h3>
+        </div>
+        <div class="box-body">
+            <ul class="two-column-list">
+                <?php
 
-        <ul>
-            <li><span class="ul_first-column">format</span><span><?=$mediumInfo['format']?></span></li>
-            <li><span class="ul_first-column">volumes</span><span><?=$mediumInfo['volumes']?></span></li>
-            <li><span class="ul_first-column">chapters</span><span><?=$mediumInfo['chapters']?></span></li>
-            <li><span class="ul_first-column">status</span><span><?=$mediumInfo['status']?></span></li>
-            <li><span class="ul_first-column">start date</span><span><?=$mediumInfo['start_date']?></span></li>
-            <li><span class="ul_first-column">end date</span><span><?=$mediumInfo['end_date']?></span></li>
-        </ul>
+                switch($medium) {
+                    case 'anime':
+                        $columns = ['type', 'episodes', 'status', 'start_date', 'end_date'];
+                        break;
+                    case 'manga':
+                        $columns = ['format', 'volumes', 'chapters', 'status', 'start_date', 'end_date'];
+                        break;
+                    case 'vn':
+                        $columns = ['duration', 'released'];
+                        break;
+                }
+                foreach ($columns as $column){
+                    ?><li><span class="ul_first-column"><?=str_replace('_', ' ', $column);?></span><span><?=$mediumInfo[$column]?></span></li><?php
+                }
+
+                ?></ul>
+        </div>
     </section>
-    <section class="querypage_people two-column-list box">
-        <ul>
-            <li><span class="ul_first-column">members</span><span><?=$mediumInfo['members']?></span></li>
-            <li><span class="ul_first-column">loved</span><span><?=$mediumInfo['favorited']?></span></li>
-            <li><span class="ul_first-column">ranked</span><span></span></li>
-            <li><span class="ul_first-column">popularity</span><span></span></li>
-        </ul>
+    <section class="querypage_people two-column-list box-wrapper">
+        <div class="box-title">
+            <h3>Community</h3>
+        </div>
+        <div class="box-body">
+            <ul class="two-column-list">
+                <li><span class="ul_first-column">members</span><span><?=$mediumInfo['members']?></span></li>
+                <li><span class="ul_first-column">loved</span><span><?=$mediumInfo['favorited']?></span></li>
+                <li><span class="ul_first-column">ranked</span><span></span></li>
+                <li><span class="ul_first-column">popularity</span><span></span></li>
+            </ul>
+        </div>
     </section>
-    <section class="querypage_edit box">
-        <a href="../edit?aid=<?=$mediumInfo['manga_id']?>"><p>Edit this page </p></a>
+    <section class="querypage_edit box-wrapper box-body">
+        <!-- broken -->
+        <a href="../edit"><p>Edit this page </p></a>
     </section>
 </div>
 
@@ -37,9 +52,18 @@
     }
     ?>
     <section class="querypage_title"><h1><?=$mediumInfo['title']?></h1></section>
-    <section class="querypage_desc box"><?=$mediumInfo['description']?></section>
-    <section class="querypage_char">
-        <div class="header"><h3>Characters</h3><span class="view-all">view all</span></div>
+    <section class="querypage_desc box-wrapper">
+        <div class="box-title">
+            <h3>Description</h3>
+        </div>
+        <div class="box-body">
+            <?=$mediumInfo['description']?>
+        </div>
+    </section>
+    <section class="querypage_char box-wrapper">
+        <div class="querypage_title box-title">
+            <h3>Characters</h3><span class="view-all">view all</span>
+        </div>
         <div class="querypage_char-entry_wrapper">
             <?php
             if (isset($characters)) {
@@ -68,8 +92,10 @@
             ?>
         </div>
     </section>
-    <section class="querypage_staff">
-        <div class="header"><h3>Staff</h3><span class="view-all">view all</span></div>
+    <section class="querypage_staff box-wrapper">
+        <div class="box-title">
+            <div class="querypage_title"><h3>Staff</h3><span class="view-all">view all</span></div>
+        </div>
         <div class="querypage_staff-entry_wrapper">
             <?php
             if (isset($staff)) {
@@ -98,8 +124,8 @@
             ?>
         </div>
     </section>
-    <section class="querypage_review">
-        <div class="header"><h3>Reviews</h3><span class="view-all">view all</span></div>
+    <section class="querypage_review box-wrapper">
+        <div class="querypage_title box-title"><h3>Reviews</h3><span class="view-all">view all</span></div>
         <div class="querypage_review-entry_wrapper">
             <?php
             if (isset($reviews)) {
@@ -115,7 +141,7 @@
                                 <i><?=$reviews[$i]['title']?></i>
                             </div>
                             <div class="querypage_review-entry_info-role">
-                                <span>by <a href="user">nagisa</a>.</span>
+                                <span>by <a href="../../../index.php">nagisa</a>.</span>
                             </div>
                         </div>
                     </div>
@@ -123,7 +149,7 @@
                     <?php
                 }
             } else {
-                print "<i style='opacity: var(--font_low-opacity)'>No reviews yet...</i>";
+                print "<i style='opacity: var(--font_low-opacity); padding: 10px 0px'>No reviews yet...</i>";
             }
             ?>
         </div>

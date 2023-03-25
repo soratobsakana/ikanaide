@@ -55,7 +55,7 @@ form.submit-form div.submit-form_wrapper {
 }
 
 form.submit-form div.submit-form_wrapper:focus-within {
-    background: var(--box-bg-color-hover);
+    background: var(--box-bg-hover);
 }
 
 form.submit-form div.submit-form_wrapper label {

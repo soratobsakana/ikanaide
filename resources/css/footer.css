@@ -9,7 +9,7 @@ footer {
     justify-content: center;
     gap: 3px;
 
-    background-color: var(--box-bg-color);
+    background-color: var(--box-bg);
 }
  footer ul.footer-links {
      display: flex;

@@ -1,46 +1,62 @@
 <div class="profile-wrapper">
     <div class="profile_left-column">
         <img src="/<?=$userInfo['pfp']?>" alt="<?=$userInfo['username']?>">
-        <section class="profile_user-info two-column-list box">
-            <ul>
-                <li><span class="ul_first-column">name</span><span><?=$userInfo['username']?></span></li>
-                <li><span class="ul_first-column">anime</span><span>0</span></li>
-                <li><span class="ul_first-column">manga</span><span>0</span></li>
-                <li><span class="ul_first-column">reviews</span><span>0</span></li>
-                <li><span class="ul_first-column">posts</span><span>0</span></li>
-            </ul>
+        <section class="profile_user-info box-wrapper">
+            <div class="box-title">
+                <h3>Information</h3>
+            </div>
+            <div class="box-body">
+                <ul class="two-column-list">
+                    <li><span class="ul_first-column">name</span><span><?=$userInfo['username']?></span></li>
+                    <li><span class="ul_first-column">anime</span><span>0</span></li>
+                    <li><span class="ul_first-column">manga</span><span>0</span></li>
+                    <li><span class="ul_first-column">reviews</span><span>0</span></li>
+                    <li><span class="ul_first-column">posts</span><span>0</span></li>
+                </ul>
+            </div>
         </section>
-        <section class="profile_user-following two-column-list box">
-            <ul>
-                <li><span class="ul_first-column">following</span><span>0</span></li>
-                <li><span class="ul_first-column">followers</span><span>0</span></li>
-            </ul>
+
+        <section class="profile_user-following box-wrapper">
+            <div class="box-title">
+                <h3>Social</h3>
+            </div>
+            <div class="box-body">
+                <ul class="two-column-list">
+                    <li><span class="ul_first-column">following</span><span>0</span></li>
+                    <li><span class="ul_first-column">followers</span><span>0</span></li>
+                </ul>
+            </div>
         </section>
         <?php
 
         // Comprobación de los campos que contienen un link. Si existe al menos uno, se creará la sección con los links que han sido asignados por el usuario.
         if (!empty($userInfo['twitter']) || !empty($userInfo['github']) || !empty($userInfo['discord']) || !empty($userInfo['website'])) {
             ?>
-            <section class="profile_user-links two-column-list box">
-                <ul>
-                    <?php
+            <section class="profile_user-links two-column-list box-wrapper">
+                <div class="box-title">
+                    <h3>Links</h3>
+                </div>
+                <div class="box-body">
+                    <ul class="two-column-list">
+                        <?php
 
-                    if (!empty($userInfo['twitter'])) {
-                        ?><li><span class="ul_first-column">twitter</span><span><?=$userInfo['twitter']?></span></li><?php
-                    }
-                    if (!empty($userInfo['github'])) {
-                        ?><li><span class="ul_first-column">github</span><span><?=$userInfo['github']?></span></li><?php
-                    }
-                    if (!empty($userInfo['discord'])) {
-                        ?><li><span class="ul_first-column">discord</span><span><?=$userInfo['discord']?></span></li><?php
-                    }
-                    if (!empty($userInfo['website'])) {
-                        ?><li><span class="ul_first-column">website</span><span><?=$userInfo['website']?></span></li><?php
-                    }
+                        if (!empty($userInfo['twitter'])) {
+                            ?><li><span class="ul_first-column">twitter</span><span><?=$userInfo['twitter']?></span></li><?php
+                        }
+                        if (!empty($userInfo['github'])) {
+                            ?><li><span class="ul_first-column">github</span><span><?=$userInfo['github']?></span></li><?php
+                        }
+                        if (!empty($userInfo['discord'])) {
+                            ?><li><span class="ul_first-column">discord</span><span><?=$userInfo['discord']?></span></li><?php
+                        }
+                        if (!empty($userInfo['website'])) {
+                            ?><li><span class="ul_first-column">website</span><span><?=$userInfo['website']?></span></li><?php
+                        }
 
-                    ?>
+                        ?>
 
-                </ul>
+                    </ul>
+                </div>
             </section>
             <?php
         }
@@ -48,23 +64,28 @@
         // Comprobación de los campos que contienen información sobre fechas. Si existe al menos uno, se creará la sección con las fechas  que han sido asignadas por el usuario.
         if (!empty($userInfo['country']) || !empty($userInfo['born']) || !empty($userInfo['joined_at'])) {
             ?>
-            <section class="profile_user-data two-column-list box">
-                <ul>
-                    <?php
+            <section class="profile_user-data two-column-list box-wrapper">
+                <div class="box-title">
+                    <h3>Data</h3>
+                </div>
+                <div class="box-body">
+                    <ul class="two-column-list">
+                        <?php
 
-                    if (!empty($userInfo['country'])) {
-                        ?><li><span class="ul_first-column">from</span><span><?=$userInfo['country']?></span></li><?php
-                    }
-                    if (!empty($userInfo['born'])) {
-                        ?><li><span class="ul_first-column">born</span><span><?=lcfirst(dateFormat(substr($userInfo['born'], 0, 10)))?></span></li><?php
-                    }
-                    if (!empty($userInfo['joined_at'])) {
-                        ?><li><span class="ul_first-column">joined</span><span><?=lcfirst(dateFormat(substr($userInfo['joined_at'], 0, 10)))?></span></li><?php
-                    }
+                        if (!empty($userInfo['country'])) {
+                            ?><li><span class="ul_first-column">from</span><span><?=$userInfo['country']?></span></li><?php
+                        }
+                        if (!empty($userInfo['born'])) {
+                            ?><li><span class="ul_first-column">born</span><span><?=lcfirst(dateFormat(substr($userInfo['born'], 0, 10)))?></span></li><?php
+                        }
+                        if (!empty($userInfo['joined_at'])) {
+                            ?><li><span class="ul_first-column">joined</span><span><?=lcfirst(dateFormat(substr($userInfo['joined_at'], 0, 10)))?></span></li><?php
+                        }
 
-                    ?>
+                        ?>
 
-                </ul>
+                    </ul>
+                </div>
             </section>
             <?php
         }
@@ -81,7 +102,7 @@
 
         ?>
 
-        <nav class="profile_user-nav box">
+        <nav class="profile_user-nav box-wrapper box-title">
             <ul class="profile_user-nav_ul">
                 <?php
 

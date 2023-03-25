@@ -10,23 +10,23 @@ main {
 /* Estilos generales usados en varias páginas */
 .box {
     padding: 10px;
-    background-color: var(--box-bg-color);
+    background-color: var(--box-bg);
     border-radius: var(--border-radius);
     box-sizing: border-box;
     overflow: hidden;
     font-size: var(--box-font-size);
 
-    border: 1px solid var(--box-bg-color-hover);
+    /* border: 1px solid var(--box-bg-hover); */
     transition: .15s;
 }
 
 /* Propósito: separar el indice de su valor en las cajas de la columna izquierda (.ul_first-column). */
-section.two-column-list ul li{
+ul.two-column-list li{
     display: flex;
     justify-content: space-between;
 }
 
-section.two-column-list ul li span.ul_first-column {
+ul.two-column-list li span.ul_first-column {
     opacity: var(--font_low-opacity);
 }
 
@@ -40,11 +40,34 @@ img {
     align-self: center;
     font-weight: var(--bold);
     margin-top: 10px;
-    background-image: linear-gradient(to right, #8e2de2, #3A73F3);
+    background-image: linear-gradient(to left, var(--box-bg), var(--box-title));
     background-size: 100%;
 
     transition: var(--transition);
 }
 #submit-button__colorful:hover {
     background-size: 150%;
+}
+
+/* Segundo tipo de estilo de caja. Esta consta tanto de un título como del contenido. */
+.box-wrapper {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.box-title {
+    padding: 7px 15px;
+    background-color: var(--box-title);
+    font-size: var(--box-font-size);
+    transition: .15s;
+}
+
+.box-body {
+    padding: 10px 15px;
+    background-color: var(--box-bg);
+    box-sizing: border-box;
+    overflow: hidden;
+    font-size: var(--box-font-size);
+
+    transition: .15s;
 }

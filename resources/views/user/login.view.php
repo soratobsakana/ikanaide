@@ -2,13 +2,21 @@
     <form action="/login" method="POST">
         <h1>Login</h1>
         <?php if (isset($message)) print '<p class="form-mistake">'.$message.'</p>'; ?>
-        <div class="logreg-input box">
-            <label for="username">username</label>
-            <input type="text" name="username" id="username">
+        <div class="logreg-input box-wrapper">
+            <div class="box-title">
+                <h3><label for="username">Username</label></h3>
+            </div>
+            <div class="box-body">
+                <input type="text" name="username" id="username">
+            </div>
         </div>
-        <div class="logreg-input box">
-            <label for="password">password</label>
-            <input type="password" name="password" id="password">
+        <div class="logreg-input box-wrapper">
+            <div class="box-title">
+                <h3><label for="password">Password</label></h3>
+            </div>
+            <div class="box-body">
+                <input type="password" name="password" id="password">
+            </div>
         </div>
         <input class="box" id="submit-button__colorful" type="submit" name='login' value="Submit">
     </form>

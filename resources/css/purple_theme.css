@@ -1,0 +1,16 @@
+:root {
+    --body-bg: #101017;
+    --main-font-color: #f1f1f1;
+    --bold: 600;
+    --font_low-opacity: 0.6;
+    --box-font-size: 14px;
+    --box-title: #2D2C3B;
+    --box-bg: #1D1D26;
+    --box-bg-hover: #2D2C3B;
+    --border-radius: 8px;
+    --blue: #3A73F3;
+    --red: #f33a3a;
+
+    --gap: 8px;
+    --transition: .15s;
+}
