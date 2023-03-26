@@ -52,3 +52,35 @@ div.profile_right-column nav.profile_user-nav ul.profile_user-nav_ul a li:hover 
 }
 
 /* Estilos para la sección de overview. */
+
+/* Estilos para la sección de listas. */
+section.profile_user-animelist {
+    display: grid;
+    grid-gap: var(--gap);
+}
+
+.animelist-grid {
+    width: 100%!important;
+    display: grid;
+    grid-template-columns: 10% 50% 10% 10% 12% 8%;
+}
+
+ul.profile_user-animelist_content-labels li{
+    opacity: var(--font_low-opacity);
+}
+
+div.profile_user-animelist_entry-wrapper div.box-body {
+    display: grid;
+    grid-gap: var(--gap);
+}
+
+.profile_user-animelist_entry img {
+    height: 37px;
+    border-radius: calc(var(--border-radius) - 4px);
+}
+
+.profile_user-animelist_entry div {
+    display: flex;
+    align-items: center;
+    word-break: break-word;
+}

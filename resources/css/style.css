@@ -70,6 +70,11 @@ textarea {
     color: inherit;
 }
 
+/* Usado, principalmente, cuando no existe datos de algún tipo. (e.g. un anime no tiene personajes asignados en `character_anime`.) */
+i {
+    opacity: var(--font_low-opacity);
+}
+
 /* La explicación de los estilos de div.container está en /index.php. */
 div.container {
     width: 100%;

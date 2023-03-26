@@ -400,17 +400,34 @@ CREATE TABLE animelist (
     `anime_id` INT UNSIGNED NOT NULL,
     `score` DECIMAL(3,1),
     `comment` VARCHAR(200),
-    `favorite` bool NOT NULL DEFAULT FALSE,
+    `progress` SMALLINT UNSIGNED DEFAULT 0,
+    `favorite` BIT(1) NOT NULL DEFAULT 0,
     PRIMARY KEY(`user_id`, `anime_id`),
     FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (`anime_id`) REFERENCES `anime`(`anime_id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
-select * from animelist;
+CREATE TABLE mangalist (
+    `user_id` INT UNSIGNED NOT NULL,
+    `manga_id` INT UNSIGNED NOT NULL,
+    `score` DECIMAL(3,1),
+    `comment` VARCHAR(200),
+    `progress` SMALLINT UNSIGNED DEFAULT 0,
+    `favorite` BIT(1) NOT NULL DEFAULT 0,
+    PRIMARY KEY(`user_id`, `manga_id`),
+    FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (`manga_id`) REFERENCES `manga`(`manga_id`) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+select * from mangalist;
+show columns from animelist;
 select * from user;
-insert into animelist values (3, 2, 9, 'Example comment', TRUE);
-update animelist set `score`=8.5;
-alter table animelist modify column `score` DECIMAL(3,1);
+insert into animelist values (3, 4, 8.5, 'Example comment', 10,  TRUE);
+select * from anime;
+update animelist set `progress`=10;
+alter table animelist modify column `favorite` BIT(1) NOT NULL DEFAULT 0;
+
+delete from animelist;
 
 -- This will be the one to go in production
 CREATE TABLE animelist (

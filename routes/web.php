@@ -37,6 +37,8 @@ $routes = array(
     '/profile/reviews' => 'controllers/profile.php',
     '/profile/favorites' => 'controllers/profile.php',
 
+    '/add' => 'controllers/addToList.php',
+
     '/404' => 'resources/views/404.view.php'
 );
 

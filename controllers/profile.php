@@ -7,6 +7,7 @@ if (isset($_COOKIE['session'])) {
     if ($Session -> validateSession() === TRUE) {
         $userInfo = $Session -> getInfo($_COOKIE['username']);
         $animelist = $Session -> animelist($_COOKIE['username']);
+        $animes = $Session -> getAnimes($animelist);
         include('resources/views/user/profile.view.php');
     } else {
         exit(header("Location: /home"));

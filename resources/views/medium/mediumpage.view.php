@@ -1,5 +1,36 @@
 <div class="querypage_left-column">
     <img src="<?=$mediumInfo['cover']?>" alt="<?=$mediumInfo['title']?>"/>
+    <div class="querypage_left-column_user">
+        <div class="querypage_left-column_user-list">
+            <!-- Compruebo si el usuario tiene anime correspondiente a $id en su lista. Si no lo tiene, muestro un botón de añadir; si lo tiene, muestro uno de borrar. -->
+            <?php
+
+            if (isset($user_id)) {
+                $User = new Database;
+                $result = $User -> db -> execute_query('select * from `animelist` WHERE `user_id` = ? AND `anime_id` = ?', [$user_id, $id]);
+                if ($result -> num_rows === 1) {
+                    ?>
+
+                    <form action="/add" method="post">
+                        <input type="submit" value="delete from list" name="delete">
+                    </form>
+
+                    <?php
+                } else {
+                    ?>
+
+                    <form action="/add" method="post">
+                        <input type="submit" value="add to list" name="add">
+                    </form>
+
+                    <?php
+                }
+            }
+
+            ?>
+
+        </div>
+    </div>
     <section class="querypage_info box-wrapper">
         <div class="box-title">
             <h3>Information</h3>

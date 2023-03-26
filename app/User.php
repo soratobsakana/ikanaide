@@ -1,6 +1,8 @@
 <?php
-session_start();
-include 'Database.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+require_once 'Database.php';
 
 class User
 {
@@ -143,6 +145,56 @@ class User
                 $i++;
             }
             return $animelist;
+        } else {
+            return $animelist = [];
+        }
+    }
+
+    // Añadir o borrar un anime o manga a la base de datos.
+    public function addToList($medium, $medium_id) {
+        if ($this -> validateSession() === TRUE) {
+            if (isset($_POST['add'])) {
+                $user_id = $_COOKIE['user_id'];
+                switch($medium) {
+                    case 'anime':
+                        $this -> con -> db -> execute_query('INSERT INTO `animelist` (`user_id`, `anime_id`, `progress`) VALUES (?, ?, default)', [$user_id, $medium_id]);
+                        break;
+                    case 'manga':
+                        $this -> con -> db -> execute_query('INSERT INTO `mangalist` (`user_id`, `manga_id`, `progress`) VALUES (?, ?, default)', [$user_id, $medium_id]);
+                        break;
+                    default:
+                        exit(header('Location: /404'));
+                }
+                header('Location: /anime?id=' . $medium_id);
+            } else if ($_POST['delete']) {
+                $user_id = $_COOKIE['user_id'];
+                switch($medium) {
+                    case 'anime':
+                        $this -> con -> db -> execute_query('DELETE FROM `animelist` WHERE `user_id` = ? AND `anime_id` = ?', [$user_id, $medium_id]);
+                        break;
+                    case 'manga':
+                        $this -> con -> db -> execute_query('DELETE FROM `mangalist` WHERE `user_id` = ? AND `manga_id` = ?', [$user_id, $medium_id]);
+                        break;
+                    default:
+                        exit(header('Location: /404'));
+                }
+                header('Location: /anime?id=' . $medium_id);
+            }
+        } else {
+            exit(header("Location: /logout"));
+        }
+    }
+
+    public function getAnimes(array $animelist): array
+    {
+        if (count($animelist) > 0) {
+            for ($i=0; $i<count($animelist); $i++) {
+                $anime = $this -> con -> db -> execute_query('SELECT `anime_id`, `title`, `episodes`, `type`,  `cover` FROM `anime` WHERE `anime_id` = ?', [$animelist[$i]['anime_id']]);
+                $animes[$i] = $anime -> fetch_assoc();
+            }
+            return $animes;
+        } else {
+            return $animes = [];
         }
     }
 
