@@ -1,4 +1,5 @@
 <?php
+
 require('resources/functions.php');
 
 // $page viene de /index.php y almacena el path de la URI actual.

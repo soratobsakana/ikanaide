@@ -1,6 +1,6 @@
 <?php
 
-require 'Database.php';
+include 'Database.php';
 
 class AddData
 {

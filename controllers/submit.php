@@ -1,8 +1,9 @@
 <?php
+
 require('resources/functions.php');
 require('database/conn.php');
 
-$id = 1;
+$id = $_COOKIE['user_id'];
 
 if (isset($_POST['submit'])) {
     // Recolecta de datos.

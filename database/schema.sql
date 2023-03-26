@@ -6,6 +6,8 @@ DROP TABLE `review_anime`;
 DROP TABLE `staff`;
 DROP TABLE `user`;
 
+-- Lots of rows in these tables will be stored in a single JSON row in the future.
+
 CREATE TABLE `user` (
     `user_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `username` VARCHAR(16) NOT NULL UNIQUE,
@@ -17,9 +19,20 @@ CREATE TABLE `user` (
     `pfp` VARCHAR(250) NOT NULL DEFAULT 'storage/img/default/default.png',
     data JSON,
     PRIMARY KEY(`user_id`)
-) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 insert into `user` values (null, 'nagisa', 'pw', 'pw@pw.pw', default, 'spain', 'This is my biography', default, null);
+
+-- Session verifier, currently not being used. Validation is currently running through User::validateSession()
+CREATE TABLE sessions (
+    `user_id` INT UNSIGNED  NOT NULL,
+    `added` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    `expires` DATETIME DEFAULT CURRENT_TIMESTAMP, -- 'api2' tokens don't expire, this column is used for last-use tracking
+    `token` varchar(60) NOT NULL,
+    PRIMARY KEY (user_id, token)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+
 
 -- `members` and `favorited` will both be added 1 each time anyone clicks their respective buttons -
 -- them both will be stored here just as a way to quickly display the number on it's anime page. user property will be treated in JSON -
@@ -41,7 +54,7 @@ CREATE TABLE `anime` (
     `cover` VARCHAR(200) NOT NULL DEFAULT 'storage/sys/default_cover.png',
     `header` VARCHAR(200) NULL DEFAULT NULL,
     PRIMARY KEY(`anime_id`)
-) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `manga` (
      `manga_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -60,7 +73,7 @@ CREATE TABLE `manga` (
      `cover` VARCHAR(200) NOT NULL DEFAULT 'storage/sys/default_cover.png',
      `header` VARCHAR(200) NULL DEFAULT NULL,
      PRIMARY KEY(`manga_id`)
-) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 update manga set `cover`='storage/img/punpun.jpg';
 select * from manga;
@@ -79,7 +92,7 @@ CREATE TABLE `vn` (
       `cover` VARCHAR(200) NOT NULL DEFAULT 'storage/sys/default_cover.png',
       `header` VARCHAR(200) NULL DEFAULT NULL,
       PRIMARY KEY(`vn_id`)
-) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 insert into `vn` values (null, 'Sakura no Uta', null, null, 3000, '2015-10-23', 'Naoya Kusanagi lost his mother when he was a child. Naoyas father who is a famous artist is the only person that can help him cope with the loss of his friend, Rin Misakura who move while they were in elementary school. Later, Naoyas father died. After the funeral ends, Naoya is taken into the custody of Keis family in exchange for cooking meals at their home. 6 years later, Rin is transferred to Naoyas class.', 0, 0, 'storage/img/sakuta.jpeg', 'storage/img/sakuta_header.jpg');
 select * from vn;
@@ -100,7 +113,7 @@ CREATE TABLE `character` (
     `data` JSON,
     `picture` VARCHAR(200) NOT NULL DEFAULT 'storage/sys/default_cover.png',
     PRIMARY KEY (`character_id`)
-) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 show columns from `character`;
 alter table `character` auto_increment = 2;
@@ -163,7 +176,7 @@ CREATE TABLE `staff` (
      `data` JSON,
      `picture` VARCHAR(200) NOT NULL DEFAULT 'storage/sys/default_cover.png',
      PRIMARY KEY (`staff_id`)
-) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 insert into staff values
 (null, 'Sorachi', 'Hideaki', null, null, null, 'storage/public/staff/Sorachi-Hideaki.jpg');
@@ -213,7 +226,7 @@ CREATE TABLE `review` (
     `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY(`review_id`),
     FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE
-) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 alter table `review` drop column `joined_at`;
 alter table `review` add column `date` DATETIME DEFAULT CURRENT_TIMESTAMP after `user_id`;
@@ -246,11 +259,11 @@ show tables;
 
 CREATE TABLE `studio` (
     `studio_id` SMALLINT UNSIGNED
-) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `producer` (
     `producer_id` SMALLINT UNSIGNED
-) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `score` (
     `anime_id` INT UNSIGNED NOT NULL,
@@ -280,7 +293,7 @@ CREATE TABLE `edit_anime` (
       PRIMARY KEY (`edit_id`, `anime_id`, `user_id`),
       FOREIGN KEY (`anime_id`) REFERENCES `anime`(`anime_id`) ON UPDATE CASCADE ON DELETE CASCADE,
       FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE
-) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `submit_anime` (
         `said` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -299,7 +312,7 @@ CREATE TABLE `submit_anime` (
         `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
         PRIMARY KEY(`said`),
         FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE
-) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `submit_manga` (
         `smid` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -319,7 +332,7 @@ CREATE TABLE `submit_manga` (
         `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
         PRIMARY KEY (`smid`),
         FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE
-) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `submit_vn` (
          `vid` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -335,7 +348,7 @@ CREATE TABLE `submit_vn` (
          `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
          PRIMARY KEY(`vid`),
          FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE
-) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `submit_character` (
         `scid` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -349,7 +362,7 @@ CREATE TABLE `submit_character` (
         `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
         PRIMARY KEY (`scid`),
         FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE
-) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `submit_staff` (
         `ssid` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -363,7 +376,7 @@ CREATE TABLE `submit_staff` (
         `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
         PRIMARY KEY (`ssid`),
         FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE
-) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 select * from `edit_anime`;
 
@@ -380,3 +393,29 @@ select * from submit_anime;
 select * from submit_staff;
 select * from submit_character;
 select * from submit_vn;
+
+-- Relations of the user with the database:
+CREATE TABLE animelist (
+    `user_id` INT UNSIGNED NOT NULL,
+    `anime_id` INT UNSIGNED NOT NULL,
+    `score` DECIMAL(3,1),
+    `comment` VARCHAR(200),
+    `favorite` bool NOT NULL DEFAULT FALSE,
+    PRIMARY KEY(`user_id`, `anime_id`),
+    FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (`anime_id`) REFERENCES `anime`(`anime_id`) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+select * from animelist;
+select * from user;
+insert into animelist values (3, 2, 9, 'Example comment', TRUE);
+update animelist set `score`=8.5;
+alter table animelist modify column `score` DECIMAL(3,1);
+
+-- This will be the one to go in production
+CREATE TABLE animelist (
+   `user_id` INT UNSIGNED NOT NULL,
+   data JSON NOT NULL,
+   PRIMARY KEY(`user_id`),
+   FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;

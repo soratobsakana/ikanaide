@@ -20,7 +20,7 @@
                         break;
                 }
                 foreach ($columns as $column){
-                    ?><li><span class="ul_first-column"><?=str_replace('_', ' ', $column);?></span><span><?=$mediumInfo[$column]?></span></li><?php
+                    ?><li><span class="ul_first-column"><?=str_replace('_', ' ', $column);?></span><span><?=dateFormat($mediumInfo[$column])?></span></li><?php
                 }
 
                 ?></ul>

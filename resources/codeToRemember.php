@@ -35,3 +35,12 @@ if (isset($_COOKIES)) {
         setcookie($key, '', time()-1000, '/');
     }
 }
+
+// Returns the number of columns from a SQL table
+// SELECT count(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'submit_manga';
+
+// Calculates and prints execute time of a script.
+$time_start = microtime(true);
+$time_end = microtime(true);
+$execution_time = ($time_end - $time_start);
+echo '<b>Total Execution Time:</b> '.$execution_time.' seconds';

@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include 'Database.php';
 
 class User
@@ -33,6 +33,7 @@ class User
                                     $user_id = $result -> fetch_column();
                                     setcookie('username', $registerInfo['username'], strtotime('NOW+60DAYS'));
                                     setcookie('user_id', $user_id, strtotime('NOW+60DAYS'));
+                                    setcookie('passwd', $password, strtotime('NOW+60DAYS'));
                                     setcookie('session', "Yes", strtotime('NOW+60DAYS'));
                                     return 'Ok';
                                 } else {
@@ -75,6 +76,7 @@ class User
                                 // Todas las verificaciones han sido exitosas, por lo que se inicia una sesión al usuario autenticado.
                                 setcookie('username', $loginInfo['username'], strtotime('NOW+60DAYS'));
                                 setcookie('user_id', $user_id, strtotime('NOW+60DAYS'));
+                                setcookie('passwd', $password, strtotime('NOW+60DAYS'));
                                 setcookie('session', "Yes", strtotime('NOW+60DAYS'));
                                 return 'Ok';
                             } else {
@@ -97,11 +99,51 @@ class User
         }
     }
 
+    // Este método añade seguridad al sistema de autenticación de usuario. Se compara la información actual de una cookie con la de la base de datos.
+    // Si coincide, indicaría que el usuario no ha alterado la información de sus cookies y que, efectivamente, conserva la información generada en User::login() o User::register).
+    public function validateSession(): bool
+    {
+        if (isset($_COOKIE['username'], $_COOKIE['passwd'], $_COOKIE['user_id'])) {
+            $result = $this -> con -> db -> execute_query('SELECT `user_id` FROM `user` WHERE username = ?', [$_COOKIE['username']]);
+            if ($result -> num_rows === 1) {
+                $id = $result -> fetch_column();
+                if ($id == $_COOKIE['user_id']) {
+                    $passwd = $this -> con -> db -> execute_query('SELECT `password` FROM `user` WHERE `user_id` = ?', [$_COOKIE['user_id']]) -> fetch_column();
+                    if ($passwd === $_COOKIE['passwd']) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
     public function getInfo(string $username): array
     {
         $result = $this -> con -> db -> execute_query('SELECT * FROM user WHERE user_id = ?', [$_COOKIE['user_id']]);
-        $userInfo = $result -> fetch_assoc();
-
-        return $userInfo;
+        return $result -> fetch_assoc();
     }
+
+    public function animelist(string $username): array
+    {
+        $result = $this -> con -> db -> execute_query('SELECT * FROM `animelist` WHERE `user_id` = ?', [$_COOKIE['user_id']]);
+        if ($result -> num_rows > 0) {
+            $i = 0; // Esto es simplemente un contador que uso para no necesitar un for dentro del foreach.
+            while ($row = $result -> fetch_assoc()) {
+                foreach($row as $key => $value) {
+                    $animelist[$i][$key] = $value;
+                }
+                $i++;
+            }
+            return $animelist;
+        }
+    }
+
 }

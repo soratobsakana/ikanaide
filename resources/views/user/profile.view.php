@@ -40,17 +40,11 @@
                     <ul class="two-column-list">
                         <?php
 
-                        if (!empty($userInfo['twitter'])) {
-                            ?><li><span class="ul_first-column">twitter</span><span><?=$userInfo['twitter']?></span></li><?php
-                        }
-                        if (!empty($userInfo['github'])) {
-                            ?><li><span class="ul_first-column">github</span><span><?=$userInfo['github']?></span></li><?php
-                        }
-                        if (!empty($userInfo['discord'])) {
-                            ?><li><span class="ul_first-column">discord</span><span><?=$userInfo['discord']?></span></li><?php
-                        }
-                        if (!empty($userInfo['website'])) {
-                            ?><li><span class="ul_first-column">website</span><span><?=$userInfo['website']?></span></li><?php
+                        $possibleLinks = ['twitter', 'github', 'discord', 'website'];
+                        foreach ($possibleLinks as $link) {
+                            if (!empty($userInfo[$link])) {
+                                ?><li><span class="ul_first-column"><?=$link?></span><span><?=$userInfo[$link]?></span></li><?php
+                            }
                         }
 
                         ?>
