@@ -1,29 +1,38 @@
 <div class="querypage_left-column">
     <img src="<?=$mediumInfo['cover']?>" alt="<?=$mediumInfo['title']?>"/>
-    <div class="querypage_left-column_user">
+    <!-- Compruebo si el usuario tiene anime correspondiente a $id en su lista. Si no lo tiene, muestro un botón de añadir; si lo tiene, muestro uno de borrar. -->
+    <?php
+
+    if (isset($user_id)) {
+        ?>
+        <div class="querypage_left-column_user">
         <div class="querypage_left-column_user-list">
-            <form action="/add" method="post">
-            <!-- Compruebo si el usuario tiene anime correspondiente a $id en su lista. Si no lo tiene, muestro un botón de añadir; si lo tiene, muestro uno de borrar. -->
-            <?php
-
-            if (isset($user_id)) {
-                $User = new Database;
-                $result = $User -> db -> execute_query('select * from `'.$medium.'list` WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $id]);
-                if ($result -> num_rows === 1) {
-                    ?><input class="add-to-list box submit-button__colorful" type="submit" value="Delete from list" name="delete"><?php
-                    $row = $result -> fetch_assoc();
-                    if ($row['favorite'] === 1) {
-                        ?><input class="add-to-list box submit-button__colorful" type="submit" value="L" name="favorite"><?php
-                    }
-                } else {
-                    ?><input class="delete-from-list box submit-button__colorful"" type="submit" value="Add to list" name="add"><?php
-                }
+        <form action="/add" method="post">
+        
+        <?php
+        $User = new Database;
+        $result = $User -> db -> execute_query('select * from `'.$medium.'list` WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $id]);
+        if ($result -> num_rows === 1) {
+            ?><input class="add-to-list box submit-button__colorful" type="submit" value="Delete from list" name="delete"><?php
+            $row = $result -> fetch_assoc();
+            if ($row['favorite'] === 1) {
+                ?><input class="add-to-list box submit-button__colorful" type="submit" value="L" name="favorite"><?php
             }
+        } else {
+            ?><input class="delete-from-list box submit-button__colorful"" type="submit" value="Add to list" name="add"><?php
+        }
 
-            ?>
-            </form>
+        ?>
+        
+        </form>
         </div>
-    </div>
+        </div>
+        
+        <?php
+    }
+
+    ?>
+            
     <section class="querypage_info box-wrapper">
         <div class="box-title">
             <h3>Information</h3>
@@ -88,7 +97,7 @@
         <div class="querypage_title box-title">
             <h3>Characters</h3><span class="view-all">view all</span>
         </div>
-        <div class="querypage_char-entry_wrapper">
+        <div class="querypage_char-entry_wrapper querypage_bg">
             <?php
             if (isset($characters)) {
                 for ($i=0; $i<count($characters); $i++) {
@@ -120,7 +129,7 @@
         <div class="box-title">
             <div class="querypage_title"><h3>Staff</h3><span class="view-all">view all</span></div>
         </div>
-        <div class="querypage_staff-entry_wrapper">
+        <div class="querypage_staff-entry_wrapper querypage_bg">
             <?php
             if (isset($staff)) {
                 for ($i=0; $i<count($staff); $i++) {
@@ -150,7 +159,7 @@
     </section>
     <section class="querypage_review box-wrapper">
         <div class="querypage_title box-title"><h3>Reviews</h3><span class="view-all">view all</span></div>
-        <div class="querypage_review-entry_wrapper">
+        <div class="querypage_review-entry_wrapper querypage_bg">
             <?php
             if (isset($reviews)) {
                 for ($i=0; $i<count($reviews); $i++) {

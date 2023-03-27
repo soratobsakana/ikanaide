@@ -14,6 +14,11 @@ div.querypage_title span.view-all:hover {
     opacity: 1;
 }
 
+/* Añadir un color de fondo a las secciones de personajes, staff y reviews. */
+.querypage_bg {
+    background-color: var(--box-bg);
+}
+
 /************* Estilos específicos *************/
 /* Propósito: dividir el cuerpo en dos columnas de 23% y 77% de tamaño. */
 div.querypage_left-column {
@@ -74,8 +79,6 @@ section.querypage_char {
 div.querypage_char-entry_wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    background-color: var(--box-bg);
-
 }
 
 div.querypage_char-entry {
