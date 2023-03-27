@@ -335,6 +335,30 @@ CREATE TABLE `submit_staff` (
     FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE animelist (
+    `user_id` INT UNSIGNED NOT NULL,
+    `anime_id` INT UNSIGNED NOT NULL,
+    `score` DECIMAL(3,1),
+    `comment` VARCHAR(200),
+    `progress` SMALLINT UNSIGNED DEFAULT 0,
+    `favorite` BIT(1) NOT NULL DEFAULT 0,
+    PRIMARY KEY(`user_id`, `anime_id`),
+    FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (`anime_id`) REFERENCES `anime`(`anime_id`) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE mangalist (
+    `user_id` INT UNSIGNED NOT NULL,
+    `manga_id` INT UNSIGNED NOT NULL,
+    `score` DECIMAL(3,1),
+    `comment` VARCHAR(200),
+    `progress` SMALLINT UNSIGNED DEFAULT 0,
+    `favorite` BIT(1) NOT NULL DEFAULT 0,
+    PRIMARY KEY(`user_id`, `manga_id`),
+    FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (`manga_id`) REFERENCES `manga`(`manga_id`) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
 -- data -
 
 insert into `anime` values(null, 'Gintama', null, null, 'TV', 49, 'finished', '2011-04-04', '2012-03-26', 'spring 2011', 'After a one-year hiatus, Shinpachi Shimura returns to Edo, only to stumble upon a shocking surprise: Gintoki and Kagura, his fellow Yorozuya members, have become completely different characters! Fleeing from the Yorozuya headquarters in confusion, Shinpachi finds that all the denizens of Edo have undergone impossibly extreme changes, in both appearance and personality. Most unbelievably, his sister Otae has married the Shinsengumi chief and shameless stalker Isao Kondou and is pregnant with their first child.', 0, 0, 'storage/img/gintama.webp', 'storage/img/gintama_header.jpg');
@@ -345,5 +369,6 @@ insert into `staff` values(null, 'Sorachi', 'Hideaki', null, null, null, 'storag
 insert into `staff_anime` VALUES (1,1, 'director');
 insert into `review` values (null, 'title', 'This is my review', 1, default);
 insert into `review_anime` VALUES (1,1, default);
+insert into animelist values (3, 4, 8.5, 'Example comment', 10,  TRUE);
 
 COMMIT;

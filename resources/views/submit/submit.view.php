@@ -30,5 +30,5 @@
             header('Location: /submit/anime');
     }
     ?>
-    <input class="box" id="submit-button__colorful" type="submit" value="Submit" name="submit">
+    <input class="submit-button__colorful box" type="submit" value="Submit" name="submit">
 </form>

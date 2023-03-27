@@ -31,6 +31,16 @@ div.querypage_right-column {
 }
 
 /***** Columna izquierda. *****/
+input.add-to-list {
+    width: 100%!important; /* El width heredado por .submit-button__colorful es 180px. */
+    margin-top: 0px; /* Elimina el margin-top de la clase .submit-button__colorful */
+}
+
+input.delete-from-list {
+    width: 100%!important; /* El width heredado por .submit-button__colorful es 180px. */
+    margin-top: 0px; /* Elimina el margin-top de la clase .submit-button__colorful */
+}
+
 section.querypage_edit {
     padding: 7px;
     transition: .2s;
@@ -64,6 +74,7 @@ section.querypage_char {
 div.querypage_char-entry_wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    background-color: var(--box-bg);
 
 }
 

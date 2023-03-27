@@ -151,34 +151,46 @@ class User
     }
 
     // Añadir o borrar un anime o manga a la base de datos.
-    public function addToList($medium, $medium_id) {
+    public function addToList($medium, $medium_id)
+    {
         if ($this -> validateSession() === TRUE) {
             if (isset($_POST['add'])) {
                 $user_id = $_COOKIE['user_id'];
                 switch($medium) {
                     case 'anime':
                         $this -> con -> db -> execute_query('INSERT INTO `animelist` (`user_id`, `anime_id`, `progress`) VALUES (?, ?, default)', [$user_id, $medium_id]);
+                        header('Location: /anime?id=' . $medium_id);
                         break;
                     case 'manga':
                         $this -> con -> db -> execute_query('INSERT INTO `mangalist` (`user_id`, `manga_id`, `progress`) VALUES (?, ?, default)', [$user_id, $medium_id]);
+                        header('Location: /manga?id=' . $medium_id);
                         break;
                     default:
                         exit(header('Location: /404'));
                 }
-                header('Location: /anime?id=' . $medium_id);
-            } else if ($_POST['delete']) {
+            } 
+        } else {
+            exit(header("Location: /logout"));
+        }
+    }
+
+    public function deleteFromList($medium, $medium_id)
+    {
+        if ($this -> validateSession() === TRUE) {
+            if ($_POST['delete']) {
                 $user_id = $_COOKIE['user_id'];
                 switch($medium) {
                     case 'anime':
                         $this -> con -> db -> execute_query('DELETE FROM `animelist` WHERE `user_id` = ? AND `anime_id` = ?', [$user_id, $medium_id]);
+                        header('Location: /anime?id=' . $medium_id);
                         break;
                     case 'manga':
                         $this -> con -> db -> execute_query('DELETE FROM `mangalist` WHERE `user_id` = ? AND `manga_id` = ?', [$user_id, $medium_id]);
+                        header('Location: /manga?id=' . $medium_id);
                         break;
                     default:
                         exit(header('Location: /404'));
                 }
-                header('Location: /anime?id=' . $medium_id);
             }
         } else {
             exit(header("Location: /logout"));

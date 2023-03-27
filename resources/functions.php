@@ -49,6 +49,8 @@ function dateFormat ($date) {
         $day = substr($date, 8);
 
         return $month . ' ' . $day . ', ' . $year;
+    } else {
+        return $date;
     }
 
 }

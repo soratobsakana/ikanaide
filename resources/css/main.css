@@ -17,7 +17,7 @@ main {
     font-size: var(--box-font-size);
 
     /* border: 1px solid var(--box-bg-hover); */
-    transition: .15s;
+    transition: var(--transition);
 }
 
 /* Propósito: separar el indice de su valor en las cajas de la columna izquierda (.ul_first-column). */
@@ -35,18 +35,18 @@ img {
 }
 
 /* Debe ser usado junto a la clase 'box' */
-#submit-button__colorful {
+.submit-button__colorful {
     width: 180px;
     align-self: center;
     font-weight: var(--bold);
     margin-top: 10px;
-    background-image: linear-gradient(to left, var(--box-bg), var(--box-title));
+    background-image: linear-gradient(to left, var(--box-bg), var(--box-title))!important;
     background-size: 100%;
-
     transition: var(--transition);
 }
-#submit-button__colorful:hover {
-    background-size: 200%;
+
+.submit-button__colorful:hover {
+    background-size: 200%!important;
 }
 
 /* Segundo tipo de estilo de caja. Esta consta tanto de un título como del contenido. */

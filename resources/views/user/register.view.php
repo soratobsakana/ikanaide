@@ -18,7 +18,7 @@
             <label for="confirm">confirm</label>
             <input type="password" name="confirm" id="confirm">
         </div>
-        <input class="box" id="submit-button__colorful" type="submit" name='register' value="Submit">
+        <input class=" box submit-button__colorful" type="submit" name='register' value="Submit">
     </form>
     <p>... or <a href="login">login</a> if you already have an account.</p>
 </div>

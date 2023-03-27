@@ -2,33 +2,26 @@
     <img src="<?=$mediumInfo['cover']?>" alt="<?=$mediumInfo['title']?>"/>
     <div class="querypage_left-column_user">
         <div class="querypage_left-column_user-list">
+            <form action="/add" method="post">
             <!-- Compruebo si el usuario tiene anime correspondiente a $id en su lista. Si no lo tiene, muestro un botón de añadir; si lo tiene, muestro uno de borrar. -->
             <?php
 
             if (isset($user_id)) {
                 $User = new Database;
-                $result = $User -> db -> execute_query('select * from `animelist` WHERE `user_id` = ? AND `anime_id` = ?', [$user_id, $id]);
+                $result = $User -> db -> execute_query('select * from `'.$medium.'list` WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $id]);
                 if ($result -> num_rows === 1) {
-                    ?>
-
-                    <form action="/add" method="post">
-                        <input type="submit" value="delete from list" name="delete">
-                    </form>
-
-                    <?php
+                    ?><input class="add-to-list box submit-button__colorful" type="submit" value="Delete from list" name="delete"><?php
+                    $row = $result -> fetch_assoc();
+                    if ($row['favorite'] === 1) {
+                        ?><input class="add-to-list box submit-button__colorful" type="submit" value="L" name="favorite"><?php
+                    }
                 } else {
-                    ?>
-
-                    <form action="/add" method="post">
-                        <input type="submit" value="add to list" name="add">
-                    </form>
-
-                    <?php
+                    ?><input class="delete-from-list box submit-button__colorful"" type="submit" value="Add to list" name="add"><?php
                 }
             }
 
             ?>
-
+            </form>
         </div>
     </div>
     <section class="querypage_info box-wrapper">

@@ -18,7 +18,7 @@
                 <input type="password" name="password" id="password">
             </div>
         </div>
-        <input class="box" id="submit-button__colorful" type="submit" name='login' value="Submit">
+        <input class="submit-button__colorful box" type="submit" name='login' value="Submit">
     </form>
     <p>... or <a href="register">register</a> if you don't have an account.</p>
 </div>

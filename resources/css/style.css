@@ -51,6 +51,10 @@ select:hover {
     background-color: var(--box-bg-hover);
 }
 
+input[type='submit'] {
+    font-family: Inter;
+}
+
 select, option, input[type='submit'] {
     cursor: pointer;
 }
