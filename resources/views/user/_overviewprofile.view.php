@@ -22,9 +22,9 @@
                 <h3>Anime</h3>
             </div>
             <div class="box-body">
-                <div class="completed"><div>200</div><div class="low-opacity">completed</div></div>
-                <div class="watching"><div>4</div><div class="low-opacity">watching</div></div>
-                <div class="score"><div>7.5</div><div class="low-opacity">score</div></div>
+                <div class="completed"><div><?=$animeStats['completed']?></div><div class="low-opacity">completed</div></div>
+                <div class="watching"><div><?=$animeStats['watching']?></div><div class="low-opacity">watching</div></div>
+                <div class="score"><div><?=$animeScoreAvg?></div><div class="low-opacity">score</div></div>
             </div>
         </div>
         <div class="profile_user-overview_stats-medium box-wrapper">
@@ -32,9 +32,9 @@
                 <h3>Manga</h3>
             </div>
             <div class="box-body">
-                <div class="completed"><div>200</div><div class="low-opacity">completed</div></div>
-                <div class="reading"><div>4</div><div class="low-opacity">reading</div></div>
-                <div class="score"><div>7.5</div><div class="low-opacity">score</div></div>
+                <div class="completed"><div><?=$mangaStats['completed']?></div><div class="low-opacity">completed</div></div>
+                <div class="reading"><div><?=$mangaStats['reading']?></div><div class="low-opacity">reading</div></div>
+                <div class="score"><div><?=$mangaScoreAvg?></div><div class="low-opacity">score</div></div>
             </div>
         </div>
     </section>

@@ -8,8 +8,8 @@
             <div class="box-body">
                 <ul class="two-column-list">
                     <li><span class="ul_first-column">name</span><span><?=$userInfo['username']?></span></li>
-                    <li><span class="ul_first-column">anime</span><span>0</span></li>
-                    <li><span class="ul_first-column">manga</span><span>0</span></li>
+                    <li><span class="ul_first-column">anime</span><span><?=count($animelist)?></span></li>
+                    <li><span class="ul_first-column">manga</span><span><?=count($mangalist)?></span></li>
                     <li><span class="ul_first-column">reviews</span><span>0</span></li>
                     <li><span class="ul_first-column">posts</span><span>0</span></li>
                 </ul>

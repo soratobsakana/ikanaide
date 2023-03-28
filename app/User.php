@@ -102,7 +102,7 @@ class User
     }
 
     // Este método añade seguridad al sistema de autenticación de usuario. Se compara la información actual de una cookie con la de la base de datos.
-    // Si coincide, indicaría que el usuario no ha alterado la información de sus cookies y que, efectivamente, conserva la información generada en User::login() o User::register).
+    // Si coincide, indicaría que el usuario no ha alterado la información de sus cookies y que, efectivamente, conserva la información que se generó en User::login() o User::register()).
     public function validateSession(): bool
     {
         if (isset($_COOKIE['username'], $_COOKIE['passwd'], $_COOKIE['user_id'])) {
@@ -129,24 +129,32 @@ class User
 
     public function getInfo(string $username): array
     {
-        $result = $this -> con -> db -> execute_query('SELECT * FROM user WHERE user_id = ?', [$_COOKIE['user_id']]);
+        $result = $this -> con -> db -> execute_query('SELECT `username`, `joined_at`, `country`, `biography`, `pfp` FROM user WHERE user_id = ?', [$_COOKIE['user_id']]);
         return $result -> fetch_assoc();
     }
 
-    public function animelist(string $username): array
+    public function getList(string $username, string $medium): array
     {
-        $result = $this -> con -> db -> execute_query('SELECT * FROM `animelist` WHERE `user_id` = ?', [$_COOKIE['user_id']]);
+        $result = $this -> con -> db -> execute_query('SELECT * FROM `'.$medium.'list` WHERE `user_id` = ?', [$_COOKIE['user_id']]);
         if ($result -> num_rows > 0) {
             $i = 0; // Esto es simplemente un contador que uso para no necesitar un for dentro del foreach.
             while ($row = $result -> fetch_assoc()) {
                 foreach($row as $key => $value) {
-                    $animelist[$i][$key] = $value;
+                    if ($key === 'score') {
+                        if (fmod($value, 1) === 0.0) {
+                            $list[$i][$key] = floor($value);
+                        } else {
+                            $list[$i][$key] = $value;
+                        }
+                    } else {
+                        $list[$i][$key] = $value;
+                    }
                 }
                 $i++;
             }
-            return $animelist;
+            return $list;
         } else {
-            return $animelist = [];
+            return $list = [];
         }
     }
 
@@ -156,18 +164,8 @@ class User
         if ($this -> validateSession() === TRUE) {
             if (isset($_POST['add'])) {
                 $user_id = $_COOKIE['user_id'];
-                switch($medium) {
-                    case 'anime':
-                        $this -> con -> db -> execute_query('INSERT INTO `animelist` (`user_id`, `anime_id`, `progress`) VALUES (?, ?, default)', [$user_id, $medium_id]);
-                        header('Location: /anime?id=' . $medium_id);
-                        break;
-                    case 'manga':
-                        $this -> con -> db -> execute_query('INSERT INTO `mangalist` (`user_id`, `manga_id`, `progress`) VALUES (?, ?, default)', [$user_id, $medium_id]);
-                        header('Location: /manga?id=' . $medium_id);
-                        break;
-                    default:
-                        exit(header('Location: /404'));
-                }
+                $this -> con -> db -> execute_query('INSERT INTO `'.$medium.'list` (`user_id`, `'.$medium.'_id`, `progress`) VALUES (?, ?, default)', [$user_id, $medium_id]);
+                header('Location: /'.$medium.'?id=' . $medium_id);
             } 
         } else {
             exit(header("Location: /logout"));
@@ -179,18 +177,8 @@ class User
         if ($this -> validateSession() === TRUE) {
             if ($_POST['delete']) {
                 $user_id = $_COOKIE['user_id'];
-                switch($medium) {
-                    case 'anime':
-                        $this -> con -> db -> execute_query('DELETE FROM `animelist` WHERE `user_id` = ? AND `anime_id` = ?', [$user_id, $medium_id]);
-                        header('Location: /anime?id=' . $medium_id);
-                        break;
-                    case 'manga':
-                        $this -> con -> db -> execute_query('DELETE FROM `mangalist` WHERE `user_id` = ? AND `manga_id` = ?', [$user_id, $medium_id]);
-                        header('Location: /manga?id=' . $medium_id);
-                        break;
-                    default:
-                        exit(header('Location: /404'));
-                }
+                $this -> con -> db -> execute_query('DELETE FROM `'.$medium.'list` WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $medium_id]);
+                header('Location: /'.$medium.'?id=' . $medium_id);
             }
         } else {
             exit(header("Location: /logout"));
@@ -208,6 +196,73 @@ class User
         } else {
             return $animes = [];
         }
+    }
+
+    /**
+     * Devuelve las estadísticas en un array asociativo de 5 campos: completed, watching|reading, planned, stalled, dropped.
+     * El segundo campo es variable según el array aportado sea $animelist(en este caso, watching) o mangalist(en este caso, reading).
+     */
+    public function getStats(array $list): array|null
+    {
+
+        switch($list[0]['status']) {
+            case 'watching':
+                $currently = 'watching';
+                break;
+            case 'reading':
+                $currently = 'reading';
+                break;
+            default:
+                return null;
+        }
+
+        $userStats['completed'] = 0;
+        $userStats[''.$currently.''] = 0;
+        $userStats['planned'] = 0;
+        $userStats['stalled'] = 0;
+        $userStats['dropped'] = 0;
+        for ($i=0; $i<count($list); $i++) {
+            switch($list[$i]['status']) {
+                case 'completed':
+                    $userStats['completed']++;
+                    break;
+                case $currently:
+                    $userStats[''.$currently.'']++;
+                    break;
+                case 'planned':
+                    $userStats['planned']++;
+                    break;
+                case 'stalled':
+                    $userStats['stalled']++;
+                    break;
+                case 'dropped':
+                    $userStats['dropped']++;
+                    break;
+                default:
+                    return null;
+            }
+        }
+        return $userStats;
+    }
+
+    public function getScoreAvg($list): float
+    {
+        // Cálculo de la media de puntuaciones que el usuario ha dado a los elementos de su lista
+        $sum = 0;
+        $total = 0;
+        foreach ($list as $listEntry) {
+            $sum += $listEntry['score'];
+            // Las puntuaciones pueden no ser asignadas, por lo que no count($animelist|mangalist) puede no ser correcto para una media.
+            if ($listEntry['score'] !== null) {
+                $total++;
+            }
+        }
+        
+        if ($sum === 0) {
+            return $scoreAvg = 0;
+        } else {
+            return $scoreAvg = $sum / $total;;
+        } 
     }
 
 }

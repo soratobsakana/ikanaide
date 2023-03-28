@@ -22,7 +22,7 @@ CREATE TABLE `user` (
     `github` varchar(39),
     `discord` varchar(39),
     `website` varchar(200),
-    PRIMARY KEY(`user_id`)
+    PRIMARY KEY (`user_id`)
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `anime` (
@@ -41,7 +41,7 @@ CREATE TABLE `anime` (
     `favorited` INT UNSIGNED NOT NULL DEFAULT 0,
     `cover` VARCHAR(200) NOT NULL DEFAULT 'storage/sys/default_cover.png',
     `header` VARCHAR(200) NULL DEFAULT NULL,
-    PRIMARY KEY(`anime_id`)
+    PRIMARY KEY (`anime_id`)
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `manga` (
@@ -60,7 +60,7 @@ CREATE TABLE `manga` (
      `favorited` INT UNSIGNED NOT NULL DEFAULT 0,
      `cover` VARCHAR(200) NOT NULL DEFAULT 'storage/sys/default_cover.png',
      `header` VARCHAR(200) NULL DEFAULT NULL,
-     PRIMARY KEY(`manga_id`)
+     PRIMARY KEY (`manga_id`)
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `vn` (
@@ -75,7 +75,7 @@ CREATE TABLE `vn` (
     `favorited` INT UNSIGNED NOT NULL DEFAULT 0,
     `cover` VARCHAR(200) NOT NULL DEFAULT 'storage/sys/default_cover.png',
     `header` VARCHAR(200) NULL DEFAULT NULL,
-    PRIMARY KEY(`vn_id`)
+    PRIMARY KEY (`vn_id`)
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `character` (
@@ -93,7 +93,7 @@ CREATE TABLE `character_anime` (
     `character_id` INT UNSIGNED NOT NULL,
     `anime_id` INT UNSIGNED NOT NULL,
     `role` ENUM('Main', 'Supporting') NOT NULL DEFAULT 'Supporting',
-    PRIMARY KEY(`character_id`, `anime_id`),
+    PRIMARY KEY (`character_id`, `anime_id`),
     FOREIGN KEY (`character_id`) REFERENCES `character`(`character_id`) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (`anime_id`) REFERENCES `anime`(`anime_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
@@ -102,7 +102,7 @@ CREATE TABLE `character_manga` (
     `character_id` INT UNSIGNED NOT NULL,
     `manga_id` INT UNSIGNED NOT NULL,
     `role` ENUM('Main', 'Supporting') NOT NULL DEFAULT 'Supporting',
-    PRIMARY KEY(`character_id`, `manga_id`),
+    PRIMARY KEY (`character_id`, `manga_id`),
     FOREIGN KEY (`character_id`) REFERENCES `character`(`character_id`) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (`manga_id`) REFERENCES `manga`(`manga_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
@@ -111,7 +111,7 @@ CREATE TABLE `character_vn` (
     `character_id` INT UNSIGNED NOT NULL,
     `vn_id` INT UNSIGNED NOT NULL,
     `role` ENUM('Main', 'Supporting') NOT NULL DEFAULT 'Supporting',
-    PRIMARY KEY(`character_id`, `vn_id`),
+    PRIMARY KEY (`character_id`, `vn_id`),
     FOREIGN KEY (`character_id`) REFERENCES `character`(`character_id`) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (`vn_id`) REFERENCES `vn`(`vn_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
@@ -131,7 +131,7 @@ CREATE TABLE `staff_anime` (
     `staff_id` INT UNSIGNED NOT NULL,
     `anime_id` INT UNSIGNED NOT NULL,
     `role` VARCHAR(50) NOT NULL DEFAULT 'Participant',
-    PRIMARY KEY(`staff_id`, `anime_id`),
+    PRIMARY KEY (`staff_id`, `anime_id`),
     FOREIGN KEY (`staff_id`) REFERENCES `staff`(`staff_id`) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (`anime_id`) REFERENCES `anime`(`anime_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
@@ -140,7 +140,7 @@ CREATE TABLE `staff_manga` (
     `staff_id` INT UNSIGNED NOT NULL,
     `manga_id` INT UNSIGNED NOT NULL,
     `role` VARCHAR(50) NOT NULL DEFAULT 'Participant',
-    PRIMARY KEY(`staff_id`, `manga_id`),
+    PRIMARY KEY (`staff_id`, `manga_id`),
     FOREIGN KEY (`staff_id`) REFERENCES `staff`(`staff_id`) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (`manga_id`) REFERENCES `manga`(`manga_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
@@ -149,7 +149,7 @@ CREATE TABLE `staff_vn` (
     `staff_id` INT UNSIGNED NOT NULL,
     `vn_id` INT UNSIGNED NOT NULL,
     `role` VARCHAR(50) NOT NULL DEFAULT 'Participant',
-    PRIMARY KEY(`staff_id`, `vn_id`),
+    PRIMARY KEY (`staff_id`, `vn_id`),
     FOREIGN KEY (`staff_id`) REFERENCES `staff`(`staff_id`) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (`vn_id`) REFERENCES `vn`(`vn_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
@@ -160,7 +160,7 @@ CREATE TABLE `review` (
     `text` TEXT NOT NULL,
     `user_id` INT UNSIGNED NOT NULL,
     `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY(`review_id`),
+    PRIMARY KEY (`review_id`),
     FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
@@ -247,7 +247,7 @@ CREATE TABLE `edit_vn` (
     `header` VARCHAR(300),
     `user_id` INT UNSIGNED NOT NULL,
     `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY(`svid`),
+    PRIMARY KEY (`svid`),
     FOREIGN KEY (`vn_id`) REFERENCES `vn`(`vn_id`) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
@@ -267,7 +267,7 @@ CREATE TABLE `submit_anime` (
     `header` VARCHAR(400),
     `user_id` INT UNSIGNED NOT NULL,
     `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY(`said`),
+    PRIMARY KEY (`said`),
     FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
@@ -303,7 +303,7 @@ CREATE TABLE `submit_vn` (
      `header` VARCHAR(300),
      `user_id` INT UNSIGNED NOT NULL,
      `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
-     PRIMARY KEY(`svid`),
+     PRIMARY KEY (`svid`),
      FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
@@ -340,9 +340,10 @@ CREATE TABLE animelist (
     `anime_id` INT UNSIGNED NOT NULL,
     `score` DECIMAL(3,1),
     `comment` VARCHAR(200),
+    `status` ENUM('completed', 'watching', 'planned', 'stalled', 'dropped') NOT NULL DEFAULT 'watching',
     `progress` SMALLINT UNSIGNED DEFAULT 0,
     `favorite` BIT(1) NOT NULL DEFAULT 0,
-    PRIMARY KEY(`user_id`, `anime_id`),
+    PRIMARY KEY (`user_id`, `anime_id`),
     FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (`anime_id`) REFERENCES `anime`(`anime_id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
@@ -352,9 +353,10 @@ CREATE TABLE mangalist (
     `manga_id` INT UNSIGNED NOT NULL,
     `score` DECIMAL(3,1),
     `comment` VARCHAR(200),
+    `status` ENUM('completed', 'reading', 'planned', 'stalled', 'dropped') NOT NULL DEFAULT 'reading',
     `progress` SMALLINT UNSIGNED DEFAULT 0,
     `favorite` BIT(1) NOT NULL DEFAULT 0,
-    PRIMARY KEY(`user_id`, `manga_id`),
+    PRIMARY KEY (`user_id`, `manga_id`),
     FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (`manga_id`) REFERENCES `manga`(`manga_id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
