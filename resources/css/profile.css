@@ -52,6 +52,31 @@ div.profile_right-column nav.profile_user-nav ul.profile_user-nav_ul a li:hover 
 }
 
 /* Estilos para la sección de overview. */
+section.profile_user-overview {
+    display: grid;
+    grid-gap: var(--gap);
+}
+section.profile_user-overview_stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: var(--gap);
+}
+
+div.profile_user-overview_stats-medium div.box-body {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+div.profile_user-overview_stats-medium div.box-body div {
+    display: grid;
+    grid-gap: var(--gap);
+    text-align: center;
+    font-size: calc(var(--box-font-size) + 1px);
+}
+
+div.profile_user-overview_stats-medium div.box-body div.low-opacity {
+    font-size: var(--box-font-size);
+}
 
 /* Estilos para la sección de listas. */
 section.profile_user-animelist {

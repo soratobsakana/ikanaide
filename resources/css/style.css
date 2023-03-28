@@ -88,3 +88,7 @@ div.container {
     flex-direction: column;
     justify-content: space-between;
 }
+
+.low-opacity {
+    opacity: var(--font_low-opacity);
+}

@@ -3,7 +3,6 @@
     if (!empty($animelist) && !empty($animes)) {
         ?>
 
-        <section class="profile_user-animelist">
             <div class="profile_user-animelist_header box-wrapper">
                 <div class="box-title">
                     <h3>Anime List</h3>
@@ -60,7 +59,6 @@
                     ?>
                 </div>
             </div>
-        </section>
 
         <?php
     } else {

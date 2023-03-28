@@ -15,4 +15,27 @@
             <?php
         }
     ?>
+
+    <section class="profile_user-overview_stats">
+        <div class="profile_user-overview_stats-medium box-wrapper">
+            <div class="box-title">
+                <h3>Anime</h3>
+            </div>
+            <div class="box-body">
+                <div class="completed"><div>200</div><div class="low-opacity">completed</div></div>
+                <div class="watching"><div>4</div><div class="low-opacity">watching</div></div>
+                <div class="score"><div>7.5</div><div class="low-opacity">score</div></div>
+            </div>
+        </div>
+        <div class="profile_user-overview_stats-medium box-wrapper">
+            <div class="box-title">
+                <h3>Manga</h3>
+            </div>
+            <div class="box-body">
+                <div class="completed"><div>200</div><div class="low-opacity">completed</div></div>
+                <div class="reading"><div>4</div><div class="low-opacity">reading</div></div>
+                <div class="score"><div>7.5</div><div class="low-opacity">score</div></div>
+            </div>
+        </div>
+    </section>
 </section>

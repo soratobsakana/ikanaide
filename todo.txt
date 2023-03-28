@@ -1,6 +1,13 @@
-220325
-    [] Think of user profile URI's.
-    [] Make submit and edit controllers assign $_COOKIE['user_id'] to the submission. DB tables need adjustment for that.
+220328
+    [] Make profile controller only display content on $_GET URI's. If not, displays /404.
+    [] Make anime and manga stats dynamic.
+    [] Work on user relations with anime and manga.
+    [] Make progress on lists and think if merging animelist and mangalist code is useful.
+    [] Complete overview tab (except posts) and make initial favorites tab.#
+
+220327
+    [X] Think of user profile URI's.
+        Will go with $_GET until learning more about URI's, htaccess stuff or etc.
 
 220324
     [X] Add session management and auto-login to the register and login methods.
