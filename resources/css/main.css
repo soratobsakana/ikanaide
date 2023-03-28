@@ -59,7 +59,7 @@ img {
     padding: 7px 15px;
     background-color: var(--box-title);
     font-size: var(--box-font-size);
-    transition: .15s;
+    transition: var(--transition);
 }
 
 .box-body {
@@ -69,5 +69,5 @@ img {
     overflow: hidden;
     font-size: var(--box-font-size);
 
-    transition: .15s;
+    transition: var(--transition);
 }

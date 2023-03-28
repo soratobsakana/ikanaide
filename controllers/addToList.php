@@ -1,15 +1,20 @@
 <?php
 
-if (isset($_POST['add'])) {
+require_once 'app/User.php';
+$User = new User;
+
+if ((isset($_POST['add']) || isset($_POST['delete']) || isset($_POST['favourite']) || isset($_POST['unfavourite'])) && $User -> validateSession() === TRUE) {
     if (isset($_COOKIE['session'])) {
-        require_once 'app/User.php';
-        $User = new User;
-        $User -> addToList($_SESSION['medium'], $_SESSION[$_SESSION['medium'] . '_id']);
+        if (isset($_POST['add'])) {
+            $User -> addToList($_SESSION['medium'], $_SESSION[$_SESSION['medium'] . '_id'], $_COOKIE['user_id']);
+        } else if (isset($_POST['delete'])) {
+            $User -> deleteFromList($_SESSION['medium'], $_SESSION[$_SESSION['medium'] . '_id'], $_COOKIE['user_id']);
+        } else if (isset($_POST['favourite'])) {
+            $User -> favourite($_SESSION['medium'], $_SESSION[$_SESSION['medium'] . '_id'], $_COOKIE['user_id']);
+        } else if (isset($_POST['unfavourite'])) {
+            $User -> unfavourite($_SESSION['medium'], $_SESSION[$_SESSION['medium'] . '_id'], $_COOKIE['user_id']);
+        }
     }
-} else if ($_POST['delete']) {
-    require_once 'app/User.php';
-    $User = new User;
-    $User -> deleteFromList($_SESSION['medium'], $_SESSION[$_SESSION['medium'] . '_id']);
 } else {
-    header('Location: /404');
+    header('Location: /logout');
 }

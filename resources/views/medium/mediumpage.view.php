@@ -11,15 +11,17 @@
         
         <?php
         $User = new Database;
-        $result = $User -> db -> execute_query('select * from `'.$medium.'list` WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $id]);
+        $result = $User -> db -> execute_query('select `favorite` from `'.$medium.'list` WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $id]);
+        $favOrNot = $result -> fetch_column();
         if ($result -> num_rows === 1) {
             ?><input class="add-to-list box submit-button__colorful" type="submit" value="Delete from list" name="delete"><?php
-            $row = $result -> fetch_assoc();
-            if ($row['favorite'] === 1) {
-                ?><input class="add-to-list box submit-button__colorful" type="submit" value="L" name="favorite"><?php
+            if (isset($favOrNot) && $favOrNot === 0) {
+                ?><input class="add-to-list box submit-button__colorful" type="submit" value="Favourite" name="favourite"><?php
+            } else if (isset($favOrNot) && $favOrNot === 1) {
+                ?><input class="add-to-list box submit-button__colorful" type="submit" value="Unfavourite" name="unfavourite"><?php
             }
         } else {
-            ?><input class="delete-from-list box submit-button__colorful"" type="submit" value="Add to list" name="add"><?php
+            ?><input class="delete-from-list box submit-button__colorful" type="submit" value="Add to list" name="add"><?php
         }
 
         ?>
@@ -109,7 +111,7 @@
                         </div>
                         <div class="querypage_char-entry_info">
                             <div class="querypage_char-entry_info-name">
-                                <?=$characters[$i]['family_name'] . ', ' . $characters[$i]['given_name']?>
+                                <?=$characters[$i]['family_name'] . ' ' . $characters[$i]['given_name']?>
                             </div>
                             <div class="querypage_char-entry_info-role">
                                 <?=strtolower($characters[$i]['role']) . " character"?>
@@ -141,7 +143,7 @@
                         </div>
                         <div class="querypage_staff-entry_info">
                             <div class="querypage_staff-entry_info-name">
-                                <?=$staff[$i]['family_name'] . ', ' . $staff[$i]['given_name']?>
+                                <?=$staff[$i]['family_name'] . ' ' . $staff[$i]['given_name']?>
                             </div>
                             <div class="querypage_staff-entry_info-role">
                                 <?=strtolower($staff[$i]['role'])?>
@@ -174,7 +176,7 @@
                                 <i><?=$reviews[$i]['title']?></i>
                             </div>
                             <div class="querypage_review-entry_info-role">
-                                <span>by <a href="../../../index.php">nagisa</a>.</span>
+                                <span>by <a href="/<?=$reviews[$i]['user_id']?>"><?=$reviews[$i]['user_id']?></a>.</span>
                             </div>
                         </div>
                     </div>

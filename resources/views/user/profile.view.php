@@ -89,7 +89,6 @@
     </div>
     <div class="profile_right-column">
         <?php
-
         if (isset($userInfo['header'])) {
             ?><img src="/<?=$userInfo['header']?>" alt="<?=$userInfo['username']?>"><?php
         }

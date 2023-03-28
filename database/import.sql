@@ -371,6 +371,7 @@ insert into `staff` values(null, 'Sorachi', 'Hideaki', null, null, null, 'storag
 insert into `staff_anime` VALUES (1,1, 'director');
 insert into `review` values (null, 'title', 'This is my review', 1, default);
 insert into `review_anime` VALUES (1,1, default);
-insert into animelist values (3, 4, 8.5, 'Example comment', 10,  TRUE);
+insert into animelist values (3, 4, 8.5, 'Example comment', default,  10,  TRUE);
+insert into mangalist values (3, 4, 8.5, 'Example comment', default,  10,  TRUE);
 
 COMMIT;

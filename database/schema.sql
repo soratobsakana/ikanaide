@@ -16,11 +16,13 @@ CREATE TABLE `user` (
     `joined_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
     `country` varchar(56),
     `biography` VARCHAR(4000),
-    `pfp` VARCHAR(250) NOT NULL DEFAULT 'storage/img/default/default.png',
+    `pfp` VARCHAR(250) NOT NULL DEFAULT 'storage/sys/default.webp',
     data JSON,
     PRIMARY KEY(`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
+update `user` set `pfp` ='storage/img/rin.jpg' where username='nabuna';
+alter table `user` modify column `pfp` VARCHAR(250) NOT NULL DEFAULT 'storage/sys/default.webp';
 insert into `user` values (null, 'nagisa', 'pw', 'pw@pw.pw', default, 'spain', 'This is my biography', default, null);
 
 -- Session verifier, currently not being used. Validation is currently running through User::validateSession()
@@ -426,6 +428,8 @@ insert into animelist values (3, 4, 8.5, 'Example comment', 10,  TRUE);
 select * from anime;
 update animelist set `progress`=10;
 alter table animelist modify column `favorite` BIT(1) NOT NULL DEFAULT 0;
+select * from animelist;
+update animelist set `favorite` = 1 where anime_id = 1;
 
 delete from animelist;
 

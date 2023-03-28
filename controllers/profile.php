@@ -3,18 +3,15 @@ include_once('resources/functions.php');
 include_once('app/User.php');
 $Session = new User;
 
-// $uri viene de routes/web.php
-// Las URI de perfiles de usuario es: /nombre_de_usuario, por lo que saco $username de esta manera:
-$username = explode("/", $uri)[1];
 
-$user_id = $Session -> getUserID($username);
+
 if ($user_id !== null) {
     $userInfo = $Session -> getInfo($user_id);
     $animelist = $Session -> getList('anime', $user_id);
     $mangalist = $Session -> getList('manga', $user_id);
     $animes = $Session -> getAnimes($animelist);
-    $animeStats = $Session -> getStats($animelist);
-    $mangaStats = $Session -> getStats($mangalist);
+    $animeStats = $Session -> getStats($animelist, 'anime');
+    $mangaStats = $Session -> getStats($mangalist, 'manga');
     $animeScoreAvg = $Session -> getScoreAvg($animelist);
     $mangaScoreAvg = $Session -> getScoreAvg($mangalist);
 

@@ -46,6 +46,11 @@ input.delete-from-list {
     margin-top: 0px; /* Elimina el margin-top de la clase .submit-button__colorful */
 }
 
+.querypage_left-column_user-list form {
+    display: grid;
+    grid-gap: var(--gap);
+}
+
 section.querypage_edit {
     padding: 7px;
     transition: .2s;

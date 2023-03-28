@@ -20,7 +20,7 @@ class User
             if (!(empty($registerInfo['username']) || empty($registerInfo['email']) || empty($registerInfo['password']) || empty($registerInfo['confirm']))) {
                 if (filter_var($registerInfo['email'], FILTER_VALIDATE_EMAIL)) {
                     if (preg_match('/^[a-zA-Z0-9]+$/', $registerInfo['username']) === 1) {
-                        if (strlen($registerInfo['username']) > 3 && strlen($registerInfo['username']) < 16) {
+                        if (strlen($registerInfo['username']) >= 3 && strlen($registerInfo['username']) < 16) {
                             $result = $this -> con -> db -> execute_query('SELECT user_id FROM user WHERE username = ?', [$registerInfo['username']]);
                             if ($result -> num_rows === 0) {
                                 $result = $this -> con -> db -> execute_query('SELECT user_id FROM user WHERE email = ?', [$registerInfo['email']]);
@@ -139,7 +139,7 @@ class User
 
     public function getInfo(int $user_id): array
     {
-        $result = $this -> con -> db -> execute_query('SELECT `username`, `joined_at`, `country`, `biography`, `pfp` FROM user WHERE user_id = ?', [$user_id]);
+        $result = $this -> con -> db -> execute_query('SELECT `username`, `joined_at`, `country`, `biography`, `pfp`, `header` FROM user WHERE user_id = ?', [$user_id]);
         return $result -> fetch_assoc();
     }
 
@@ -151,7 +151,7 @@ class User
             while ($row = $result -> fetch_assoc()) {
                 foreach($row as $key => $value) {
                     if ($key === 'score') {
-                        if (fmod($value, 1) === 0.0) {
+                        if ($value !== null && fmod($value, 1) === 0.0) {
                             $list[$i][$key] = floor($value);
                         } else {
                             $list[$i][$key] = $value;
@@ -181,12 +181,35 @@ class User
         }
     }
 
-    public function deleteFromList($medium, $medium_id)
+    public function deleteFromList($medium, $medium_id, $user_id)
     {
         if ($this -> validateSession() === TRUE) {
             if ($_POST['delete']) {
-                $user_id = $_COOKIE['user_id'];
                 $this -> con -> db -> execute_query('DELETE FROM `'.$medium.'list` WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $medium_id]);
+                header('Location: /'.$medium.'?id=' . $medium_id);
+            }
+        } else {
+            exit(header("Location: /logout"));
+        }
+    }
+
+    public function favourite($medium, $medium_id, $user_id)
+    {
+        if ($this -> validateSession() === TRUE) {
+            if (isset($_POST['favourite'])) {
+                $this -> con -> db -> execute_query('UPDATE '.$medium.'list SET `favorite` = true WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $medium_id]);
+                header('Location: /'.$medium.'?id=' . $medium_id);
+            }
+        } else {
+            exit(header("Location: /logout"));
+        }
+    }
+
+    public function unfavourite($medium, $medium_id, $user_id)
+    {
+        if ($this -> validateSession() === TRUE) {
+            if (isset($_POST['unfavourite'])) {
+                $this -> con -> db -> execute_query('UPDATE '.$medium.'list SET `favorite` = false WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $medium_id]);
                 header('Location: /'.$medium.'?id=' . $medium_id);
             }
         } else {
@@ -211,45 +234,48 @@ class User
      * Devuelve las estadísticas en un array asociativo de 5 campos: completed, watching|reading, planned, stalled, dropped.
      * El segundo campo es variable según el array aportado sea $animelist(en este caso, watching) o mangalist(en este caso, reading).
      */
-    public function getStats(array $list): array|null
+    public function getStats(array $list, string $medium): array|null
     {
-
-        switch($list[0]['status']) {
-            case 'watching':
-                $currently = 'watching';
-                break;
-            case 'reading':
-                $currently = 'reading';
-                break;
-            default:
-                return null;
-        }
-
-        $userStats['completed'] = 0;
-        $userStats[''.$currently.''] = 0;
-        $userStats['planned'] = 0;
-        $userStats['stalled'] = 0;
-        $userStats['dropped'] = 0;
-        for ($i=0; $i<count($list); $i++) {
-            switch($list[$i]['status']) {
-                case 'completed':
-                    $userStats['completed']++;
+            switch($medium) {
+                case 'anime':
+                    $currently = 'watching';
                     break;
-                case $currently:
-                    $userStats[''.$currently.'']++;
-                    break;
-                case 'planned':
-                    $userStats['planned']++;
-                    break;
-                case 'stalled':
-                    $userStats['stalled']++;
-                    break;
-                case 'dropped':
-                    $userStats['dropped']++;
+                case 'manga':
+                    $currently = 'reading';
                     break;
                 default:
                     return null;
             }
+
+
+            $userStats['completed'] = 0;
+            $userStats[$currently] = 0;
+            $userStats['planned'] = 0;
+            $userStats['stalled'] = 0;
+            $userStats['dropped'] = 0;
+
+
+
+            if (!empty($list)) {
+                for ($i=0; $i<count($list); $i++) {
+                    switch($list[$i]['status']) {
+                        case 'completed':
+                            $userStats['completed']++;
+                            break;
+                        case $currently:
+                            $userStats[$currently]++;
+                            break;
+                        case 'planned':
+                            $userStats['planned']++;
+                            break;
+                        case 'stalled':
+                            $userStats['stalled']++;
+                            break;
+                        case 'dropped':
+                            $userStats['dropped']++;
+                            break;
+                    }
+                }
         }
         return $userStats;
     }

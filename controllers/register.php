@@ -14,7 +14,7 @@ if ($_POST) {
         $register = new User;
         // Si todas las verificaciones son exitosas, crea un ID de sesión y manda al usuario a su nuevo perfil automáticamente.
         if (($message = $register -> register($registerInfo)) === 'Ok') {
-            exit(header('Location: /profile'));
+            exit(header('Location: /'.$registerInfo['username']));
         }
     } else {
         // Si alguna de las verificaciones falla, enviará el error específico (definidos en User::register()) al usuario mediante la variable $message.

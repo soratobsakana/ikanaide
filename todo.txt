@@ -1,12 +1,20 @@
-220328
-    [] Make profile controller only display content on $_GET URI's. If not, displays /404.
-    [X] Make anime and manga stats dynamic.
-    [] Work on user relations with anime and manga.
+220329
     [] Make progress on lists and think if merging animelist and mangalist code is useful.
     [] Complete overview tab (except posts) and make initial favorites tab.
 
+220328
+    [X] Make profile controller only display content on $_GET URI's. If not, displays /404.
+    [X] Make anime and manga stats dynamic.
+    [X] Work on user relations with anime and manga.
+        It's now possible to favorite something out.
+        Added `status` to the anime|mangalist tables. Will add the front-end once research about <select> is done.
+
+    [X] Profile URI's.
+        Nevermind about $_get. A second router file was made only for clear URLs. (eg. /nabuna, /nabuna/animelist, etc.).
+        Every URI will go over main router. If it's not found in these routes, it will pass over to the profile router to find for usernames. If not found again, it will /404.
+
 220327
-    [X] Think of user profile URI's.
+    [-] Think of user profile URI's.
         Will go with $_GET until learning more about URI's, htaccess stuff or etc.
 
 220324
