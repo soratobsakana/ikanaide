@@ -103,17 +103,16 @@
                 // Este bloque de código muestra un menú de navegación que dinamiza la clase .current en torno a la URI actual.
                 // He añadido dos condiciones específicas para 'overview' ya que pretendo mostrar esa pestaña por defecto en la URI '/profile' y no '/profile/overview' (lo cual se generaría sin estas dos condiciones).
                 $nav = ['overview', 'animelist', 'mangalist', 'reviews', 'favorites'];
-                $page = parse_url($_SERVER['REQUEST_URI'])['path'];
                 for ($i=0; $i < count($nav); $i++) {
 
-                    if ($nav[$i] === 'overview' && $page === '/profile') {
-                        print "<a href='/profile'><li class='current'>$nav[$i]</li></a>";
-                    } else if ($nav[$i] === substr($page, 9, strlen($page)) && $page !== '/profile') {
-                        print "<a href='/profile/".$nav[$i]."'><li class='current'>$nav[$i]</li></a>";
-                    } elseif ($nav[$i] === 'overview') {
-                        print "<a href='/profile'><li>$nav[$i]</li></a>";
+                    if ($nav[$i] === 'overview' && $page === '/'.$username) {
+                        print "<a href='/".$username."'><li class='current'>$nav[$i]</li></a>";
+                    } else if ($page === '/'.$username.'/'.$nav[$i]) {
+                        print "<a href='/".$username."/".$nav[$i]."'><li class='current'>$nav[$i]</li></a>";
+                    } else if ($nav[$i] === 'overview' && $page !== '/'.$username) {
+                        print "<a href='/".$username."'><li>$nav[$i]</li></a>";
                     } else {
-                        print "<a href='/profile/" . $nav[$i] . "'><li>$nav[$i]</li></a>";
+                        print "<a href='/".$username."/" . $nav[$i] . "'><li>$nav[$i]</li></a>";
                     }
 
                 }
@@ -123,21 +122,20 @@
         </nav>
         <?php
 
-        switch($page) {
-            case '/profile':
-            case '/profile/overview':
+        switch($uri) {
+            case '/'.$username:
                 require('resources/views/user/_overviewprofile.view.php');
                 break;
-            case '/profile/animelist':
+            case '/'.$username.'/animelist':
                 require('resources/views/user/_animelistprofile.view.php');
                 break;
-            case '/profile/mangalist':
+            case '/'.$username.'/mangalist':
                 require('resources/views/user/_mangalistprofile.view.php');
                 break;
-            case '/profile/reviews':
+            case '/'.$username.'/reviews':
                 require('resources/views/user/_reviewsprofile.view.php');
                 break;
-            case '/profile/favorites':
+            case '/'.$username.'/favorites':
                 require('resources/views/user/_favoritesprofile.view.php');
                 break;
         }

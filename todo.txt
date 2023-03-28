@@ -1,9 +1,9 @@
 220328
     [] Make profile controller only display content on $_GET URI's. If not, displays /404.
-    [] Make anime and manga stats dynamic.
+    [X] Make anime and manga stats dynamic.
     [] Work on user relations with anime and manga.
     [] Make progress on lists and think if merging animelist and mangalist code is useful.
-    [] Complete overview tab (except posts) and make initial favorites tab.#
+    [] Complete overview tab (except posts) and make initial favorites tab.
 
 220327
     [X] Think of user profile URI's.

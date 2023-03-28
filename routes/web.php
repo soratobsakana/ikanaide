@@ -30,13 +30,6 @@ $routes = array(
     '/register' => 'controllers/register.php',
     '/logout' => 'controllers/logout.php',
 
-    '/profile' => 'controllers/profile.php',
-    '/profile/overview' => 'controllers/profile.php',
-    '/profile/animelist' => 'controllers/profile.php',
-    '/profile/mangalist' => 'controllers/profile.php',
-    '/profile/reviews' => 'controllers/profile.php',
-    '/profile/favorites' => 'controllers/profile.php',
-
     '/add' => 'controllers/addToList.php',
 
     '/404' => 'resources/views/404.view.php'
@@ -47,7 +40,5 @@ if (array_key_exists($uri, $routes)) {
     require $routes[$uri];
 } else {
     // En caso de no existir el URI solicitado, envía un error 404 al usuario y le avisa por pantalla.
-    http_response_code(404);
-    include('resources/views/404.view.php');
-    die();
+    require 'profileRouter.php';
 }

@@ -29,7 +29,7 @@
                 if ($_COOKIE['session'] === "Yes") {
                     ?>
                     <ul class="header-user-ul">
-                        <a href="/profile"><li><?=$_COOKIE['username']?></li></a>
+                        <a href="/<?=$_COOKIE['username']?>"><li><?=$_COOKIE['username']?></li></a>
                     </ul>
                     <?php
                 }

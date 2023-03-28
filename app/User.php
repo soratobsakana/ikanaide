@@ -127,15 +127,25 @@ class User
         }
     }
 
-    public function getInfo(string $username): array
+    public function getUserID(string $username): int|null
     {
-        $result = $this -> con -> db -> execute_query('SELECT `username`, `joined_at`, `country`, `biography`, `pfp` FROM user WHERE user_id = ?', [$_COOKIE['user_id']]);
+        $result = $this -> con -> db -> execute_query('SELECT `user_id` FROM `user` WHERE username = ?', [$username]);
+        if ($result -> num_rows === 1) {
+            return $user_id = $result -> fetch_column();
+        } else {
+            return null;
+        }
+    }
+
+    public function getInfo(int $user_id): array
+    {
+        $result = $this -> con -> db -> execute_query('SELECT `username`, `joined_at`, `country`, `biography`, `pfp` FROM user WHERE user_id = ?', [$user_id]);
         return $result -> fetch_assoc();
     }
 
-    public function getList(string $username, string $medium): array
+    public function getList(string $medium, int $user_id): array
     {
-        $result = $this -> con -> db -> execute_query('SELECT * FROM `'.$medium.'list` WHERE `user_id` = ?', [$_COOKIE['user_id']]);
+        $result = $this -> con -> db -> execute_query('SELECT * FROM `'.$medium.'list` WHERE `user_id` = ?', [$user_id]);
         if ($result -> num_rows > 0) {
             $i = 0; // Esto es simplemente un contador que uso para no necesitar un for dentro del foreach.
             while ($row = $result -> fetch_assoc()) {
@@ -159,11 +169,10 @@ class User
     }
 
     // Añadir o borrar un anime o manga a la base de datos.
-    public function addToList($medium, $medium_id)
+    public function addToList($medium, $medium_id, $user_id)
     {
         if ($this -> validateSession() === TRUE) {
             if (isset($_POST['add'])) {
-                $user_id = $_COOKIE['user_id'];
                 $this -> con -> db -> execute_query('INSERT INTO `'.$medium.'list` (`user_id`, `'.$medium.'_id`, `progress`) VALUES (?, ?, default)', [$user_id, $medium_id]);
                 header('Location: /'.$medium.'?id=' . $medium_id);
             } 
