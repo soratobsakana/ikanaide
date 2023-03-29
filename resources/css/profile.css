@@ -78,34 +78,54 @@ div.profile_user-overview_stats-medium div.box-body div.low-opacity {
     font-size: var(--box-font-size);
 }
 
-/* Estilos para la sección de listas. */
-section.profile_user-animelist {
+section.profile_user-overview_favorites {
     display: grid;
     grid-gap: var(--gap);
 }
 
-.animelist-grid {
+/* Estilos para la sección de listas. */
+section.profile_user-list {
+    display: grid;
+    grid-gap: var(--gap);
+}
+
+.list-grid {
     width: 100%!important;
     display: grid;
     grid-template-columns: 10% 50% 10% 10% 12% 8%;
 }
 
-ul.profile_user-animelist_content-labels li{
+ul.profile_user-list_content-labels li{
     opacity: var(--font_low-opacity);
 }
 
-div.profile_user-animelist_entry-wrapper div.box-body {
+div.profile_user-list_entry-wrapper div.box-body {
     display: grid;
     grid-gap: var(--gap);
 }
 
-.profile_user-animelist_entry img {
+.profile_user-list_entry img {
     height: 37px;
     border-radius: calc(var(--border-radius) - 4px);
 }
 
-.profile_user-animelist_entry div {
+.profile_user-list_entry div {
     display: flex;
     align-items: center;
     word-break: break-word;
+}
+
+/* Estilos para la sección de favoritos */
+section.profile_user-favorites {
+    display: grid;
+    grid-gap: var(--gap);
+}
+
+div.profile_user-favorites_wrapper {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+}
+
+div.profile_user-favorites_wrapper img{
+    border-radius: 0px!important;
 }

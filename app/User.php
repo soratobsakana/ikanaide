@@ -198,6 +198,7 @@ class User
         if ($this -> validateSession() === TRUE) {
             if (isset($_POST['favourite'])) {
                 $this -> con -> db -> execute_query('UPDATE '.$medium.'list SET `favorite` = true WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $medium_id]);
+                $this -> con -> db -> execute_query('UPDATE '.$medium.' SET favorited = favorited + 1 WHERE `'.$medium.'_id` = ?', [$medium_id]);
                 header('Location: /'.$medium.'?id=' . $medium_id);
             }
         } else {
@@ -210,6 +211,7 @@ class User
         if ($this -> validateSession() === TRUE) {
             if (isset($_POST['unfavourite'])) {
                 $this -> con -> db -> execute_query('UPDATE '.$medium.'list SET `favorite` = false WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $medium_id]);
+                $this -> con -> db -> execute_query('UPDATE '.$medium.' SET favorited = favorited - 1 WHERE `'.$medium.'_id` = ?', [$medium_id]);
                 header('Location: /'.$medium.'?id=' . $medium_id);
             }
         } else {
@@ -230,6 +232,19 @@ class User
         }
     }
 
+    public function getMangas(array $mangalist): array
+    {
+        if (count($mangalist) > 0) {
+            for ($i=0; $i<count($mangalist); $i++) {
+                $manga = $this -> con -> db -> execute_query('SELECT `manga_id`, `title`, `chapters`, `format`,  `cover` FROM `manga` WHERE `manga_id` = ?', [$mangalist[$i]['manga_id']]);
+                $mangas[$i] = $manga -> fetch_assoc();
+            }
+            return $mangas;
+        } else {
+            return $mangas = [];
+        }
+    }
+
     /**
      * Devuelve las estadísticas en un array asociativo de 5 campos: completed, watching|reading, planned, stalled, dropped.
      * El segundo campo es variable según el array aportado sea $animelist(en este caso, watching) o mangalist(en este caso, reading).
@@ -247,14 +262,11 @@ class User
                     return null;
             }
 
-
             $userStats['completed'] = 0;
             $userStats[$currently] = 0;
             $userStats['planned'] = 0;
             $userStats['stalled'] = 0;
             $userStats['dropped'] = 0;
-
-
 
             if (!empty($list)) {
                 for ($i=0; $i<count($list); $i++) {
@@ -280,7 +292,7 @@ class User
         return $userStats;
     }
 
-    public function getScoreAvg($list): float
+    public function getScoreAvg(array $list): float
     {
         // Cálculo de la media de puntuaciones que el usuario ha dado a los elementos de su lista
         $sum = 0;
@@ -298,6 +310,24 @@ class User
         } else {
             return $scoreAvg = $sum / $total;;
         } 
+    }
+
+    public function getFavorites(int $user_id, string $medium): object|null
+    {
+        if (isset($user_id) && isset($medium)) {
+
+            $result = $this -> con -> db -> execute_query('select '.$medium.'.'.$medium.'_id, '.$medium.'.title, '.$medium.'.cover from '.$medium.','.$medium.'list
+            where '.$medium.'.'.$medium.'_id='.$medium.'list.'.$medium.'_id
+            and '.$medium.'list.favorite=true');
+
+            if ($result -> num_rows > 0) {
+                return $result;
+            } else {
+                return null;
+            }
+
+            
+        }
     }
 
 }

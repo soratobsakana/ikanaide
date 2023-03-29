@@ -126,10 +126,10 @@
                 require('resources/views/user/_overviewprofile.view.php');
                 break;
             case '/'.$username.'/animelist':
-                require('resources/views/user/_animelistprofile.view.php');
+                require('resources/views/user/_listsprofile.view.php');
                 break;
             case '/'.$username.'/mangalist':
-                require('resources/views/user/_mangalistprofile.view.php');
+                require('resources/views/user/_listsprofile.view.php');
                 break;
             case '/'.$username.'/reviews':
                 require('resources/views/user/_reviewsprofile.view.php');

@@ -1,6 +1,9 @@
 220329
-    [] Make progress on lists and think if merging animelist and mangalist code is useful.
-    [] Complete overview tab (except posts) and make initial favorites tab.
+    [X] Make progress on lists and think if merging animelist and mangalist code is useful.
+        Views are merged into _listsprofile.view.php.
+    [-] Complete overview tab (except posts) and make initial favorites tab.
+        Not sure about implementing favorites on the overview tab. Rest is done.
+    [] Work on the reviews system.
 
 220328
     [X] Make profile controller only display content on $_GET URI's. If not, displays /404.

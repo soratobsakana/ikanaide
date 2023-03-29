@@ -3,29 +3,44 @@
 <head>
     <?php
     $page = parse_url($_SERVER['REQUEST_URI'])['path'];
+    $username = explode("/", $page)[1];
     // For the root path and URI's that have more than one word.
     switch ($page) {
         case '/':
-            $page = '/home';
+            $tabTitle = '/home';
             break;
         case '/submit/anime':
-            $page = '/submit a new anime';
+            $tabTitle = 'submit a new anime';
             break;
         case '/submit/manga':
-            $page = '/submit a new manga';
+            $tabTitle = 'submit a new manga';
             break;
         case '/submit/vn':
-            $page = '/submit a new visual novel';
+            $tabTitle = 'submit a new visual novel';
             break;
         case '/submit/character':
-            $page = '/submit a new character';
+            $tabTitle = 'submit a new character';
             break;
         case '/submit/staff':
-            $page = '/submit a new staff';
+            $tabTitle = 'submit a new staff';
             break;
+        case '/'.$username.'/animelist':
+            $tabTitle = $username . '\'s animelist';
+            break;
+        case '/'.$username.'/mangalist':
+            $tabTitle = $username . '\'s mangalist';
+            break;
+        case '/'.$username.'/reviews':
+            $tabTitle = $username . '\'s reviews';
+            break;
+            case '/'.$username.'/favorites':
+            $tabTitle = $username . '\'s favorites';
+            break;
+        default:
+            $tabTitle = $username;
     }
     ?>
-    <title><?=ucfirst(substr($page, 1))?> / Ikanaide</title>
+    <title><?=$tabTitle?> / Ikanaide</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
