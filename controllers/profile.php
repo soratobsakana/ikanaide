@@ -3,10 +3,15 @@ include_once('resources/functions.php');
 include_once('app/User.php');
 $Session = new User;
 
+if (isset($_COOKIE['session'])) {
+    if ($Session -> validateSession() !== TRUE) {
+        exit(header("Location: /logout"));
+    }
+}
 
-
+// $user_id viene de /routes/profileRouter.php
 if ($user_id !== null) {
-    $userInfo = $Session -> getInfo($user_id);
+    $userInfo  = $Session -> getInfo($user_id);
     $animelist = $Session -> getList('anime', $user_id);
     $mangalist = $Session -> getList('manga', $user_id);
     $animes = $Session -> getAnimes($animelist);
@@ -18,16 +23,11 @@ if ($user_id !== null) {
     $favoriteAnimes = $Session -> getFavorites($user_id, 'anime'); // This is an object that will be looped in _favoritesprofile.view.php
     $favoriteMangas = $Session -> getFavorites($user_id, 'manga'); // This is an object that will be looped in _favoritesprofile.view.php
 
+    if ($_COOKIE['username'] === $username) {
+
+    }
+
     require 'resources/views/user/profile.view.php';
 } else {
     exit(header("Location: /404"));
-}
-    
-if (isset($_COOKIE['session'])) {
-    
-    if ($Session -> validateSession() === TRUE) {
-        
-    } else {
-        exit(header("Location: /logout"));
-    }
 }

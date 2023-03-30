@@ -20,6 +20,11 @@ if ($_GET) {
         $Session = new User;
         if ($Session -> validateSession() === TRUE) {
             $user_id = $_COOKIE['user_id'];
+
+            // Comprobación de que el usuario tiene, o no, como favorito el anime o manga mostrado.
+            $User = new Database;
+            $result = $User -> db -> execute_query('select `favorite` from `'.$medium.'list` WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $id]);
+            $favOrNot = $result -> fetch_column();
         } else {
             exit(header("Location: /logout"));
         }
@@ -38,10 +43,7 @@ if ($_GET) {
         $members = $Listing -> getMembers($medium, $id);
         $favourites = $Listing -> getFavourites($medium, $id);
 
-        // Comprobación de que el usuario tiene, o no, como favorito el anime o manga mostrado.
-        $User = new Database;
-        $result = $User -> db -> execute_query('select `favorite` from `'.$medium.'list` WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $id]);
-        $favOrNot = $result -> fetch_column();
+
 
         if ($mediumInfo !== null) {
             require('resources/views/medium/mediumpage.view.php');
