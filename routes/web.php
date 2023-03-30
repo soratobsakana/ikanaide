@@ -1,7 +1,24 @@
 <?php
 
+require_once 'resources/functions.php';
+
 // Devuelve la URI y la parsea eliminando una posible query (ej. en /pagina?id=100 devolverá /pagina).
 $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
+
+// La URI normal de un listado de anime o manga es: /anime|manga/Nombre-De-Anime|Manga. Hago explode() de la URI para conseguir el medio (anime o manga) y el entry que voy a listar.
+$guide = explode("/", $uri);
+$medium = $guide[1]; // anime|manga
+
+// Si se indica un anime o manga por URL, significa que explode('/', $uri) va a devolver un tercer valor. Si esto pasa, creo una ruta dinámica en $mediumRoutes que utilizo abajo mediante un else if.
+// Si no existe un tercer valor, se require el controlador indicado para /anime y /manga indicado en $routes.
+// Ambos casos conducen al mismo controlador (/controllers/medium.php), que se encarga de mostrar el listado de un anime o manga, o mostrar la página predeterminada de cada medio.
+if (isset($guide[2])) {
+    $entry = $guide[2];  // Nombre-de-Anime|Manga
+    $mediumRoutes = [
+        '/'.$medium.'/'.$entry => 'controllers/medium.php',
+    ];
+}
+
 
 // Array con las todas las rutas de la página web.
 $routes = array(
@@ -9,6 +26,8 @@ $routes = array(
     '/home' => 'resources/views/home.view.php',
     '/anime' => 'controllers/medium.php',
     '/manga' => 'controllers/medium.php',
+    // '/anime' => 'mediumRouter.php',
+    // '/manga' => 'controllers/medium.php',
     '/vn' => 'controllers/medium.php',
     '/rankings' => 'controllers/rankings.php',
     '/community' => 'controllers/community.php',
@@ -38,7 +57,9 @@ $routes = array(
 // Filtrar la $uri a traves del array de rutas y requerir el archivo al que refiere esa URI.
 if (array_key_exists($uri, $routes)) {
     require $routes[$uri];
+} else if (($guide[1] === 'anime' || $guide[1] === 'manga') && isset($guide[2])){
+    require $mediumRoutes[$uri];
 } else {
-    // En caso de no existir el URI solicitado, envía un error 404 al usuario y le avisa por pantalla.
+    // En caso de no existir el URI solicitado, se procesa la información mediante profileRouter.php para encontrar un usuario.
     require 'profileRouter.php';
 }

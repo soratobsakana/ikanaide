@@ -32,7 +32,7 @@
                                     <img src="<?=$animes[0]['cover']?>">
                                 </div>
                                 <div class="profile_user-list_entry-title list-grid">
-                                    <a href="/anime?id=<?=$animes[$i]['anime_id']?>"><?=$animes[$i]['title']?></a>
+                                    <a href="/anime/<?=str_replace(' ', '-', $animes[$i]['title'])?>"><?=$animes[$i]['title']?></a>
                                 </div>
                                 <div class="profile_user-list_entry-score list-grid">
                                     <?=$animelist[$i]['score']?>
@@ -66,7 +66,7 @@
                                     <img src="<?=$mangas[0]['cover']?>">
                                 </div>
                                 <div class="profile_user-list_entry-title list-grid">
-                                    <a href="/manga?id=<?=$mangas[$i]['manga_id']?>"><?=$mangas[$i]['title']?></a>
+                                    <a href="/manga/<?=str_replace(' ', '-', $mangas[$i]['title'])?>"><?=$mangas[$i]['title']?></a>
                                 </div>
                                 <div class="profile_user-list_entry-score list-grid">
                                     <?=$mangalist[$i]['score']?>

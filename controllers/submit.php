@@ -1,6 +1,5 @@
 <?php
 
-require('resources/functions.php');
 require('database/conn.php');
 
 $id = $_COOKIE['user_id'] ?? null;

@@ -1,7 +1,7 @@
 <?php
 
-include('resources/functions.php');
-require('database/conn.php');
+include_once ('resources/functions.php');
+require_once ('database/conn.php');
 
 // Propósito: distinguir el medio mediante la query de la URL (proveniente de los links 'Edit this page' de las views de query) y recoger el ID correspondiente.
 if ($_GET) {

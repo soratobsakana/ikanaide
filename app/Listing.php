@@ -11,6 +11,16 @@ class Listing
         $this -> con = new Database;
     }
 
+    public function exists(string $medium, string $entry): int|bool
+    {
+        $result = $this -> con -> db -> execute_query('SELECT `'.$medium.'_id` FROM '.$medium.' WHERE title= ?', [$entry]);
+        if ($result -> num_rows === 1) {
+            return $result -> fetch_column();
+        } else {
+            return false;
+        }
+    }
+
     // Devuelve todos los valores de la fila de una tabla indicada por parámetro.
     public function getInfo(string $table, string $column, array $params): array|null
     {
