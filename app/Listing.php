@@ -26,6 +26,16 @@ class Listing
         }
     }
 
+    public function getFavourites(string $medium, int $medium_id): int
+    {
+        return $this -> con -> db -> execute_query('SELECT count(favorite) FROM '.$medium.'list WHERE '.$medium.'_id = ? AND favorite=true', [$medium_id]) -> fetch_column();
+    }
+
+    public function getMembers(string $medium, int $medium_id): int
+    {
+        return $this -> con -> db -> execute_query('SELECT count(user_id) FROM '.$medium.'list WHERE '.$medium.'_id = ?', [$medium_id]) -> fetch_column();
+    }
+
     // Devuelve la información sobre los personajes asociados a una entrada de la base de datos.
     public function getChars(string $table, array $params): array|null
     {

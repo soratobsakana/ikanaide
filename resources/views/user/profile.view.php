@@ -1,13 +1,13 @@
 <div class="profile-wrapper">
     <div class="profile_left-column">
-        <img src="/<?=$userInfo['pfp']?>" alt="<?=$userInfo['username']?>">
+        <img src="<?=$userInfo['pfp']?>" alt="<?=$userInfo['username']?>">
+        <section class="profile_left-column-username"><h2><?=$userInfo['username']?></h2></section>
         <section class="profile_user-info box-wrapper">
             <div class="box-title">
-                <h3>Information</h3>
+                <h3>Stats</h3>
             </div>
             <div class="box-body">
                 <ul class="two-column-list">
-                    <li><span class="ul_first-column">name</span><span><?=$userInfo['username']?></span></li>
                     <li><span class="ul_first-column">anime</span><span><?=count($animelist)?></span></li>
                     <li><span class="ul_first-column">manga</span><span><?=count($mangalist)?></span></li>
                     <li><span class="ul_first-column">reviews</span><span>0</span></li>
@@ -60,7 +60,7 @@
             ?>
             <section class="profile_user-data two-column-list box-wrapper">
                 <div class="box-title">
-                    <h3>Data</h3>
+                    <h3>Information</h3>
                 </div>
                 <div class="box-body">
                     <ul class="two-column-list">

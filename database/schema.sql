@@ -431,6 +431,8 @@ alter table animelist modify column `favorite` BIT(1) NOT NULL DEFAULT 0;
 select * from animelist;
 update animelist set `favorite` = 1 where anime_id = 1;
 
+show columns from anime;
+
 delete from animelist;
 
 -- This will be the one to go in production

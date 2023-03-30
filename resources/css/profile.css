@@ -21,6 +21,14 @@ div.profile_right-column {
 }
 
 /******** Estilos de cada sección. ********/
+/* Estilos para la columna izquierda */
+section.profile_left-column-username {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 37px!important;
+}
+
 /* Estilos para el menú de navegación de la columna derecha. */
 div.profile_right-column nav.profile_user-nav {
     font-size: calc(var(--box-font-size) + 1px);

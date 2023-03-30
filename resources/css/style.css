@@ -28,6 +28,11 @@ h1 {
     font-weight: var(--bold);
 }
 
+h2 {
+    font-size: 24px!important;
+    font-weight: var(--bold);
+}
+
 h3 {
     font-size: 16px !important;
     font-weight: var(--bold);

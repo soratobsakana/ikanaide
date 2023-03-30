@@ -7,7 +7,7 @@ require('resources/functions.php');
 $medium = substr($page, 1);
 require_once 'app/Listing.php';
 require_once 'app/User.php';
-$listing = new Listing;
+$Listing = new Listing;
 
 // Se comprueba que existe una query en la URI de nombre 'id' antes de realizar el extracto de la información.
 if ($_GET) {
@@ -30,10 +30,19 @@ if ($_GET) {
     $_SESSION['medium'] = $medium;
 
     if (isset($id)) {
-        $mediumInfo = $listing -> getInfo($medium, $column, [$id]);
-        $characters = $listing -> getChars($medium, [$id]);
-        $staff = $listing -> getStaff($medium, [$id]);
-        $reviews = $listing -> getReviews($medium, [$id]);
+        // Consulta de los datos a mostrar.
+        $mediumInfo = $Listing -> getInfo($medium, $column, [$id]);
+        $characters = $Listing -> getChars($medium, [$id]);
+        $staff = $Listing -> getStaff($medium, [$id]);
+        $reviews = $Listing -> getReviews($medium, [$id]);
+        $members = $Listing -> getMembers($medium, $id);
+        $favourites = $Listing -> getFavourites($medium, $id);
+
+        // Comprobación de que el usuario tiene, o no, como favorito el anime o manga mostrado.
+        $User = new Database;
+        $result = $User -> db -> execute_query('select `favorite` from `'.$medium.'list` WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $id]);
+        $favOrNot = $result -> fetch_column();
+
         if ($mediumInfo !== null) {
             require('resources/views/medium/mediumpage.view.php');
         } else {
@@ -47,7 +56,7 @@ if ($_GET) {
     // Si no existe un id, mostramos una pagina predeterminada.
     // $page proviene de /index.php y almacena la URI actual.
 
-    $homeInfo = $listing -> getHome($medium);
+    $homeInfo = $Listing -> getHome($medium);
 
     require('resources/views/medium/mediumhome.view.php');
 }

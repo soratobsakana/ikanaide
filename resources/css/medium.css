@@ -36,14 +36,18 @@ div.querypage_right-column {
 }
 
 /***** Columna izquierda. *****/
-input.add-to-list {
+input.list-submit {
     width: 100%!important; /* El width heredado por .submit-button__colorful es 180px. */
     margin-top: 0px; /* Elimina el margin-top de la clase .submit-button__colorful */
+    font-family: Fredoka;
+    font-weight: calc(var(--bold) - 100);
+    font-size: 15px;
+    padding: 7px 15px;
+    transition: var(--transition);
 }
 
-input.delete-from-list {
-    width: 100%!important; /* El width heredado por .submit-button__colorful es 180px. */
-    margin-top: 0px; /* Elimina el margin-top de la clase .submit-button__colorful */
+input.list-submit:hover {
+    filter: brightness(1.2);
 }
 
 .querypage_left-column_user-list form {

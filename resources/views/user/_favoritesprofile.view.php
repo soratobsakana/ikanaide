@@ -32,14 +32,12 @@
         
             <?php
 
-                if (isset($favoriteMangas)){
-                    if ($favoriteMangas -> num_rows > 0) {
-                        while ($row = $favoriteMangas -> fetch_assoc()) {
-                            ?><a href="/manga?id=<?=$row['manga_id']?>"><img src="<?=$row['cover']?>" alt=""></a><?php
-                        }
-                    }
+            if ($favoriteMangas -> num_rows > 0) {
+                while ($row = $favoriteMangas -> fetch_assoc()) {
+                    ?><a href="/manga?id=<?=$row['manga_id']?>"><img src="<?=$row['cover']?>" alt=""></a><?php
                 }
-                
+            }
+
                 ?>
         
             </div>

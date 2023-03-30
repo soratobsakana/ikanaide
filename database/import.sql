@@ -16,7 +16,7 @@ CREATE TABLE `user` (
     `country` varchar(56),
     `biography` VARCHAR(4000),
     `born` DATE,
-    `pfp` VARCHAR(250) NOT NULL DEFAULT 'storage/sys/default.png',
+    `pfp` VARCHAR(250) NOT NULL DEFAULT '/storage/sys/default.png',
     `header` VARCHAR(250),
     `twitter` varchar(15),
     `github` varchar(39),
@@ -37,9 +37,7 @@ CREATE TABLE `anime` (
     `end_date` DATE,
     `season` VARCHAR(30) NOT NULL,
     `description` VARCHAR(3000) NOT NULL,
-    `members` INT UNSIGNED NOT NULL DEFAULT 0,
-    `favorited` INT UNSIGNED NOT NULL DEFAULT 0,
-    `cover` VARCHAR(200) NOT NULL DEFAULT 'storage/sys/default_cover.png',
+    `cover` VARCHAR(200) NOT NULL DEFAULT '/storage/sys/default_cover.png',
     `header` VARCHAR(200) NULL DEFAULT NULL,
     PRIMARY KEY (`anime_id`)
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
@@ -56,9 +54,7 @@ CREATE TABLE `manga` (
      `start_date` DATE,
      `end_date` DATE,
      `description` VARCHAR(3000) NOT NULL,
-     `members` INT UNSIGNED NOT NULL DEFAULT 0,
-     `favorited` INT UNSIGNED NOT NULL DEFAULT 0,
-     `cover` VARCHAR(200) NOT NULL DEFAULT 'storage/sys/default_cover.png',
+     `cover` VARCHAR(200) NOT NULL DEFAULT '/storage/sys/default_cover.png',
      `header` VARCHAR(200) NULL DEFAULT NULL,
      PRIMARY KEY (`manga_id`)
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
@@ -71,8 +67,6 @@ CREATE TABLE `vn` (
     `duration` INT UNSIGNED, -- This stores minutes -
     `released` DATE,
     `description` VARCHAR(3000) NOT NULL,
-    `members` INT UNSIGNED NOT NULL DEFAULT 0,
-    `favorited` INT UNSIGNED NOT NULL DEFAULT 0,
     `cover` VARCHAR(200) NOT NULL DEFAULT 'storage/sys/default_cover.png',
     `header` VARCHAR(200) NULL DEFAULT NULL,
     PRIMARY KEY (`vn_id`)
@@ -85,7 +79,7 @@ CREATE TABLE `character` (
     `alias` VARCHAR(50),
     `japanese_name` NVARCHAR(50),
     `data` JSON,
-    `picture` VARCHAR(200) NOT NULL DEFAULT 'storage/sys/default_cover.png',
+    `picture` VARCHAR(200) NOT NULL DEFAULT '/storage/sys/default_cover.png',
     PRIMARY KEY (`character_id`)
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
@@ -123,7 +117,7 @@ CREATE TABLE `staff` (
      `alias` VARCHAR(50) NULL DEFAULT NULL,
      `japanese_name` NVARCHAR(50),
      `data` JSON,
-     `picture` VARCHAR(200) NOT NULL DEFAULT 'storage/sys/default_cover.png',
+     `picture` VARCHAR(200) NOT NULL DEFAULT '/storage/sys/default_cover.png',
      PRIMARY KEY (`staff_id`)
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
@@ -314,7 +308,7 @@ CREATE TABLE `submit_character` (
     `alias` VARCHAR(200),
     `japanese_name` NVARCHAR(50),
     `biography` text,
-    `picture` VARCHAR(200) NOT NULL DEFAULT 'storage/sys/default_cover.png',
+    `picture` VARCHAR(200) NOT NULL DEFAULT '/storage/sys/default_cover.png',
     `user_id` INT UNSIGNED NOT NULL,
     `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`scid`),
@@ -328,7 +322,7 @@ CREATE TABLE `submit_staff` (
     `alias` VARCHAR(200) NULL DEFAULT NULL,
     `japanese_name` NVARCHAR(50),
     `biography` text,
-    `picture` VARCHAR(200) NOT NULL DEFAULT 'storage/sys/default_cover.png',
+    `picture` VARCHAR(200) NOT NULL DEFAULT '/storage/sys/default_cover.png',
     `user_id` INT UNSIGNED NOT NULL,
     `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`ssid`),
@@ -365,9 +359,9 @@ CREATE TABLE mangalist (
 
 insert into `anime` values(null, 'Gintama', null, null, 'TV', 49, 'finished', '2011-04-04', '2012-03-26', 'spring 2011', 'After a one-year hiatus, Shinpachi Shimura returns to Edo, only to stumble upon a shocking surprise: Gintoki and Kagura, his fellow Yorozuya members, have become completely different characters! Fleeing from the Yorozuya headquarters in confusion, Shinpachi finds that all the denizens of Edo have undergone impossibly extreme changes, in both appearance and personality. Most unbelievably, his sister Otae has married the Shinsengumi chief and shameless stalker Isao Kondou and is pregnant with their first child.', 0, 0, 'storage/img/gintama.webp', 'storage/img/gintama_header.jpg');
 insert into `manga` values (null, 'Oyasumi Punpun', null, null, 'manga', '13', '144', 'finished', '2007-03-15', '2013-11-02', 'Punpun Onodera is a normal 11-year-old boy living in Japan. Hopelessly idealistic and romantic, Punpun begins to see his life take a subtle—though nonetheless startling—turn to the adult when he meets the new girl in his class, Aiko Tanaka. It is then that the quiet boy learns just how fickle maintaining a relationship can be, and the surmounting difficulties of transitioning from a naïve boyhood to a convoluted adulthood. When his father assaults his mother one night, Punpun realizes another thing: those whom he looked up to were not as impressive as he once thought.', 0, 0, 'storage/img/punpun.jpg', 'storage/img/punpun_header.png');
-insert into `character` values(null, 'Sakata', 'Gintoki', null,  null,  null, 'storage/public/character/gintoki.jpg');
+insert into `character` values(null, 'Sakata', 'Gintoki', null,  null,  null, '/storage/public/character/gintoki.jpg');
 insert into `character_anime` values(1,1, 'Main');
-insert into `staff` values(null, 'Sorachi', 'Hideaki', null, null, null, 'storage/public/staff/Sorachi-Hideaki.jpg');
+insert into `staff` values(null, 'Sorachi', 'Hideaki', null, null, null, '/storage/public/staff/Sorachi-Hideaki.jpg');
 insert into `staff_anime` VALUES (1,1, 'director');
 insert into `review` values (null, 'title', 'This is my review', 1, default);
 insert into `review_anime` VALUES (1,1, default);

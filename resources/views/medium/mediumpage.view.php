@@ -10,18 +10,16 @@
         <form action="/add" method="post">
         
         <?php
-        $User = new Database;
-        $result = $User -> db -> execute_query('select `favorite` from `'.$medium.'list` WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $id]);
-        $favOrNot = $result -> fetch_column();
+
         if ($result -> num_rows === 1) {
-            ?><input class="add-to-list box submit-button__colorful" type="submit" value="Delete from list" name="delete"><?php
+            ?><input class="list-submit box submit-button__colorful" type="submit" value="Delete from list" name="delete"><?php
             if (isset($favOrNot) && $favOrNot === 0) {
-                ?><input class="add-to-list box submit-button__colorful" type="submit" value="Favourite" name="favourite"><?php
+                ?><input class="list-submit box submit-button__colorful" type="submit" value="Favourite" name="favourite"><?php
             } else if (isset($favOrNot) && $favOrNot === 1) {
-                ?><input class="add-to-list box submit-button__colorful" type="submit" value="Unfavourite" name="unfavourite"><?php
+                ?><input class="list-submit box submit-button__colorful" type="submit" value="Unfavourite" name="unfavourite"><?php
             }
         } else {
-            ?><input class="delete-from-list box submit-button__colorful" type="submit" value="Add to list" name="add"><?php
+            ?><input class="list-submit box submit-button__colorful" type="submit" value="Add to list" name="add"><?php
         }
 
         ?>
@@ -67,8 +65,8 @@
         </div>
         <div class="box-body">
             <ul class="two-column-list">
-                <li><span class="ul_first-column">members</span><span><?=$mediumInfo['members']?></span></li>
-                <li><span class="ul_first-column">loved</span><span><?=$mediumInfo['favorited']?></span></li>
+                <li><span class="ul_first-column">members</span><span><?=$members?></span></li>
+                <li><span class="ul_first-column">loved</span><span><?=$favourites?></span></li>
                 <li><span class="ul_first-column">ranked</span><span></span></li>
                 <li><span class="ul_first-column">popularity</span><span></span></li>
             </ul>
