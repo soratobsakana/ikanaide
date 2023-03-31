@@ -18,7 +18,7 @@ footer {
  }
 
  footer ul.footer-links li {
-    transition: var(--transition);
+     transition: calc(var(--transition) + .1s)
  }
 
 footer ul.footer-links:hover li {

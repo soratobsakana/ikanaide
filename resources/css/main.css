@@ -47,6 +47,7 @@ img {
 
 .submit-button__colorful:hover {
     background-size: 200%!important;
+    filter: brightness(1.2);
 }
 
 /* Segundo tipo de estilo de caja. Esta consta tanto de un título como del contenido. */

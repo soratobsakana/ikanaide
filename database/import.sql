@@ -16,7 +16,7 @@ CREATE TABLE `user` (
     `country` varchar(56),
     `biography` VARCHAR(4000),
     `born` DATE,
-    `pfp` VARCHAR(250) NOT NULL DEFAULT '/storage/sys/default.png',
+    `pfp` VARCHAR(250) NOT NULL DEFAULT '/storage/sys/default.webp',
     `header` VARCHAR(250),
     `twitter` varchar(15),
     `github` varchar(39),

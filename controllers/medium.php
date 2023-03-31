@@ -1,10 +1,7 @@
 <?php
 
-session_start();
+session_start(); // I use this to pass information about the current entry to the edit form through $_SESSION.
 require_once('resources/functions.php');
-
-// $page viene de /index.php y almacena el path de la URI actual.
-// $medium = substr($page, 1);
 require_once 'app/Listing.php';
 require_once 'app/User.php';
 
@@ -42,6 +39,7 @@ if (isset($guide[2])) {
         // Asigno estos valores a una superglobal para utilizarlos en el fichero addToList.php
         $_SESSION[$medium . '_id'] = $id;
         $_SESSION['medium'] = $medium;
+        $_SESSION['entry'] = $entry;
 
         // Consulta de los datos a mostrar.
         $mediumInfo = $Listing -> getInfo($medium, $column, [$id]);
@@ -61,9 +59,6 @@ if (isset($guide[2])) {
     }
 } else {
     // Si no se ha indicado un segundo elemento en la URI, se muestra una página de inicio predeterminada.
-    // $page proviene de /index.php y almacena la URI actual.
-
     $homeInfo = $Listing -> getHome($medium);
-
     require('resources/views/medium/mediumhome.view.php');
 }

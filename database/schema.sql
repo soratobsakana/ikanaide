@@ -51,12 +51,15 @@ CREATE TABLE `anime` (
     `end_date` DATE,
     `season` VARCHAR(30) NOT NULL,
     `description` VARCHAR(3000) NOT NULL,
-    `members` INT UNSIGNED NOT NULL DEFAULT 0,
-    `favorited` INT UNSIGNED NOT NULL DEFAULT 0,
     `cover` VARCHAR(200) NOT NULL DEFAULT 'storage/sys/default_cover.png',
     `header` VARCHAR(200) NULL DEFAULT NULL,
     PRIMARY KEY(`anime_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+select * from anime;
+update anime set title ='Kimetsu no Yaiba Katanakaji no Sato hen' where anime_id=10;
+insert into anime(title, type, episodes, status, season, description, cover) values
+('Kimetsu no Yaiba: Katanakaji no Sato-hen', 'TV', 24, 'finished', 'sprint 2020', 'This is a description', '/storage/animes/kny/cover.jpg');
 
 CREATE TABLE `manga` (
      `manga_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -117,6 +120,13 @@ CREATE TABLE `character` (
     PRIMARY KEY (`character_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
+insert into `character`(family_name, given_name, picture) values
+('Shinei', 'Nouzen', '/storage/animes/86/char/char.jpg');
+
+insert into `character_anime` values(16,2, 'Main');
+
+select * from anime;
+
 show columns from `character`;
 alter table `character` auto_increment = 2;
 select * from `character`;
@@ -157,7 +167,7 @@ CREATE TABLE `character_manga` (
 );
 
 insert into `character_anime` values(1,1, 'Main');
-insert into `character_anime` values(2,1, 'Supporting');
+
 insert into `character_anime` values(3,1, 'Supporting');
 insert into `character_anime` values(4,1, 'Supporting');
 insert into `character_anime` values(5,1, 'Supporting');

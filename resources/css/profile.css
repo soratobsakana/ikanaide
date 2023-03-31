@@ -64,6 +64,13 @@ section.profile_user-overview {
     display: grid;
     grid-gap: var(--gap);
 }
+section.profile_user-overview_bio div.box-body {
+    font-size: calc(var(--box-font-size) + 1px)!important;
+    max-height: 400px!important;
+    overflow-y: scroll;
+    text-align: center;
+}
+
 section.profile_user-overview_stats {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -100,7 +107,7 @@ section.profile_user-list {
 .list-grid {
     width: 100%!important;
     display: grid;
-    grid-template-columns: 10% 50% 10% 10% 12% 8%;
+    grid-template-columns: 8% 52% 10% 10% 12% 8%;
 }
 
 ul.profile_user-list_content-labels li{
@@ -113,7 +120,7 @@ div.profile_user-list_entry-wrapper div.box-body {
 }
 
 .profile_user-list_entry img {
-    height: 37px;
+    height: 40px;
     border-radius: calc(var(--border-radius) - 4px);
 }
 
@@ -134,6 +141,15 @@ div.profile_user-favorites_wrapper {
     grid-template-columns: repeat(10, 1fr);
 }
 
-div.profile_user-favorites_wrapper img{
+div.profile_user-favorites_wrapper div {
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     border-radius: 0px!important;
+    transition: calc(var(--transition) + .1s);
+}
+
+div.profile_user-favorites_wrapper div:hover {
+    filter: brightness(1.2);
 }

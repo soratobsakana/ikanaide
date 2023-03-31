@@ -169,48 +169,48 @@ class User
     }
 
     // Añadir o borrar un anime o manga a la base de datos.
-    public function addToList($medium, $medium_id, $user_id)
+    public function addToList($medium, $medium_id, $user_id, string $entry)
     {
         if ($this -> validateSession() === TRUE) {
             if (isset($_POST['add'])) {
                 $this -> con -> db -> execute_query('INSERT INTO `'.$medium.'list` (`user_id`, `'.$medium.'_id`, `progress`) VALUES (?, ?, default)', [$user_id, $medium_id]);
-                header('Location: /'.$medium.'?id=' . $medium_id);
+                header('Location: /'.$medium.'/' . $entry);
             } 
         } else {
             exit(header("Location: /logout"));
         }
     }
 
-    public function deleteFromList($medium, $medium_id, $user_id)
+    public function deleteFromList($medium, $medium_id, $user_id, string $entry)
     {
         if ($this -> validateSession() === TRUE) {
             if ($_POST['delete']) {
                 $this -> con -> db -> execute_query('DELETE FROM `'.$medium.'list` WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $medium_id]);
-                header('Location: /'.$medium.'?id=' . $medium_id);
+                header('Location: /'.$medium.'/' . $entry);
             }
         } else {
             exit(header("Location: /logout"));
         }
     }
 
-    public function favourite(string $medium, int $medium_id, int $user_id)
+    public function favourite(string $medium, int $medium_id, int $user_id, string $entry)
     {
         if ($this -> validateSession() === TRUE) {
             if (isset($_POST['favourite'])) {
                 $this -> con -> db -> execute_query('UPDATE '.$medium.'list SET `favorite` = true WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $medium_id]);
-                header('Location: /'.$medium.'?id=' . $medium_id);
+                header('Location: /'.$medium.'/' . $entry);
             }
         } else {
             exit(header("Location: /logout"));
         }
     }
 
-    public function unfavourite(string $medium, int $medium_id, int $user_id)
+    public function unfavourite(string $medium, int $medium_id, int $user_id, string $entry)
     {
         if ($this -> validateSession() === TRUE) {
             if (isset($_POST['unfavourite'])) {
                 $this -> con -> db -> execute_query('UPDATE '.$medium.'list SET `favorite` = false WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $medium_id]);
-                header('Location: /'.$medium.'?id=' . $medium_id);
+                header('Location: /'.$medium.'/' . $entry);
             }
         } else {
             exit(header("Location: /logout"));

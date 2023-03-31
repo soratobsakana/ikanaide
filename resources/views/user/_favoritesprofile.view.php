@@ -11,7 +11,7 @@
             <?php
             if ($favoriteAnimes -> num_rows > 0) {
                 while ($row = $favoriteAnimes -> fetch_assoc()) {
-                    ?><a href="/anime?id=<?=$row['anime_id']?>"><img src="<?=$row['cover']?>" alt=""></a><?php
+                    ?><a href="/anime/<?=str_replace(' ', '-', $row['title'])?>"><div style="background-image: url(<?=$row['cover']?>)"></div></a><?php
                 }
             }
 
@@ -34,7 +34,7 @@
 
             if ($favoriteMangas -> num_rows > 0) {
                 while ($row = $favoriteMangas -> fetch_assoc()) {
-                    ?><a href="/manga?id=<?=$row['manga_id']?>"><img src="<?=$row['cover']?>" alt=""></a><?php
+                    ?><a href="/manga/<?=str_replace(' ', '-', $row['title'])?>?>"><div style="background-image: url(<?=$row['cover']?>)"></div></a><?php
                 }
             }
 

@@ -29,7 +29,7 @@
                             ?>
                             <div class="profile_user-list_entry list-grid">
                                 <div class="profile_user-list_entry-cover">
-                                    <img src="<?=$animes[0]['cover']?>">
+                                    <img src="<?=$animes[$i]['cover']?>">
                                 </div>
                                 <div class="profile_user-list_entry-title list-grid">
                                     <a href="/anime/<?=str_replace(' ', '-', $animes[$i]['title'])?>"><?=$animes[$i]['title']?></a>
