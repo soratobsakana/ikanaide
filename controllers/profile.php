@@ -23,10 +23,6 @@ if ($user_id !== null) {
     $favoriteAnimes = $Session -> getFavorites($user_id, 'anime'); // This is an object that will be looped in _favoritesprofile.view.php
     $favoriteMangas = $Session -> getFavorites($user_id, 'manga'); // This is an object that will be looped in _favoritesprofile.view.php
 
-    if ($_COOKIE['username'] === $username) {
-
-    }
-
     require 'resources/views/user/profile.view.php';
 } else {
     exit(header("Location: /404"));
