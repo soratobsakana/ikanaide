@@ -316,7 +316,7 @@ class User
 
             $result = $this -> con -> db -> execute_query('select '.$medium.'.'.$medium.'_id, '.$medium.'.title, '.$medium.'.cover from '.$medium.','.$medium.'list
             where '.$medium.'.'.$medium.'_id='.$medium.'list.'.$medium.'_id
-            and '.$medium.'list.favorite=true');
+            and '.$medium.'list.favorite=true and user_id= ?', [$user_id]);
 
             if ($result -> num_rows > 0) {
                 return $result;

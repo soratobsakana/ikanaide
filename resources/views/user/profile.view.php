@@ -2,6 +2,11 @@
     <div class="profile_left-column">
         <img src="<?=$userInfo['pfp']?>" alt="<?=$userInfo['username']?>">
         <section class="profile_left-column-username"><h2><?=$userInfo['username']?></h2></section>
+        <section class="profile_left-column_buttons">
+            <form action="" method="post">
+                <input class="list-submit box submit-button__colorful" type="submit" value="Edit profile">
+            </form>
+        </section>
         <section class="profile_user-info box-wrapper">
             <div class="box-title">
                 <h3>Stats</h3>
@@ -126,8 +131,6 @@
                 require('resources/views/user/_overviewprofile.view.php');
                 break;
             case '/'.$username.'/animelist':
-                require('resources/views/user/_listsprofile.view.php');
-                break;
             case '/'.$username.'/mangalist':
                 require('resources/views/user/_listsprofile.view.php');
                 break;

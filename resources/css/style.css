@@ -97,3 +97,8 @@ div.container {
 .low-opacity {
     opacity: var(--font_low-opacity);
 }
+
+.center-text {
+    text-align: center;
+    justify-content: center;
+}

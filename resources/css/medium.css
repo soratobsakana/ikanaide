@@ -236,3 +236,12 @@ div.mediumhome_all-medium_content {
 
     box-sizing: border-box;
 }
+
+div.mediumhome_all-medium_content div {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 167px;
+    min-width: 108px;
+    border-radius: var(--border-radius);
+}

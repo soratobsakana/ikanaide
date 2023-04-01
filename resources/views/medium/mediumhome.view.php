@@ -6,7 +6,7 @@
             if ($homeInfo -> num_rows > 0) {
                 while ($row = $homeInfo -> fetch_assoc()) {
                     ?>
-                    <a href="/<?=$medium?>/<?=str_replace(' ', '-', $row['title'])?>"><img src="<?=$row['cover']?>" alt="<?=$row['title']?>"></a>
+                    <a href="/<?=$medium?>/<?=str_replace(' ', '-', $row['title'])?>"><div style="background-image: url('<?=$row['cover']?>')"></div></a>
                     <?php
                 }
             }

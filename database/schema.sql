@@ -440,6 +440,7 @@ update animelist set `progress`=10;
 alter table animelist modify column `favorite` BIT(1) NOT NULL DEFAULT 0;
 select * from animelist;
 update animelist set `favorite` = 1 where anime_id = 1;
+update animelist set score=9.2;
 
 show columns from anime;
 

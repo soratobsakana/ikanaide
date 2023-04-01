@@ -12,11 +12,10 @@
                     <ul class="profile_user-list_content-labels list-grid">
                         <li>cover</li>
                         <li>title</li>
-                        <li>score</li>
+                        <li class="center-text">score</li>
+                        <li class="center-text">progress</li>
                         <?php $medium === 'anime' ? $type = 'type' : $type = 'format' ?>
-                        <li><?=$type?></li>
-                        <li>progress</li>
-                        <li>favorite</li>
+                        <li class="center-text"><?=$type?></li>
                     </ul>
                 </div>
             </div>
@@ -31,29 +30,17 @@
                                 <div class="profile_user-list_entry-cover">
                                     <img src="<?=$animes[$i]['cover']?>">
                                 </div>
-                                <div class="profile_user-list_entry-title list-grid">
+                                <div class="profile_user-list_entry-title">
                                     <a href="/anime/<?=str_replace(' ', '-', $animes[$i]['title'])?>"><?=$animes[$i]['title']?></a>
                                 </div>
-                                <div class="profile_user-list_entry-score list-grid">
+                                <div class="profile_user-list_entry-score center-text">
                                     <?=$animelist[$i]['score']?>
                                 </div>
-                                <div class="profile_user-list_entry-type list-grid">
-                                    <?=$animes[$i]['type']?>
-                                </div>
-                                <div class="profile_user-list_entry-progress list-grid">
+                                <div class="profile_user-list_entry-progress center-text">
                                     <?=$animelist[$i]['progress']?>/<?=$animes[0]['episodes']?>
                                 </div>
-                                <div class="profile_user-list_entry-favorite list-grid">
-                                    <?php
-
-                                    if ($animelist[$i]['favorite'] === 1) {
-                                        print 'Yes';
-                                    } else {
-                                        print 'No';
-
-                                    }
-
-                                    ?>
+                                <div class="profile_user-list_entry-type center-text">
+                                    <?=$animes[$i]['type']?>
                                 </div>
                             </div>
                             <?php
@@ -65,29 +52,17 @@
                                 <div class="profile_user-list_entry-cover">
                                     <img src="<?=$mangas[0]['cover']?>">
                                 </div>
-                                <div class="profile_user-list_entry-title list-grid">
+                                <div class="profile_user-list_entry-title">
                                     <a href="/manga/<?=str_replace(' ', '-', $mangas[$i]['title'])?>"><?=$mangas[$i]['title']?></a>
                                 </div>
-                                <div class="profile_user-list_entry-score list-grid">
+                                <div class="profile_user-list_entry-score center-text">
                                     <?=$mangalist[$i]['score']?>
                                 </div>
-                                <div class="profile_user-list_entry-type list-grid">
-                                    <?=$mangas[$i]['format']?>
-                                </div>
-                                <div class="profile_user-list_entry-progress list-grid">
+                                <div class="profile_user-list_entry-progress center-text">
                                     <?=$mangalist[$i]['progress']?>/<?=$mangas[0]['chapters']?>
                                 </div>
-                                <div class="profile_user-list_entry-favorite list-grid">
-                                    <?php
-
-                                    if ($mangalist[$i]['favorite'] === 1) {
-                                        print 'Yes';
-                                    } else {
-                                        print 'No';
-
-                                    }
-
-                                    ?>
+                                <div class="profile_user-list_entry-type center-text">
+                                    <?=$mangas[$i]['format']?>
                                 </div>
                             </div>
                             <?php

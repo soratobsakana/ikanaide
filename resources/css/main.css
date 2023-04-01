@@ -40,7 +40,7 @@ img {
     align-self: center;
     font-weight: var(--bold);
     margin-top: 10px;
-    background-image: linear-gradient(to left, var(--box-bg), var(--box-title))!important;
+    background-image: linear-gradient(to left, var(--box-title), var(--box-title))!important;
     background-size: 100%;
     transition: var(--transition);
 }
@@ -54,6 +54,7 @@ img {
 .box-wrapper {
     border-radius: var(--border-radius);
     overflow: hidden;
+    box-shadow: 0 0 3px rgba(0, 0, 0, .25);
 }
 
 .box-title {
