@@ -1,4 +1,5 @@
 <div class="querypage_left-column">
+    <button id="test">click</button>
     <img src="<?=$mediumInfo['cover']?>" alt="<?=$mediumInfo['title']?>"/>
     <!-- Compruebo si el usuario tiene anime correspondiente a $id en su lista. Si no lo tiene, muestro un botón de añadir; si lo tiene, muestro uno de borrar. -->
     <?php
@@ -182,9 +183,30 @@
                     <?php
                 }
             } else {
-                print "<i style='opacity: var(--font_low-opacity); padding: 10px 0px'>No reviews yet...</i>";
+                print "<i style='opacity: var(--font_low-opacity); padding: 10px 0'>No reviews yet...</i>";
             }
             ?>
         </div>
     </section>
 </div>
+
+
+
+<section id="querypage_list-edit">
+    <div class="querypage_list-edit_wrapper">
+        <div class="querypage_list-edit_header" style="background-image: url(<?=$mediumInfo['header']?>)">
+            <img src="<?=$mediumInfo['cover']?>" alt="<?=$mediumInfo['title']?>">
+        </div>
+        <div class="querypage_list-edit_form">
+            <form action="<?='/'.$medium.'/'.$entry?>">
+                <div class="form-title">
+                    <h3><?=$mediumInfo['title']?></h3>
+                </div>
+                <div class="form-fields">
+                    <input type="text" name="score" id="score">
+                    <input type="text" name="progress" id="progress">
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

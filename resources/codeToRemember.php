@@ -44,39 +44,3 @@ $time_start = microtime(true);
 $time_end = microtime(true);
 $execution_time = ($time_end - $time_start);
 echo '<b>Total Execution Time:</b> '.$execution_time.' seconds';
-
-
-switch ($username) {
-    case $username:
-    case $username.'/overview':
-        require('resources/views/user/profile.view.php');
-        break;
-    case $username.'/animelist':
-        require('resources/views/user/_animelistprofile.view.php');
-        break;
-    case $username.'/mangalist':
-        require('resources/views/user/_mangalistprofile.view.php');
-        break;
-    case $username.'/reviews':
-        require('resources/views/user/_reviewsprofile.view.php');
-        break;
-    case $username.'/favorites':
-        require('resources/views/user/_favoritesprofile.view.php');
-        break;
-    default:
-        exit(header("Location: /404"));
-    }
-
-    $profileRoutes = [
-        '/'.$username => 'resources/views/user/profile.view.php',
-        '/'.$username.'/animelist' => 'resources/views/user/_animelistprofile.php',
-        '/'.$username.'/mangalist' => 'resources/views/user/_mangalistprofile.php',
-        '/'.$username.'/reviews' => 'resources/views/user/_reviewsprofile.php',
-        '/'.$username.'/favorites' => 'resources/views/user/_favoritesprofile.php'
-    ];
-
-    if (array_key_exists($uri, $profileRoutes)) {
-        require $profileRoutes[$uri];
-    } else {
-        exit(header('Location: /404'));
-    }

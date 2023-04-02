@@ -56,7 +56,11 @@ $routes = array(
 if (array_key_exists($uri, $routes)) {
     require $routes[$uri];
 } else if (($guide[1] === 'anime' || $guide[1] === 'manga') && isset($guide[2])){
-    require $mediumRoutes[$uri];
+    if (array_key_exists($uri, $mediumRoutes)) {
+        require $mediumRoutes[$uri];
+    } else {
+        exit(header('Location: /404'));
+    }
 } else {
     // En caso de no existir el URI solicitado, se procesa la información mediante profileRouter.php para encontrar un usuario.
     require 'profileRouter.php';

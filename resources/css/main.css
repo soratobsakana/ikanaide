@@ -54,7 +54,6 @@ img {
 .box-wrapper {
     border-radius: var(--border-radius);
     overflow: hidden;
-    box-shadow: 0 0 3px rgba(0, 0, 0, .25);
 }
 
 .box-title {
