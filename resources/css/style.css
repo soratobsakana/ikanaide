@@ -38,29 +38,31 @@ h3 {
     font-weight: var(--bold);
 }
 
-input[type='text'], input[type='email'], input[type='password'], input[type='submit'], select {
+input[type='text'], input[type='email'], input[type='password'], input[type='submit'], select, input[type='number'], input[type=date], button {
     color: inherit;
     outline: none;
     border: none;
     background: transparent;
     box-sizing: border-box;
     font-size: var(--box-font-size);
+    font-family: Fredoka;
 }
 
 select {
     appearance: none;
     transition: var(--transition);
+    border: 1px solid var(--box-title);
 }
 
 select:hover {
     background-color: var(--box-bg-hover);
 }
 
-input[type='submit'] {
+input[type='submit'], button {
     font-family: Inter;
 }
 
-select, option, input[type='submit'] {
+select, option, input[type='submit'], button {
     cursor: pointer;
 }
 

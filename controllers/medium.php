@@ -12,7 +12,6 @@ $medium = $guide[1]; // anime|manga
 
 $Listing = new Listing;
 if (isset($guide[2])) {
-    $entry = $guide[2];  // Nombre-de-Anime|Manga
     $entryOnDB = str_replace('-', ' ', $guide[2]);
     $result = $Listing -> exists($medium, $entryOnDB);
 

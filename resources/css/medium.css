@@ -247,61 +247,81 @@ div.mediumhome_all-medium_content div {
 }
 
 
-/* Estilos para  */
+/* Estilos para el formulario de edición de entrada de lista.*/
 section#querypage_list-edit {
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+
+    z-index: 1234;
     background-color: rgba(0, 0, 0, .40);
+
+    display: none;
 }
 
 div.querypage_list-edit_wrapper {
     width: 650px;
-    background-color: var(--box-bg);
-    border-radius: var(--border-radius);
+    border-radius: 10px;
     overflow: hidden;
 
-    position: absolute;
+    position: fixed;
     top: 15vh;
     left: 50%;
     transform: translateX(-50%);
+    box-shadow: 0 0px 33px rgba(0,0,0,.50);
 }
 
-div.querypage_list-edit_header {
-    height: 150px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    box-shadow: inset 0 0 200px #1c1c1c;
-
-    position: relative;
-}
-
-div.querypage_list-edit_header img {
-    height: 160px;
-    position: absolute;
-    left: 50px;
-    bottom: -35%;
-    box-shadow: 0 1px 3px rgba(0,0,0,.35);
-}
-
-div.querypage_list-edit_form {
-    padding: 12px;
-    height: 300px;
-}
-
-div.querypage_list-edit_form div.form-title {
-    text-align: center;
-}
-
-div.querypage_list-edit_form div.form-title h3 {
-    font-size: 20px!important;
-}
-
-div.querypage_list-edit_form div.form-fields {
-    background-color: #2D2C3B;
+div.querypage_list-edit_form form div.edit-list_fields {
+    display: grid;
+    grid-gap: 15px;
     padding: 20px;
+}
+
+div.querypage_list-edit_form form div.edit-list_fields div.edit-list_fields-inputs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    row-gap: 15px;
+}
+
+div.querypage_list-edit_form form div.edit-list_fields * div.input-wrapper {
+    background-color: var(--box-bg);
+    display: grid;
+    grid-gap: 5px;
+}
+
+div.querypage_list-edit_form form div.edit-list_fields * div.input-wrapper label {
+    font-size: calc(var(--box-font-size) - 1px);
+    padding-left: 10px; /* To vertically align the label with the input text */
+}
+
+div.querypage_list-edit_form form div.edit-list_fields * div.input-wrapper input[type='text'], input[type='number'], input[type=date], select, textarea {
+    padding: 5px 10px;
+    background-color: var(--box-title);
+    border-radius: var(--border-radius);
+    width: 100%;
+}
+
+div.querypage_list-edit_form form div.edit-list_fields div.edit-list_fields-textarea textarea{
+    padding: 10px 15px!important;
+    min-height: 80px;
+    max-height: 200px;
+}
+
+div.querypage_list-edit_form form div.edit-list_fields div.edit-list_fields-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+hr#edit-list_fields-separator {
+    margin-top: 10px;
+    height: 1px;
+    border: 0px!important;
+    background-color: var(--box-title);
 }

@@ -1,5 +1,5 @@
 <div class="querypage_left-column">
-    <button id="test">click</button>
+    <button id="edit-list_button">click</button>
     <img src="<?=$mediumInfo['cover']?>" alt="<?=$mediumInfo['title']?>"/>
     <!-- Compruebo si el usuario tiene anime correspondiente a $id en su lista. Si no lo tiene, muestro un botón de añadir; si lo tiene, muestro uno de borrar. -->
     <?php
@@ -190,23 +190,75 @@
     </section>
 </div>
 
-
-
 <section id="querypage_list-edit">
-    <div class="querypage_list-edit_wrapper">
-        <div class="querypage_list-edit_header" style="background-image: url(<?=$mediumInfo['header']?>)">
-            <img src="<?=$mediumInfo['cover']?>" alt="<?=$mediumInfo['title']?>">
-        </div>
+    <div class="querypage_list-edit_wrapper box-wrapper">
         <div class="querypage_list-edit_form">
             <form action="<?='/'.$medium.'/'.$entry?>">
-                <div class="form-title">
+                <div class="box-title">
                     <h3><?=$mediumInfo['title']?></h3>
                 </div>
-                <div class="form-fields">
-                    <input type="text" name="score" id="score">
-                    <input type="text" name="progress" id="progress">
+                <div class="edit-list_fields box-body">
+                    <div class="edit-list_fields-inputs">
+                        <div class="input-wrapper">
+                            <label for="status">status</label>
+                            <select name="status" id="status">
+                                <option value="watching">watching</option>
+                                <option value="completed">completed</option>
+                                <option value="planned">planned</option>
+                                <option value="dropped">dropped</option>
+                                <option value="stalled">stalled</option>
+                            </select>
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="score">score</label>
+                            <input min='0' max='10' value='0' type="number" name="score" id="score">
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="progress">progress</label>
+                            <input min='0' max='<?=$mediumInfo['episodes']?>' value='0' type="number" name="progress" id="progress">
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="start-date">start date</label>
+                            <input type="date" name="progress" id="progress">
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="progress">end date</label>
+                            <input type="date" name="progress" id="progress">
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="rewatch">rewatches</label>
+                            <input min='0' value='0' type="number" name="rewatch" id="rewatch">
+                        </div>
+                    </div>
+                    <div class="edit-list_fields-textarea">
+                        <div class="input-wrapper">
+                            <label for="notes">notes</label>
+                            <textarea name="notes" id="notes"></textarea>
+                        </div>
+                    </div>
+                    <hr id="edit-list_fields-separator">
+                    <div class="edit-list_fields-buttons">
+                        <button id="cancel" class="submit-button__colorful box">Cancel</button>
+                        <input class="submit-button__colorful box" type="submit" name='save' value="Save">
+                    </div>
+
                 </div>
             </form>
         </div>
     </div>
 </section>
+
+<script !src="">
+    let modal = document.getElementById('querypage_list-edit');
+    let btn = document.getElementById('edit-list_button');
+    let cancelBtn = document.getElementById('edit-list_cancel')
+
+    btn.addEventListener('click', function() {
+        modal.style.display = "block";
+    })
+
+    cancelBtn.onclick = function() {
+        modal.style.display = "none";
+    }
+
+</script>
