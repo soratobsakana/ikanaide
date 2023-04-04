@@ -29,7 +29,7 @@ section.profile_left-column-username {
     height: 37px!important;
 }
 
-input.list-submit {
+.list-submit {
     width: 100%!important; /* El width heredado por .submit-button__colorful es 180px. */
     margin-top: 0px; /* Elimina el margin-top de la clase .submit-button__colorful */
     font-family: Fredoka;
@@ -39,7 +39,7 @@ input.list-submit {
     transition: var(--transition);
 }
 
-input.list-submit:hover {
+.list-submit:hover {
     filter: brightness(1.2);
 }
 

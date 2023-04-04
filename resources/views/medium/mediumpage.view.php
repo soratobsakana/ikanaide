@@ -1,5 +1,4 @@
 <div class="querypage_left-column">
-    <button id="edit-list_button">click</button>
     <img src="<?=$mediumInfo['cover']?>" alt="<?=$mediumInfo['title']?>"/>
     <!-- Compruebo si el usuario tiene anime correspondiente a $id en su lista. Si no lo tiene, muestro un botón de añadir; si lo tiene, muestro uno de borrar. -->
     <?php
@@ -13,11 +12,17 @@
         <?php
 
         if ($result -> num_rows === 1) {
-            ?><input class="list-submit box submit-button__colorful" type="submit" value="Delete from list" name="delete"><?php
+            ?>
+
+            <input class="list-submit box submit-button__colorful" type="submit" value="Delete from list" name="delete">
+            <button type="button" id="edit-list_button" class="list-submit submit-button__colorful box">Edit your entry</button>
+
+
+            <?php
             if (isset($favOrNot) && $favOrNot === 0) {
-                ?><input class="list-submit box submit-button__colorful" type="submit" value="Favourite" name="favourite"><?php
+                ?><input class="list-submit box submit-button__colorful bg-orange" type="submit" value="Favourite" name="favourite"><?php
             } else if (isset($favOrNot) && $favOrNot === 1) {
-                ?><input class="list-submit box submit-button__colorful" type="submit" value="Unfavourite" name="unfavourite"><?php
+                ?><input class="list-submit box submit-button__colorful bg-orange" type="submit" value="Unfavourite" name="unfavourite"><?php
             }
         } else {
             ?><input class="list-submit box submit-button__colorful" type="submit" value="Add to list" name="add"><?php
@@ -193,7 +198,7 @@
 <section id="querypage_list-edit">
     <div class="querypage_list-edit_wrapper box-wrapper">
         <div class="querypage_list-edit_form">
-            <form action="<?='/'.$medium.'/'.$entry?>">
+            <form action="/add" method="POST">
                 <div class="box-title">
                     <h3><?=$mediumInfo['title']?></h3>
                 </div>
@@ -219,15 +224,15 @@
                         </div>
                         <div class="input-wrapper">
                             <label for="start-date">start date</label>
-                            <input type="date" name="progress" id="progress">
+                            <input type="date" name="start-date" id="start-date">
                         </div>
                         <div class="input-wrapper">
-                            <label for="progress">end date</label>
-                            <input type="date" name="progress" id="progress">
+                            <label for="end-date">end date</label>
+                            <input type="date" name="end-date" id="end-date">
                         </div>
                         <div class="input-wrapper">
-                            <label for="rewatch">rewatches</label>
-                            <input min='0' value='0' type="number" name="rewatch" id="rewatch">
+                            <label for="rewatches">rewatches</label>
+                            <input min='0' value='0' type="number" name="rewatches" id="rewatches">
                         </div>
                     </div>
                     <div class="edit-list_fields-textarea">
@@ -238,10 +243,9 @@
                     </div>
                     <hr id="edit-list_fields-separator">
                     <div class="edit-list_fields-buttons">
-                        <button id="cancel" class="submit-button__colorful box">Cancel</button>
+                        <button type="button" id="edit-list_cancel" class="submit-button__colorful box">Cancel</button>
                         <input class="submit-button__colorful box" type="submit" name='save' value="Save">
                     </div>
-
                 </div>
             </form>
         </div>
@@ -251,14 +255,14 @@
 <script !src="">
     let modal = document.getElementById('querypage_list-edit');
     let btn = document.getElementById('edit-list_button');
-    let cancelBtn = document.getElementById('edit-list_cancel')
+    let cancelBtn = document.getElementById('edit-list_cancel');
 
     btn.addEventListener('click', function() {
         modal.style.display = "block";
     })
 
-    cancelBtn.onclick = function() {
+    cancelBtn.addEventListener('click', function() {
         modal.style.display = "none";
-    }
+    })
 
 </script>

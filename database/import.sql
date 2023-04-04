@@ -333,9 +333,12 @@ CREATE TABLE animelist (
     `user_id` INT UNSIGNED NOT NULL,
     `anime_id` INT UNSIGNED NOT NULL,
     `score` DECIMAL(3,1),
-    `comment` VARCHAR(200),
     `status` ENUM('completed', 'watching', 'planned', 'stalled', 'dropped') NOT NULL DEFAULT 'watching',
-    `progress` SMALLINT UNSIGNED DEFAULT 0,
+    `progress` SMALLINT UNSIGNED NOT NULL DEFAULT 0,
+    `start_date` DATE,
+    `end_date` DATE,
+    `notes` text,
+    `rewatches` TINYINT UNSIGNED NOT NULL DEFAULT 0,
     `favorite` BIT(1) NOT NULL DEFAULT 0,
     PRIMARY KEY (`user_id`, `anime_id`),
     FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -346,26 +349,29 @@ CREATE TABLE mangalist (
     `user_id` INT UNSIGNED NOT NULL,
     `manga_id` INT UNSIGNED NOT NULL,
     `score` DECIMAL(3,1),
-    `comment` VARCHAR(200),
     `status` ENUM('completed', 'reading', 'planned', 'stalled', 'dropped') NOT NULL DEFAULT 'reading',
-    `progress` SMALLINT UNSIGNED DEFAULT 0,
+    `progress` SMALLINT UNSIGNED NOT NULL DEFAULT 0,
+    `start_date` DATE,
+    `end_date` DATE,
+    `notes` text,
+    `rewatches` TINYINT UNSIGNED NOT NULL DEFAULT 0,
     `favorite` BIT(1) NOT NULL DEFAULT 0,
-    PRIMARY KEY (`user_id`, `manga_id`),
     FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (`manga_id`) REFERENCES `manga`(`manga_id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
--- data -
-
-insert into `anime` values(null, 'Gintama', null, null, 'TV', 49, 'finished', '2011-04-04', '2012-03-26', 'spring 2011', 'After a one-year hiatus, Shinpachi Shimura returns to Edo, only to stumble upon a shocking surprise: Gintoki and Kagura, his fellow Yorozuya members, have become completely different characters! Fleeing from the Yorozuya headquarters in confusion, Shinpachi finds that all the denizens of Edo have undergone impossibly extreme changes, in both appearance and personality. Most unbelievably, his sister Otae has married the Shinsengumi chief and shameless stalker Isao Kondou and is pregnant with their first child.', 0, 0, 'storage/img/gintama.webp', 'storage/img/gintama_header.jpg');
-insert into `manga` values (null, 'Oyasumi Punpun', null, null, 'manga', '13', '144', 'finished', '2007-03-15', '2013-11-02', 'Punpun Onodera is a normal 11-year-old boy living in Japan. Hopelessly idealistic and romantic, Punpun begins to see his life take a subtle—though nonetheless startling—turn to the adult when he meets the new girl in his class, Aiko Tanaka. It is then that the quiet boy learns just how fickle maintaining a relationship can be, and the surmounting difficulties of transitioning from a naïve boyhood to a convoluted adulthood. When his father assaults his mother one night, Punpun realizes another thing: those whom he looked up to were not as impressive as he once thought.', 0, 0, 'storage/img/punpun.jpg', 'storage/img/punpun_header.png');
-insert into `character` values(null, 'Sakata', 'Gintoki', null,  null,  null, '/storage/public/character/gintoki.jpg');
-insert into `character_anime` values(1,1, 'Main');
-insert into `staff` values(null, 'Sorachi', 'Hideaki', null, null, null, '/storage/public/staff/Sorachi-Hideaki.jpg');
-insert into `staff_anime` VALUES (1,1, 'director');
-insert into `review` values (null, 'title', 'This is my review', 1, default);
-insert into `review_anime` VALUES (1,1, default);
-insert into animelist values (3, 4, 8.5, 'Example comment', default,  10,  TRUE);
-insert into mangalist values (3, 4, 8.5, 'Example comment', default,  10,  TRUE);
+/**
+* Data (some are wrong).
+* insert into `anime` values(null, 'Gintama', null, null, 'TV', 49, 'finished', '2011-04-04', '2012-03-26', 'spring 2011', 'After a one-year hiatus, Shinpachi Shimura returns to Edo, only to stumble upon a shocking surprise: Gintoki and Kagura, his fellow Yorozuya members, have become completely different characters! Fleeing from the Yorozuya headquarters in confusion, Shinpachi finds that all the denizens of Edo have undergone impossibly extreme changes, in both appearance and personality. Most unbelievably, his sister Otae has married the Shinsengumi chief and shameless stalker Isao Kondou and is pregnant with their first child.', 0, 0, 'storage/img/gintama.webp', 'storage/img/gintama_header.jpg');
+* insert into `manga` values (null, 'Oyasumi Punpun', null, null, 'manga', '13', '144', 'finished', '2007-03-15', '2013-11-02', 'Punpun Onodera is a normal 11-year-old boy living in Japan. Hopelessly idealistic and romantic, Punpun begins to see his life take a subtle—though nonetheless startling—turn to the adult when he meets the new girl in his class, Aiko Tanaka. It is then that the quiet boy learns just how fickle maintaining a relationship can be, and the surmounting difficulties of transitioning from a naïve boyhood to a convoluted adulthood. When his father assaults his mother one night, Punpun realizes another thing: those whom he looked up to were not as impressive as he once thought.', 0, 0, 'storage/img/punpun.jpg', 'storage/img/punpun_header.png');
+* insert into `character` values(null, 'Sakata', 'Gintoki', null,  null,  null, '/storage/public/character/gintoki.jpg');
+* insert into `character_anime` values(1,1, 'Main');
+* insert into `staff` values(null, 'Sorachi', 'Hideaki', null, null, null, '/storage/public/staff/Sorachi-Hideaki.jpg');
+* insert into `staff_anime` VALUES (1,1, 'director');
+* insert into `review` values (null, 'title', 'This is my review', 1, default);
+* insert into `review_anime` VALUES (1,1, default);
+* insert into animelist values (3, 4, 8.5, 'Example comment', default,  10,  TRUE);
+* insert into mangalist values (3, 4, 8.5, 'Example comment', default,  10,  TRUE);
+*/
 
 COMMIT;

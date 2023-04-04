@@ -171,50 +171,50 @@ class User
     // Añadir o borrar un anime o manga a la base de datos.
     public function addToList($medium, $medium_id, $user_id, string $entry)
     {
-        if ($this -> validateSession() === TRUE) {
-            if (isset($_POST['add'])) {
-                $this -> con -> db -> execute_query('INSERT INTO `'.$medium.'list` (`user_id`, `'.$medium.'_id`, `progress`) VALUES (?, ?, default)', [$user_id, $medium_id]);
-                header('Location: /'.$medium.'/' . $entry);
-            } 
-        } else {
-            exit(header("Location: /logout"));
+        if (isset($_POST['add'])) {
+            $this -> con -> db -> execute_query('INSERT INTO `'.$medium.'list` (`user_id`, `'.$medium.'_id`, `progress`) VALUES (?, ?, default)', [$user_id, $medium_id]);
+            header('Location: /'.$medium.'/' . $entry);
         }
     }
 
     public function deleteFromList($medium, $medium_id, $user_id, string $entry)
     {
-        if ($this -> validateSession() === TRUE) {
-            if ($_POST['delete']) {
-                $this -> con -> db -> execute_query('DELETE FROM `'.$medium.'list` WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $medium_id]);
-                header('Location: /'.$medium.'/' . $entry);
-            }
-        } else {
-            exit(header("Location: /logout"));
+        if ($_POST['delete']) {
+            $this -> con -> db -> execute_query('DELETE FROM `'.$medium.'list` WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $medium_id]);
+            header('Location: /'.$medium.'/' . $entry);
         }
     }
 
     public function favourite(string $medium, int $medium_id, int $user_id, string $entry)
     {
-        if ($this -> validateSession() === TRUE) {
-            if (isset($_POST['favourite'])) {
-                $this -> con -> db -> execute_query('UPDATE '.$medium.'list SET `favorite` = true WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $medium_id]);
-                header('Location: /'.$medium.'/' . $entry);
-            }
-        } else {
-            exit(header("Location: /logout"));
+        if (isset($_POST['favourite'])) {
+            $this -> con -> db -> execute_query('UPDATE '.$medium.'list SET `favorite` = true WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $medium_id]);
+            header('Location: /'.$medium.'/' . $entry);
         }
     }
 
     public function unfavourite(string $medium, int $medium_id, int $user_id, string $entry)
     {
-        if ($this -> validateSession() === TRUE) {
-            if (isset($_POST['unfavourite'])) {
-                $this -> con -> db -> execute_query('UPDATE '.$medium.'list SET `favorite` = false WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $medium_id]);
-                header('Location: /'.$medium.'/' . $entry);
-            }
-        } else {
-            exit(header("Location: /logout"));
+        if (isset($_POST['unfavourite'])) {
+            $this -> con -> db -> execute_query('UPDATE '.$medium.'list SET `favorite` = false WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $medium_id]);
+            header('Location: /'.$medium.'/' . $entry);
         }
+    }
+
+    public function editListEntry(array $entryInfo, string $medium, int $medium_id, int $user_id, string $entry)
+    {
+        $this -> con -> db -> execute_query('UPDATE '.$medium.'list SET status = ?, score = ?, progress = ?, start_date = ?, end_date = ?, rewatches = ?, notes = ? WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [
+            $entryInfo['status'],
+            $entryInfo['score'],
+            $entryInfo['progress'],
+            $entryInfo['start-date'],
+            $entryInfo['end-date'],
+            $entryInfo['rewatches'],
+            $entryInfo['notes'],
+            $user_id,
+            $medium_id
+        ]);
+        header('Location: /'.$medium.'/' . $entry);
     }
 
     public function getAnimes(array $animelist): array
