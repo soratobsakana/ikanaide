@@ -1,8 +1,12 @@
+220404
+    [X] Validate list entry edition form data.
+        Had to rewrite many things in order to protect the controllers from accepting incorrect form input values or form action destinations.
+    [] Write list entry single page and complete profile lists.
+
 220330
     [X] Rework medium entry listing way of displaying the URI.
         /anime?id=1 to /anime/Gintama (it will replace spaces for hyphens when needed).
-    [] Rewrite submission and edition forms.
-
+    
 220329
     [X] Make progress on lists and think if merging animelist and mangalist code is useful.
         Views are merged into _listsprofile.view.php.

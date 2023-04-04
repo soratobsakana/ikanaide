@@ -11,7 +11,7 @@
         
         <?php
 
-        if ($result -> num_rows === 1) {
+        if (!empty($listEntry)) {
             ?>
 
             <input class="list-submit box submit-button__colorful" type="submit" value="Delete from list" name="delete">
@@ -19,9 +19,9 @@
 
 
             <?php
-            if (isset($favOrNot) && $favOrNot === 0) {
+            if (isset($listEntry['favorite']) && $listEntry['favorite'] === 0) {
                 ?><input class="list-submit box submit-button__colorful bg-orange" type="submit" value="Favourite" name="favourite"><?php
-            } else if (isset($favOrNot) && $favOrNot === 1) {
+            } else if (isset($listEntry['favorite']) && $listEntry['favorite'] === 1) {
                 ?><input class="list-submit box submit-button__colorful bg-orange" type="submit" value="Unfavourite" name="unfavourite"><?php
             }
         } else {
@@ -207,38 +207,42 @@
                         <div class="input-wrapper">
                             <label for="status">status</label>
                             <select name="status" id="status">
-                                <option value="watching">watching</option>
-                                <option value="completed">completed</option>
-                                <option value="planned">planned</option>
-                                <option value="dropped">dropped</option>
-                                <option value="stalled">stalled</option>
+                                <?php $medium === 'anime' ? $current = 'watching' : $current = 'reading'; ?>
+                                <option <?php if ($listEntry['status'] === 'watching')  { echo 'selected ';} ?>value="watching"><?=$current?></option>
+                                <option <?php if ($listEntry['status'] === 'completed') { echo 'selected ';} ?>value="completed">completed</option>
+                                <option <?php if ($listEntry['status'] === 'planned')   { echo 'selected ';} ?>value="planned">planned</option>
+                                <option <?php if ($listEntry['status'] === 'dropped')   { echo 'selected ';} ?>value="dropped">dropped</option>
+                                <option <?php if ($listEntry['status'] === 'stalled')   { echo 'selected ';} ?>value="stalled">stalled</option>
                             </select>
                         </div>
                         <div class="input-wrapper">
                             <label for="score">score</label>
-                            <input min='0' max='10' value='0' type="number" name="score" id="score">
+                            <!-- If score is null I want to show 0 instead of nothing (which I actually prefer on /user/animelist) -->
+                            <?php $listEntry['score'] === null ? $entryScore = 0 : $entryScore = $listEntry['score']; ?>
+                            <input min='0' max='10' value='<?=$entryScore?>' type="number" name="score" id="score">
                         </div>
                         <div class="input-wrapper">
                             <label for="progress">progress</label>
-                            <input min='0' max='<?=$mediumInfo['episodes']?>' value='0' type="number" name="progress" id="progress">
+                            <?php $medium === 'anime' ? $counter = 'episodes' : $counter = 'chapters'; ?>
+                            <input min='0' max='<?=$mediumInfo[$counter]?>' value='<?=$listEntry['progress']?>' type="number" name="progress" id="progress">
                         </div>
                         <div class="input-wrapper">
                             <label for="start-date">start date</label>
-                            <input type="date" name="start-date" id="start-date">
+                            <input type="date" value="<?=$listEntry['start_date']?>" name="start-date" id="start-date">
                         </div>
                         <div class="input-wrapper">
                             <label for="end-date">end date</label>
-                            <input type="date" name="end-date" id="end-date">
+                            <input type="date" value="<?=$listEntry['end_date']?>" name="end-date" id="end-date">
                         </div>
                         <div class="input-wrapper">
                             <label for="rewatches">rewatches</label>
-                            <input min='0' value='0' type="number" name="rewatches" id="rewatches">
+                            <input min='0' value='<?=$listEntry['rewatches']?>' type="number" name="rewatches" id="rewatches">
                         </div>
                     </div>
                     <div class="edit-list_fields-textarea">
                         <div class="input-wrapper">
                             <label for="notes">notes</label>
-                            <textarea name="notes" id="notes"></textarea>
+                            <textarea name="notes" id="notes"><?=$listEntry['notes']?></textarea>
                         </div>
                     </div>
                     <hr id="edit-list_fields-separator">

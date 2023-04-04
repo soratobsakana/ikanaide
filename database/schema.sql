@@ -446,7 +446,9 @@ show columns from anime;
 
 delete from animelist;
 
--- This will be the one to go in production
+select * from animelist;
+
+-- This might be the one to go in production
 CREATE TABLE animelist (
    `user_id` INT UNSIGNED NOT NULL,
    data JSON NOT NULL,

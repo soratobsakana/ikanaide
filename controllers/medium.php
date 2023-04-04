@@ -26,16 +26,15 @@ if (isset($guide[2])) {
             if ($Session -> validateSession() === TRUE) {
                 $user_id = $_COOKIE['user_id'];
 
-                // Comprobación de que el usuario tiene, o no, como favorito el anime o manga mostrado.
-                $User = new Database;
-                $result = $User -> db -> execute_query('select `favorite` from `'.$medium.'list` WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $id]);
-                $favOrNot = $result -> fetch_column();
+                // Extraigo la información de la lista (`animelist` o `mangalist`) del usuario logeado para utilizarla en mediumpage.view.php.
+                $User = new User;
+                $listEntry = $User -> getListEntry($medium, $id, $user_id);
             } else {
                 exit(header("Location: /logout"));
             }
         }
 
-        // Asigno estos valores a una superglobal para utilizarlos en el fichero addToList.php
+        // Asigno estos valores a una superglobal para utilizarlos en el fichero addToList.php.
         $_SESSION[$medium . '_id'] = $id;
         $_SESSION['medium'] = $medium;
         $_SESSION['entry'] = $entry;
@@ -49,6 +48,10 @@ if (isset($guide[2])) {
         $favourites = $Listing -> getFavourites($medium, $id);
 
         if ($mediumInfo !== null) {
+            // Introduzco el número de episodios|capitulos en una $_SESSION para utilizar en addToList.php.
+            $medium === 'anime' ? $counter = 'episodes' : $counter = 'chapters';
+            $_SESSION['counter'] = $mediumInfo[$counter];
+
             require('resources/views/medium/mediumpage.view.php');
         } else {
             header('Location: /404');

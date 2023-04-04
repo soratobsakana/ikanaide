@@ -46,7 +46,7 @@ section.profile_left-column-username {
 /* Estilos para el menú de navegación de la columna derecha. */
 div.profile_right-column nav.profile_user-nav {
     font-size: calc(var(--box-font-size) + 1px);
-    padding: 8px 15px;
+    padding: 6px 15px;
     border: 1px solid var(--box-title);
 }
 

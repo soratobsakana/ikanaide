@@ -20,6 +20,8 @@
                 </div>
             </div>
             <div class="profile_user-list_entry-wrapper box-wrapper">
+                <?php $medium === 'anime' ? $current = 'watching' : $current = 'reading'; ?>
+                <div class="box-title"><h3><?=ucfirst($current)?></h3></div>
                 <div class="box-body">
                     <?php
 
