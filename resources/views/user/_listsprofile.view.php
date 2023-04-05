@@ -19,60 +19,77 @@
                     </ul>
                 </div>
             </div>
-            <div class="profile_user-list_entry-wrapper box-wrapper">
-                <?php $medium === 'anime' ? $current = 'watching' : $current = 'reading'; ?>
-                <div class="box-title"><h3><?=ucfirst($current)?></h3></div>
-                <div class="box-body">
-                    <?php
+            <div class="profile_user-list_entry-wrapper">
+                <?php
 
-                    if ($medium === 'anime') {
-                        for ($i=0; $i<count($animelist); $i++) {
+                $medium === 'anime' ? $current = 'watching' : $current = 'reading';
+                $groups = [$current, 'completed', 'planned', 'stalled', 'dropped'];
+                foreach ($groups as $group) {
+                    if (isset($animes[$group]) && $medium === 'anime') {
+                        ?>
+                        <div class="box-wrapper">
+                        <div class="box-title"><h3><?=ucfirst($group)?></h3></div>
+                        <div class="box-body">
+                        <?php
+
+                        for ($i=0; $i<count($animes[$group]); $i++) {
                             ?>
                             <div class="profile_user-list_entry list-grid">
                                 <div class="profile_user-list_entry-cover">
-                                    <img src="<?=$animes[$i]['cover']?>">
+                                    <img src="<?=$animes[$group][$i]['cover']?>">
                                 </div>
                                 <div class="profile_user-list_entry-title">
-                                    <a href="/anime/<?=str_replace(' ', '-', $animes[$i]['title'])?>"><?=$animes[$i]['title']?></a>
+                                    <a href="/anime/<?=str_replace(' ', '-', $animes[$group][$i]['title'])?>"><?=$animes[$group][$i]['title']?></a>
                                 </div>
                                 <div class="profile_user-list_entry-score center-text">
                                     <?=$animelist[$i]['score']?>
                                 </div>
                                 <div class="profile_user-list_entry-progress center-text">
-                                    <?php $animelist[$i]['status'] === 'completed' ? $progress = $animes[$i]['episodes'] : $progress = $animelist[$i]['progress']; ?>
-                                    <?=$progress?>/<?=$animes[$i]['episodes']?>
+                                    <?php $animelist[$i]['status'] === 'completed' ? $progress = $animes[$group][$i]['episodes'] : $progress = $animelist[$i]['progress']; ?>
+                                    <?=$progress?>/<?=$animes[$group][$i]['episodes']?>
                                 </div>
                                 <div class="profile_user-list_entry-type center-text">
-                                    <?=$animes[$i]['type']?>
+                                    <?=$animes[$group][$i]['type']?>
                                 </div>
                             </div>
                             <?php
                         }
-                    } else if ($medium === 'manga') {
-                        for ($i=0; $i<count($mangalist); $i++) {
+                        echo '</div>';
+                        echo '</div>';
+                    } else if (isset($mangas[$group]) && $medium === 'manga') {
+                        ?>
+                        <div class="box-wrapper">
+                        <div class="box-title"><h3><?=ucfirst($group)?></h3></div>
+                        <div class="box-body">
+                        <?php
+
+                        for ($i=0; $i<count($mangas[$group]); $i++) {
                             ?>
                             <div class="profile_user-list_entry list-grid">
                                 <div class="profile_user-list_entry-cover">
-                                    <img src="<?=$mangas[0]['cover']?>">
+                                    <img src="<?=$mangas[$group][$i]['cover']?>">
                                 </div>
                                 <div class="profile_user-list_entry-title">
-                                    <a href="/manga/<?=str_replace(' ', '-', $mangas[$i]['title'])?>"><?=$mangas[$i]['title']?></a>
+                                    <a href="/manga/<?=str_replace(' ', '-', $mangas[$group][$i]['title'])?>"><?=$mangas[$group][$i]['title']?></a>
                                 </div>
                                 <div class="profile_user-list_entry-score center-text">
                                     <?=$mangalist[$i]['score']?>
                                 </div>
                                 <div class="profile_user-list_entry-progress center-text">
-                                    <?php $mangalist[$i]['status'] === 'completed' ? $progress = $mangas[$i]['chapters'] : $progress = $mangalist[$i]['progress']; ?>
-                                    <?=$progress?>/<?=$mangas[$i]['chapters']?>
+                                    <?php $mangalist[$i]['status'] === 'completed' ? $progress = $mangas[$group][$i]['chapters'] : $progress = $mangalist[$i]['progress']; ?>
+                                    <?=$progress?>/<?=$mangas[$group][$i]['chapters']?>
                                 </div>
                                 <div class="profile_user-list_entry-type center-text">
-                                    <?=$mangas[$i]['format']?>
+                                    <?=$mangas[$group][$i]['format']?>
                                 </div>
                             </div>
                             <?php
                         }
+                        echo '</div>';
+                        echo '</div>';
                     }
 
+                }
                     ?>
                 </div>
             </div>

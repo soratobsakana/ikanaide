@@ -13,32 +13,6 @@ if (isset($_COOKIE['session'])) {
 if ($user_id !== null) {
     $userInfo  = $Session -> getInfo($user_id);
     $animelist = $Session -> getList('anime', $user_id);
-    if (count($animelist) > 0) {
-        for ($i=0; $i<count($animelist);$i++) {
-            foreach ($animelist[$i] as $key => $value) {
-                if ($key === 'status') {
-                    switch($value) {
-                        case 'watching':
-                            $watching = $animelist[$i];
-                            break;
-                        case 'completed':
-                            $completed = $animelist[$i];
-                            break;
-                        case 'planned':
-                            $planned = $animelist[$i];
-                            break;
-                        case 'stalled':
-                            $stalled = $animelist[$i];
-                            break;
-                        case 'dropped':
-                            $dropped = $animelist[$i];
-                            break;
-                    }
-                }
-            }
-        }
-    }
-
     $mangalist = $Session -> getList('manga', $user_id);
     $animes = $Session -> getAnimes($animelist);
     $mangas = $Session -> getMangas($mangalist);

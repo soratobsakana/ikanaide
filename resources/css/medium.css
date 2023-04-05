@@ -305,9 +305,14 @@ div.querypage_list-edit_form form div.edit-list_fields * div.input-wrapper input
     background-color: var(--box-title);
     border-radius: var(--border-radius);
     width: 100%;
+    transition: filter var(--transition);
 }
 
-div.querypage_list-edit_form form div.edit-list_fields div.edit-list_fields-textarea textarea{
+div.querypage_list-edit_form form div.edit-list_fields * div.input-wrapper input:focus-within, textarea:focus-within, select:hover {
+    filter: brightness(1.15);
+}
+
+div.querypage_list-edit_form form div.edit-list_fields div.edit-list_fields-textarea textarea {
     padding: 10px 15px!important;
     min-height: 80px;
     max-height: 200px;

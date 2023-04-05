@@ -128,7 +128,7 @@ ul.profile_user-list_content-labels li{
     opacity: var(--font_low-opacity);
 }
 
-div.profile_user-list_entry-wrapper div.box-body {
+div.profile_user-list_entry-wrapper, div.box-body {
     display: grid;
     grid-gap: var(--gap);
 }

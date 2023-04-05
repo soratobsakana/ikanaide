@@ -290,9 +290,10 @@ class User
     // $counter is the number of episodes|chapters.
     public function editListEntry(string $medium, int $medium_id, int $user_id, string $entry, int $counter)
     {
+        $medium === 'anime' ? $current = 'watching' : $current = 'reading';
         // Confirmación de que el usuario no alterado el nombre de campo en el formulario HTML de mediumpage.view.php.
         $fields = ['status', 'score', 'progress', 'start-date', 'end-date', 'rewatches', 'notes', 'save'];
-        $statusValues = ['watching', 'completed', 'planned', 'stalled', 'dropped'];
+        $statusValues = [$current, 'completed', 'planned', 'stalled', 'dropped'];
         foreach ($_POST as $key => $value) {
             if (!in_array($key, $fields)) {
                 exit(header('Location: /'.$medium.'/' . $entry));
@@ -364,7 +365,23 @@ class User
         if (count($animelist) > 0) {
             for ($i=0; $i<count($animelist); $i++) {
                 $anime = $this -> con -> db -> execute_query('SELECT `anime_id`, `title`, `episodes`, `type`,  `cover` FROM `anime` WHERE `anime_id` = ?', [$animelist[$i]['anime_id']]);
-                $animes[$i] = $anime -> fetch_assoc();
+                switch($animelist[$i]['status']) {
+                    case 'watching':
+                        $animes['watching'][] = $anime -> fetch_assoc();
+                        break;
+                    case 'completed':
+                        $animes['completed'][] = $anime -> fetch_assoc();
+                        break;
+                    case 'planned':
+                        $animes['planned'][] = $anime -> fetch_assoc();
+                        break;
+                    case 'stalled':
+                        $animes['stalled'][] = $anime -> fetch_assoc();
+                        break;
+                    case 'dropped':
+                        $animes['dropped'][] = $anime -> fetch_assoc();
+                        break;
+                }
             }
             return $animes;
         } else {
@@ -377,7 +394,23 @@ class User
         if (count($mangalist) > 0) {
             for ($i=0; $i<count($mangalist); $i++) {
                 $manga = $this -> con -> db -> execute_query('SELECT `manga_id`, `title`, `chapters`, `format`,  `cover` FROM `manga` WHERE `manga_id` = ?', [$mangalist[$i]['manga_id']]);
-                $mangas[$i] = $manga -> fetch_assoc();
+                switch($mangalist[$i]['status']) {
+                    case 'reading':
+                        $mangas['reading'][] = $manga -> fetch_assoc();
+                        break;
+                    case 'completed':
+                        $mangas['completed'][] = $manga -> fetch_assoc();
+                        break;
+                    case 'planned':
+                        $mangas['planned'][] = $manga -> fetch_assoc();
+                        break;
+                    case 'stalled':
+                        $mangas['stalled'][] = $manga -> fetch_assoc();
+                        break;
+                    case 'dropped':
+                        $mangas['dropped'][] = $manga -> fetch_assoc();
+                        break;
+                }
             }
             return $mangas;
         } else {
