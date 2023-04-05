@@ -39,7 +39,8 @@
                                     <?=$animelist[$i]['score']?>
                                 </div>
                                 <div class="profile_user-list_entry-progress center-text">
-                                    <?=$animelist[$i]['progress']?>/<?=$animes[0]['episodes']?>
+                                    <?php $animelist[$i]['status'] === 'completed' ? $progress = $animes[$i]['episodes'] : $progress = $animelist[$i]['progress']; ?>
+                                    <?=$progress?>/<?=$animes[$i]['episodes']?>
                                 </div>
                                 <div class="profile_user-list_entry-type center-text">
                                     <?=$animes[$i]['type']?>
@@ -61,7 +62,8 @@
                                     <?=$mangalist[$i]['score']?>
                                 </div>
                                 <div class="profile_user-list_entry-progress center-text">
-                                    <?=$mangalist[$i]['progress']?>/<?=$mangas[0]['chapters']?>
+                                    <?php $mangalist[$i]['status'] === 'completed' ? $progress = $mangas[$i]['chapters'] : $progress = $mangalist[$i]['progress']; ?>
+                                    <?=$progress?>/<?=$mangas[$i]['chapters']?>
                                 </div>
                                 <div class="profile_user-list_entry-type center-text">
                                     <?=$mangas[$i]['format']?>
