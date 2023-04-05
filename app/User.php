@@ -287,7 +287,8 @@ class User
         }
     }
 
-    public function editListEntry(string $medium, int $medium_id, int $user_id, string $entry, int $progress)
+    // $counter is the number of episodes|chapters.
+    public function editListEntry(string $medium, int $medium_id, int $user_id, string $entry, int $counter)
     {
         // Confirmación de que el usuario no alterado el nombre de campo en el formulario HTML de mediumpage.view.php.
         $fields = ['status', 'score', 'progress', 'start-date', 'end-date', 'rewatches', 'notes', 'save'];
@@ -316,7 +317,7 @@ class User
                         }
                         break;
                     case 'progress':
-                        if ($value <= 0 || $value > $progress) {
+                        if ($value < 0 || $value > $counter) {
                             exit(header('Location: /'.$medium.'/' . $entry));
                         } else {
                             $entryInfo[$key] = $value ?? null;
@@ -353,6 +354,8 @@ class User
             $user_id,
             $medium_id
         ]);
+
+
         header('Location: /'.$medium.'/' . $entry);
     }
 
@@ -445,7 +448,7 @@ class User
         if ($sum === 0) {
             return $scoreAvg = 0;
         } else {
-            return $scoreAvg = $sum / $total;
+            return $scoreAvg = round(($sum / $total), 2);
         } 
     }
 

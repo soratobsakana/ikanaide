@@ -1,3 +1,10 @@
+220405
+    [] Make lists show maximun episode|chapter progress if status is completed.
+    [] Complete profile lists front-end.
+        [] Grouping by status (not show a group if it doesn't have any).
+        [] Hovering effects depends on the action (click name -> go to entry listing. general hover ->show entry edit form. progress hover -> show + and - to edit it).
+    [] Work on the review ecosystem.
+
 220404
     [X] Validate list entry edition form data.
         Had to rewrite many things in order to protect the controllers from accepting incorrect form input values or form action destinations.
