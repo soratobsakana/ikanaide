@@ -92,7 +92,6 @@
                 }
                     ?>
                 </div>
-            </div>
 
         <?php
     } else {

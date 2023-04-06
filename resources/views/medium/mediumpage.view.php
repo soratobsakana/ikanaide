@@ -90,7 +90,9 @@
         print "<img src=".$mediumInfo['header']." alt=".$mediumInfo['title'].">";
     }
     ?>
-    <section class="querypage_title"><h1><?=$mediumInfo['title']?></h1></section>
+    <section class="querypage_title box-wrapper">
+        <h1 style="font-family: Inter!important; font-weight: 900!important"><?=$mediumInfo['title']?></h1>
+    </section>
     <section class="querypage_desc box-wrapper">
         <div class="box-title">
             <h3>Description</h3>

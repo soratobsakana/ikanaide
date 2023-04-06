@@ -4,6 +4,16 @@
     <?php
     $page = parse_url($_SERVER['REQUEST_URI'])['path'];
     $username = explode("/", $page)[1];
+
+    // Si el primer elemento del URI es 'anime' o 'manga' y existe un segundo elemento (que correspondría a la entrada listada), se recoge el título para ponerlo en el <title></title>
+    $guide = explode("/", $page);
+    if (($username === 'anime' || $username === 'manga') && isset($guide[2])) {
+        $entryURI = explode("/", $page)[2];
+        $entryTitle = str_replace('-', ' ', $entryURI);
+    } else {
+        $entryURI = '';
+    }
+
     // For the root path and URI's that have more than one word.
     switch ($page) {
         case '/':
@@ -35,6 +45,10 @@
             break;
             case '/'.$username.'/favorites':
             $tabTitle = $username . '\'s favorites';
+            break;
+        case '/anime/' . $entryURI:
+        case '/manga/' . $entryURI:
+            $tabTitle = $entryTitle;
             break;
         default:
             $tabTitle = $username;
