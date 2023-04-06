@@ -93,12 +93,14 @@ class User
                         $result = $this -> con -> db -> execute_query('SELECT `user_id` FROM user WHERE username = ?', [$loginInfo['username']]);
                         if ($result -> num_rows === 1) {
                             $user_id = $result -> fetch_column();
+                            $result = $this -> con -> db -> execute_query('SELECT username FROM user WHERE user_id = ?', [$user_id]);
+                            $username = $result -> fetch_column();
                             // Comprobación de la contraseña. Si coincide se autenticará al usuario.
                             $result = $this -> con -> db -> execute_query('SELECT `password` FROM user WHERE username = ?', [$loginInfo['username']]);
                             $password = $result -> fetch_column();
                             if (password_verify($loginInfo['password'], $password)) {
                                 // Todas las verificaciones han sido exitosas, por lo que se inicia una sesión al usuario autenticado.
-                                setcookie('username', $loginInfo['username'], strtotime('NOW+60DAYS'));
+                                setcookie('username', $username, strtotime('NOW+60DAYS'));
                                 setcookie('user_id', $user_id, strtotime('NOW+60DAYS'));
                                 setcookie('passwd', $password, strtotime('NOW+60DAYS'));
                                 setcookie('session', "Yes", strtotime('NOW+60DAYS'));
@@ -154,6 +156,16 @@ class User
         $result = $this -> con -> db -> execute_query('SELECT `user_id` FROM `user` WHERE username = ?', [$username]);
         if ($result -> num_rows === 1) {
             return $user_id = $result -> fetch_column();
+        } else {
+            return null;
+        }
+    }
+
+    public function getUsername(int $user_id): string|null
+    {
+        $result = $this -> con -> db -> execute_query('SELECT `username` FROM `user` WHERE user_id = ?', [$user_id]);
+        if ($result -> num_rows === 1) {
+            return $result -> fetch_column();
         } else {
             return null;
         }
