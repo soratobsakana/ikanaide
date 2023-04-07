@@ -36,6 +36,14 @@ class Listing
         }
     }
 
+    // Retorno una cadena en este método porque, en caso de ser retornar un número entero, prefiero mostrar X.00 en vez de X, en este caso.
+    public function getScore(string $medium, int $medium_id): string|null
+    {
+        return $this -> con -> db -> execute_query('SELECT score FROM (
+        SELECT '.$medium.'_id, round(avg(score), 2) AS score FROM '.$medium.'list GROUP BY '.$medium.'_id
+        ) AS scores WHERE '.$medium.'_id = ?', [$medium_id]) -> fetch_column();
+    }
+
     public function getFavourites(string $medium, int $medium_id): int
     {
         return $this -> con -> db -> execute_query('SELECT count(favorite) FROM '.$medium.'list WHERE '.$medium.'_id = ? AND favorite=true', [$medium_id]) -> fetch_column();
@@ -44,6 +52,24 @@ class Listing
     public function getMembers(string $medium, int $medium_id): int
     {
         return $this -> con -> db -> execute_query('SELECT count(user_id) FROM '.$medium.'list WHERE '.$medium.'_id = ?', [$medium_id]) -> fetch_column();
+    }
+
+    public function getRank(string $medium, int $medium_id): int
+    {
+        return $this -> con -> db -> execute_query('SELECT score_rank FROM (
+        SELECT '.$medium.'_id, ROUND(AVG(score), 2) AS score, ROW_NUMBER() OVER(ORDER BY AVG(score)) AS score_rank
+        FROM '.$medium.'list WHERE score IS NOT NULL
+        GROUP BY '.$medium.'_id
+        ) AS scores WHERE '.$medium.'_id = ?', [$medium_id]) -> fetch_column();
+    }
+
+    public function getPopularity(string $medium, int $medium_id): int
+    {
+        return $this -> con -> db -> execute_query('SELECT pop_rank FROM (
+        SELECT '.$medium.'_id, COUNT('.$medium.'_id) AS popularity, ROW_NUMBER() OVER(ORDER BY COUNT('.$medium.'_id) desc) AS pop_rank
+        FROM '.$medium.'list
+        GROUP BY '.$medium.'_id
+        ) AS pop_rank WHERE '.$medium.'_id = ?', [$medium_id]) -> fetch_column();
     }
 
     // Devuelve la información sobre los personajes asociados a una entrada de la base de datos.

@@ -44,3 +44,13 @@ $time_start = microtime(true);
 $time_end = microtime(true);
 $execution_time = ($time_end - $time_start);
 echo '<b>Total Execution Time:</b> '.$execution_time.' seconds';
+
+// SQL query that returns anime|manga average scores and rank.
+/**
+ * SELECT * FROM (
+SELECT anime_id, ROUND(AVG(score), 2) AS score, ROW_NUMBER() OVER(ORDER BY AVG(score)) AS score_rank
+FROM animelist
+GROUP BY anime_id
+) AS scores
+WHERE anime_id = 1;
+ */

@@ -79,6 +79,19 @@ section.querypage_edit:hover p {
     opacity: 1;
 }
 
+/* Score and Rank displaying. */
+section.querypage_rank {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: var(--gap);
+}
+
+section.querypage_rank * div.box-body {
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+}
+
 /***** Columna derecha. *****/
 /* Propósito: aplicado de estilos a la sección de personajes. */
 section.querypage_char {

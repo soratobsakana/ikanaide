@@ -45,7 +45,10 @@ if (isset($guide[2])) {
         $staff = $Listing -> getStaff($medium, [$id]);
         $reviews = $Listing -> getReviews($medium, [$id]);
         $members = $Listing -> getMembers($medium, $id);
-        $favourites = $Listing -> getFavourites($medium, $id);
+        $favourited = $Listing -> getFavourites($medium, $id);
+        $rank = $Listing -> getRank($medium, $id);
+        $popularity = $Listing -> getPopularity($medium, $id);
+        $score = $Listing -> getScore($medium, $id);
 
         if ($mediumInfo !== null) {
             // Introduzco el número de episodios|capitulos en una $_SESSION para utilizar en addToList.php.

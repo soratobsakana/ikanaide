@@ -38,7 +38,41 @@
     }
 
     ?>
-            
+
+    <section class="querypage_rank">
+        <div class="score box-wrapper">
+            <div class="box-title">
+                <h3>Score</h3>
+            </div>
+            <div class="box-body">
+                <?php
+                // $score is a string value, so I use '' instead of 0.
+                if (isset($score) && $score !== '') {
+                    echo $score;
+                } else {
+                    echo 'N/A';
+                }
+                ?>
+
+            </div>
+        </div>
+        <div class="rank box-wrapper">
+            <div class="box-title">
+                <h3>Rank</h3>
+            </div>
+            <div class="box-body">
+                <?php
+
+                if (isset($rank) && $rank !== 0) {
+                    ?><span>#<?=$rank?></span><?php
+                } else {
+                    ?><span>N/A</span><?php
+                }
+
+                ?>
+            </div>
+        </div>
+    </section>
     <section class="querypage_info box-wrapper">
         <div class="box-title">
             <h3>Information</h3>
@@ -72,9 +106,25 @@
         <div class="box-body">
             <ul class="two-column-list">
                 <li><span class="ul_first-column">members</span><span><?=$members?></span></li>
-                <li><span class="ul_first-column">loved</span><span><?=$favourites?></span></li>
-                <li><span class="ul_first-column">ranked</span><span></span></li>
-                <li><span class="ul_first-column">popularity</span><span></span></li>
+                <li><span class="ul_first-column">favourited</span><span><?=$favourited?></span></li>
+                <li><span class="ul_first-column">ranked</span>
+                <?php
+                if (isset($rank) && $rank !== 0) {
+                    ?><span>#<?=$rank?></span><?php
+                } else {
+                    ?><span>N/A</span><?php
+                }
+                ?>
+                </li>
+                <li><span class="ul_first-column">popularity</span>
+                <?php
+                if (isset($popularity) && $popularity !== 0) {
+                    ?><span>#<?=$popularity?></span><?php
+                } else {
+                    ?><span>N/A</span><?php
+                }
+                ?>
+                </li>
             </ul>
         </div>
     </section>
