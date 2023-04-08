@@ -185,7 +185,7 @@ class User
             while ($row = $result -> fetch_assoc()) {
                 foreach($row as $key => $value) {
                     if ($key === 'score') {
-                        // Ya que quiero mostrar 4.5, 4.2... pero no 4.0, esta condición convertiría 4.0 en 4.
+                        // Ya que quiero mostrar 4.5, 4.2... pero no 4.0, esta condición convierte 4.0 en 4.
                         if ($value !== null && fmod($value, 1) === 0.0) {
                             $list[$i][$key] = floor($value);
                         } else {
@@ -210,7 +210,7 @@ class User
             $row = $result -> fetch_assoc();
             foreach ($row as $key => $value) {
                 if ($key === 'score') {
-                    // Ya que quiero mostrar 4.5, 4.2... pero no 4.0, esta condición convertiría 4.0 en 4.
+                    // Ya que quiero mostrar 4.5, 4.2... pero no 4.0, esta condición convierte 4.0 en 4.
                     if ($value !== null && fmod($value, 1) === 0.0) {
                         $listEntry[$key] = floor($value);
                     } else {
@@ -303,6 +303,7 @@ class User
     public function editListEntry(string $medium, int $medium_id, int $user_id, string $entry, int $counter)
     {
         $medium === 'anime' ? $current = 'watching' : $current = 'reading';
+
         // Confirmación de que el usuario no alterado el nombre de campo en el formulario HTML de mediumpage.view.php.
         $fields = ['status', 'score', 'progress', 'start-date', 'end-date', 'rewatches', 'notes', 'save'];
         $statusValues = [$current, 'completed', 'planned', 'stalled', 'dropped'];
@@ -323,10 +324,10 @@ class User
                         }
                         break;
                     case 'score':
-                        if ($value >= 0 && $value <= 10) {
+                        if ($value >= 1 && $value <= 10) {
                             $entryInfo[$key] = $value ?? null;
                         } else {
-                            exit(header('Location: /'.$medium.'/' . $entry));
+                            $entryInfo[$key] = null;
                         }
                         break;
                     case 'progress':
@@ -355,6 +356,9 @@ class User
         if (empty($entryInfo['end-date'])) {
             $entryInfo['end-date'] = null;
         }
+        if ($entryInfo['status'] === 'completed') {
+            $entryInfo['progress'] = $counter;
+        }
 
         $this -> con -> db -> execute_query('UPDATE '.$medium.'list SET status = ?, score = ?, progress = ?, start_date = ?, end_date = ?, rewatches = ?, notes = ? WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [
             $entryInfo['status'],
@@ -376,22 +380,25 @@ class User
     {
         if (count($animelist) > 0) {
             for ($i=0; $i<count($animelist); $i++) {
-                $anime = $this -> con -> db -> execute_query('SELECT `anime_id`, `title`, `episodes`, `type`,  `cover` FROM `anime` WHERE `anime_id` = ?', [$animelist[$i]['anime_id']]);
+                $anime = $this -> con -> db -> execute_query('SELECT `anime_id`, `title`, `episodes`, `type`,  `cover` FROM `anime` WHERE `anime_id` = ?', [$animelist[$i]['anime_id']]) -> fetch_assoc();
+                $anime['score'] = $animelist[$i]['score'];
+                $anime['progress'] = $animelist[$i]['progress'];
+                $anime['notes'] = $animelist[$i]['notes'];
                 switch($animelist[$i]['status']) {
                     case 'watching':
-                        $animes['watching'][] = $anime -> fetch_assoc();
+                        $animes['watching'][] = $anime;
                         break;
                     case 'completed':
-                        $animes['completed'][] = $anime -> fetch_assoc();
+                        $animes['completed'][] = $anime;
                         break;
                     case 'planned':
-                        $animes['planned'][] = $anime -> fetch_assoc();
+                        $animes['planned'][] = $anime;
                         break;
                     case 'stalled':
-                        $animes['stalled'][] = $anime -> fetch_assoc();
+                        $animes['stalled'][] = $anime;
                         break;
                     case 'dropped':
-                        $animes['dropped'][] = $anime -> fetch_assoc();
+                        $animes['dropped'][] = $anime;
                         break;
                 }
             }

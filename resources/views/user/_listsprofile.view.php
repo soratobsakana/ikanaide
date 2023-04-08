@@ -42,11 +42,10 @@
                                     <a href="/anime/<?=str_replace(' ', '-', $animes[$group][$i]['title'])?>"><?=$animes[$group][$i]['title']?></a>
                                 </div>
                                 <div class="profile_user-list_entry-score center-text">
-                                    <?=$animelist[$i]['score']?>
+                                    <?=$animes[$group][$i]['score']?>
                                 </div>
                                 <div class="profile_user-list_entry-progress center-text">
-                                    <?php $animelist[$i]['status'] === 'completed' ? $progress = $animes[$group][$i]['episodes'] : $progress = $animelist[$i]['progress']; ?>
-                                    <?=$progress?>/<?=$animes[$group][$i]['episodes']?>
+                                    <?=$animes[$group][$i]['progress']?>/<?=$animes[$group][$i]['episodes']?>
                                 </div>
                                 <div class="profile_user-list_entry-type center-text">
                                     <?=$animes[$group][$i]['type']?>
