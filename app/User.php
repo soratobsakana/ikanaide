@@ -412,22 +412,25 @@ class User
     {
         if (count($mangalist) > 0) {
             for ($i=0; $i<count($mangalist); $i++) {
-                $manga = $this -> con -> db -> execute_query('SELECT `manga_id`, `title`, `chapters`, `format`,  `cover` FROM `manga` WHERE `manga_id` = ?', [$mangalist[$i]['manga_id']]);
+                $manga = $this -> con -> db -> execute_query('SELECT `manga_id`, `title`, `chapters`, `format`,  `cover` FROM `manga` WHERE `manga_id` = ?', [$mangalist[$i]['manga_id']]) -> fetch_assoc();
+                $manga['score'] = $mangalist[$i]['score'];
+                $manga['progress'] = $mangalist[$i]['progress'];
+                $manga['notes'] = $mangalist[$i]['notes'];
                 switch($mangalist[$i]['status']) {
                     case 'reading':
-                        $mangas['reading'][] = $manga -> fetch_assoc();
+                        $mangas['reading'][] = $manga;
                         break;
                     case 'completed':
-                        $mangas['completed'][] = $manga -> fetch_assoc();
+                        $mangas['completed'][] = $manga;
                         break;
                     case 'planned':
-                        $mangas['planned'][] = $manga -> fetch_assoc();
+                        $mangas['planned'][] = $manga;
                         break;
                     case 'stalled':
-                        $mangas['stalled'][] = $manga -> fetch_assoc();
+                        $mangas['stalled'][] = $manga;
                         break;
                     case 'dropped':
-                        $mangas['dropped'][] = $manga -> fetch_assoc();
+                        $mangas['dropped'][] = $manga;
                         break;
                 }
             }

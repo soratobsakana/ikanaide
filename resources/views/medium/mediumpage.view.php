@@ -260,7 +260,7 @@
                             <label for="status">status</label>
                             <select name="status" id="status">
                                 <?php $medium === 'anime' ? $current = 'watching' : $current = 'reading'; ?>
-                                <option <?php if ($listEntry['status'] === 'watching')  { echo 'selected ';} ?>value="watching"><?=$current?></option>
+                                <option <?php if ($listEntry['status'] === 'watching')  { echo 'selected ';} ?>value="<?=$current?>"><?=$current?></option>
                                 <option <?php if ($listEntry['status'] === 'completed') { echo 'selected ';} ?>value="completed">completed</option>
                                 <option <?php if ($listEntry['status'] === 'planned')   { echo 'selected ';} ?>value="planned">planned</option>
                                 <option <?php if ($listEntry['status'] === 'dropped')   { echo 'selected ';} ?>value="dropped">dropped</option>
