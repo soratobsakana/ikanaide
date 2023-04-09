@@ -28,6 +28,12 @@ $routes = array(
     '/manga' => 'controllers/medium.php',
     '/vn' => 'controllers/medium.php',
     '/rankings' => 'controllers/rankings.php',
+    '/rankings/anime' => 'controllers/rankings.php',
+    '/rankings/manga' => 'controllers/rankings.php',
+    '/rankings/vn' => 'controllers/rankings.php',
+    '/rankings/soundtracks' => 'controllers/rankings.php',
+    '/rankings/openings' => 'controllers/rankings.php',
+    '/rankings/endings' => 'controllers/rankings.php',
     '/community' => 'controllers/community.php',
 
     '/terms' => 'resources/views/terms.view.php',

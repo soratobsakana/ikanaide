@@ -1,0 +1,31 @@
+div.rankings-page_wrapper {
+    width: 100%;
+    display: grid;
+    grid-gap: var(--gap);
+}
+
+nav.rankings-page_menu ul {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 8px 15px;
+}
+
+nav.rankings-page_menu ul li {
+    font-size: calc(var(--box-font-size) + 1px);
+    transition: var(--transition);
+}
+
+nav.rankings-page_menu ul:hover li {
+    opacity: var(--font_low-opacity)!important;
+}
+
+nav.rankings-page_menu ul li:hover {
+    opacity: 1!important;
+}
+
+section.rankings-page_list-labels ul {
+    padding: 5px 20px!important;
+    display: grid;
+    grid-template-columns: 10% 40% 10% 15%;
+}

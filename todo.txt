@@ -1,9 +1,19 @@
+220410
+    [] Work on user following system.
+    [] Work on the home page
+    [] Work on the anime|manga home page.
+
+220409
+    [] Add anime and manga views to the ranking section.
+    [] Work on the review ecosystem.
+    [] Work on user posting and activity.
+    [] Add needed details to what's already written.
+
 220405
     [X] Make lists show maximun episode|chapter progress if status is completed.
     [-] Complete profile lists front-end.
         [X] Grouping by status (not show a group if it doesn't have any).
         [] Hovering effects depends on the action (click name -> go to entry listing. general hover -> show entry edit form. progress hover -> show + and - to edit it).
-    [] Work on the review ecosystem.
 
 220404
     [X] Validate list entry edition form data.
