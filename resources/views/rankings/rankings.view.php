@@ -3,10 +3,10 @@
         <ul class="box-wrapper box-body">
             <?php
 
-            $menuFields = ['anime', 'manga', 'vn', 'soundtracks', 'openings', 'endings'];
+            $menuFields = ['anime', 'manga'];
             foreach($menuFields as $field) {
                 if ($page === '/rankings/' . $field) {
-                    echo '<a href="/rankings/'.$field.'"><li style="opacity: 1">top ' . $field .'</li></a>';
+                    echo '<a href="/rankings/'.$field.'"><li class="current-ranking">top ' . $field .'</li></a>';
                 } else {
                     echo '<a href="/rankings/'.$field.'"><li class="low-opacity">top ' . $field .'</li></a>';
                 }
@@ -26,23 +26,12 @@
     <?php
 
     switch($page) {
+        case '/rankings':
         case '/rankings/anime':
-            require 'resources/views/rankings/_animeranking.php';
+            require 'resources/views/rankings/_animeranking.view.php';
             break;
         case '/rankings/manga':
-            require 'resources/views/rankings/_mangaranking.php';
-            break;
-        case '/rankings/vn':
-            require 'resources/views/rankings/_vnranking.php';
-            break;
-        case '/rankings/soundtracks':
-            require 'resources/views/rankings/_ostranking.php';
-            break;
-        case '/rankings/openings':
-            require 'resources/views/rankings/_openingranking.php';
-            break;
-        case '/rankings/endings':
-            require 'resources/views/rankings/_endingranking.php';
+            require 'resources/views/rankings/_mangaranking.view.php';
             break;
         default:
             header('Location: /404');

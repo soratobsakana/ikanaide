@@ -6,22 +6,35 @@ div.rankings-page_wrapper {
 
 nav.rankings-page_menu ul {
     width: 100%;
-    display: flex;
-    justify-content: space-around;
-    padding: 8px 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0px!important;
+    text-align: center;
 }
 
 nav.rankings-page_menu ul li {
-    font-size: calc(var(--box-font-size) + 1px);
+    padding: 6px 15px;
+    font-size: calc(var(--box-font-size) + 0px);
     transition: var(--transition);
+    background-color: var(--box-title);
+}
+
+nav.rankings-page_menu ul li.low-opacity {
+    background-color: var(--box-bg);
+}
+
+nav.rankings-page_menu ul li.low-opacity:hover li.current-ranking {
+    background-color: blue;
 }
 
 nav.rankings-page_menu ul:hover li {
     opacity: var(--font_low-opacity)!important;
+    background-color: var(--box-bg);
 }
 
 nav.rankings-page_menu ul li:hover {
     opacity: 1!important;
+    background-color: var(--box-title);
 }
 
 section.rankings-page_list-labels ul {
