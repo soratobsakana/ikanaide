@@ -15,6 +15,8 @@ class Ranking
     }
 
     /**
+     * @param string $medium
+     * @return array|null
      * Returns all ranked anime|manga. An anime is ranked if it exists on any of the medium lists (atm: `animelist` and `mangalist`) that has a score.
      * Information needed for the rankings page is: the ID of each entry, its score, its rank, member count, title and cover.
      */

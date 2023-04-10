@@ -12,11 +12,28 @@ $medium = $guide[1]; // anime|manga
 // Si se indica un anime o manga por URL, significa que explode('/', $uri) va a devolver un tercer valor. Si esto pasa, creo una ruta dinámica en $mediumRoutes que utilizo abajo mediante un else if.
 // Si no existe un tercer valor, se require el controlador indicado para /anime y /manga indicado en $routes.
 // Ambos casos conducen al mismo controlador (/controllers/medium.php), que se encarga de mostrar el listado de un anime o manga, o mostrar la página predeterminada de cada medio.
-if (isset($guide[2])) {
+if (($guide[1] === 'anime' || $guide[1] === 'manga') && isset($guide[2])) {
     $entry = $guide[2];  // Nombre-de-Anime|Manga
     $mediumRoutes = [
         '/'.$medium.'/'.$entry => 'controllers/medium.php',
+        '/'.$medium.'/'.$entry.'/characters'=> 'controllers/medium.php',
+        '/'.$medium.'/'.$entry.'/staff'=> 'controllers/medium.php',
+        '/'.$medium.'/'.$entry.'/reviews'=> 'controllers/medium.php',
     ];
+}
+
+if ($guide[1] === 'review' && isset($guide[3])) {
+    $newReview = $guide[3];  // Nombre-de-Anime|Manga
+    $reviewRoutes = [
+        '/review/new/'.$newReview => 'controllers/review.php'
+    ];
+} else if ($guide[1] === 'review' && isset($guide[2])) {
+    if (is_numeric($guide[2])) {
+        $reviewEntry = $guide[2];  // Review ID
+        $reviewRoutes = [
+            '/review/'.$reviewEntry => 'controllers/review.php'
+        ];
+    }
 }
 
 
@@ -27,13 +44,13 @@ $routes = array(
     '/anime' => 'controllers/medium.php',
     '/manga' => 'controllers/medium.php',
     '/vn' => 'controllers/medium.php',
+
     '/rankings' => 'controllers/rankings.php',
     '/rankings/anime' => 'controllers/rankings.php',
     '/rankings/manga' => 'controllers/rankings.php',
-    '/rankings/vn' => 'controllers/rankings.php',
-    '/rankings/soundtracks' => 'controllers/rankings.php',
-    '/rankings/openings' => 'controllers/rankings.php',
-    '/rankings/endings' => 'controllers/rankings.php',
+
+    '/reviews' => 'controllers/review.php',
+
     '/community' => 'controllers/community.php',
 
     '/terms' => 'resources/views/terms.view.php',
@@ -61,12 +78,18 @@ $routes = array(
 // Filtrar la $uri a traves del array de rutas y requerir el archivo al que refiere esa URI.
 if (array_key_exists($uri, $routes)) {
     require $routes[$uri];
-} else if (($guide[1] === 'anime' || $guide[1] === 'manga') && isset($guide[2])){
+} else if (($guide[1] === 'anime' || $guide[1] === 'manga') && isset($guide[2])) {
     if (array_key_exists($uri, $mediumRoutes)) {
         require $mediumRoutes[$uri];
     } else {
         exit(header('Location: /404'));
     }
+} else if (isset($reviewRoutes)) {
+   if (array_key_exists($uri, $reviewRoutes)) {
+       require $reviewRoutes[$uri];
+   } else {
+       exit(header('Location: /404'));
+   }
 } else {
     // En caso de no existir el URI solicitado, se procesa la información mediante profileRouter.php para encontrar un usuario.
     require 'profileRouter.php';
