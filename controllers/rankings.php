@@ -9,6 +9,6 @@ if ($page === '/rankings') {
 $medium = explode('/', $uri)[2]; // anime|manga
 $Ranking = new Ranking;
 
-$animes = $Ranking -> getRankings($medium);
+$ranking = $Ranking -> getRankings($medium);
 
 require 'resources/views/rankings/rankings.view.php';

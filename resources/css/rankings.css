@@ -38,7 +38,37 @@ nav.rankings-page_menu ul li:hover {
 }
 
 section.rankings-page_list-labels ul {
-    padding: 5px 20px!important;
+    padding: 5px 15px!important;
+    padding-left: 0px!important;
     display: grid;
-    grid-template-columns: 10% 40% 10% 15%;
+    grid-template-columns: 7% 5% 50% 8% 8%;
+}
+
+section.rankings-page_anime_wrapper {
+    padding-left: 0px!important;
+}
+
+section.rankings-page_anime_content {
+    display: grid;
+    grid-gap: var(--gap);
+}
+
+section.rankings-page_anime_content img {
+    max-height: 40px;
+}
+
+section.rankings-page_anime_content div.rankings-page_anime_content-entry {
+    display: grid;
+    grid-template-columns: 7% 5% 50% 8% 8%;
+    word-break: break-word;
+}
+
+section.rankings-page_anime_content div.rankings-page_anime_content-entry div {
+    display: flex;
+    align-items: center;
+    transition: var(--transition);
+}
+
+section.rankings-page_anime_content div.rankings-page_anime_content-entry div.low-opacity:hover {
+    opacity: 1;
 }

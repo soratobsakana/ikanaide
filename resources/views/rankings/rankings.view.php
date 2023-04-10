@@ -15,12 +15,16 @@
             ?>
         </ul>
     </nav>
-    <section class="rankings-page_list-labels">
-        <ul class="box-wrapper box-body">
-            <li class="low-opacity">rank</li>
+    <section class="rankings-page_list-labels box-wrapper">
+        <div class="box-title">
+            <h3><?=ucfirst($medium)?> rankings</h3>
+        </div>
+        <ul class=" box-body">
+            <li class="low-opacity center-text">rank</li>
+            <li class="low-opacity"></li>
             <li class="low-opacity">title</li>
-            <li class="low-opacity">score</li>
-            <li class="low-opacity">members</li>
+            <li class="low-opacity center-text">score</li>
+            <li class="low-opacity center-text">members</li>
         </ul>
     </section>
     <?php
@@ -28,10 +32,10 @@
     switch($page) {
         case '/rankings':
         case '/rankings/anime':
-            require 'resources/views/rankings/_animeranking.view.php';
+            require 'resources/views/rankings/_ranking.view.php';
             break;
         case '/rankings/manga':
-            require 'resources/views/rankings/_mangaranking.view.php';
+            require 'resources/views/rankings/_ranking.view.php';
             break;
         default:
             header('Location: /404');
