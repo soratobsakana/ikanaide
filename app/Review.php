@@ -60,4 +60,45 @@ class Review
             return null;
         }
     }
+
+    public function getReview(int $review_id): array|null
+    {
+        $result = $this -> con -> db -> execute_query('SELECT * FROM review WHERE review_id = ?', [$review_id]);
+        if ($result -> num_rows === 1) {
+            $row = $result -> fetch_assoc();
+            $review['review_id'] = $row['review_id'];
+            $review['title'] = $row['title'];
+            $review['text'] = $row['text'];
+            $review['user_id'] = $row['user_id'];
+            $review['date'] = $row['date'];
+
+            $user = $this -> con -> db -> execute_query('SELECT username, pfp FROM user WHERE user_id = ?', [$row['user_id']]);
+            if ($user -> num_rows === 1) {
+                $row = $user -> fetch_assoc();
+                $review['username'] = $row['username'];
+                $review['pfp'] = $row['pfp'];
+            }
+
+            $entryAnime = $this -> con -> db -> execute_query('SELECT anime_id FROM review_anime WHERE review_id = ?', [$review['review_id']]);
+            $entryManga = $this -> con -> db -> execute_query('SELECT manga_id FROM review_manga WHERE review_id = ?', [$review['review_id']]);
+
+            if ($entryAnime -> num_rows === 1) {
+                $medium = 'anime';
+                $medium_id = $entryAnime -> fetch_column();
+            } else if ($entryManga -> num_rows === 1){
+                $medium = 'manga';
+                $medium_id = $entryManga -> fetch_column();
+            }
+
+            $mediumEntry = $this -> con -> db -> execute_query('SELECT title FROM '.$medium.' WHERE '.$medium.'_id = ?', [$medium_id]);
+            if ($mediumEntry -> num_rows === 1) {
+                $row = $mediumEntry -> fetch_assoc();
+                $review['entry'] = $row['title'];
+                $review['medium'] = $medium;
+            }
+            return $review;
+        } else {
+            return null;
+        }
+    }
 }

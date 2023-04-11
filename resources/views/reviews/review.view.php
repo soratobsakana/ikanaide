@@ -21,6 +21,8 @@
 
             <?php
         }
+    } else if (isset($review)) {
+        pre($review);
     }
     
     ?>
