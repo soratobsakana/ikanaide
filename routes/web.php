@@ -33,6 +33,11 @@ if ($guide[1] === 'review' && isset($guide[3])) {
         $reviewRoutes = [
             '/review/'.$reviewEntry => 'controllers/review.php'
         ];
+    } else if (($guide[1] . '/' . $guide[2] === 'review/new') && isset($guide[3])) {
+        $reviewEntry = $guide[2];
+        $reviewRoutes = [
+            '/review/new/' . $reviewEntry => 'controllers/review.php'
+        ];
     }
 }
 
