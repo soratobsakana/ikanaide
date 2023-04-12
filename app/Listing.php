@@ -129,9 +129,19 @@ class Listing
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
+
+                // Asignación de las columnas de `review` al array $reviewsHome.
                 foreach ($row as $key => $value) {
                     $reviewInfo[$key] = $value;
                 }
+
+                $user = $this -> con -> db -> execute_query('SELECT username, pfp FROM user WHERE user_id = ?', [$row['user_id']]);
+                if ($user -> num_rows === 1) {
+                    $row = $user -> fetch_assoc();
+                    $reviewInfo['username'] = $row['username'];
+                    $reviewInfo['pfp'] = $row['pfp'];
+                }
+
                 $reviews[] = $reviewInfo;
             }
             return $reviews;

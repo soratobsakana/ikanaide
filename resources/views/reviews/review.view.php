@@ -1,29 +1,13 @@
-<section class="reviews_home-wrapper">
-    <?php
-    
-    if (isset($reviewsHome)) {
-        for ($i = 0; $i < count($reviewsHome); $i++) {
-            ?>
+<?php
 
-                <div class="review">
-                <a href="/review/<?=$reviewsHome[$i]['review_id']?>">
-                    <div class="first-row">
-                    <img class="review_home_user-pfp" src="<?=$reviewsHome[$i]['pfp']?>" alt="<?=$reviewsHome[$i]['username']?>">    
-                    <div class="review_home_user-body box-wrapper box-body">
-                        <i><?=$reviewsHome[$i]['title']?>.</i>
-                    </div>
-                    </div>
-                </a>
-                    <div class="second-row">
-                        <p>Written by <a href="/<?=$reviewsHome[$i]['username']?>"><?=$reviewsHome[$i]['username']?></a> on <a href="/<?=$reviewsHome[$i]['medium']?>/<?=str_replace(' ', '-', $reviewsHome[$i]['entry'])?>"><?=$reviewsHome[$i]['entry']?></a></p>
-                    </div>
-                </div>
+if (isset($reviewsHome)) {
+    require '_reviewHome.view.php';
+} else if (isset($review)) {
+    require '_reviewEntry.view.php';
+} else if (isset($newReview)) {
+    require '_reviewNew.view.php';
+} else {
+    header('Location: /404');
+}
 
-            <?php
-        }
-    } else if (isset($review)) {
-        pre($review);
-    }
-    
-    ?>
-</section>
+?>

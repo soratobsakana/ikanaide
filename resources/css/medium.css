@@ -190,12 +190,15 @@ div.querypage_review-entry_wrapper {
 }
 
 div.querypage_review-entry {
-    display: flex;
     overflow: hidden;
 }
 
 div.querypage_review-entry:last-child {
     border-bottom-right-radius: var(--border-radius);
+}
+
+div.querypage_review-entry_content {
+    display: flex;
 }
 
 div.querypage_review-entry_pic {
@@ -204,31 +207,26 @@ div.querypage_review-entry_pic {
 }
 
 div.querypage_review-entry_pic img {
-    border-radius: 0px;
+    border-radius: 0!important;
 }
 
-div.querypage_review-entry_info {
-    background: var(--box-bg);
+a.querypage_review-entry_title {
     width: 100%;
     padding: 10px;
     font-size: var(--box-font-size);
 
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
-div.querypage_review-entry_info-role span {
-    font-size: calc(var(--box-font-size) - 2px);
+a.querypage_review-entry_title i {
+    opacity: 1!important;
 }
 
-div.querypage_review-entry_info-role span a{
-    opacity: var(--font_low-opacity);
-    transition: 0.2s;
-}
-
-div.querypage_review-entry_info-role a:hover {
-    opacity: 1;
+a.querypage_review-entry_title:hover {
+    filter: brightness(1.15);
 }
 
 div.mediumhome {

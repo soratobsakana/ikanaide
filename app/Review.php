@@ -28,7 +28,6 @@ class Review
                 $reviewsHome[$i]['title'] = $row['title'];
                 $reviewsHome[$i]['text'] = $row['text'];
                 $reviewsHome[$i]['user_id'] = $row['user_id'];
-                $reviewsHome[$i]['date'] = $row['date'];
 
                 $user = $this -> con -> db -> execute_query('SELECT username, pfp FROM user WHERE user_id = ?', [$row['user_id']]);
                 if ($user -> num_rows === 1) {

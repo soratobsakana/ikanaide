@@ -228,17 +228,18 @@
                     ?>
 
                     <div class="querypage_review-entry">
-                        <div class="querypage_review-entry_pic">
-                            <img src="<?=$mediumInfo['cover']?>" alt="<?=$mediumInfo['title']?>">
-                        </div>
-                        <div class="querypage_review-entry_info">
-                            <div class="querypage_review-entry_info-name">
+                        
+                        <div class="querypage_review-entry_content">
+                            <a href="/<?=$reviews[$i]['username']?>">
+                                <div class="querypage_review-entry_pic">
+                                    <img src="<?=$reviews[$i]['pfp']?>" alt="<?=$mediumInfo['title']?>">
+                                </div>
+                            </a>
+                            <a class="querypage_review-entry_title box-body" href="/review/<?=$reviews[$i]['review_id']?>">
                                 <i><?=$reviews[$i]['title']?></i>
-                            </div>
-                            <div class="querypage_review-entry_info-role">
-                                <span>by <a href="/<?=$reviews[$i]['user_id']?>"><?=$reviews[$i]['user_id']?></a>.</span>
-                            </div>
+                            </a>
                         </div>
+
                     </div>
 
                     <?php

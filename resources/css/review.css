@@ -5,6 +5,11 @@ section.reviews_home-wrapper {
     grid-gap: var(--gap);
 }
 
+section.reviews_home-wrapper div.review {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
 section.reviews_home-wrapper div.review div.first-row {
     display: flex;
     transition: var(--transition);
@@ -40,8 +45,10 @@ section.reviews_home-wrapper div.review div div.review_home_user-body i {
 
 section.reviews_home-wrapper div.review div.second-row {
     font-size: 12px;
-    padding: 5px var(--border-radius);
+    margin-top: -8px; /* 8px viene de var(--border-radius) */
+    padding: calc(5px + 8px) var(--border-radius) 5px; /* Ese +8px pretende contrarrestar los -8px de margin-top. El padding real son 5px. */
     text-align: center;
+    background-color: var(--box-bg);
 }
 
 section.reviews_home-wrapper div.review div.second-row p a {
@@ -50,5 +57,15 @@ section.reviews_home-wrapper div.review div.second-row p a {
 }
 
 section.reviews_home-wrapper div.review div.second-row p a:hover {
+    opacity: 1!important;
+}
+
+/* Estilos para el archivo /resources/views/review/_reviewEntry.view.php */
+div.review_entry-medium a{
+    opacity: var(--font_low-opacity);
+    transition: var(--transition);
+}
+
+div.review_entry-medium a:hover {
     opacity: 1!important;
 }

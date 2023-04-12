@@ -17,8 +17,8 @@ class Ranking
     /**
      * @param string $medium
      * @return array|null
-     * Returns all ranked anime|manga. An anime is ranked if it exists on any of the medium lists (atm: `animelist` and `mangalist`) that has a score.
-     * Information needed for the rankings page is: the ID of each entry, its score, its rank, member count, title and cover.
+     * Devuelve todos los animes|mangas clasificados. Un anime|manga está clasificado si existe en las tablas de `animelist` o `mangalist` y tiene asignado, al menos, una nota (`score`) en alguna de las filas.
+     * Se extrae la información necesitada en la página de clasificación (/rankings): ID de cada entrada, su nota, su puesto en la clasificación, el número de usuarios que lo tienen en su lista, el título y la carátula.
      */
     public function getRankings(string $medium): array|null
     {

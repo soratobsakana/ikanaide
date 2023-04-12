@@ -507,6 +507,51 @@ class User
         } 
     }
 
+    /**
+     * @param int $user_id
+     * @return array|null
+     * Devuelve la información necesaria para mostrar en /usuario/reviews (/resources/views/user/_reviewsprofile.view.php).
+     */
+    public function getReviews(int $user_id): array|null
+    {
+        $result = $this -> con -> db -> execute_query('SELECT * FROM `review` WHERE user_id = ? ORDER BY `date` DESC', [$user_id]);
+        if ($result -> num_rows > 0) {
+            for ($i = 0; $i < $result -> num_rows; $i++) {
+
+                $row = $result -> fetch_assoc();
+
+                // Asignación de las columnas de `review` al array $userReviews.
+                $userReviews[$i]['review_id'] = $row['review_id'];
+                $userReviews[$i]['title'] = $row['title'];
+                $userReviews[$i]['user_id'] = $row['user_id'];
+
+                // Si la review actual pertenece a un anime, $entryAnime devolverá un valor, si no, lo hará $entryManga.
+                // Se devuelve el medio (anime|manga) y el ID, lo cual necesito para crear los siguientes links: /anime|manga/Nombre-De-Entrada.
+                $entryAnime = $this -> con -> db -> execute_query('SELECT anime_id FROM review_anime WHERE review_id = ?', [$userReviews[$i]['review_id']]);
+                $entryManga = $this -> con -> db -> execute_query('SELECT manga_id FROM review_manga WHERE review_id = ?', [$userReviews[$i]['review_id']]);
+                if ($entryAnime -> num_rows === 1) {
+                    $medium = 'anime';
+                    $medium_id = $entryAnime -> fetch_column();
+                } else if ($entryManga -> num_rows === 1){
+                    $medium = 'manga';
+                    $medium_id = $entryManga -> fetch_column();
+                }
+
+                // Recojo el título de la entrada correspondiente $medium_id y asigno los valores que necesito dentro de $userReviews.
+                $mediumEntry = $this -> con -> db -> execute_query('SELECT title FROM '.$medium.' WHERE '.$medium.'_id = ?', [$medium_id]);
+                if ($mediumEntry -> num_rows === 1) {
+                    $row = $mediumEntry -> fetch_assoc();
+                    $userReviews[$i]['entry'] = $row['title'];
+                    $userReviews[$i]['medium'] = $medium;
+                }
+                
+            }
+            return $userReviews;
+        } else {
+            return null;
+        }
+    }
+
     public function getFavorites(int $user_id, string $medium): object|null
     {
         $result = $this -> con -> db -> execute_query('select '.$medium.'.'.$medium.'_id, '.$medium.'.title, '.$medium.'.cover from '.$medium.','.$medium.'list
