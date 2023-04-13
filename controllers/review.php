@@ -1,10 +1,12 @@
 <?php
 
 include_once 'app/Review.php';
+include_once 'app/Listing.php';
 
 $reviewGuide = explode('/', $uri);
 
 $Review = new Review;
+$Listing = new Listing;
 
 if ($reviewGuide[1] === 'reviews' || $reviewGuide[1] === 'review') {
     if (!isset($reviewGuide[2])) {
@@ -19,6 +21,11 @@ if ($reviewGuide[1] === 'reviews' || $reviewGuide[1] === 'review') {
             $titles = $Review -> getTitles($reviewGuide[3]);
         } else if (isset($reviewGuide[3])) {
             
+            if ($Listing -> exists('anime', $reviewGuide[3])) {
+                
+            } else {
+                print 'nope';
+            }
         }
         
     }

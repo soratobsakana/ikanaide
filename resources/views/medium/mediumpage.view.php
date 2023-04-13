@@ -40,7 +40,7 @@
     ?>
 
     <div class="write-a-review list-submit box submit-button__colorful bg-orange center-text less-bold">
-        <a href="/review/new/<?=$entry?>">Write a review</a>
+        <a href="/review/new/<?=$medium?>/<?=$mediumInfo['title']?>">Write a review</a>
     </div>
 
     <section class="querypage_rank">

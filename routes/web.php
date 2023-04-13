@@ -22,6 +22,8 @@ if (($guide[1] === 'anime' || $guide[1] === 'manga') && isset($guide[2])) {
     ];
 }
 
+pre($guide);
+
 if ($guide[1] === 'review' && isset($guide[3])) {
     $newReview = $guide[3];  // Nombre-de-Anime|Manga
     $reviewRoutes = [
@@ -33,11 +35,15 @@ if ($guide[1] === 'review' && isset($guide[3])) {
         $reviewRoutes = [
             '/review/'.$reviewEntry => 'controllers/review.php'
         ];
-    } else if (($guide[1] . '/' . $guide[2] === 'review/new') && isset($guide[3])) {
-        $reviewEntry = $guide[2];
-        $reviewRoutes = [
-            '/review/new/' . $reviewEntry => 'controllers/review.php'
-        ];
+    } else if (($guide[1] . '/' . $guide[2] === 'review/new') && isset($guide[4])) {
+        if ($guide[3] === 'anime' || $guide[3] === 'manga') {
+            $reviewMedium = $guide[3];
+            pre($reviewMedium);
+            $reviewEntry = str_replace(' ', '-', $guide[4]);
+            $reviewRoutes = [
+                '/review/new/' . $reviewEntry => 'controllers/review.php'
+            ];
+        }
     }
 }
 
