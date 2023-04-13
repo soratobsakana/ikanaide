@@ -1,28 +1,38 @@
 section.reviews_home-wrapper {
+    display: grid;
+    grid-gap: var(--gap);
+}
+
+div.reviews_home-header div.box-body{
+    display: flex;
+    justify-content: space-between;
+}
+
+div.reviews_home-content {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: var(--gap);
 }
 
-section.reviews_home-wrapper div.review {
+div.reviews_home-content div.review {
     border-radius: var(--border-radius);
     overflow: hidden;
 }
 
-section.reviews_home-wrapper div.review div.first-row {
+div.reviews_home-content div.review div.first-row {
     display: flex;
     transition: var(--transition);
 }
 
-section.reviews_home-wrapper div.review div.first-row img.review_home_user-pfp {
+div.reviews_home-content div.review div.first-row img.review_home_user-pfp {
     height: 60px;
     width: 60px;
 
     z-index: 2; /* Sobrepongo la imagen a div.review_home_user-body. */
 }
 
-section.reviews_home-wrapper div.review div.first-row div.review_home_user-body {
+div.reviews_home-content div.review div.first-row div.review_home_user-body {
     width: 100%;
     border-radius: 0 var(--border-radius) var(--border-radius) 0;
 
@@ -35,15 +45,15 @@ section.reviews_home-wrapper div.review div.first-row div.review_home_user-body 
     z-index: 1;
 }
 
-section.reviews_home-wrapper div.review div.first-row:hover div.review_home_user-body {
+div.reviews_home-content div.review div.first-row:hover div.review_home_user-body {
     filter: brightness(1.15);
 }
 
-section.reviews_home-wrapper div.review div div.review_home_user-body i {
+div.reviews_home-content div.review div div.review_home_user-body i {
     opacity: 1!important;
 }
 
-section.reviews_home-wrapper div.review div.second-row {
+div.reviews_home-content div.review div.second-row {
     font-size: 12px;
     margin-top: -8px; /* 8px viene de var(--border-radius) */
     padding: calc(5px + 8px) var(--border-radius) 5px; /* Ese +8px pretende contrarrestar los -8px de margin-top. El padding real son 5px. */
@@ -51,21 +61,38 @@ section.reviews_home-wrapper div.review div.second-row {
     background-color: var(--box-bg);
 }
 
-section.reviews_home-wrapper div.review div.second-row p a {
-    transition: var(--transition);
-    opacity: var(--font_low-opacity);
+
+/* Estilos para la sección de nueva review (/review/new/...) */
+section.review_new-wrapper {
+    width: 100%;
+    display: grid;
+    grid-gap: var(--gap);
 }
 
-section.reviews_home-wrapper div.review div.second-row p a:hover {
-    opacity: 1!important;
+section.review_new-wrapper div.reviews_new-header div.box-body {
+    display: flex;
+    justify-content: space-between;
 }
 
-/* Estilos para el archivo /resources/views/review/_reviewEntry.view.php */
-div.review_entry-medium a{
-    opacity: var(--font_low-opacity);
-    transition: var(--transition);
+section.choose-entry form {
+    display: flex;
 }
 
-div.review_entry-medium a:hover {
-    opacity: 1!important;
+section.choose-entry form label {
+    font-size: var(--box-font-size);
+    align-self: center;
+    min-width: 11%; /* It makes 'Choose a title:' 2 lines if I don't do this. Not sure why */
+}
+
+section.review_new-fields form {
+    display: grid;
+    grid-gap: var(--gap);
+}
+
+section.review_new-fields form textarea {
+    min-height: 450px;
+}
+
+section.review_new-fields form input[type=submit] {
+    margin: 10px auto;
 }

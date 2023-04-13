@@ -311,15 +311,15 @@ div.querypage_list-edit_form form div.edit-list_fields * div.input-wrapper label
     padding-left: 10px; /* To vertically align the label with the input text */
 }
 
-div.querypage_list-edit_form form div.edit-list_fields * div.input-wrapper input[type='text'], input[type='number'], input[type=date], select, textarea {
+div.input-wrapper input[type='text'], div.input-wrapper input[type='number'], div.input-wrapper input[type=date], div.input-wrapper select, div.input-wrapper textarea {
     padding: 5px 10px;
-    background-color: var(--box-title);
+    background-color: var(--box-title)!important;
     border-radius: var(--border-radius);
     width: 100%;
     transition: filter var(--transition);
 }
 
-div.querypage_list-edit_form form div.edit-list_fields * div.input-wrapper input:focus-within, textarea:focus-within, select:hover {
+div.input-wrapper input:focus-within, div.input-wrapper textarea:focus-within, div.input-wrapper select:hover {
     filter: brightness(1.15);
 }
 

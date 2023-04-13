@@ -100,4 +100,22 @@ class Review
             return null;
         }
     }
+
+    /**
+     * @param string $medium
+     * @return array|null
+     * Devuelve todos los títulos de las tabla `anime` o `manga` para mostrarlos en un menú select en /review/new/anime|manga.
+     */
+    public function getTitles(string $medium): array|null
+    {
+        $result = $this -> con -> db -> execute_query('SELECT title FROM '.$medium.' ORDER BY title');
+        if ($result -> num_rows > 0) {
+            while ($row = $result -> fetch_column()) {
+                $titles[] = $row;
+            }
+            return $titles;
+        } else {
+            return null;
+        }
+    }
 }

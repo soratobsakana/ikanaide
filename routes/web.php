@@ -55,6 +55,9 @@ $routes = array(
     '/rankings/manga' => 'controllers/rankings.php',
 
     '/reviews' => 'controllers/review.php',
+    '/review/new' => 'controllers/review.php',
+    '/review/new/anime' => 'controllers/review.php',
+    '/review/new/manga' => 'controllers/review.php',
 
     '/community' => 'controllers/community.php',
 

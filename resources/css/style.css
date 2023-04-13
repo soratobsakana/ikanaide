@@ -4,6 +4,8 @@
     text-decoration: none;
     list-style: none;
     box-sizing: border-box;
+    scrollbar-color: var(--box-bg) var(--body-bg);
+    scrollbar-width: 10px;
 }
 
 a {
@@ -15,6 +17,7 @@ body {
     background-color: var(--body-bg);
     font-family: 'Fredoka', sans-serif;
     overflow-y: scroll;
+    
     color: var(--main-font-color);
 }
 
@@ -51,7 +54,11 @@ input[type='text'], input[type='email'], input[type='password'], input[type='sub
 select {
     appearance: none;
     transition: var(--transition);
-    border: 1px solid var(--box-title);
+    padding: 5px 10px;
+    background-color: var(--box-bg)!important;
+    border-radius: var(--border-radius);
+    width: 100%;
+    transition: filter var(--transition);
 }
 
 select:hover {
@@ -72,13 +79,33 @@ label {
 
 textarea {
     resize: vertical;
-    overflow-y: scroll;
     background: transparent;
     font-family: inherit;
     font-size: var(--box-font-size);
     border: none;
     outline: none;
     color: inherit;
+    background-color: var(--box-bg)!important;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+background-color: var(--body-bg);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+background-color: var(--box-bg);
+border-radius: var(--border-radius);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+background: #555;
 }
 
 /* Usado, principalmente, cuando no existe datos de algún tipo. (e.g. un anime no tiene personajes asignados en `character_anime`.) */
@@ -103,4 +130,13 @@ div.container {
 .center-text {
     text-align: center;
     justify-content: center;
+}
+
+.link {
+    opacity: var(--font_low-opacity);
+    transition: var(--transition);
+}
+
+.link:hover {
+    opacity: 1!important;
 }
