@@ -19,13 +19,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 if (!empty($value)) {
                     switch ($key) {
                         case 'title':
-                            if ($Listing -> exists($title, str_replace('-', ' ', $title))) {
-
+                            if ($Listing -> exists('anime', str_replace('-', ' ', $value))) {
+                                $newReview[$key] = $value;
                             }
                             break;
                         case 'reviewTitle':
                             if (strlen($value) <= 0 || strlen($value) > 50) {
                                 $errorMessage = 'Title cannot be longer than 50 characters';
+                            } else {
+                                $newReview[$key] = $value;
                             }
                             break;
                         case 'reviewContent':
