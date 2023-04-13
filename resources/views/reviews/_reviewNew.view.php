@@ -19,7 +19,7 @@
     
     <?php
 
-    if (!is_null($titles)) {
+    if (isset($titles)) {
         ?>
         <section class="choose-entry">
         <form action="controllers/review.php" method="post">
@@ -36,19 +36,21 @@
         </form>
         </section>
         <?php
+    } else if (isset($entryToReview)) {
+        echo '<p class="center-text low-opacity small-font">New review for '.$entryToReview.'</p>';
     }
     
     ?>
 
     <section class="review_new-fields">
-        <form action="controllers/review.php" method="POST">
+        <form action="/reviews" method="POST">
             <div class="box-wrapper box-body">
-                <input type="text" name="reviewTitle" id="reviewTitle" placeholder="Title of the review">
+                <input type="text" name="reviewTitle" id="reviewTitle" placeholder="Title of the review" required>
             </div>
             <div class="box-wrapper box-body">
-                <textarea name="reviewContent" id="reviewContent" placeholder="Content of the review"></textarea>
+                <textarea name="reviewContent" id="reviewContent" placeholder="Content of the review" required></textarea>
             </div>
-            <input class="box submit-button__colorful" type="submit" value="Submit">
+            <input class="box submit-button__colorful" type="submit" name="submit" value="Submit">
         </form>
     </section>
 </section>

@@ -132,6 +132,10 @@ div.container {
     justify-content: center;
 }
 
+.small-font {
+    font-size: var(--box-font-size)!important;
+}
+
 .link {
     opacity: var(--font_low-opacity);
     transition: var(--transition);

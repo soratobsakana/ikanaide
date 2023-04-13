@@ -307,6 +307,10 @@ CREATE TABLE `edit_anime` (
       FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
+insert into review_anime values (3, 1);
+
+select * from review_anime;
+
 CREATE TABLE `submit_anime` (
         `said` INT UNSIGNED NOT NULL AUTO_INCREMENT,
         `title` VARCHAR(150),

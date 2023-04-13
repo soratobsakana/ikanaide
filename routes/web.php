@@ -22,29 +22,24 @@ if (($guide[1] === 'anime' || $guide[1] === 'manga') && isset($guide[2])) {
     ];
 }
 
-pre($guide);
+/**
+ * Esta condición permite las siguientes URI:
+ * /reviews
+ * /review/new/anime ó /review/new/manga
+ * /review/new/anime|manga/Nombre-De-Anime|Manga
+ */
 
-if ($guide[1] === 'review' && isset($guide[3])) {
-    $newReview = $guide[3];  // Nombre-de-Anime|Manga
+if ($guide[1] === 'review' && is_numeric($guide[2])) {
+    $reviewEntry = $guide[2];  // Review ID
     $reviewRoutes = [
-        '/review/new/'.$newReview => 'controllers/review.php'
+        '/review/'.$reviewEntry => 'controllers/review.php'
     ];
-} else if ($guide[1] === 'review' && isset($guide[2])) {
-    if (is_numeric($guide[2])) {
-        $reviewEntry = $guide[2];  // Review ID
-        $reviewRoutes = [
-            '/review/'.$reviewEntry => 'controllers/review.php'
-        ];
-    } else if (($guide[1] . '/' . $guide[2] === 'review/new') && isset($guide[4])) {
-        if ($guide[3] === 'anime' || $guide[3] === 'manga') {
-            $reviewMedium = $guide[3];
-            pre($reviewMedium);
-            $reviewEntry = str_replace(' ', '-', $guide[4]);
-            $reviewRoutes = [
-                '/review/new/' . $reviewEntry => 'controllers/review.php'
-            ];
-        }
-    }
+} else if ($guide[1] === 'review' && isset($guide[4])) {
+    $reviewMedium = $guide[3]; // anime|manga
+    $reviewEntry = $guide[4];  // Nombre-de-Anime|Manga
+    $reviewRoutes = [
+        '/review/new/'.$reviewMedium.'/'.$reviewEntry => 'controllers/review.php'
+    ];
 }
 
 

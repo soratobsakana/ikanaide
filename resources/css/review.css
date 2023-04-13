@@ -1,6 +1,7 @@
 section.reviews_home-wrapper {
     display: grid;
     grid-gap: var(--gap);
+    width: 100%;
 }
 
 div.reviews_home-header div.box-body{
@@ -9,7 +10,7 @@ div.reviews_home-header div.box-body{
 }
 
 div.reviews_home-content {
-    width: 100%;
+    width: 100%!important;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: var(--gap);
