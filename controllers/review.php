@@ -9,18 +9,35 @@ $Review = new Review;
 $Listing = new Listing;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Inspección de que los nombres de campo del formulario HTML no han sido modificados en las herramientas de navegador.
-    $fields = ['title', 'reviewTitle', 'reviewContent', 'submit'];
+    
+    if ($reviewGuide[3] === 'anime' || $reviewGuide[3] === 'manga') {
+        $reviewMedium = $reviewGuide[3];
+    }
+
+    if (isset($reviewGuide[4])) {
+        $fields = ['reviewTitle', 'reviewContent', 'submit'];
+        if ($Listing -> exists($reviewMedium, str_replace('-', ' ', $reviewGuide[4]))) {
+            $newReview['title'] = $reviewGuide[4];
+        }
+    } else {
+        $fields = ['title', 'reviewTitle', 'reviewContent', 'submit'];
+    }
+    
+    
+   
     foreach ($_POST as $key => $value) {
+        // Inspección de que los nombres de campo del formulario HTML no han sido modificados en las herramientas de navegador.
         if (!in_array($key, $fields)) {
             header('Location: /404');
         } else {
+            // Validación y asignación de la información.
             if (!($key === 'submit')) {
                 if (!empty($value)) {
                     switch ($key) {
                         case 'title':
-                            if ($Listing -> exists('anime', str_replace('-', ' ', $value))) {
+                            if ($Listing -> exists($reviewMedium, str_replace('-', ' ', $value))) {
                                 $newReview[$key] = $value;
+                                $ok = true;
                             }
                             break;
                         case 'reviewTitle':
@@ -28,11 +45,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                 $errorMessage = 'Title cannot be longer than 50 characters';
                             } else {
                                 $newReview[$key] = $value;
+                                $ok = true;
                             }
                             break;
                         case 'reviewContent':
                             $newReview[$key] = $value;
+                            $ok = true;
                             break;
+                    }
+                    if ($ok) {
+                        $Review -> createReview($reviewMedium, $newReview);
                     }
                 } else {
                     $newReview = null;
@@ -41,7 +63,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             }
         }
     }
-    pre($newReview);
 } else {
     if ($reviewGuide[1] === 'reviews') {
         $reviewsHome = $Review -> getReviews();

@@ -2,6 +2,7 @@
 
 include_once 'Database.php';
 include_once 'Listing.php';
+include_once 'User.php';
 
 class Review
 {
@@ -12,6 +13,7 @@ class Review
     {
         $this -> con = new Database;
         $this -> listing = new Listing;
+        $this -> user = new User;
     }
 
     /**
@@ -114,6 +116,23 @@ class Review
                 $titles[] = $row;
             }
             return $titles;
+        } else {
+            return null;
+        }
+    }
+
+    public function createReview(string $medium, array $review): int|null
+    {
+        if ($User -> validateSession()) {
+            if (isset($review['title']) || isset($review['reviewTitle']) || isset($review['reviewContent'])) {
+                $this -> con -> db -> execute_query('INSERT INTO review VALUES (null, ?, ?, ?, default)', [$review['reviewTitle'], $review['reviewContent'], $_COOKIE['user_id']]);
+
+                $medium_id = $Listing -> exists($medium, $review['title']);
+                if ($medium_id -> num_rows === 1) {
+                    $medium_id = $medium_id -> fetch_column();
+                    $this -> con -> db -> execute_query('INSERT INTO review_'.$medium.' VALUES (?, ?)', [$medium_id, $_COOKIE['user_id']]);
+                }
+            }
         } else {
             return null;
         }

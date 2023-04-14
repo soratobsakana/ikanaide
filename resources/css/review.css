@@ -64,7 +64,7 @@ div.reviews_home-content div.review div.second-row {
 
 
 /* Estilos para la sección de nueva review (/review/new/...) */
-section.review_new-wrapper {
+section.review_new-wrapper, section.review_new-wrapper form {
     width: 100%;
     display: grid;
     grid-gap: var(--gap);
@@ -75,25 +75,25 @@ section.review_new-wrapper div.reviews_new-header div.box-body {
     justify-content: space-between;
 }
 
-section.choose-entry form {
+section.choose-entry {
     display: flex;
 }
 
-section.choose-entry form label {
+section.choose-entry label {
     font-size: var(--box-font-size);
     align-self: center;
     min-width: 11%; /* It makes 'Choose a title:' 2 lines if I don't do this. Not sure why */
 }
 
-section.review_new-fields form {
+section.review_new-fields {
     display: grid;
     grid-gap: var(--gap);
 }
 
-section.review_new-fields form textarea {
+section.review_new-fields textarea {
     min-height: 450px;
 }
 
-section.review_new-fields form input[type=submit] {
+section.review_new-fields input[type=submit] {
     margin: 10px auto;
 }

@@ -50,6 +50,12 @@
         case '/manga/' . $entryURI:
             $tabTitle = $entryTitle;
             break;
+        case '/review/new/anime':
+            $tabTitle = 'new anime review';
+            break;
+        case '/review/new/manga':
+            $tabTitle = 'new manga review';
+            break;
         default:
             $tabTitle = $username;
     }
