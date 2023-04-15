@@ -1,37 +1,33 @@
-220410
-    [] Work on user following system.
-    [] Work on the home page
-    [] Work on the anime|manga home page.
-
-220409
-    [] Add anime and manga views to the ranking section.
-    [] Work on the review ecosystem.
+230415
     [] Work on user posting and activity.
-    [] Add needed details to what's already written.
 
-220405
+230409-15
+    [X] Add anime and manga views to the ranking section.
+    [X] Complete the review ecosystem.
+
+230405
     [X] Make lists show maximun episode|chapter progress if status is completed.
     [-] Complete profile lists front-end.
         [X] Grouping by status (not show a group if it doesn't have any).
         [] Hovering effects depends on the action (click name -> go to entry listing. general hover -> show entry edit form. progress hover -> show + and - to edit it).
 
-220404
+230404
     [X] Validate list entry edition form data.
         Had to rewrite many things in order to protect the controllers from accepting incorrect form input values or form action destinations.
     [] Write list entry single page and complete profile lists.
 
-220330
+230330
     [X] Rework medium entry listing way of displaying the URI.
         /anime?id=1 to /anime/Gintama (it will replace spaces for hyphens when needed).
     
-220329
+230329
     [X] Make progress on lists and think if merging animelist and mangalist code is useful.
         Views are merged into _listsprofile.view.php.
     [-] Complete overview tab (except posts) and make initial favorites tab.
         Not sure about implementing favorites on the overview tab. Rest is done.
     [] Work on the reviews system.
 
-220328
+230328
     [X] Make profile controller only display content on $_GET URI's. If not, displays /404.
     [X] Make anime and manga stats dynamic.
     [X] Work on user relations with anime and manga.
@@ -42,18 +38,18 @@
         Nevermind about $_get. A second router file was made only for clear URLs. (eg. /nabuna, /nabuna/animelist, etc.).
         Every URI will go over main router. If it's not found in these routes, it will pass over to the profile router to find for usernames. If not found again, it will /404.
 
-220327
+230327
     [-] Think of user profile URI's.
         Will go with $_GET until learning more about URI's, htaccess stuff or etc.
 
-220324
+230324
     [X] Add session management and auto-login to the register and login methods.
         For now, I'm only using 3 cookies: session(Yes|No), user_id and username. Auto-login and logout both work.
     [X] Make the login controller.
     [-] Work on the profile page. Start to think on the relation of users with data and make the design.
         Everything but relation of user to data.
 
-220323
+230323
     [X] Add an id colorful submit and style it just on main.css.
     [X] User registration validation form.
         Should be a pretty premature one. It will change and be more specific and secure in the future, but it will do for now.
@@ -61,7 +57,7 @@
         Simply the HTML is done. Authentication and session management is still needed.
     [] Make user profile page.
 
-220322
+230322
     [X] Learn about classes
     [X] Implement a Database class
         Implemented the database connection as a constructor for the class. The class will be called in Class definition files and not controllers.
@@ -69,7 +65,7 @@
         Querying anime/manga/vn info is now completely dynamic. Only unifying the query page view is left.
     [] Implement an AddData class and merge the edit and submit form up.
 
-220318/19
+230318/19
     [X] Add timestamp to relational data tables (review_X, submit_X, etc.).
         I've added timestamp to both individual data tables and relational ones. Just in case for now.
     [] Finish up the manga and vn pages for once...
@@ -78,25 +74,25 @@
         [] Session management with the purpose of adding autorship to things.
     [X] Header into /submit after inserting data in the submit form and closing the connections.
         Decided to keep the ugly URI after submission (/submit?anime) and display an OK message to the user in that page.
-22031X
+23031X
     [] Simplify listing stuff. Probably covert every query stuff into a class.
     [X] Finish up everything needed before starting with user stuff tomorrow.
         Edition and submission is partly completed, so user system implementation can be started.
     [X] Do the controller for anime submission form.
         This was referring to the edit part of user data submission. It has been changed to an independent edit page and that is currently completed.
 
-220311
+230311
     [X] Fix submit page not working when no anime_id provided.
     [] Finish up the submit.php controller. (It will deliver information to a submit_x table).
     [X] Create an anime home page that displays the database entries that link to ?anime_id=X and show its information.
 
-220307
+230307
     [-] Create the submit page (basic for now).
         The HTML has been created (it displays one input field for each column that can be edited by the user)
     [] Create the manga page.
     [] Start thinking about the profile tab.
 
-22030X
+23030X
     [X] Learn to use JSON:
         [X] Understand what it is,
         [-] think of possible usages and implement it (first usage will be to fetch information from the anime's submit page).
@@ -106,36 +102,36 @@
         [] implement it, inluding JSON data.
     [] Continue to learn about mysqli and code safety.
 
-220301
+230301
     [X] Work on anime query page.
             `user`, `anime`, `character`, `character_anime`, `staff`, `staff_anime`, `review` and `review_anime` have been worked on. They are functional, but pretty much not final.
             The page is written, but the CSS classes should probably be simplified. I'm not too sure about that since what I've done could also be beneficial in a redesign case, and not many CSS lines got repeated tbh.
             PHP should definitely be rewritten though, especially the info fetching; that seems so redundant.
-220226
+230226
     [] Continue to learn about mysqli and code safety.
     [] Implement moderator's anime and manga submission system.
     [] Complete the anime and manga query pages. Redesign is important (headers for each box and different buttons for users)
             `character` has been finished. relational tables will be `character_anime`, `character_manga` and `character_vn` for now.
             I feel like this system should be simplified, but for now it works.
 
-220225
+230225
     [X] Continue to learn about mysqli and code safety.
     [] Implement moderator's anime and manga submission system.
     [-] Complete the anime and manga query pages. Redesign is important (headers for each box and different buttons for users)
             I don't think I'll redesign for now. Headers didn't seem to work out.
             `character` and `reviews` tables need to be made for this. I'm thinking on adding JSON to this table, as a character can have much information not worthy of a database column.
 
-220224
+230224
     [] Continue to learn about mysqli and code safety.
     [] Implement moderator's anime and manga submission system.
     [] Complete the anime and manga query pages. Redesign is important (headers for each box and different buttons for users).
 
-220223
+230223
     [] Continue to learn about mysqli and code safety.
     [] Implement anime and manga submission system.
     [] Complete the anime and manga queried pages. Redesign is important (headers for each box and different buttons for users).
 
-220222
+230222
     [X] Read PDO documentation from http://web.archive.org/web/20190330214051/http://wiki.hashphp.org/PDO_Tutorial_for_MySQL_Developers
             Noticed PDO works basically the same way as mysqli but is compatible with more drivers than mysql. Also, that OO mysqli is like an alias to procedural style.
             Result: I will use Object Oriended mysqli.

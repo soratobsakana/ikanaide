@@ -527,12 +527,12 @@ class User
 
                 // Si la review actual pertenece a un anime, $entryAnime devolverá un valor, si no, lo hará $entryManga.
                 // Se devuelve el medio (anime|manga) y el ID, lo cual necesito para crear los siguientes links: /anime|manga/Nombre-De-Entrada.
-                $entryAnime = $this -> con -> db -> execute_query('SELECT anime_id FROM review_anime WHERE review_id = ?', [$userReviews[$i]['review_id']]);
-                $entryManga = $this -> con -> db -> execute_query('SELECT manga_id FROM review_manga WHERE review_id = ?', [$userReviews[$i]['review_id']]);
-                if ($entryAnime -> num_rows === 1) {
+                $entryAnime = $this -> con -> db -> execute_query('SELECT `anime_id` FROM `review_anime` WHERE review_id = ?', [$userReviews[$i]['review_id']]);
+                $entryManga = $this -> con -> db -> execute_query('SELECT `manga_id` FROM `review_manga` WHERE review_id = ?', [$userReviews[$i]['review_id']]);
+                if ($entryAnime -> num_rows === 0) {
                     $medium = 'anime';
                     $medium_id = $entryAnime -> fetch_column();
-                } else if ($entryManga -> num_rows === 1){
+                } else if ($entryManga -> num_rows === 0) {
                     $medium = 'manga';
                     $medium_id = $entryManga -> fetch_column();
                 }

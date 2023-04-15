@@ -161,20 +161,18 @@ CREATE TABLE `review` (
 CREATE TABLE `review_anime` (
     `review_id` SMALLINT UNSIGNED NOT NULL,
     `anime_id` INT UNSIGNED NOT NULL,
-    `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`review_id`, `anime_id`),
     FOREIGN KEY (`review_id`) REFERENCES `review`(`review_id`) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (`anime_id`) REFERENCES `anime`(`anime_id`) ON UPDATE CASCADE ON DELETE CASCADE
-) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+);
 
 CREATE TABLE `review_manga` (
     `review_id` SMALLINT UNSIGNED NOT NULL,
     `manga_id` INT UNSIGNED NOT NULL,
-    `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`review_id`, `manga_id`),
     FOREIGN KEY (`review_id`) REFERENCES `review`(`review_id`) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (`manga_id`) REFERENCES `manga`(`manga_id`) ON UPDATE CASCADE ON DELETE CASCADE
-) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+);
 
 CREATE TABLE `review_vn` (
     `review_id` SMALLINT UNSIGNED NOT NULL,

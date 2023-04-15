@@ -8,6 +8,7 @@ class Review
 {
     private object $con;
     private object $listing;
+    private object $user;
 
     public function __construct()
     {
@@ -121,16 +122,17 @@ class Review
         }
     }
 
-    public function createReview(string $medium, array $review): int|null
+    public function createReview(string $medium, array $review)
     {
-        if ($User -> validateSession()) {
+        if ($this -> user -> validateSession()) {
             if (isset($review['title']) || isset($review['reviewTitle']) || isset($review['reviewContent'])) {
                 $this -> con -> db -> execute_query('INSERT INTO review VALUES (null, ?, ?, ?, default)', [$review['reviewTitle'], $review['reviewContent'], $_COOKIE['user_id']]);
-
-                $medium_id = $Listing -> exists($medium, $review['title']);
-                if ($medium_id -> num_rows === 1) {
-                    $medium_id = $medium_id -> fetch_column();
-                    $this -> con -> db -> execute_query('INSERT INTO review_'.$medium.' VALUES (?, ?)', [$medium_id, $_COOKIE['user_id']]);
+                $review_id = $this -> con -> db -> insert_id;
+                $medium_id = $this -> listing -> exists($medium, $review['title']);
+                if (is_int($medium_id)) {
+                    if ($this -> con -> db -> execute_query('INSERT INTO review_'.$medium.' VALUES (?, ?)', [$review_id, $medium_id])) {
+                        header('Location: /review/'.$review_id);
+                    };
                 }
             }
         } else {

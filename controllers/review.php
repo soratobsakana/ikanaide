@@ -53,15 +53,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             $ok = true;
                             break;
                     }
-                    if ($ok) {
-                        $Review -> createReview($reviewMedium, $newReview);
-                    }
                 } else {
                     $newReview = null;
                     header('Location: /404');
                 }
             }
         }
+    }
+    if ($ok) {
+        $Review -> createReview($reviewMedium, $newReview);
     }
 } else {
     if ($reviewGuide[1] === 'reviews') {
