@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (isset($reviewGuide[4])) {
         $fields = ['reviewTitle', 'reviewContent', 'submit'];
         if ($Listing -> exists($reviewMedium, str_replace('-', ' ', $reviewGuide[4]))) {
-            $newReview['title'] = $reviewGuide[4];
+            $newReview['title'] = str_replace('-', ' ', $reviewGuide[4]);
         }
     } else {
         $fields = ['title', 'reviewTitle', 'reviewContent', 'submit'];
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     switch ($key) {
                         case 'title':
                             if ($Listing -> exists($reviewMedium, str_replace('-', ' ', $value))) {
-                                $newReview[$key] = $value;
+                                $newReview[$key] = str_replace('-', ' ', $value);
                                 $ok = true;
                             }
                             break;

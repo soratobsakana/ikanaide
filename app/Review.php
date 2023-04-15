@@ -129,10 +129,11 @@ class Review
                 $this -> con -> db -> execute_query('INSERT INTO review VALUES (null, ?, ?, ?, default)', [$review['reviewTitle'], $review['reviewContent'], $_COOKIE['user_id']]);
                 $review_id = $this -> con -> db -> insert_id;
                 $medium_id = $this -> listing -> exists($medium, $review['title']);
+
                 if (is_int($medium_id)) {
                     if ($this -> con -> db -> execute_query('INSERT INTO review_'.$medium.' VALUES (?, ?)', [$review_id, $medium_id])) {
                         header('Location: /review/'.$review_id);
-                    };
+                    }
                 }
             }
         } else {

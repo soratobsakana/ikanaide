@@ -17,6 +17,7 @@ body {
     background-color: var(--body-bg);
     font-family: 'Fredoka', sans-serif;
     overflow-y: scroll;
+
     
     color: var(--main-font-color);
 }
