@@ -1,11 +1,24 @@
 <div class="profile-wrapper">
     <div class="profile_left-column">
         <img src="<?=$userInfo['pfp']?>" alt="<?=$userInfo['username']?>">
-        <section class="profile_left-column_buttons">
-            <form action="" method="post">
-                <input class="list-submit box submit-button__colorful" type="submit" value="Edit profile">
-            </form>
-        </section>
+
+            <?php
+
+            if (isset($_COOKIE["session"], $_COOKIE["username"])) {
+                if ($_COOKIE['session'] === 'Yes' && $_COOKIE['username'] === $userInfo['username']) {
+                    ?>
+                     <section class="profile_left-column_buttons">
+                        <form action="" method="post">
+                            <input class="list-submit box submit-button__colorful" type="submit" value="Edit profile">
+                        </form>
+                     </section>
+                    <?php
+                }
+            }
+
+            ?>
+
+
         <section class="profile_user-info box-wrapper">
             <div class="box-title">
                 <h3><?=$userInfo['username']?></h3>
