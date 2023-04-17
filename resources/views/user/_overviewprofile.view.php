@@ -21,6 +21,7 @@
             </div>
         </div>
     </section>
+
     <?php
 
     if (!empty($userInfo['biography'])) {
@@ -39,6 +40,57 @@
     }
 
     ?>
+
+    <?php
+    
+    if (isset($userPosts)) {
+        ?><section class="profile_user-overview_posts-wrapper">
+        <div class="left-column"><?php
+        for($i = 0; $i < count($userPosts); $i++) {
+            ?>
+            
+                <div class="post-entry box-wrapper box-body">
+                    <div class="top">
+                        <img src="<?=$userInfo['pfp']?>" alt="">
+                        <div class="username">
+                            <div><?=$userInfo['username']?></div>
+                            <div>ts</div>
+                        </div>
+                    </div>
+                    <div class="bottom">
+                        <div class="content"><?=$userPosts[$i]['content']?></div>
+                    </div>
+                </div>
+            <?php
+            $i++;
+        }
+        ?>
+        </div>
+        <div class="right-column">
+        <?php
+        for($i = 1; $i < count($userPosts); $i++) {
+            ?>
+            
+                <div class="post-entry box-wrapper box-body">
+                    <div class="top">
+                        <img src="<?=$userInfo['pfp']?>" alt="">
+                        <div class="username">
+                            <div><?=$userInfo['username']?></div>
+                            <div>ts</div>
+                        </div>
+                    </div>
+                    <div class="bottom">
+                        <div class="content"><?=$userPosts[$i]['content']?></div>
+                    </div>
+                </div>
+            <?php
+            $i++;
+        }
+        ?></section><?php
+    }
+    
+    ?>
+    </div>
 
 
 </section>

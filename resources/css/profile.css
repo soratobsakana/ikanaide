@@ -138,7 +138,7 @@ ul.profile_user-list_content-labels li{
     opacity: var(--font_low-opacity);
 }
 
-div.profile_user-list_entry-wrapper, div.box-body {
+div.profile_user-list_entry-wrapper, div.profile_user-list_entry-wrapper div.box-body {
     display: grid;
     grid-gap: var(--gap);
 }
@@ -243,4 +243,34 @@ hr#user_post_fields-separator {
     height: 1px;
     border: 0px!important;
     background-color: var(--box-title);
+}
+
+/* Estilos para la sección de posts de la pestaña de overview */
+section.profile_user-overview_posts-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: var(--gap);   
+}
+
+section.profile_user-overview_posts-wrapper div.left-column, section.profile_user-overview_posts-wrapper div.right-column {
+    display: grid;
+    grid-gap: var(--gap);   
+}
+
+section.profile_user-overview_posts-wrapper div.post-entry {
+    display: grid;
+    grid-gap: var(--gap);
+    padding: 10px!important;
+}
+
+section.profile_user-overview_posts-wrapper div.post-entry div.top {
+    display: grid;
+    grid-template-columns: 10% 90%;
+}
+
+section.profile_user-overview_posts-wrapper div.post-entry div.top div.username {
+    padding-left: var(--gap);
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
 }

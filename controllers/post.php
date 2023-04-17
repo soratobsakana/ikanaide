@@ -3,15 +3,17 @@
 require_once 'app/Activity.php';
 $Activity = new Activity;
 
-// Comprobación de que el formulario no ha sido alterado mediante las herramientas de navegador.
 $fields = ['post-content', 'post'];
 if (isset($_POST)) {
     foreach($_POST as $key => $value) {
+        // Comprobación de que el formulario no ha sido alterado mediante las herramientas de navegador.
         if (!in_array($key, $fields)) {
             header('Location: /404');
         } else {
-            if ($key === 'post-content') {
+            if ($key === 'post-content' && !empty($key)) {
                 $post['content'] = $value;
+            } else {
+                header('Location: /404');
             }
         }
     }

@@ -565,4 +565,20 @@ class User
         }
     }
 
+    public function getPosts(int $user_id): array|null
+    {
+        $result = $this -> con -> db -> execute_query('SELECT * FROM post WHERE user_id = ? ORDER BY `date` DESC', [$user_id]);
+        if ($result -> num_rows > 0) {
+            for($i = 0; $i < $result -> num_rows; $i++) {
+                $row = $result -> fetch_assoc();
+                foreach($row as $key => $value) {
+                    $posts[$i][$key] = $value;
+                }
+            }
+            return $posts;
+        } else {
+            return null;
+        }
+    }
+
 }

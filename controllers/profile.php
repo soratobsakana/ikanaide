@@ -23,6 +23,7 @@ if ($user_id !== null) {
     $favoriteAnimes = $Session -> getFavorites($user_id, 'anime'); // This is an object that will be looped in _favoritesprofile.view.php
     $favoriteMangas = $Session -> getFavorites($user_id, 'manga'); // This is an object that will be looped in _favoritesprofile.view.php
     $userReviews = $Session -> getReviews($user_id);
+    $userPosts = $Session -> getPosts($user_id);
 
     require 'resources/views/user/profile.view.php';
 } else {

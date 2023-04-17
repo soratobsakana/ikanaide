@@ -92,6 +92,7 @@ section.review_new-fields {
 
 section.review_new-fields textarea {
     min-height: 450px;
+    min-width: 100%;
 }
 
 section.review_new-fields input[type=submit] {
