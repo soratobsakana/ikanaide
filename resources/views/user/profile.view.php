@@ -9,6 +9,7 @@
                     ?>
                      <section class="profile_left-column_buttons">
                         <form action="" method="post">
+                            <button type="button" id="user-post_button" class="list-submit submit-button__colorful box">Make a post</button>
                             <input class="list-submit box submit-button__colorful" type="submit" value="Edit profile">
                         </form>
                      </section>
@@ -157,3 +158,35 @@
         ?>
     </div>
 </div>
+
+<section id="user_post-wrapper">
+    <div class="box-wrapper">
+        <div class="box-title"><h3>Make a post</h3></div>
+        <div class="box-body">
+            <form action="/post" method="post">
+                <label for="post-content">This post will appear in your profile and your followers time line.</label>
+                <textarea name="post-content" id="post-content"></textarea>
+                <hr id="user_post_fields-separator">
+                    <div class="user_post_fields-buttons">
+                        <button type="button" id="user-post_cancel" class="submit-button__colorful box">Cancel</button>
+                        <input class="submit-button__colorful box" type="submit" name='post' value="Post">
+                    </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script !src="">
+    let modal = document.getElementById('user_post-wrapper');
+    let btn = document.getElementById('user-post_button');
+    let cancelBtn = document.getElementById('user-post_cancel');
+
+    btn.addEventListener('click', function() {
+        modal.style.display = "block";
+    })
+
+    cancelBtn.addEventListener('click', function() {
+        modal.style.display = "none";
+    })
+
+</script>

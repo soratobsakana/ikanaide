@@ -68,6 +68,7 @@ $routes = array(
     '/support' => 'resources/views/support.view.php',
 
     '/edit' => 'controllers/edit.php',
+    '/post' => 'controllers/post.php',
     '/submit' => 'controllers/submit.php',
     '/submit/anime' => 'controllers/submit.php',
     '/submit/manga' => 'controllers/submit.php',
