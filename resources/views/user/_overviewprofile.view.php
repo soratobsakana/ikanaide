@@ -40,66 +40,44 @@
     }
 
     ?>
-
-    <?php
-    
-    if (isset($userPosts)) {
-        ?><section class="profile_user-overview_posts-wrapper">
-        <div class="left-column"><?php
-        for($i = 0; $i < count($userPosts['posts']); $i++) {
-            // Recogida de las fechas para crear el tiempo que ha pasado desde la creación de cada post mediante mi función timeAgo().
-            $current = date('Y-m-d h:i:s');
-            $reference = $userPosts['posts'][$i]['date'];
-            $timeAgo = timeAgo($current, $reference);
-            ?>
-            
-                <div class="post-entry box-wrapper box-body">
-                    <div class="top">
-                        <img src="<?=$userPosts['user']['pfp']?>" alt="">
-                        <div class="username">
-                            <div><span><?=$userPosts['user']['username']?></span><span class="post_time-ago">&nbsp;&nbsp;·&nbsp;&nbsp;<?=$timeAgo?></span></div>
-                            <div>ts</div>
-                        </div>
-                    </div>
-                    <div class="bottom">
-                        <div class="content"><?=$userPosts['posts'][$i]['content']?></div>
-                    </div>
-                </div>
-            <?php
-            $i++;
-        }
-        ?>
+    <section class="profile_user-overview_posts-wrapper box-wrapper">
+        <div class="box-title">
+            <h3>Activity</h3>
         </div>
-        <div class="right-column">
-        <?php
-        for($i= 1; $i < count($userPosts['posts']); $i++) {
+        <div class="box-body">
+            <?php
 
-            // Recogida de las fechas para crear el tiempo que ha pasado desde la creación de cada post mediante mi función timeAgo().
-            $current = date('Y-m-d h:i:s');
-            $reference = $userPosts['posts'][$i]['date'];
-            $timeAgo = timeAgo($current, $reference);
+            if (isset($userPosts)) {
+                for($i= 0; $i < count($userPosts['posts']); $i++) {
 
-            ?>
-            
-                <div class="post-entry box-wrapper box-body">
-                    <div class="top">
-                        <img src="<?=$userPosts['user']['pfp']?>" alt="">
-                        <div class="username">
-                            <div><span><?=$userPosts['user']['username']?></span><span class="post_time-ago">&nbsp;&nbsp;·&nbsp;&nbsp;<?=$timeAgo?></span></div>
-                            <div>ts</div>
+                    // Recogida de las fechas para crear el tiempo que ha pasado desde la creación de cada post mediante mi función timeAgo().
+                    $current = date('Y-m-d h:i:s');
+                    $reference = $userPosts['posts'][$i]['date'];
+                    $timeAgo = timeAgo($current, $reference);
+
+                    ?>
+
+                    <div class="post-entry box-wrapper box-body">
+                        <div class="top">
+                            <img src="<?=$userPosts['user']['pfp']?>" alt="">
+                            <div class="username">
+                                <div><span><?=$userPosts['user']['username']?></span><span class="post_time-ago">&nbsp;&nbsp;·&nbsp;&nbsp;<?=$timeAgo?></span></div>
+                                <div><span class="material-icons dots">more_horiz</span></div>
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            <div class="content"><?=htmlspecialchars($userPosts['posts'][$i]['content'])?></div>
                         </div>
                     </div>
-                    <div class="bottom">
-                        <div class="content"><?=$userPosts['posts'][$i]['content']?></div>
-                    </div>
-                </div>
-            <?php
-            $i++;
-        }
-        ?></div></section><?php
-    }
-    
-    ?>
+                    <?php
+
+                }
+            }
+
+            ?>
+        </div>
+    </section>
+
     
 
 

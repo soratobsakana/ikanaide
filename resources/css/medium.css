@@ -187,6 +187,7 @@ section.querypage_review {
 div.querypage_review-entry_wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-gap: 1px;
 }
 
 div.querypage_review-entry {
@@ -226,7 +227,7 @@ a.querypage_review-entry_title i {
 }
 
 a.querypage_review-entry_title:hover {
-    filter: brightness(1.15);
+    background: var(--box-bg-hover);
 }
 
 div.mediumhome {

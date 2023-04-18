@@ -245,16 +245,8 @@ hr#user_post_fields-separator {
 }
 
 /* Estilos para la sección de posts de la pestaña de overview */
-section.profile_user-overview_posts-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: var(--gap);   
-}
-
-section.profile_user-overview_posts-wrapper div.left-column, section.profile_user-overview_posts-wrapper div.right-column {
-    display: grid;
-    grid-gap: var(--gap);
-    height: fit-content; /* Esto hace que las columnas no se ajusten al height total del wrapper */
+section.profile_user-overview_posts-wrapper div.box-body {
+    padding: 0!important;
 }
 
 section.profile_user-overview_posts-wrapper div.post-entry {
@@ -262,18 +254,50 @@ section.profile_user-overview_posts-wrapper div.post-entry {
     grid-gap: var(--gap);
     padding: 10px!important;
     word-break: break-all;
+
+    border-radius: 0;
+    border-bottom: 1px solid var(--box-title);
+
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+section.profile_user-overview_posts-wrapper div.post-entry:last-child {
+    border-bottom: none;
+}
+
+section.profile_user-overview_posts-wrapper div.post-entry:hover {
+    background: var(--box-bg-hover);
 }
 
 section.profile_user-overview_posts-wrapper div.post-entry div.top {
-    display: grid;
-    grid-template-columns: 10% 90%;
+    display: flex;
+}
+
+section.profile_user-overview_posts-wrapper div.post-entry div.top img {
+    height: 40px;
 }
 
 section.profile_user-overview_posts-wrapper div.post-entry div.top div.username {
+    width: 100%;
     padding-left: var(--gap);
     display: flex;
     justify-content: space-between;
     font-weight: 500;
+}
+
+section.profile_user-overview_posts-wrapper div.post-entry div.top div.username .dots {
+    font-size: calc(var(--box-font-size) + 5px);
+    opacity: var(--font_low-opacity);
+    cursor: pointer;
+    padding: 0 5px;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+section.profile_user-overview_posts-wrapper div.post-entry div.top div.username .dots:hover {
+    background-color: var(--box-bg);
+    opacity: 1;
 }
 
 section.profile_user-overview_posts-wrapper div.post-entry div.top div.username span.post_time-ago {

@@ -97,7 +97,12 @@ function timeAgo($current, $reference) {
     if ($difference <= 60) {
         $formatted = $difference . ' seconds ago';
     } else if ($difference <= 3600) {
-        $formatted = round(($difference / 60)) . ' minutes ago';
+        if (round(($difference / 60)) === 1) {
+            $formatted = round(($difference / 60)) . ' minute ago';
+        } else {
+            $formatted = round(($difference / 60)) . ' minutes ago';
+        }
+
     } else {
         $formatted = round(($difference / 3600)) . ' hours ago';
     }
