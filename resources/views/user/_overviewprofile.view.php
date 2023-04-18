@@ -46,19 +46,19 @@
     if (isset($userPosts)) {
         ?><section class="profile_user-overview_posts-wrapper">
         <div class="left-column"><?php
-        for($i = 0; $i < count($userPosts); $i++) {
+        for($i = 0; $i < count($userPosts['posts']); $i++) {
             ?>
             
                 <div class="post-entry box-wrapper box-body">
                     <div class="top">
-                        <img src="<?=$userInfo['pfp']?>" alt="">
+                        <img src="<?=$userPosts['user']['pfp']?>" alt="">
                         <div class="username">
-                            <div><?=$userInfo['username']?></div>
+                            <div><span><?=$userPosts['user']['username']?></span><span class="post_time-ago"> · 6 hours ago</span></div>
                             <div>ts</div>
                         </div>
                     </div>
                     <div class="bottom">
-                        <div class="content"><?=$userPosts[$i]['content']?></div>
+                        <div class="content"><?=$userPosts['posts'][$i]['content']?></div>
                     </div>
                 </div>
             <?php
@@ -68,29 +68,30 @@
         </div>
         <div class="right-column">
         <?php
-        for($i = 1; $i < count($userPosts); $i++) {
+        for($i= 1; $i < count($userPosts['posts']); $i++) {
+            pre(time())
             ?>
             
                 <div class="post-entry box-wrapper box-body">
                     <div class="top">
-                        <img src="<?=$userInfo['pfp']?>" alt="">
+                        <img src="<?=$userPosts['user']['pfp']?>" alt="">
                         <div class="username">
-                            <div><?=$userInfo['username']?></div>
+                            <div><span><?=$userPosts['user']['username']?></span><span class="post_time-ago"> · 6 hours ago</span></div>
                             <div>ts</div>
                         </div>
                     </div>
                     <div class="bottom">
-                        <div class="content"><?=$userPosts[$i]['content']?></div>
+                        <div class="content"><?=$userPosts['posts'][$i]['content']?></div>
                     </div>
                 </div>
             <?php
             $i++;
         }
-        ?></section><?php
+        ?></div></section><?php
     }
     
     ?>
-    </div>
+    
 
 
 </section>

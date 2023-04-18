@@ -177,6 +177,12 @@ class User
         return $result -> fetch_assoc();
     }
 
+    public function getInfoLess(int $user_id): array
+    {
+        $result = $this -> con -> db -> execute_query('SELECT `username`,`pfp` FROM user WHERE user_id = ?', [$user_id]);
+        return $result -> fetch_assoc();
+    }
+
     public function getList(string $medium, int $user_id): array
     {
         $result = $this -> con -> db -> execute_query('SELECT * FROM `'.$medium.'list` WHERE `user_id` = ?', [$user_id]);
@@ -565,6 +571,11 @@ class User
         }
     }
 
+    /**
+     * @return array|null
+     * @param int $user_id
+     * Devuelve los posts a mostrar en la página de perfil, por lo que solo devuelve los posts de un único usuario (así como su nombre de usuario y foto de perfil).
+     */
     public function getPosts(int $user_id): array|null
     {
         $result = $this -> con -> db -> execute_query('SELECT * FROM post WHERE user_id = ? ORDER BY `date` DESC', [$user_id]);
@@ -575,7 +586,16 @@ class User
                     $posts[$i][$key] = $value;
                 }
             }
-            return $posts;
+
+            if ($userInfo = $this -> getInfoLess($user_id)) {
+                foreach ($userInfo as $key => $value) {
+                    $postsInfo['user'][$key] = $value;
+                }
+               
+            }
+
+            $postsInfo['posts'] = $posts;
+            return $postsInfo;
         } else {
             return null;
         }

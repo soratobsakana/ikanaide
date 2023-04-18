@@ -91,3 +91,5 @@ function highlightNav(array $nav, $substrStart) {
         }
     }
 }
+
+function timeAgo(string $current)

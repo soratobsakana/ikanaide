@@ -165,7 +165,7 @@
         <div class="box-body">
             <form action="/post" method="post">
                 <label for="post-content">This post will appear in your profile and your followers time line.</label>
-                <textarea name="post-content" id="post-content" required></textarea>
+                <textarea name="post-content" id="post-content" autocomplete="off" required></textarea>
                 <hr id="user_post_fields-separator">
                     <div class="user_post_fields-buttons">
                         <button type="button" id="user-post_cancel" class="submit-button__colorful box">Cancel</button>

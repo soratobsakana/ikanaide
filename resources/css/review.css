@@ -70,6 +70,10 @@ section.review_new-wrapper, section.review_new-wrapper form {
     grid-gap: var(--gap);
 }
 
+section.review_new-wrapper, section.review_new-wrapper form input[type=text] {
+    min-width: 100%;
+}
+
 section.review_new-wrapper div.reviews_new-header div.box-body {
     display: flex;
     justify-content: space-between;

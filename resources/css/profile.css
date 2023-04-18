@@ -254,13 +254,15 @@ section.profile_user-overview_posts-wrapper {
 
 section.profile_user-overview_posts-wrapper div.left-column, section.profile_user-overview_posts-wrapper div.right-column {
     display: grid;
-    grid-gap: var(--gap);   
+    grid-gap: var(--gap);
+    height: fit-content; /* Esto hace que las columnas no se ajusten al height total del wrapper */
 }
 
 section.profile_user-overview_posts-wrapper div.post-entry {
     display: grid;
     grid-gap: var(--gap);
     padding: 10px!important;
+    word-break: break-all;
 }
 
 section.profile_user-overview_posts-wrapper div.post-entry div.top {
@@ -273,4 +275,10 @@ section.profile_user-overview_posts-wrapper div.post-entry div.top div.username 
     display: flex;
     justify-content: space-between;
     font-weight: 500;
+}
+
+section.profile_user-overview_posts-wrapper div.post-entry div.top div.username span.post_time-ago {
+    font-weight: 400;
+    opacity: var(--font_low-opacity);
+    
 }

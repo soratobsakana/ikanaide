@@ -55,10 +55,10 @@
     <section class="review_new-fields">
         
             <div class="box-wrapper box-body">
-                <input type="text" name="reviewTitle" id="reviewTitle" placeholder="Title of the review" required>
+                <input type="text" name="reviewTitle" id="reviewTitle" placeholder="Title of the review" autocomplete="off" required>
             </div>
             <div class="box-wrapper box-body">
-                <textarea name="reviewContent" id="reviewContent" placeholder="Content of the review" required></textarea>
+                <textarea name="reviewContent" id="reviewContent" placeholder="Content of the review" autocomplete="off"required></textarea>
             </div>
             <input class="box submit-button__colorful" type="submit" name="submit" value="Submit">
         </form>
