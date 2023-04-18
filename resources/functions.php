@@ -92,4 +92,15 @@ function highlightNav(array $nav, $substrStart) {
     }
 }
 
-function timeAgo(string $current)
+function timeAgo($current, $reference) {
+    $difference = strtotime($current) - strtotime($reference);
+    if ($difference <= 60) {
+        $formatted = $difference . ' seconds ago';
+    } else if ($difference <= 3600) {
+        $formatted = round(($difference / 60)) . ' minutes ago';
+    } else {
+        $formatted = round(($difference / 3600)) . ' hours ago';
+    }
+
+    return $formatted;
+}

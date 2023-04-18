@@ -91,7 +91,6 @@ section.profile_user-overview {
 section.profile_user-overview_bio div.box-body {
     font-size: calc(var(--box-font-size) + 1px)!important;
     max-height: 400px!important;
-    overflow-y: scroll;
     text-align: center;
 }
 
