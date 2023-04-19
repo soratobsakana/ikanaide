@@ -49,19 +49,13 @@
 
             if (isset($userPosts)) {
                 for($i= 0; $i < count($userPosts['posts']); $i++) {
-
-                    // Recogida de las fechas para crear el tiempo que ha pasado desde la creación de cada post mediante mi función timeAgo().
-                    $current = date('Y-m-d h:i:s');
-                    $reference = $userPosts['posts'][$i]['date'];
-                    $timeAgo = timeAgo($current, $reference);
-
                     ?>
 
                     <div class="post-entry box-wrapper box-body">
                         <div class="top">
                             <img src="<?=$userPosts['user']['pfp']?>" alt="">
                             <div class="username">
-                                <div><span><?=$userPosts['user']['username']?></span><span class="post_time-ago">&nbsp;&nbsp;·&nbsp;&nbsp;<?=$timeAgo?></span></div>
+                                <div><span><?=$userPosts['user']['username']?></span><span class="post_time-ago">&nbsp;&nbsp;·&nbsp;&nbsp;<?=$userPosts['posts'][$i]['time_ago']?></span></div>
                                 <div><span class="material-icons dots">more_horiz</span></div>
                             </div>
                         </div>

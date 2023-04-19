@@ -33,15 +33,17 @@
         </form>
         </div>
         </div>
+
+        <div class="write-a-review list-submit box submit-button__colorful bg-orange center-text less-bold">
+            <a href="/review/new/<?=$medium?>/<?=str_replace(' ', '-', $mediumInfo['title'])?>">Write a review</a>
+        </div>
         
         <?php
     }
 
     ?>
 
-    <div class="write-a-review list-submit box submit-button__colorful bg-orange center-text less-bold">
-        <a href="/review/new/<?=$medium?>/<?=str_replace(' ', '-', $mediumInfo['title'])?>">Write a review</a>
-    </div>
+
 
     <section class="querypage_rank">
         <div class="score box-wrapper">

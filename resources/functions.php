@@ -95,16 +95,11 @@ function highlightNav(array $nav, $substrStart) {
 function timeAgo($current, $reference) {
     $difference = strtotime($current) - strtotime($reference);
     if ($difference <= 60) {
-        $formatted = $difference . ' seconds ago';
+        $difference === 1 ? $formatted = $difference . ' second ago' : $formatted = $difference . ' seconds ago';
     } else if ($difference <= 3600) {
-        if (round(($difference / 60)) === 1) {
-            $formatted = round(($difference / 60)) . ' minute ago';
-        } else {
-            $formatted = round(($difference / 60)) . ' minutes ago';
-        }
-
+        round(($difference / 60)) == 1 ? $formatted = round(($difference / 60)) . ' minute ago' : $formatted = round(($difference / 60)) . ' minutes ago';
     } else {
-        $formatted = round(($difference / 3600)) . ' hours ago';
+        round(($difference / 3600)) === 1 ? $formatted = round(($difference / 3600)) . ' hour ago' : $formatted = round(($difference / 3600)) . ' hours ago';
     }
 
     return $formatted;

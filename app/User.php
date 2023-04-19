@@ -583,8 +583,18 @@ class User
             for($i = 0; $i < $result -> num_rows; $i++) {
                 $row = $result -> fetch_assoc();
                 foreach($row as $key => $value) {
-                    $posts[$i][$key] = $value;
+                    if ($key === 'date') {
+                        // Recogida de las fechas para crear el tiempo que ha pasado desde la creación de cada post mediante mi función timeAgo().
+                        $posts[$i]['date'] = $value;
+                        $current = date('Y-m-d h:i:s');
+                        $reference = $posts[$i]['date'];
+                        $timeAgo = timeAgo($current, $reference);
+                        $posts[$i]['time_ago'] = $timeAgo;
+                    } else {
+                        $posts[$i][$key] = $value;
+                    }
                 }
+
             }
 
             if ($userInfo = $this -> getInfoLess($user_id)) {
