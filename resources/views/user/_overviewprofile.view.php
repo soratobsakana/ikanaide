@@ -39,6 +39,7 @@
         <?php
     }
 
+    if (isset($userPosts)) {
     ?>
     <section class="profile_user-overview_posts-wrapper box-wrapper">
         <div class="box-title">
@@ -47,32 +48,30 @@
         <div class="box-body">
             <?php
 
-            if (isset($userPosts)) {
-                for($i= 0; $i < count($userPosts['posts']); $i++) {
-                    ?>
+            for($i= 0; $i < count($userPosts['posts']); $i++) {
+                ?>
 
-                    <div class="post-entry box-wrapper box-body">
-                        <div class="top">
-                            <img src="<?=$userPosts['user']['pfp']?>" alt="">
-                            <div class="username">
-                                <div><span><?=$userPosts['user']['username']?></span><span class="post_time-ago">&nbsp;&nbsp;·&nbsp;&nbsp;<?=$userPosts['posts'][$i]['time_ago']?></span></div>
-                                <div><span class="material-icons dots">more_horiz</span></div>
-                            </div>
-                        </div>
-                        <div class="bottom">
-                            <div class="content"><?=htmlspecialchars($userPosts['posts'][$i]['content'])?></div>
+                <div class="post-entry box-wrapper box-body">
+                    <div class="top">
+                        <img src="<?=$userPosts['user']['pfp']?>" alt="">
+                        <div class="username">
+                            <div><span><?=$userPosts['user']['username']?></span><span class="post_time-ago">&nbsp;&nbsp;·&nbsp;&nbsp;<?=$userPosts['posts'][$i]['time_ago']?></span></div>
+                            <div><span class="material-icons dots">more_horiz</span></div>
                         </div>
                     </div>
-                    <?php
+                    <div class="bottom">
+                        <div class="content"><?=htmlspecialchars($userPosts['posts'][$i]['content'])?></div>
+                    </div>
+                </div>
 
-                }
+                <?php
             }
 
             ?>
         </div>
     </section>
-
-    
-
+    <?php
+    }
+    ?>
 
 </section>
