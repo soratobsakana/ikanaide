@@ -10,13 +10,18 @@
             [] Add post liking system.
             [] Add post replying system.
             [] Add a single page for each post.
+            []
         [] Social activites
             [] Create a following system.
-            [] 
+            [] Add a private message system.
         [] Home pages
             [] Main home page.
-                []
-        [] 
+                [] Add a post time line (following and global) if user is logged in.
+                [] Add watching animes and mangas, and make summing one episode to both possible.
+        [] User stuff
+             [] Make profile editing available. (No picture or header yet)
+             [] Support follow, post likes and replies notifications. Also PM ones.
+             [] Support post deletion.
         [] 
         [] 
 

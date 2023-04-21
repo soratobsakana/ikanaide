@@ -586,7 +586,7 @@ class User
                     if ($key === 'date') {
                         // Recogida de las fechas para crear el tiempo que ha pasado desde la creación de cada post mediante mi función timeAgo().
                         $posts[$i]['date'] = $value;
-                        $current = date('Y-m-d h:i:s');
+                        $current = date('Y-m-d H:i:s');
                         $reference = $posts[$i]['date'];
                         $timeAgo = timeAgo($current, $reference);
                         $posts[$i]['time_ago'] = $timeAgo;

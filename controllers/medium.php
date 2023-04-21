@@ -11,6 +11,8 @@ $guide = explode("/", $uri);
 $medium = $guide[1]; // anime|manga
 
 $Listing = new Listing;
+
+// Si $guide[2] tiene asignado un valor, se espera que la URI sea algo así: /anime|manga/Nombre-de-anime|manga
 if (isset($guide[2])) {
     $entryOnDB = str_replace('-', ' ', $guide[2]);
     $result = $Listing -> exists($medium, $entryOnDB);
