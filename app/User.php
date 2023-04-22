@@ -388,8 +388,13 @@ class User
             for ($i=0; $i<count($animelist); $i++) {
                 $anime = $this -> con -> db -> execute_query('SELECT `anime_id`, `title`, `episodes`, `type`,  `cover` FROM `anime` WHERE `anime_id` = ?', [$animelist[$i]['anime_id']]) -> fetch_assoc();
                 $anime['score'] = $animelist[$i]['score'];
+                $anime['status'] = $animelist[$i]['status'];
                 $anime['progress'] = $animelist[$i]['progress'];
+                $anime['start_date'] = $animelist[$i]['start_date'];
+                $anime['end_date'] = $animelist[$i]['end_date'];
                 $anime['notes'] = $animelist[$i]['notes'];
+                $anime['rewatches'] = $animelist[$i]['rewatches'];
+                $anime['favorite'] = $animelist[$i]['favorite'];
                 switch($animelist[$i]['status']) {
                     case 'watching':
                         $animes['watching'][] = $anime;

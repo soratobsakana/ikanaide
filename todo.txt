@@ -1,4 +1,4 @@
-230420-21
+230422-23
     [] Resume of work left in order to public the first version of the website:
         [] List editing
             [] Add edition form to the lists too.
@@ -6,7 +6,7 @@
             [] Add comment column on list entries. It will display a hidden div on hover.
         [] Activity
             [] Create a post when user register an activity.
-            [] Make `post_anime` and `post_manga` so its possible to filter posts about X anime|manga later. Similar to a hashtag system.
+            [] Make `post_anime` and `post_manga` so it's possible to filter posts about X anime|manga later. Similar to a hashtag system.
             [] Add post liking system.
             [] Add post replying system.
             [] Add a single page for each post.
@@ -22,8 +22,6 @@
              [] Make profile editing available. (No picture or header yet)
              [] Support follow, post likes and replies notifications. Also PM ones.
              [] Support post deletion.
-        [] 
-        [] 
 
 230417
     [-] Work on user posting and activity.

@@ -249,6 +249,7 @@
             } else {
                 print "<i style='opacity: var(--font_low-opacity); padding: 10px 0'>No reviews yet...</i>";
             }
+
             ?>
         </div>
     </section>
