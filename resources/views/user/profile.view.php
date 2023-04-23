@@ -26,83 +26,46 @@
             </div>
             <div class="box-body">
                 <ul class="two-column-list">
-                    <li><span class="ul_first-column">anime</span><span><?=count($animelist)?></span></li>
-                    <li><span class="ul_first-column">manga</span><span><?=count($mangalist)?></span></li>
-                    <li><span class="ul_first-column">reviews</span><span>0</span></li>
                     <li><span class="ul_first-column">posts</span><span>0</span></li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="profile_user-following box-wrapper">
-            <div class="box-title">
-                <h3>Social</h3>
-            </div>
-            <div class="box-body">
-                <ul class="two-column-list">
+                    <li><span class="ul_first-column">submissions</span><span>0</span></li>
+                    <li><span class="ul_first-column">threads</span><span>0</span></li>
                     <li><span class="ul_first-column">following</span><span>0</span></li>
                     <li><span class="ul_first-column">followers</span><span>0</span></li>
                 </ul>
             </div>
         </section>
-        <?php
 
-        // Comprobación de los campos que contienen un link. Si existe al menos uno, se creará la sección con los links que han sido asignados por el usuario.
-        if (!empty($userInfo['twitter']) || !empty($userInfo['github']) || !empty($userInfo['discord']) || !empty($userInfo['website'])) {
-            ?>
-            <section class="profile_user-links two-column-list box-wrapper">
-                <div class="box-title">
-                    <h3>Links</h3>
-                </div>
-                <div class="box-body">
-                    <ul class="two-column-list">
-                        <?php
+        <section class="profile_user-medium_stats box-wrapper">
+            <div class="box-title">
+                <h3>Anime Stats</h3>
+            </div>
+            <div class="box-body">
+                <ul class="two-column-list">
+                    <li><span class="ul_first-column">watching</span><span><?=count($animelist)?></span></li>
+                    <li><span class="ul_first-column">completed</span><span><?=count($mangalist)?></span></li>
+                    <li><span class="ul_first-column">planned</span><span>0</span></li>
+                    <li><span class="ul_first-column">stalled</span><span>0</span></li>
+                    <li><span class="ul_first-column">dropped</span><span>0</span></li>
+                </ul>
+            </div>
+        </section>
 
-                        $possibleLinks = ['twitter', 'github', 'discord', 'website'];
-                        foreach ($possibleLinks as $link) {
-                            if (!empty($userInfo[$link])) {
-                                ?><li><span class="ul_first-column"><?=$link?></span><span><?=$userInfo[$link]?></span></li><?php
-                            }
-                        }
+        <section class="profile_user-medium_stats box-wrapper">
+            <div class="box-title">
+                <h3>Manga Stats</h3>
+            </div>
+            <div class="box-body">
+                <ul class="two-column-list">
+                    <li><span class="ul_first-column">watching</span><span><?=count($animelist)?></span></li>
+                    <li><span class="ul_first-column">completed</span><span><?=count($mangalist)?></span></li>
+                    <li><span class="ul_first-column">planned</span><span>0</span></li>
+                    <li><span class="ul_first-column">stalled</span><span>0</span></li>
+                    <li><span class="ul_first-column">dropped</span><span>0</span></li>
+                </ul>
+            </div>
+        </section>
 
-                        ?>
-
-                    </ul>
-                </div>
-            </section>
-            <?php
-        }
-
-        // Comprobación de los campos que contienen información sobre fechas. Si existe al menos uno, se creará la sección con las fechas  que han sido asignadas por el usuario.
-        if (!empty($userInfo['country']) || !empty($userInfo['born']) || !empty($userInfo['joined_at'])) {
-            ?>
-            <section class="profile_user-data two-column-list box-wrapper">
-                <div class="box-title">
-                    <h3>Information</h3>
-                </div>
-                <div class="box-body">
-                    <ul class="two-column-list">
-                        <?php
-
-                        if (!empty($userInfo['country'])) {
-                            ?><li><span class="ul_first-column">from</span><span><?=$userInfo['country']?></span></li><?php
-                        }
-                        if (!empty($userInfo['born'])) {
-                            ?><li><span class="ul_first-column">born</span><span><?=lcfirst(dateFormat(substr($userInfo['born'], 0, 10)))?></span></li><?php
-                        }
-                        if (!empty($userInfo['joined_at'])) {
-                            ?><li><span class="ul_first-column">joined</span><span><?=lcfirst(dateFormat(substr($userInfo['joined_at'], 0, 10)))?></span></li><?php
-                        }
-
-                        ?>
-
-                    </ul>
-                </div>
-            </section>
-            <?php
-        }
-
-        ?>
+        <span class="user-report material-icons dots center-text low-opacity">more_horiz</span>
 
     </div>
     <div class="profile_right-column">

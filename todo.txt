@@ -1,4 +1,4 @@
-230422-23
+230424-28
     [] Resume of work left in order to public the first version of the website:
         [] List editing
             [] Add edition form to the lists too.

@@ -48,6 +48,18 @@ section.profile_left-column_buttons form {
     filter: brightness(1.2);
 }
 
+span.user-report {
+    border-radius: var(--border-radius);
+    margin: 0 auto;
+    width: 45px;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+span.user-report:hover {
+    background: var(--box-title);
+}
+
 /* Estilos para el menú de navegación de la columna derecha. */
 div.profile_right-column img {
     object-fit: cover;
@@ -88,6 +100,7 @@ section.profile_user-overview {
     display: grid;
     grid-gap: var(--gap);
 }
+
 section.profile_user-overview_bio div.box-body {
     font-size: calc(var(--box-font-size) + 1px)!important;
     max-height: 400px!important;
@@ -118,7 +131,26 @@ div.profile_user-overview_stats-medium div.box-body div.low-opacity {
 
 section.profile_user-overview_favorites {
     display: grid;
+    grid-template-columns: 1fr 1fr;
     grid-gap: var(--gap);
+}
+
+div.profile_user-overview_favorites_wrapper {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+div.profile_user-overview_favorites_wrapper div {
+    height: 98px;
+    background-size: cover;
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    border-radius: 0!important;
+    transition: calc(var(--transition) + .1s);
+}
+
+div.profile_user-overview_favorites_wrapper div:hover {
+    filter: brightness(1.2);
 }
 
 /* Estilos para la sección de listas. */

@@ -1,27 +1,4 @@
 <section class="profile_user-overview">
-    <section class="profile_user-overview_stats">
-        <div class="profile_user-overview_stats-medium box-wrapper">
-            <div class="box-title">
-                <h3>Anime</h3>
-            </div>
-            <div class="box-body">
-                <div class="completed"><div><?=$animeStats['completed']?></div><div class="low-opacity">completed</div></div>
-                <div class="watching"><div><?=$animeStats['watching']?></div><div class="low-opacity">watching</div></div>
-                <div class="score"><div><?=$animeScoreAvg?></div><div class="low-opacity">score</div></div>
-            </div>
-        </div>
-        <div class="profile_user-overview_stats-medium box-wrapper">
-            <div class="box-title">
-                <h3>Manga</h3>
-            </div>
-            <div class="box-body">
-                <div class="completed"><div><?=$mangaStats['completed']?></div><div class="low-opacity">completed</div></div>
-                <div class="reading"><div><?=$mangaStats['reading']?></div><div class="low-opacity">reading</div></div>
-                <div class="score"><div><?=$mangaScoreAvg?></div><div class="low-opacity">score</div></div>
-            </div>
-        </div>
-    </section>
-
     <?php
 
     if (!empty($userInfo['biography'])) {
@@ -34,6 +11,58 @@
             <div class="box-body">
                 <p><?=$userInfo['biography']?></p>
             </div>
+        </section>
+
+        <section class="profile_user-overview_favorites">
+            <?php
+
+            if (isset($favoriteAnimes)){
+                ?>
+
+                <section class="profile_user-overview_favorites_medium box-wrapper">
+                    <div class="box-title"><h3>Favourite anime</h3></div>
+                    <div class="profile_user-overview_favorites_wrapper querypage_bg">
+
+                        <?php
+                        if ($favoriteAnimes -> num_rows > 0) {
+                            while ($row = $favoriteAnimes -> fetch_assoc()) {
+                                ?><a href="/anime/<?=str_replace(' ', '-', $row['title'])?>"><div style="background-image: url(<?=$row['cover']?>)"></div></a><?php
+                            }
+                        }
+
+                        ?>
+
+                    </div>
+                </section>
+
+                <?php
+            }
+
+            if (isset($favoriteMangas)){
+                ?>
+
+                <section class="profile_user-overview_favorites_medium box-wrapper">
+                    <div class="box-title"><h3>Favourite manga</h3></div>
+                    <div class="profile_user-overview_favorites_wrapper querypage_bg">
+
+                        <?php
+
+                        if ($favoriteMangas -> num_rows > 0) {
+                            while ($row = $favoriteMangas -> fetch_assoc()) {
+                                ?><a href="/manga/<?=str_replace(' ', '-', $row['title'])?>?>"><div style="background-image: url(<?=$row['cover']?>)"></div></a><?php
+                            }
+                        }
+
+                        ?>
+
+                    </div>
+                </section>
+
+                <?php
+            }
+
+            ?>
+
         </section>
 
         <?php
