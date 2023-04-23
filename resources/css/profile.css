@@ -138,10 +138,12 @@ section.profile_user-overview_favorites {
 div.profile_user-overview_favorites_wrapper {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
+    background: var(--box-bg);
+    height: 98px;
 }
 
 div.profile_user-overview_favorites_wrapper div {
-    height: 98px;
+    height: 100%;
     background-size: cover;
     background-position: bottom center;
     background-repeat: no-repeat;

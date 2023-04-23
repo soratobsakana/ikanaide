@@ -26,7 +26,7 @@
             </div>
             <div class="box-body">
                 <ul class="two-column-list">
-                    <li><span class="ul_first-column">posts</span><span>0</span></li>
+                    <li><span class="ul_first-column">posts</span><span><?=count($userPosts['posts'])?></span></li>
                     <li><span class="ul_first-column">submissions</span><span>0</span></li>
                     <li><span class="ul_first-column">threads</span><span>0</span></li>
                     <li><span class="ul_first-column">following</span><span>0</span></li>
@@ -41,11 +41,15 @@
             </div>
             <div class="box-body">
                 <ul class="two-column-list">
-                    <li><span class="ul_first-column">watching</span><span><?=count($animelist)?></span></li>
-                    <li><span class="ul_first-column">completed</span><span><?=count($mangalist)?></span></li>
-                    <li><span class="ul_first-column">planned</span><span>0</span></li>
-                    <li><span class="ul_first-column">stalled</span><span>0</span></li>
-                    <li><span class="ul_first-column">dropped</span><span>0</span></li>
+                    <?php
+
+                    $statsRows = ['watching', 'completed', 'planned', 'stalled', 'dropped'];
+                    foreach ($statsRows as $row) {
+                        isset($animes[$row]) ? $value = count($animes[$row]) : $value = 0;
+                        ?><li><span class="ul_first-column"><?=$row?></span><span><?=$value?></span></li><?php
+                    }
+
+                    ?>
                 </ul>
             </div>
         </section>
@@ -56,14 +60,50 @@
             </div>
             <div class="box-body">
                 <ul class="two-column-list">
-                    <li><span class="ul_first-column">watching</span><span><?=count($animelist)?></span></li>
-                    <li><span class="ul_first-column">completed</span><span><?=count($mangalist)?></span></li>
-                    <li><span class="ul_first-column">planned</span><span>0</span></li>
-                    <li><span class="ul_first-column">stalled</span><span>0</span></li>
-                    <li><span class="ul_first-column">dropped</span><span>0</span></li>
+                    <?php
+
+                    $statsRows = ['reading', 'completed', 'planned', 'stalled', 'dropped'];
+                    foreach ($statsRows as $row) {
+                        isset($mangas[$row]) ? $value = count($mangas[$row]) : $value = 0;
+                        ?><li><span class="ul_first-column"><?=$row?></span><span><?=$value?></span></li><?php
+                    }
+
+                    ?>
                 </ul>
             </div>
         </section>
+
+        <?php
+        // Comprobación de los campos que contienen información sobre fechas. Si existe al menos uno, se creará la sección con las fechas  que han sido asignadas por el usuario.
+        if (!empty($userInfo['country']) || !empty($userInfo['born']) || !empty($userInfo['joined_at'])) {
+        ?>
+        <section class="profile_user-data two-column-list box-wrapper">
+            <div class="box-title">
+                <h3>Information</h3>
+            </div>
+            <div class="box-body">
+                <ul class="two-column-list">
+                    <?php
+
+                    if (!empty($userInfo['country'])) {
+                        ?><li><span class="ul_first-column">from</span><span><?=$userInfo['country']?></span></li><?php
+                    }
+                    if (!empty($userInfo['born'])) {
+                        ?><li><span class="ul_first-column">born</span><span><?=lcfirst(dateFormat(substr($userInfo['born'], 0, 10)))?></span></li><?php
+                    }
+                    if (!empty($userInfo['joined_at'])) {
+                        ?><li><span class="ul_first-column">joined</span><span><?=lcfirst(dateFormat(substr($userInfo['joined_at'], 0, 10)))?></span></li><?php
+                    }
+
+                    ?>
+
+                </ul>
+            </div>
+        </section>
+        <?php
+        }
+
+        ?>
 
         <span class="user-report material-icons dots center-text low-opacity">more_horiz</span>
 
