@@ -10,7 +10,6 @@
             [] Add post liking system.
             [] Add post replying system.
             [] Add a single page for each post.
-            []
         [] Social activites
             [] Create a following system.
             [] Add a private message system.
