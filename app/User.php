@@ -382,6 +382,20 @@ class User
         header('Location: /'.$medium.'/' . $entry);
     }
 
+    public function sumOne(array $data): bool
+    {
+        if (isset($data['user_id']) && isset($data['medium']) && isset($data['medium_id'])) {
+            if ($this -> con -> db -> execute_query('UPDATE '.$data['medium'].'list SET progress = (progress + 1) WHERE user_id = ? and '.$data['medium'].'_id = ?', [$data['user_id'], $data['medium_id']])) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+        
+    }
+
     public function getAnimes(array $animelist): array
     {
         if (count($animelist) > 0) {

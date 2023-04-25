@@ -26,7 +26,7 @@
             </div>
             <div class="box-body">
                 <ul class="two-column-list">
-                    <li><span class="ul_first-column">posts</span><span><?=count($userPosts['posts'])?></span></li>
+                    <li><span class="ul_first-column">posts</span><span><?=is_null($userPosts) ? $userPostsCount = 0 : $userPostsCount = count($userPosts['posts']);?></span></li>
                     <li><span class="ul_first-column">submissions</span><span>0</span></li>
                     <li><span class="ul_first-column">threads</span><span>0</span></li>
                     <li><span class="ul_first-column">following</span><span>0</span></li>

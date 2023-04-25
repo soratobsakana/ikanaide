@@ -23,6 +23,7 @@
                     <div class="profile_user-overview_favorites_wrapper querypage_bg">
 
                         <?php
+                        
                         if (isset($favoriteAnimes)) {
                             if ($favoriteAnimes -> num_rows > 0) {
                                 while ($row = $favoriteAnimes -> fetch_assoc()) {

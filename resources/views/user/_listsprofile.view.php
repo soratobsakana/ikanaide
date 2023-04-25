@@ -45,7 +45,7 @@
                                     <?=$animes[$group][$i]['score']?>
                                 </div>
                                 <div class="profile_user-list_entry-progress center-text">
-                                    <?=$animes[$group][$i]['progress']?>/<?=$animes[$group][$i]['episodes']?>
+                                    <a href="/sum?medium=<?=$medium?>&id=<?=$animes[$group][$i]['anime_id']?>"><?=$animes[$group][$i]['progress']?>/<?=$animes[$group][$i]['episodes']?></a>
                                 </div>
                                 <div class="profile_user-list_entry-type center-text">
                                     <?=$animes[$group][$i]['type']?>
