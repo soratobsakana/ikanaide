@@ -22,6 +22,7 @@ CREATE TABLE `user` (
     `github` varchar(39),
     `discord` varchar(39),
     `website` varchar(200),
+    `shares` BIT(1) NOT NULL DEFAULT 0, /* If he shares, a post will be created when user updates his list */
     PRIMARY KEY (`user_id`)
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
@@ -370,7 +371,6 @@ CREATE TABLE post (
 CREATE TABLE post_reply (
     `post_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     `user_id` INT UNSIGNED NOT NULL,
-    `content` VARCHAR(350) NOT NULL,
     PRIMARY KEY (`post_id`, `user_id`),
     FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
@@ -382,5 +382,24 @@ CREATE TABLE post_like (
     PRIMARY KEY (`post_id`, `user_id`),
     FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE post_anime (
+    `post_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `user_id` INT UNSIGNED NOT NULL,
+    `anime_id` INT UNSIGNED,
+    PRIMARY KEY (`post_id`, `user_id`),
+    FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (`anime_id`) REFERENCES `anime`(`anime_id`) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE post_manga (
+    `post_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `user_id` INT UNSIGNED NOT NULL,
+    `manga_id` INT UNSIGNED,
+    PRIMARY KEY (`post_id`, `user_id`),
+    FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (`manga_id`) REFERENCES `manga`(`manga_id`) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
 
 COMMIT;

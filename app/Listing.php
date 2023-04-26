@@ -12,6 +12,7 @@ class Listing
         $this -> con = new Database;
     }
 
+    // Comprueba si existe mediante el título y devuelve el ID.
     public function exists(string $medium, string $entry): int|bool
     {
         $result = $this -> con -> db -> execute_query('SELECT `'.$medium.'_id` FROM '.$medium.' WHERE title= ?', [$entry]);
@@ -22,6 +23,7 @@ class Listing
         }
     }
 
+    // Comprueba si existe mediante el ID y devuelve un valor booleano.
     public function existsWithId(string $medium, int $entry): bool
     {
         $result = $this -> con -> db -> execute_query('SELECT `'.$medium.'_id` FROM '.$medium.' WHERE `'.$medium.'_id` = ?', [$entry]);
@@ -44,6 +46,17 @@ class Listing
             return $queryInfo;
         } else {
             return $queryInfo = null;
+        }
+    }
+
+    // Devuelve el nombre del anime|manga
+    public function getTitle(string $medium, int $medium_id): string|false
+    {
+        $result = $this -> con -> db -> execute_query('SELECT title FROM '.$medium.' WHERE '.$medium.'_id = ?', [$medium_id]);
+        if ($result -> num_rows === 1) {
+            return $result -> fetch_column();
+        } else {
+            return false;
         }
     }
 

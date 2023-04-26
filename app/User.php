@@ -415,6 +415,16 @@ class User
         
     }
 
+    public function shares(int $user_id): bool
+    {
+        $result = $this -> con -> db -> execute_query('SELECT user_id FROM user WHERE user_id = ? AND shares = 1', [$user_id]);
+        if ($result -> num_rows === 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function getAnimes(array $animelist): array
     {
         if (count($animelist) > 0) {
