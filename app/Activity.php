@@ -69,4 +69,24 @@ class Activity
             return false;
         }
     }
+
+    /**
+     * @param array $data
+     * @return bool
+     * Se añade una fila a la entrada de post_like cuando un usuario da click sobre el icono de corazón de un post.
+     */
+    public function like(array $data): bool
+    {
+        if (isset($data['post_id'] && $data['user_id'])) {
+            if ($this -> user -> validateSession()) {
+                 if ($this -> con -> db -> execute_query('INSERT INTO `post_like` VALUES(?, ?, default)', [$data['post_id'], $data['user_id']])) {
+                    return true;
+                 }
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
 }
