@@ -187,6 +187,14 @@ div.profile_user-list_entry-wrapper, div.profile_user-list_entry-wrapper div.box
     word-break: break-word;
 }
 
+.profile_user-list_entry-progress a {
+    transition: var(--transition);
+}
+
+.profile_user-list_entry-progress a:hover {
+    opacity: var(--font_low-opacity);
+}
+
 /* Estilos para la sección de reviews */
 
 

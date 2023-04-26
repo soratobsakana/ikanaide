@@ -3,15 +3,18 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 require_once 'Database.php';
+require_once 'Listing.php';
 
 class User
 {
 
     private object $con;
+    private object $listing;
 
     public function __construct()
     {
         $this -> con = new Database;
+        $this -> listing = new Listing;
     }
 
     public function register(array $registerInfo): string
@@ -337,7 +340,8 @@ class User
                         }
                         break;
                     case 'progress':
-                        if ($value < 0 || $value > $counter) {
+                        is_numeric($value) ? $value = intval(floor($value)) : $value = false;
+                        if (($value < 0 || $value > $counter) && $value !== false) {
                             exit(header('Location: /'.$medium.'/' . $entry));
                         } else {
                             $entryInfo[$key] = $value ?? null;
@@ -382,14 +386,29 @@ class User
         header('Location: /'.$medium.'/' . $entry);
     }
 
+    public function getEpisodesOrChapters(string $medium, int $medium_id, int $user_id): int|false
+    {
+        $medium === 'anime' ? $current = 'episodes' : $current = 'chapters';
+        $result = $this -> con -> db -> execute_query('SELECT progress FROM '.$medium.'list WHERE '.$medium.'_id = ? AND user_id = ?', [$medium_id, $user_id]) -> fetch_column();
+        if (is_numeric($result)) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
+
     public function sumOne(array $data): bool
     {
         if (isset($data['user_id']) && isset($data['medium']) && isset($data['medium_id'])) {
-            if ($this -> con -> db -> execute_query('UPDATE '.$data['medium'].'list SET progress = (progress + 1) WHERE user_id = ? and '.$data['medium'].'_id = ?', [$data['user_id'], $data['medium_id']])) {
-                return true;
+            if ($this -> listing -> existsWithId($data['medium'], $data['medium_id'])) {
+                if ($this -> con -> db -> execute_query('UPDATE '.$data['medium'].'list SET progress = (progress + 1) WHERE user_id = ? and '.$data['medium'].'_id = ?', [$data['user_id'], $data['medium_id']])) {
+                    return true;
+                } else {
+                    return false;
+                }
             } else {
                 return false;
-            }
+            }   
         } else {
             return false;
         }

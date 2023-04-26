@@ -1,6 +1,7 @@
 <?php
 
 require_once 'Database.php';
+require_once 'User.php';
 
 class Listing
 {
@@ -16,6 +17,16 @@ class Listing
         $result = $this -> con -> db -> execute_query('SELECT `'.$medium.'_id` FROM '.$medium.' WHERE title= ?', [$entry]);
         if ($result -> num_rows === 1) {
             return $result -> fetch_column();
+        } else {
+            return false;
+        }
+    }
+
+    public function existsWithId(string $medium, int $entry): bool
+    {
+        $result = $this -> con -> db -> execute_query('SELECT `'.$medium.'_id` FROM '.$medium.' WHERE `'.$medium.'_id` = ?', [$entry]);
+        if ($result -> num_rows === 1) {
+            return true;
         } else {
             return false;
         }
@@ -155,5 +166,16 @@ class Listing
     {
         $query = 'SELECT ' . $medium . '_id, title, cover FROM ' . $medium;
         return $this -> con -> db -> execute_query($query);
+    }
+
+    public function getEpisodesOrChapters(string $medium, int $id): int
+    {
+        $medium === 'anime' ? $current = 'episodes' : $current = 'chapters';
+        $result = $this -> con -> db -> execute_query('SELECT '.$current.' FROM '.$medium.' WHERE '.$medium.'_id = ?', [$id]) -> fetch_column();
+        if (isset($result)) {
+            return $result;
+        } else {
+            return 0;
+        }
     }
 }

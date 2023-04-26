@@ -75,7 +75,7 @@
                                     <?=$mangas[$group][$i]['score']?>
                                 </div>
                                 <div class="profile_user-list_entry-progress center-text">
-                                    <?=$mangas[$group][$i]['progress']?>/<?=$mangas[$group][$i]['chapters']?>
+                                <a href="/sum?medium=<?=$medium?>&id=<?=$mangas[$group][$i]['manga_id']?>"><?=$mangas[$group][$i]['progress']?>/<?=$mangas[$group][$i]['chapters']?></a>
                                 </div>
                                 <div class="profile_user-list_entry-type center-text">
                                     <?=$mangas[$group][$i]['format']?>
