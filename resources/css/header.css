@@ -13,7 +13,8 @@ div.inner-header {
 
 p#header-logo {
     font-family: 'Berkshire Swash';
-    font-size: 24px;
+    font-family: 'Redressed', cursive;
+    font-size: 26px;
     font-weight: bold;
 
     position: absolute;

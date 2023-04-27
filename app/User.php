@@ -431,7 +431,7 @@ class User
             for ($i=0; $i<count($animelist); $i++) {
                 $anime = $this -> con -> db -> execute_query('SELECT `anime_id`, `title`, `episodes`, `type`,  `cover` FROM `anime` WHERE `anime_id` = ?', [$animelist[$i]['anime_id']]) -> fetch_assoc();
                 $anime['score'] = $animelist[$i]['score'];
-                $anime['status'] = $animelist[$i]['status'];
+                $animelist[$i]['progress'] === $anime['episodes'] ? $animelist[$i]['status'] = 'completed' : $animelist[$i]['status'] = $animelist[$i]['status'];
                 $anime['progress'] = $animelist[$i]['progress'];
                 $anime['start_date'] = $animelist[$i]['start_date'];
                 $anime['end_date'] = $animelist[$i]['end_date'];

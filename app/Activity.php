@@ -77,7 +77,7 @@ class Activity
      */
     public function like(array $data): bool
     {
-        if (isset($data['post_id'] && $data['user_id'])) {
+        if (isset($data['post_id']) && $data['user_id']) {
             if ($this -> user -> validateSession()) {
                  if ($this -> con -> db -> execute_query('INSERT INTO `post_like` VALUES(?, ?, default)', [$data['post_id'], $data['user_id']])) {
                     return true;

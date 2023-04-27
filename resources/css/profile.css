@@ -345,5 +345,26 @@ section.profile_user-overview_posts-wrapper div.post-entry div.top div.username 
 section.profile_user-overview_posts-wrapper div.post-entry div.top div.username span.post_time-ago {
     font-weight: 400;
     opacity: var(--font_low-opacity);
-    
+}
+
+section.profile_user-overview_posts-wrapper div.post-entry div.bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+section.profile_user-overview_posts-wrapper div.post-entry div.bottom div.social {
+    display: flex;
+    gap: var(--gap);
+}
+
+section.profile_user-overview_posts-wrapper div.post-entry div.social span {
+    font-size: 14px;
+    opacity: var(--font_low-opacity);
+    transition: var(--transition);
+    padding-top: 5px;
+}
+
+section.profile_user-overview_posts-wrapper div.post-entry div.social span:hover {
+    opacity: 1;
 }
