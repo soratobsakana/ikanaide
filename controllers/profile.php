@@ -1,7 +1,9 @@
 <?php
 include_once('resources/functions.php');
 include_once('app/User.php');
+include_once('app/Activity.php');
 $Session = new User;
+$Activity = new Activity;
 
 if (isset($_COOKIE['session'])) {
     if ($Session -> validateSession() !== TRUE) {
@@ -24,6 +26,7 @@ if ($user_id !== null) {
     $favoriteMangas = $Session -> getFavorites($user_id, 'manga'); // This is an object that will be looped in _favoritesprofile.view.php
     $userReviews = $Session -> getReviews($user_id);
     $userPosts = $Session -> getPosts($user_id);
+    $select = $Activity -> getSelect();
 
     require 'resources/views/user/profile.view.php';
 } else {

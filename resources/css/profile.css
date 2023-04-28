@@ -269,6 +269,7 @@ section#user_post-wrapper div.box-body form div.user_post_fields-buttons {
 section#user_post-wrapper div.box-wrapper textarea {
     min-height: 150px;
     padding: 10px;
+    margin-bottom: 5px; /* Separa el textarea con el select */
     border-radius: var(--border-radius);
     background-color: var(--box-title)!important;
     width: 100%;
@@ -277,6 +278,11 @@ section#user_post-wrapper div.box-wrapper textarea {
 
 section#user_post-wrapper div.box-wrapper textarea:focus-within {
     filter: brightness(1.15);
+}
+
+section#user_post-wrapper div.box-wrapper select {
+    background-color: var(--box-title)!important;
+    transition: var(--transition);
 }
 
 hr#user_post_fields-separator {
@@ -346,16 +352,18 @@ section.profile_user-overview_posts-wrapper div.post-entry div.top div.username 
     font-weight: 400;
     opacity: var(--font_low-opacity);
 }
-
+/* This will be displayed once I find a decent way to front-end the like and replying system (need JS)
 section.profile_user-overview_posts-wrapper div.post-entry div.bottom {
     display: flex;
     justify-content: space-between;
     gap: 10px;
 }
+*/
 
 section.profile_user-overview_posts-wrapper div.post-entry div.bottom div.social {
     display: flex;
     gap: var(--gap);
+    display: none
 }
 
 section.profile_user-overview_posts-wrapper div.post-entry div.social span {

@@ -2,11 +2,13 @@
     [-] Resume of work left in order to public the first version of the website:
         [-] List editing
             [] Add edition form to the lists too.
+                need JS to display it on /user/animelist. I will prob only allow edition on medium and single list entry pages.
             [X] Add posibility of summing one watched episode or read chapter
         [-] Activity
             [X] Create a post when user registers an activity.
-            [] Make `post_anime` and `post_manga` so it's possible to filter posts about X anime|manga later. Similar to a hashtag system.
+            [X] Make `post_anime` and `post_manga` so it's possible to filter posts about X anime|manga later. Similar to a hashtag system.
             [-] Add post liking system.
+                need JS
             [] Add post replying system.
             [] Add a single page for each post.
         [] Social activites

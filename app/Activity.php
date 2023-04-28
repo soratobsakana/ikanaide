@@ -5,7 +5,7 @@ include_once 'User.php';
 
 class Activity
 {
-    private object $con;
+    public object $con;
     private object $user;
     private object $listing;
 
@@ -21,7 +21,7 @@ class Activity
      * @return bool
      * Crea un post mediante $post['user_id'] y $post['content'] y lo asigna a un usuario.
      */
-    public function post(array $post): bool
+    public function post(array $post): int|false
     {
         if (isset($post['content']) && isset($post['user_id'])) {
             if ($this -> user -> validateSession()) {
@@ -85,6 +85,38 @@ class Activity
             } else {
                 return false;
             }
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * @return array $select
+     * Hace una lista con todos los anime y manga de la base de datos para mostrar en un select dentro del wrapper de creación de post.
+     * Con esto, un usuario puede relacionar un post a un anime o manga.
+     */
+    public function getSelect(): array
+    {
+        $animes = $this -> con -> db -> execute_query('SELECT title FROM anime ORDER BY title');
+        $mangas = $this -> con -> db -> execute_query('SELECT title FROM manga ORDER BY title');
+
+        for ($i = 0; $i < $animes -> num_rows; $i++) {
+            $anime = $animes -> fetch_column();
+            $select[] = $anime . ' (anime)';
+        }
+
+        for ($i = 0; $i < $mangas -> num_rows; $i++) {
+            $manga = $mangas -> fetch_column();
+            $select[] = $manga . ' (manga)';
+        }
+
+        return $select;
+    }
+
+    public function setPostRelation(string $medium, int $post_id, int $user_id, int $entry): bool
+    {
+        if ($this -> con -> db -> execute_query('INSERT INTO post_'.$medium.' VALUES (?, ?, ?)', [$post_id, $user_id, $entry])) {
+            return true;
         } else {
             return false;
         }

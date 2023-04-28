@@ -169,11 +169,22 @@
             <form action="/post" method="post">
                 <label for="post-content">This post will appear in your profile and your followers time line.</label>
                 <textarea name="post-content" id="post-content" autocomplete="off" required></textarea>
+                <label for="on-medium">Is this post about any anime or manga?</label>
+                <select name="on-medium" id="on-medium">
+                    <option disabled selected>Select an anime or manga</option>
+                    <?php
+
+                    foreach ($select as $option) {
+                        ?><option value="<?=$option?>"><?=$option?></option><?php
+                    }
+
+                    ?>
+                </select>
                 <hr id="user_post_fields-separator">
-                    <div class="user_post_fields-buttons">
-                        <button type="button" id="user-post_cancel" class="submit-button__colorful box">Cancel</button>
-                        <input class="submit-button__colorful box" type="submit" name='post' value="Post">
-                    </div>
+                <div class="user_post_fields-buttons">
+                    <button type="button" id="user-post_cancel" class="submit-button__colorful box">Cancel</button>
+                    <input class="submit-button__colorful box" type="submit" name='post' value="Post">
+                </div>
             </form>
         </div>
     </div>
