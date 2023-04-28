@@ -43,6 +43,16 @@ if ($guide[1] === 'review' && is_numeric($guide[2])) {
 }
 
 
+if ($guide[1] === 'activity' && isset($guide[2])) {
+    if (is_numeric($guide[2])) {
+        $postId = $guide[2];
+        $postRoutes = [
+            '/activity/' . $postId => 'controllers/activity.php'
+        ];
+    }
+}
+
+
 // Array con las todas las rutas de la página web.
 $routes = array(
     '/' => 'resources/views/home.view.php',
@@ -101,6 +111,12 @@ if (array_key_exists($uri, $routes)) {
    } else {
        exit(header('Location: /404'));
    }
+} else if (isset($postRoutes)) {
+    if (array_key_exists($uri, $postRoutes)) {
+        require $postRoutes[$uri];
+    } else {
+        exit(header('Location: /404'));
+    }
 } else {
     // En caso de no existir el URI solicitado, se procesa la información mediante profileRouter.php para encontrar un usuario.
     require 'profileRouter.php';

@@ -121,4 +121,13 @@ class Activity
             return false;
         }
     }
+
+    public function exists(int $post_id): bool
+    {
+        if ($this -> con -> db -> execute_query('SELECT * FROM post WHERE post_id = ?', [$post_id])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

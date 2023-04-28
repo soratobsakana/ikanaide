@@ -78,7 +78,7 @@
 
             for($i= 0; $i < count($userPosts['posts']); $i++) {
                 ?>
-
+                <a href="/activity/<?=$userPosts['posts'][$i]['post_id']?>">
                 <div class="post-entry box-wrapper box-body">
                     <div class="top">
                         <img src="<?=$userPosts['user']['pfp']?>" alt="">
@@ -89,14 +89,15 @@
                     </div>
                     <div class="bottom">
                         <div class="content"><?=htmlspecialchars($userPosts['posts'][$i]['content'])?></div>
-                        <div class="social">
+                        <!--<div class="social">
                             <span class="material-icons-outlined">chat_bubble_outline</span>
                             <span class="material-icons-outlined">favorite_border</span>
                             <span class="material-icons-outlined">bookmark_border</span>
-                        </div>
+                        </div>-->
                     </div>
                     
                 </div>
+                </a>
 
                 <?php
             }
