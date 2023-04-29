@@ -643,16 +643,33 @@ class User
                     }
                 }
 
+                $animeId = $this -> con -> db -> execute_query('SELECT anime_id FROM `post_anime` WHERE post_id = ?', [$posts[$i]['post_id']]);
+                $mangaId = $this -> con -> db -> execute_query('SELECT manga_id FROM `post_manga` WHERE post_id = ?', [$posts[$i]['post_id']]);
+                if ($animeId -> num_rows === 1) {
+                    $posts[$i]['medium'] = 'anime';
+                    $posts[$i]['medium_id'] = $animeId -> fetch_column();
+                    $posts[$i]['medium_title'] = $this -> con -> db -> execute_query('SELECT title FROM anime WHERE anime_id = ?', [$posts[$i]['medium_id']]) -> fetch_column();
+                } else if ($mangaId -> num_rows === 1) {
+                    $posts[$i]['medium'] = 'manga';
+                    $posts[$i]['medium_id'] = $mangaId -> fetch_column();
+                    $posts[$i]['medium_title'] = $this -> con -> db -> execute_query('SELECT title FROM manga WHERE manga_id = ?', [$posts[$i]['medium_id']]) -> fetch_column();
+                } else {
+                    $posts[$i]['medium'] = null;
+                    $posts[$i]['medium_id'] = null;
+                    $posts[$i]['medium_title'] = null;
+                }
             }
+
+            $postsInfo['posts'] = $posts;
 
             if ($userInfo = $this -> getInfoLess($user_id)) {
                 foreach ($userInfo as $key => $value) {
                     $postsInfo['user'][$key] = $value;
                 }
-               
             }
 
-            $postsInfo['posts'] = $posts;
+
+
             return $postsInfo;
         } else {
             return null;

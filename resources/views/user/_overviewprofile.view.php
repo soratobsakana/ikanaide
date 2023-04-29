@@ -82,9 +82,22 @@
                 <div class="post-entry box-wrapper box-body">
                     <div class="top">
                         <img src="<?=$userPosts['user']['pfp']?>" alt="">
-                        <div class="username">
-                            <div><span><?=$userPosts['user']['username']?></span><span class="post_time-ago">&nbsp;&nbsp;·&nbsp;&nbsp;<?=$userPosts['posts'][$i]['time_ago']?></span></div>
-                            <div><span class="material-icons dots">more_horiz</span></div>
+                        <div class="post-info">
+                            <div class="post-info_user">
+                                <div class="username">
+                                    <div><span><?=$userPosts['user']['username']?></span><span class="post_time-ago">&nbsp;&nbsp;·&nbsp;&nbsp;<?=$userPosts['posts'][$i]['time_ago']?></span></div>
+                                    <div><span class="material-icons dots">more_horiz</span></div>
+                                </div>
+                            </div>
+                            <div class="post-info_relation">
+                                <?php
+
+                                if (!($userPosts['posts'][$i]['medium_id'] === NULL)) {
+                                    ?><span class="low-opacity">on <?=$userPosts['posts'][$i]['medium_title']?></span><?php
+                                }
+
+                                ?>
+                            </div>
                         </div>
                     </div>
                     <div class="bottom">

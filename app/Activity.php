@@ -124,7 +124,7 @@ class Activity
 
     public function exists(int $post_id): bool
     {
-        if ($this -> con -> db -> execute_query('SELECT * FROM post WHERE post_id = ?', [$post_id])) {
+        if ($this -> con -> db -> execute_query('SELECT * FROM post WHERE post_id = ?', [$post_id]) -> num_rows === 1) {
             return true;
         } else {
             return false;

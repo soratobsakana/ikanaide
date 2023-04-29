@@ -7,7 +7,6 @@ $Activity = new Activity;
 
 $postId = intval($guide[2]);
 
-pre($Activity -> exists($postId));
 if ($Activity -> exists($postId)) {
     print 'y';
 } else {

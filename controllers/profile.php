@@ -26,7 +26,7 @@ if ($user_id !== null) {
     $favoriteMangas = $Session -> getFavorites($user_id, 'manga'); // This is an object that will be looped in _favoritesprofile.view.php
     $userReviews = $Session -> getReviews($user_id);
     $userPosts = $Session -> getPosts($user_id);
-    $select = $Activity -> getSelect();
+    $select = $Activity -> getSelect(); // La variable $select es asignada con los valores a mostrar en el menú HTML select del wrapper de creación de posts, en el perfil.
 
     require 'resources/views/user/profile.view.php';
 } else {
