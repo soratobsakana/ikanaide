@@ -101,6 +101,7 @@ section.querypage_char {
 div.querypage_char-entry_wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1px;
 }
 
 div.querypage_char-entry {
@@ -144,6 +145,7 @@ section.querypage_staff {
 div.querypage_staff-entry_wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1px;
 }
 
 div.querypage_staff-entry {
@@ -337,7 +339,7 @@ div.querypage_list-edit_form form div.edit-list_fields div.edit-list_fields-butt
 }
 
 hr#edit-list_fields-separator {
-    margin-top: 10px;
+
     height: 1px;
     border: 0px!important;
     background-color: var(--box-title);

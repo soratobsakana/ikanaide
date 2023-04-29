@@ -1,5 +1,7 @@
 <?php
 
+// Este archivo es utilizado para registrar nuevos posts en la base de datos.
+
 require_once 'app/Activity.php';
 require_once 'app/Listing.php';
 $Activity = new Activity;

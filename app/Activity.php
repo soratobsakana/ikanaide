@@ -18,7 +18,7 @@ class Activity
 
     /**
      * @param array $post
-     * @return bool
+     * @return int|false
      * Crea un post mediante $post['user_id'] y $post['content'] y lo asigna a un usuario.
      */
     public function post(array $post): int|false
@@ -129,5 +129,52 @@ class Activity
         } else {
             return false;
         }
+    }
+
+    /**
+     * @param int $post_id
+     * @return array
+     * Este método requiere el previo uso del método Activity -> exists() para que no de error en caso de no existir el post.
+     */
+    public function getPost(int $post_id): array
+    {
+        $result = $this -> con -> db -> execute_query('SELECT * FROM post WHERE post_id = ?', [$post_id]) -> fetch_assoc();
+        
+        foreach ($result as $key => $value) {
+            if ($key === 'date') {
+                // Recogida de las fechas para crear el tiempo que ha pasado desde la creación de cada post mediante mi función timeAgo().
+                $post['post']['date'] = $value;
+                $current = date('Y-m-d H:i:s');
+                $reference = $post['post']['date'];
+                $timeAgo = timeAgo($current, $reference);
+                $post['post']['time_ago'] = $timeAgo;
+            } else if ($key === 'user_id') {
+                $post['user']['user_id'] = $value;
+            } else {
+                $post['post'][$key] = $value;
+            }
+        }
+        
+        $post['user']['username'] = $this -> user -> getUsername($post['user']['user_id']);
+
+        $animeId = $this -> con -> db -> execute_query('SELECT anime_id FROM `post_anime` WHERE post_id = ?', [$post['post']['post_id']]);
+        $mangaId = $this -> con -> db -> execute_query('SELECT manga_id FROM `post_manga` WHERE post_id = ?', [$post['post']['post_id']]);
+        if ($animeId -> num_rows === 1) {
+            $post['post']['medium'] = 'anime';
+            $post['post']['medium_id'] = $animeId -> fetch_column();
+            $post['post']['medium_title'] = $this -> con -> db -> execute_query('SELECT title FROM anime WHERE anime_id = ?', [$post['post']['medium_id']]) -> fetch_column();
+        } else if ($mangaId -> num_rows === 1) {
+            $post['post']['medium'] = 'manga';
+            $post['post']['medium_id'] = $mangaId -> fetch_column();
+            $post['post']['medium_title'] = $this -> con -> db -> execute_query('SELECT title FROM manga WHERE manga_id = ?', [$post['post']['medium_id']]) -> fetch_column();
+        }
+
+        if ($userInfo = $this -> user -> getInfoLess($post['user']['user_id'])) {
+            foreach ($userInfo as $key => $value) {
+                $post['user'][$key] = $value;
+            }
+        }
+        
+        return $post;
     }
 }

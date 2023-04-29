@@ -58,6 +58,14 @@ function dateFormat ($date) {
     }
 }
 
+function timeFormat($time) {
+    if (substr($time, 0, 3) >= 12) {
+        return $time . ' PM';
+    } else {
+        return $time . ' AM';
+    }
+}
+
 // Preformatea el resultado de var_dump y termina el script de después para leer los resultados con mayor claridad.
 function pre($v) {
     print '<pre>';

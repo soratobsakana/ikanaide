@@ -129,10 +129,12 @@ div.profile_user-overview_stats-medium div.box-body div.low-opacity {
     font-size: var(--box-font-size);
 }
 
+/* Displays favorites on the overview tab. Currently not in use. */
 section.profile_user-overview_favorites {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: var(--gap);
+    display: none;
 }
 
 div.profile_user-overview_favorites_wrapper {
@@ -290,94 +292,4 @@ hr#user_post_fields-separator {
     height: 1px;
     border: 0px!important;
     background-color: var(--box-title);
-}
-
-/* Estilos para la sección de posts de la pestaña de overview */
-section.profile_user-overview_posts-wrapper div.box-body {
-    padding: 0!important;
-}
-
-section.profile_user-overview_posts-wrapper div.box-body a div.post-entry {
-    display: grid;
-    grid-gap: var(--gap);
-    padding: 10px!important;
-    word-break: break-all;
-
-    border-radius: 0;
-    border-bottom: 1px solid var(--box-title);
-
-    transition: var(--transition);
-    cursor: pointer;
-}
-
-section.profile_user-overview_posts-wrapper div.box-body a:last-child div.post-entry {
-    border-bottom: 0;
-}
-
-section.profile_user-overview_posts-wrapper div.post-entry:hover {
-    background: var(--box-bg-hover);
-}
-
-section.profile_user-overview_posts-wrapper div.post-entry div.top {
-    display: flex;
-    gap: var(--gap);
-    height: 40px;
-}
-
-section.profile_user-overview_posts-wrapper div.post-entry div.top img {
-    height: 100%;
-}
-
-div.post-info, div.post-info_user, div.post-info_relation {
-    width: 100%;
-}
-
-section.profile_user-overview_posts-wrapper div.post-entry div.top div.post-info div.post-info_user div.username {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    font-weight: 500;
-}
-
-section.profile_user-overview_posts-wrapper div.post-entry div.top div.post-info div.post-info_user div.username .dots {
-    font-size: calc(var(--box-font-size) + 5px);
-    opacity: var(--font_low-opacity);
-    cursor: pointer;
-    padding: 0 5px;
-    border-radius: var(--border-radius);
-    transition: var(--transition);
-}
-
-section.profile_user-overview_posts-wrapper div.post-entry div.top div.post-info div.post-info_user div.username .dots:hover {
-    background-color: var(--box-bg);
-    opacity: 1;
-}
-
-section.profile_user-overview_posts-wrapper div.post-entry div.top div.username span.post_time-ago {
-    font-weight: 400;
-    opacity: var(--font_low-opacity);
-}
-/* This will be displayed once I find a decent way to front-end the like and replying system (need JS)
-section.profile_user-overview_posts-wrapper div.post-entry div.bottom {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-}
-*/
-
-section.profile_user-overview_posts-wrapper div.post-entry div.bottom div.social {
-    display: flex;
-    gap: var(--gap);
-    display: none
-}
-
-section.profile_user-overview_posts-wrapper div.post-entry div.social span {
-    font-size: 14px;
-    opacity: var(--font_low-opacity);
-    transition: var(--transition);
-    padding-top: 5px;
-}
-
-section.profile_user-overview_posts-wrapper div.post-entry div.social span:hover {
-    opacity: 1;
 }

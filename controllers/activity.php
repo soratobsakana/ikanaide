@@ -5,10 +5,12 @@ require_once 'app/Activity.php';
 
 $Activity = new Activity;
 
-$postId = intval($guide[2]);
+// $guide y $postId han sido declaradas en el archivo /routes/web.php
 
 if ($Activity -> exists($postId)) {
-    print 'y';
+    $post = $Activity -> getPost($postId);
+
+    require 'resources/views/activity/activity.view.php';
 } else {
-    print 'n';
+    header('Location: /404');
 }

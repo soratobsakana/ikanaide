@@ -42,7 +42,7 @@ if ($guide[1] === 'review' && is_numeric($guide[2])) {
     ];
 }
 
-
+// Esta condición permite el siguiente tipo de URI: /activity/54
 if ($guide[1] === 'activity' && isset($guide[2])) {
     if (is_numeric($guide[2])) {
         $postId = $guide[2];

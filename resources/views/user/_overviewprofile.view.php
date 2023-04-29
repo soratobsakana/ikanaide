@@ -69,7 +69,7 @@
 
     if (isset($userPosts)) {
     ?>
-    <section class="profile_user-overview_posts-wrapper box-wrapper">
+    <section class="posts-wrapper box-wrapper">
         <div class="box-title">
             <h3>Activity</h3>
         </div>

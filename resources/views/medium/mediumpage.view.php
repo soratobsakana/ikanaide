@@ -305,7 +305,7 @@
                             <textarea name="notes" id="notes"><?=$listEntry['notes']?></textarea>
                         </div>
                     </div>
-                    <hr id="edit-list_fields-separator">
+                    <hr style="margin-top: 10px" id="edit-list_fields-separator">
                     <div class="edit-list_fields-buttons">
                         <button type="button" id="edit-list_cancel" class="submit-button__colorful box">Cancel</button>
                         <input class="submit-button__colorful box" type="submit" name='save' value="Save">
