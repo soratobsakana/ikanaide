@@ -182,7 +182,7 @@ class User
 
     public function getInfoLess(int $user_id): array
     {
-        $result = $this -> con -> db -> execute_query('SELECT `username`,`pfp` FROM user WHERE user_id = ?', [$user_id]);
+        $result = $this -> con -> db -> execute_query('SELECT `user_id`,`username`,`pfp` FROM user WHERE user_id = ?', [$user_id]);
         return $result -> fetch_assoc();
     }
 
