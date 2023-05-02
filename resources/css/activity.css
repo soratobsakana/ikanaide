@@ -21,6 +21,10 @@ div.activity_single-page_wrapper form div.top img {
     height: 40px;
 }
 
+div.activity_single-page_wrapper section.post-reply_wrapper {
+    display: none;
+}
+
 div.activity_single-page_wrapper section.post-reply_wrapper form div.top textarea {
     min-height: 120px!important;
     padding: 10px 10px 10px 12px;
@@ -36,13 +40,3 @@ div.activity_single-page_wrapper section.post-reply_wrapper form div.bottom {
     gap: var(--gap);
 }
 
-div.activity_single-page_wrapper section.post-reply_wrapper form input[type=submit] {
-    padding: 8px 50px;
-    border-radius: 20px;
-    background-color: var(--purple);
-    transition: var(--transition);
-}
-
-div.activity_single-page_wrapper section.post-reply_wrapper form input[type=submit]:hover {
-    filter: brightness(1.15);
-}

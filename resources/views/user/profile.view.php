@@ -197,6 +197,7 @@
 
     btn.addEventListener('click', function() {
         modal.style.display = "block";
+        document.getElementById("post-content").focus();
     })
 
     cancelBtn.addEventListener('click', function() {

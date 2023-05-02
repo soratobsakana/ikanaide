@@ -80,6 +80,7 @@ $routes = array(
     '/edit' => 'controllers/edit.php',
     '/sum' => 'controllers/sum.php',
     '/post' => 'controllers/post.php',
+    '/reply' => 'controllers/activity.php',
     '/submit' => 'controllers/submit.php',
     '/submit/anime' => 'controllers/submit.php',
     '/submit/manga' => 'controllers/submit.php',

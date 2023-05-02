@@ -28,7 +28,7 @@
                 </div>
                 <hr id="edit-list_fields-separator">
                 <div class="social">
-                    <span class="material-icons-outlined">chat_bubble_outline</span>
+                    <span class="material-icons-outlined" id="display-reply">chat_bubble_outline</span>
                     <span class="material-icons-outlined">favorite_border</span>
                     <span class="material-icons-outlined">bookmark_border</span>
                 </div>
@@ -37,16 +37,34 @@
         </div>
     </section>
 
-    <section class="post-reply_wrapper box-wrapper">
-        <form action="/controllers/activity.php">
+    <section class="post-reply_wrapper box-wrapper" id="post-reply_wrapper">
+        <form method="POST" action="<?=$page?>">
             <div class="top">
                 <img src="<?=$loggedUser['pfp']?>" alt="">
                 <textarea name="post-reply" id="post-reply" placeholder="Post your reply"></textarea>
             </div>
             <div class="bottom">
-                <input type="submit" name="cancel-reply" value="Cancel">
-                <input type="submit" name="submit-reply" value="Reply">
+                <button type="button" id="cancel-reply" class="box submit-button__colorful">Cancel</button>
+                <input class="box submit-button__colorful" type="submit" name="submit-reply" value="Reply">
             </div>
         </form>
     </section>
 </div>
+
+<script !src="">
+    let wrapper = document.getElementById('post-reply_wrapper');
+    let btn = document.getElementById('display-reply');
+    let cancelBtn = document.getElementById('cancel-reply');
+
+    btn.addEventListener('click', function() {
+        wrapper.style.display = "block";
+        document.getElementById("post-reply").focus();
+        btn.style.opacity = "1";
+    });
+
+    cancelBtn.addEventListener('click', function() {
+        wrapper.style.display = "none";
+        btn.style.opacity = "var(--font_low-opacity)";
+    });
+
+</script>
