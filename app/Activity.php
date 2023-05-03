@@ -18,10 +18,10 @@ class Activity
 
     /**
      * @param array $post
-     * @return int|false
+     * @return bool
      * Crea un post mediante $post['user_id'] y $post['content'] y lo asigna a un usuario.
      */
-    public function post(array $post): int|false
+    public function post(array $post): bool
     {
         if (isset($post['content']) && isset($post['user_id'])) {
             if ($this -> user -> validateSession()) {
@@ -113,6 +113,9 @@ class Activity
         return $select;
     }
 
+    /**
+     * Añade la relación entre anime|manga y post.
+     */
     public function setPostRelation(string $medium, int $post_id, int $user_id, int $entry): bool
     {
         if ($this -> con -> db -> execute_query('INSERT INTO post_'.$medium.' VALUES (?, ?, ?)', [$post_id, $user_id, $entry])) {
@@ -169,6 +172,12 @@ class Activity
             $post['post']['medium_title'] = $this -> con -> db -> execute_query('SELECT title FROM manga WHERE manga_id = ?', [$post['post']['medium_id']]) -> fetch_column();
         }
 
+        $original = $this -> con -> db -> execute_query('SELECT post_id FROM `post_reply` WHERE reply_id = ?', [$post['post']['post_id']]);
+        if ($reply -> num_rows === 1) {
+            $mainPost = $reply -> fetch_column();
+            $result = $this -> con -> db -> execute_query('SELECT post_id')
+        }
+
         if ($userInfo = $this -> user -> getInfoLess($post['user']['user_id'])) {
             foreach ($userInfo as $key => $value) {
                 $post['user'][$key] = $value;
@@ -176,5 +185,32 @@ class Activity
         }
         
         return $post;
+    }
+
+    public function getPostReplies(int $post_id): array|null
+    {
+        $result = $this -> con -> db -> execute_query('SELECT post_id, reply_id FROM post_reply WHERE post_id = ? ORDER BY reply_id DESC', [$post_id]);
+        if ($result -> num_rows > 0) {
+            for ($i = 0; $i < $result -> num_rows; $i++) {
+                $row = $result -> fetch_assoc();
+                $replies[] = $this -> getPost($row['reply_id']);
+            }
+            return $replies;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Crea una entrada en `post_reply` si un usuario a escrito una respuesta a un post.
+     */
+
+    public function postReply(int $postId, string $postReplyId): bool
+    {
+        if ($this -> con -> db -> execute_query('INSERT INTO post_reply VALUES (?, ?)', [$postId, $postReplyId])) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

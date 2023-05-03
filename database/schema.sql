@@ -369,14 +369,15 @@ CREATE TABLE post (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE post_reply (
-    `post_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `user_id` INT UNSIGNED NOT NULL,
-    PRIMARY KEY (`post_id`, `user_id`),
-    FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE
+    `post_id` BIGINT UNSIGNED NOT NULL,
+    `reply_id` BIGINT UNSIGNED NOT NULL,
+    PRIMARY KEY (`post_id`, `reply_id`),
+    FOREIGN KEY (`post_id`) REFERENCES `post`(`post_id`) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (`reply_id`) REFERENCES `post`(`post_id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE post_like (
-    `post_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `post_id` BIGINT UNSIGNED NOT NULL
     `user_id` INT UNSIGNED NOT NULL,
     `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`post_id`, `user_id`),
@@ -384,7 +385,7 @@ CREATE TABLE post_like (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE post_anime (
-    `post_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `post_id` BIGINT UNSIGNED NOT NULL,
     `user_id` INT UNSIGNED NOT NULL,
     `anime_id` INT UNSIGNED,
     PRIMARY KEY (`post_id`, `user_id`),
@@ -393,7 +394,7 @@ CREATE TABLE post_anime (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE post_manga (
-    `post_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `post_id` BIGINT UNSIGNED NOT NULL,
     `user_id` INT UNSIGNED NOT NULL,
     `manga_id` INT UNSIGNED,
     PRIMARY KEY (`post_id`, `user_id`),

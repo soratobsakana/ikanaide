@@ -40,3 +40,18 @@ div.activity_single-page_wrapper section.post-reply_wrapper form div.bottom {
     gap: var(--gap);
 }
 
+/* Estilos para el icono de respuesta en /activity */
+span#display-reply {
+    font-size: 18px;
+    font-weight: bold;
+    opacity: var(--font_low-opacity);
+    transition: var(--transition);
+}
+
+span#display-reply {
+    cursor: pointer;
+}
+
+span#display-reply:hover {
+    opacity: 1!important; /* Este !important permite que el :hover siga funcionando tras aplicar los estilos de JavaScript */
+}

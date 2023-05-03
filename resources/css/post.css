@@ -83,6 +83,10 @@ section.posts-wrapper div.post-entry div.bottom div.social {
 }
 
 section.posts-wrapper div.post-entry div.social span {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    
     font-size: 18px;
     font-weight: bold;
     opacity: var(--font_low-opacity);
