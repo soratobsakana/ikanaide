@@ -173,9 +173,10 @@ class Activity
         }
 
         $original = $this -> con -> db -> execute_query('SELECT post_id FROM `post_reply` WHERE reply_id = ?', [$post['post']['post_id']]);
-        if ($reply -> num_rows === 1) {
-            $mainPost = $reply -> fetch_column();
-            $result = $this -> con -> db -> execute_query('SELECT post_id')
+        if ($original -> num_rows === 1) {
+            $mainPost = $original -> fetch_column();
+            $userId = $this -> con -> db -> execute_query('select user_id from post where post_id = ?', [$mainPost]) -> fetch_column();
+            $post['post']['replying_to'] = $this -> user -> getUsername($userId);
         }
 
         if ($userInfo = $this -> user -> getInfoLess($post['user']['user_id'])) {

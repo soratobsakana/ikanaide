@@ -13,7 +13,11 @@
                     <div class="post-info_relation">
                         <?php
 
-                        if (isset($post['post']['medium_id'])) {
+                        if (isset($post['post']['replying_to']) && isset($post['post']['medium_id'])) {
+                            ?><span class="low-opacity">replying to <?=$post['post']['replying_to']?> on <?=$post['post']['medium_title']?></span><?php
+                        } else if (isset($post['post']['replying_to'])) {
+                        ?><span class="low-opacity">replying to <?=$post['post']['replying_to']?></span><?php
+                        } else if (isset($post['post']['medium_id'])) {
                             ?><span class="low-opacity">on <?=$post['post']['medium_title']?></span><?php
                         }
 
