@@ -27,7 +27,7 @@ class Following
         }
     }
 
-    public function unfollow(int $unfollowingUser, int $unfollowedUser)
+    public function unfollow(int $unfollowingUser, int $unfollowedUser):bool
     {
         if ($this -> user -> validateSession()) {
             if ($this -> con -> db -> execute_query('DELETE FROM `follow` WHERE following_user = ? AND followed_user = ?', [$unfollowingUser, $unfollowedUser])) {

@@ -20,7 +20,7 @@
                         <form action="/follow?id=<?=$userInfo['user_id']?>" method="post">
                         <?php
 
-                        if ($Following -> isFollowing($followingUser, $followedUser)) {
+                        if ($Following -> isFollowing($_COOKIE['user_id'], $user_id) && $Session -> validateSession()) {
                             ?><input class="list-submit box submit-button__colorful" name="unfollow" type="submit" value="Unfollow"><?php
                         } else {
                             ?><input class="list-submit box submit-button__colorful" name="follow" type="submit" value="Follow"><?php
