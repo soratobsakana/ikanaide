@@ -643,6 +643,12 @@ class User
                     }
                 }
 
+                // Cálculo del número de respuestas y likes asociados a un post.
+                $replyCount = $this -> con -> db -> execute_query('SELECT count(reply_id) FROM `post_reply` WHERE post_id = ?;', [$posts[$i]['post_id']]) -> fetch_column();
+                $likeCount = $this -> con -> db -> execute_query('SELECT count(user_id) FROM `post_like` WHERE post_id = ?;', [$posts[$i]['post_id']]) -> fetch_column();
+                $posts[$i]['reply_count'] = $replyCount;
+                $posts[$i]['like_count'] = $likeCount;
+
                 $animeId = $this -> con -> db -> execute_query('SELECT anime_id FROM `post_anime` WHERE post_id = ?', [$posts[$i]['post_id']]);
                 $mangaId = $this -> con -> db -> execute_query('SELECT manga_id FROM `post_manga` WHERE post_id = ?', [$posts[$i]['post_id']]);
                 if ($animeId -> num_rows === 1) {
@@ -653,11 +659,23 @@ class User
                     $posts[$i]['medium'] = 'manga';
                     $posts[$i]['medium_id'] = $mangaId -> fetch_column();
                     $posts[$i]['medium_title'] = $this -> con -> db -> execute_query('SELECT title FROM manga WHERE manga_id = ?', [$posts[$i]['medium_id']]) -> fetch_column();
-                } else {
-                    $posts[$i]['medium'] = null;
-                    $posts[$i]['medium_id'] = null;
-                    $posts[$i]['medium_title'] = null;
                 }
+
+                $original = $this -> con -> db -> execute_query('SELECT post_id FROM `post_reply` WHERE reply_id = ?', [$posts[$i]['post_id']]);
+                if ($original -> num_rows === 1) {
+                    $mainPost = $original -> fetch_column();
+                    $userId = $this -> con -> db -> execute_query('select user_id from post where post_id = ?', [$mainPost]) -> fetch_column();
+                    $posts[$i]['replying_to'] = $this -> getUsername($userId);
+                }
+
+                if (isset($_COOKIE['session']) && $this -> validateSession()) {
+                    if ($this -> con -> db -> execute_query('SELECT user_id FROM post_like WHERE post_id = ? AND user_id = ?', [$posts[$i]['post_id'], $_COOKIE['user_id']]) -> num_rows === 1) {
+                        $postsInfo['user']['liked'] = true;
+                    } else {
+                        $postsInfo['user']['liked'] = false;
+                    }
+                }
+
             }
 
             $postsInfo['posts'] = $posts;
@@ -667,8 +685,6 @@ class User
                     $postsInfo['user'][$key] = $value;
                 }
             }
-
-
 
             return $postsInfo;
         } else {

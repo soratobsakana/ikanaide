@@ -79,8 +79,18 @@ class Activity
     {
         if (isset($data['post_id']) && $data['user_id']) {
             if ($this -> user -> validateSession()) {
-                 if ($this -> con -> db -> execute_query('INSERT INTO `post_like` VALUES(?, ?, default)', [$data['post_id'], $data['user_id']])) {
-                    return true;
+                 if ($this -> con -> db -> execute_query('SELECT user_id FROM post_like WHERE post_id = ? AND user_id = ?', [$data['post_id'], $data['user_id']]) -> num_rows === 0) {
+                    if ($this -> con -> db -> execute_query('INSERT INTO `post_like` VALUES(?, ?, default)', [$data['post_id'], $data['user_id']])) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                 } else {
+                    if ($this -> con -> db -> execute_query('DELETE FROM `post_like` WHERE post_id = ? AND user_id = ?', [$data['post_id'], $data['user_id']])) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                  }
             } else {
                 return false;
@@ -160,6 +170,13 @@ class Activity
         
         $post['user']['username'] = $this -> user -> getUsername($post['user']['user_id']);
 
+        // Cálculo del número de respuestas y likes asociados a un post.
+        $replyCount = $this -> con -> db -> execute_query('SELECT count(reply_id) FROM `post_reply` WHERE post_id = ?;', [$post['post']['post_id']]) -> fetch_column();
+        $likeCount = $this -> con -> db -> execute_query('SELECT count(user_id) FROM `post_like` WHERE post_id = ?;', [$post['post']['post_id']]) -> fetch_column();
+        $post['post']['reply_count'] = $replyCount;
+        $post['post']['like_count'] = $likeCount;
+
+        // Comprobación de si un post tiene relación con un anime o manga.
         $animeId = $this -> con -> db -> execute_query('SELECT anime_id FROM `post_anime` WHERE post_id = ?', [$post['post']['post_id']]);
         $mangaId = $this -> con -> db -> execute_query('SELECT manga_id FROM `post_manga` WHERE post_id = ?', [$post['post']['post_id']]);
         if ($animeId -> num_rows === 1) {
@@ -172,6 +189,7 @@ class Activity
             $post['post']['medium_title'] = $this -> con -> db -> execute_query('SELECT title FROM manga WHERE manga_id = ?', [$post['post']['medium_id']]) -> fetch_column();
         }
 
+        // Comprobación de si un post es una respuesta o un post original.
         $original = $this -> con -> db -> execute_query('SELECT post_id FROM `post_reply` WHERE reply_id = ?', [$post['post']['post_id']]);
         if ($original -> num_rows === 1) {
             $mainPost = $original -> fetch_column();
@@ -182,6 +200,14 @@ class Activity
         if ($userInfo = $this -> user -> getInfoLess($post['user']['user_id'])) {
             foreach ($userInfo as $key => $value) {
                 $post['user'][$key] = $value;
+            }
+        }
+
+        if (isset($_COOKIE['session']) && $this -> user -> validateSession()) {
+            if ($this -> con -> db -> execute_query('SELECT user_id FROM post_like WHERE post_id = ? AND user_id = ?', [$post['post']['post_id'], $_COOKIE['user_id']]) -> num_rows === 1) {
+                $post['user']['liked'] = true;
+            } else {
+                $post['user']['liked'] = false;
             }
         }
         
@@ -212,6 +238,25 @@ class Activity
             return true;
         } else {
             return false;
+        }
+    }
+
+    public function getRelation(int $postId): array|null
+    {
+        $animeId = $this -> con -> db -> execute_query('SELECT anime_id FROM `post_anime` WHERE post_id = ?', [$postId]);
+        $mangaId = $this -> con -> db -> execute_query('SELECT manga_id FROM `post_manga` WHERE post_id = ?', [$postId]);
+        if ($animeId -> num_rows === 1) {
+            $post['medium'] = 'anime';
+            $post['medium_id'] = $animeId -> fetch_column();
+        } else if ($mangaId -> num_rows === 1) {
+            $post['medium'] = 'manga';
+            $post['medium_id'] = $mangaId -> fetch_column();
+        }
+
+        if (isset($post)) {
+            return $post;
+        } else {
+            return null;
         }
     }
 }

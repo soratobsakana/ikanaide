@@ -40,6 +40,7 @@ section.posts-wrapper div.post-entry div.top {
 
 section.posts-wrapper div.post-entry div.top img {
     height: 100%;
+    min-width: 40px;
 }
 
 div.post-info, div.post-info_user, div.post-info_relation {
@@ -82,21 +83,25 @@ section.posts-wrapper div.post-entry div.bottom div.social {
     justify-content: space-around;
 }
 
-section.posts-wrapper div.post-entry div.social span {
+section.posts-wrapper div.post-entry div.social a {
+    width: 100%;
+}
+
+section.posts-wrapper div.post-entry div.social div.social-icon {
     width: 100%;
     display: flex;
     justify-content: center;
-    
+    gap: var(--gap);
+    cursor: pointer;
+}
+
+section.posts-wrapper div.post-entry div.social div.social-icon span {    
     font-size: 18px;
     font-weight: bold;
     opacity: var(--font_low-opacity);
     transition: var(--transition);
 }
 
-section.posts-wrapper div.post-entry div.social span {
-    cursor: pointer;
-}
-
-section.posts-wrapper div.post-entry div.social span:hover {
+section.posts-wrapper div.post-entry div.social div.social-icon:hover span {
     opacity: 1;
 }

@@ -77,6 +77,7 @@
             <?php
 
             for($i= 0; $i < count($userPosts['posts']); $i++) {
+                
                 ?>
                 <a href="/activity/<?=$userPosts['posts'][$i]['post_id']?>">
                 <div class="post-entry box-wrapper box-body">
@@ -91,8 +92,12 @@
                             </div>
                             <div class="post-info_relation">
                                 <?php
-
-                                if (!($userPosts['posts'][$i]['medium_id'] === NULL)) {
+                                
+                                if (isset($userPosts['posts'][$i]['replying_to']) && isset($userPosts['posts'][$i]['medium_id'])) {
+                                    ?><span class="low-opacity">replying to <?=$userPosts['posts'][$i]['replying_to']?> on <?=$userPosts['posts'][$i]['medium_title']?></span><?php
+                                } else if (isset($userPosts['posts'][$i]['replying_to'])) {
+                                ?><span class="low-opacity">replying to <?=$userPosts['posts'][$i]['replying_to']?></span><?php
+                                } else if (isset($userPosts['posts'][$i]['medium_id'])) {
                                     ?><span class="low-opacity">on <?=$userPosts['posts'][$i]['medium_title']?></span><?php
                                 }
 
@@ -103,9 +108,23 @@
                     <div class="bottom">
                         <div class="content"><?=htmlspecialchars($userPosts['posts'][$i]['content'])?></div>
                         <!--<div class="social">
-                            <span class="material-icons-outlined">chat_bubble_outline</span>
-                            <span class="material-icons-outlined">favorite_border</span>
-                            <span class="material-icons-outlined">bookmark_border</span>
+                            <div class="social-icon">
+                                <span class="material-icons-outlined" id="display-reply">chat_bubble_outline</span>
+                                <p><?=$userPosts['posts'][$i]['reply_count']?></p>
+                            </div>
+                            <a href="/like?id=<?=$userPosts['posts'][$i]['post_id']?>">
+                            <div class="social-icon">
+                            <span class="material-icons-outlined">
+                                <?php if ($userPosts['user']['liked']) {echo "favorite";} else {echo "favorite_border";} ?>
+                            </span>
+                                <p><?=$userPosts['posts'][$i]['like_count']?></p>
+                            </div>
+                            </a>
+                            
+                            <div class="social-icon">
+                                <span class="material-icons-outlined">bookmark_border</span>
+                                <p>0</p>
+                            </div>
                         </div>-->
                     </div>
                     

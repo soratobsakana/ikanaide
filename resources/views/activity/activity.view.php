@@ -2,7 +2,7 @@
     <section class="posts-wrapper box-wrapper">
         <div class="post-entry single-page box-wrapper box-body">
             <div class="top">
-                <img src="<?=$post['user']['pfp']?>" alt="">
+                <a href="/<?=$post['user']['username']?>"><img src="<?=$post['user']['pfp']?>" alt=""></a>
                 <div class="post-info">
                     <div class="post-info_user">
                         <div class="username">
@@ -37,9 +37,24 @@
                     ?>
                     <hr id="edit-list_fields-separator">
                     <div class="social">
-                        <span class="material-icons-outlined" id="display-reply">chat_bubble_outline</span>
-                        <span class="material-icons-outlined">favorite_border</span>
-                        <span class="material-icons-outlined">bookmark_border</span>
+                        <div class="social-icon">
+                            <span class="material-icons-outlined" id="display-reply">chat_bubble_outline</span>
+                            <p><?=$post['post']['reply_count']?></p>
+                        </div>
+                        <a href="/like?id=<?=$post['post']['post_id']?>">
+                        <div class="social-icon">
+                        <span class="material-icons-outlined">
+                            <?php if ($post['user']['liked']) {echo "favorite";} else {echo "favorite_border";} ?>
+                        </span>
+                            <p><?=$post['post']['like_count']?></p>
+                        </div>
+                        </a>
+                        
+                        <div class="social-icon">
+                            <span class="material-icons-outlined">bookmark_border</span>
+                            <p>0</p>
+                        </div>
+                        
                     </div>
 
                     <?php
@@ -90,7 +105,6 @@
                             <div class="post-info_relation">
                                 <?php
 
-
                                 if (isset($post['post']['medium_id'])) {
                                     ?><span class="low-opacity">replying to <?=$post['user']['username']?> on <?=$post['post']['medium_title']?></span><?php
                                 } else {
@@ -105,9 +119,23 @@
                     <div class="bottom">
                         <div class="content"><?=htmlspecialchars($reply['post']['content'])?></div>
                         <!--<div class="social">
-                            <span class="material-icons-outlined">chat_bubble_outline</span>
-                            <span class="material-icons-outlined">favorite_border</span>
-                            <span class="material-icons-outlined">bookmark_border</span>
+                            <div class="social-icon">
+                                <span class="material-icons-outlined" id="display-reply">chat_bubble_outline</span>
+                                <p><?=$reply['post']['reply_count']?></p>
+                            </div>
+                            <a href="/like?id=<?=$reply['post']['post_id']?>">
+                            <div class="social-icon">
+                            <span class="material-icons-outlined">
+                                <?php if ($reply['user']['liked']) {echo "favorite";} else {echo "favorite_border";} ?>
+                            </span>
+                                <p><?=$reply['post']['like_count']?></p>
+                            </div>
+                            </a>
+                            
+                            <div class="social-icon">
+                                <span class="material-icons-outlined">bookmark_border</span>
+                                <p>0</p>
+                            </div>
                         </div>-->
                         </div>
                     

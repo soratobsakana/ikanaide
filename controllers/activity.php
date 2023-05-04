@@ -8,7 +8,6 @@ $User = new User;
 
 // $guide, $page y $postId han sido declaradas en el archivo /routes/web.php
 
-
 // Si el usuario ha escrito una respuesta a un post, se añade a la base de datos mediante el siguiente bloque:
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-reply'])) {
     // Comprobación de que los campos del formulario no han sido alterados por el usuario.
@@ -22,14 +21,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-reply'])) {
     if (isset($_POST['submit-reply']) && $User -> validateSession()) {
         $submitPost['content'] = $_POST['post-reply'];
         $submitPost['user_id'] = $_COOKIE['user_id'];
+        $relation = $Activity -> getRelation($postId);
         if (!empty($_POST['post-reply']) && $Activity -> post($submitPost)) {
             // Consigo el ID del último post introducido
             $postReplyId = $Activity -> con -> db -> insert_id;
-
+            if (isset($relation)) {
+                $Activity -> setPostRelation($relation['medium'], $postReplyId, $_COOKIE['user_id'], $relation['medium_id']);
+            }
             $Activity -> postReply($postId, $postReplyId);
             header('Location: '. $page);
-        } else {
-            exit('miss');
         }
     } else {
         header('Location: /404');
