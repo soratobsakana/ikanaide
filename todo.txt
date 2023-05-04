@@ -7,12 +7,13 @@
         [-] Activity
             [X] Create a post when user registers an activity.
             [X] Make `post_anime` and `post_manga` so it's possible to filter posts about X anime|manga later. Similar to a hashtag system.
-            [] Add post liking system.
-                need JS
+            [-] Add post liking system.
+                On single pages is done.
+                On time lines not, its needs JS so that liking something doesn't reload the page.
             [] Add post replying system for time lines.
-                need JS
-            [] Add a single page for each post.
-            [] Add post replying system for post single pages.
+                This takes some work and the same JS than time-line likes, so gonna put this on hold.
+            [X] Add a single page for each post.
+            [X] Add post replying system for post single pages.
         [] Social activites
             [] Create a following system.
             [] Add a private message system.

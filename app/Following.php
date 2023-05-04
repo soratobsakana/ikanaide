@@ -16,13 +16,36 @@ class Following
         $this -> user = new User;
     }
 
-    public function follow()
+    public function follow(int $followingUser, int $followedUser): bool
     {
-
+        if ($this -> user -> validateSession()) {
+            if ($this -> con -> db -> execute_query('INSERT INTO `follow` VALUES (?, ?, default)', [$followingUser, $followedUser])) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 
-    public function unfollow()
+    public function unfollow(int $unfollowingUser, int $unfollowedUser)
     {
-        
+        if ($this -> user -> validateSession()) {
+            if ($this -> con -> db -> execute_query('DELETE FROM `follow` WHERE following_user = ? AND followed_user = ?', [$unfollowingUser, $unfollowedUser])) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    public function isFollowing(int $loggedInUser, int $loggedOffUser): bool
+    {
+        if ($this -> user -> validateSession()) {
+            if ($this -> con -> db -> execute_query('SELECT * FROM `follow` WHERE `following_user` = ? AND `followed_user` = ?', [$loggedInUser, $loggedOffUser]) -> num_rows === 1) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 }

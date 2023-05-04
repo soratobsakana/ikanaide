@@ -82,6 +82,7 @@ $routes = array(
     '/post' => 'controllers/post.php',
     '/reply' => 'controllers/activity.php',
     '/like' => 'controllers/like.php',
+    '/follow' => 'controllers/follow.php',
     '/submit' => 'controllers/submit.php',
     '/submit/anime' => 'controllers/submit.php',
     '/submit/manga' => 'controllers/submit.php',

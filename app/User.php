@@ -154,6 +154,15 @@ class User
         }
     }
 
+    public function exists(int $userId): bool
+    {
+        if ($this -> con -> db -> execute_query('SELECT user_id FROM `user` WHERE user_id = ?', [$userId])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function getUserID(string $username): int|null
     {
         $result = $this -> con -> db -> execute_query('SELECT `user_id` FROM `user` WHERE username = ?', [$username]);
@@ -176,7 +185,7 @@ class User
 
     public function getInfo(int $user_id): array
     {
-        $result = $this -> con -> db -> execute_query('SELECT `username`, `joined_at`, `country`, `biography`, `pfp`, `header`, `github`, `twitter` FROM user WHERE user_id = ?', [$user_id]);
+        $result = $this -> con -> db -> execute_query('SELECT `user_id`, `username`, `joined_at`, `country`, `biography`, `pfp`, `header`, `github`, `twitter` FROM user WHERE user_id = ?', [$user_id]);
         return $result -> fetch_assoc();
     }
 

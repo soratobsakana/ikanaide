@@ -14,6 +14,24 @@
                         </form>
                      </section>
                     <?php
+                } else if ($_COOKIE['session'] === 'Yes' && $_COOKIE['username'] !== $userInfo['username']) {
+                    ?>
+                    <section class="profile_left-column_buttons">
+                        <form action="/follow?id=<?=$userInfo['user_id']?>" method="post">
+                        <?php
+
+                        if ($Following -> isFollowing($followingUser, $followedUser)) {
+                            ?><input class="list-submit box submit-button__colorful" name="unfollow" type="submit" value="Unfollow"><?php
+                        } else {
+                            ?><input class="list-submit box submit-button__colorful" name="follow" type="submit" value="Follow"><?php
+                        }
+
+                        ?>
+                            
+                            
+                        </form>
+                    </section>
+                    <?php
                 }
             }
 

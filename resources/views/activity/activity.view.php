@@ -37,8 +37,8 @@
                     ?>
                     <hr id="edit-list_fields-separator">
                     <div class="social">
-                        <div class="social-icon">
-                            <span class="material-icons-outlined" id="display-reply">chat_bubble_outline</span>
+                        <div class="social-icon" id="display-reply">
+                            <span class="material-icons-outlined" id="reply-icon">chat_bubble_outline</span>
                             <p><?=$post['post']['reply_count']?></p>
                         </div>
                         <a href="/like?id=<?=$post['post']['post_id']?>">
@@ -155,17 +155,18 @@
 <script !src="">
     let wrapper = document.getElementById('post-reply_wrapper');
     let btn = document.getElementById('display-reply');
+    let icon = document.getElementById('reply-icon');
     let cancelBtn = document.getElementById('cancel-reply');
 
     btn.addEventListener('click', function() {
         wrapper.style.display = "block";
         document.getElementById("post-reply").focus();
-        btn.style.opacity = "1";
+        icon.style.opacity = "1";
     });
 
     cancelBtn.addEventListener('click', function() {
         wrapper.style.display = "none";
-        btn.style.opacity = "var(--font_low-opacity)";
+        icon.style.opacity = "var(--font_low-opacity)";
     });
 
 </script>

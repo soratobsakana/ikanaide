@@ -2,8 +2,10 @@
 include_once('resources/functions.php');
 include_once('app/User.php');
 include_once('app/Activity.php');
+include_once('app/Following.php');
 $Session = new User;
 $Activity = new Activity;
+$Following = new Following;
 
 if (isset($_COOKIE['session'])) {
     if ($Session -> validateSession() !== TRUE) {

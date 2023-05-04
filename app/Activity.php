@@ -128,7 +128,7 @@ class Activity
      */
     public function setPostRelation(string $medium, int $post_id, int $user_id, int $entry): bool
     {
-        if ($this -> con -> db -> execute_query('INSERT INTO post_'.$medium.' VALUES (?, ?, ?)', [$post_id, $user_id, $entry])) {
+        if ($this -> con -> db -> execute_query('INSERT INTO post_'.$medium.' VALUES (?, ?)', [$post_id, $entry])) {
             return true;
         } else {
             return false;
