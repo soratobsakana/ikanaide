@@ -124,6 +124,11 @@ class Activity
     }
 
     /**
+     * @param string $medium
+     * @param int $post_id
+     * @param int $user_id
+     * @param int $entry
+     * @return bool
      * Añade la relación entre anime|manga y post.
      */
     public function setPostRelation(string $medium, int $post_id, int $user_id, int $entry): bool
@@ -134,6 +139,11 @@ class Activity
             return false;
         }
     }
+
+    /**
+     * @param int $post_id
+     * @return bool
+     */
 
     public function exists(int $post_id): bool
     {
@@ -214,6 +224,11 @@ class Activity
         return $post;
     }
 
+    /**
+     * @param int $post_id
+     * @return array|null
+     */
+
     public function getPostReplies(int $post_id): array|null
     {
         $result = $this -> con -> db -> execute_query('SELECT post_id, reply_id FROM post_reply WHERE post_id = ? ORDER BY reply_id DESC', [$post_id]);
@@ -229,6 +244,9 @@ class Activity
     }
 
     /**
+     * @param int $postId
+     * @param string $postReplyId
+     * @return bool
      * Crea una entrada en `post_reply` si un usuario a escrito una respuesta a un post.
      */
 
@@ -240,6 +258,11 @@ class Activity
             return false;
         }
     }
+
+    /**
+     * @param int $postId
+     * @return array|null
+     */
 
     public function getRelation(int $postId): array|null
     {
@@ -259,4 +282,42 @@ class Activity
             return null;
         }
     }
+
+    /**
+     * @param int $userId
+     * @return array|null
+     * Devuelve un array con los usuarios a los que otro usuario sigue.
+     */
+
+    public function getFollowing(int $userId): array|null
+    {
+        $following = $this -> con -> db -> execute_query('SELECT `followed_user` FROM `follow` WHERE `following_user` = ?', [$userId]);
+        if ($following -> num_rows > 0) {
+            for ($i = 0; $i < $following -> num_rows; $i++) {
+                $followingUsers[] = $following -> fetch_column();
+            }
+            return $followingUsers;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * @param int $userId
+     * @return array|null
+     * Devuelve un array con los nuevos posts de los usuarios que sigue otro usuario.
+     */
+    public function getFollowingTimeline(int $userId): array|null
+    {
+        $result = $this -> con -> db -> execute_query('SELECT * FROM `post` WHERE `user_id` IN (SELECT `followed_user` FROM `follow` WHERE `following_user` = ?) ORDER BY `date` DESC', [$userId]);
+        if ($result -> num_rows > 0) {
+            for ($i = 0; $i < $result -> num_rows; $i++) {
+                $followingTimeline[] = $result -> fetch_assoc();
+            }
+            return $followingTimeline;
+        } else {
+            return null;
+        }
+    }
+
 }

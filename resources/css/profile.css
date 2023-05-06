@@ -101,10 +101,15 @@ section.profile_user-overview {
     grid-gap: var(--gap);
 }
 
+section.profile_user-overview_bio {
+    border-radius: var(--border-radius);
+}
+
 section.profile_user-overview_bio div.box-body {
     font-size: calc(var(--box-font-size) + 1px)!important;
-    max-height: 400px!important;
+    max-height: 350px!important;
     text-align: center;
+    overflow-y: auto;
 }
 
 section.profile_user-overview_stats {

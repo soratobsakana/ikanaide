@@ -14,9 +14,10 @@
                 This takes some work and the same JS than time-line likes, so gonna put this on hold.
             [X] Add a single page for each post.
             [X] Add post replying system for post single pages.
-        [] Social activites
-            [] Create a following system.
+        [-] Social activites
+            [X] Create a following system.
             [] Add a private message system.
+                Messages might need to be somewhat encrypted, but I'm not sure yet, so this will stay on hold.
         [] Home pages
             [] Main home page.
                 [] Add a post time line (following and global) if user is logged in.

@@ -55,8 +55,8 @@ if ($guide[1] === 'activity' && isset($guide[2])) {
 
 // Array con las todas las rutas de la página web.
 $routes = array(
-    '/' => 'resources/views/home.view.php',
-    '/home' => 'resources/views/home.view.php',
+    '/' => 'controllers/home.php',
+    '/home' => 'controllers/home.php',
     '/anime' => 'controllers/medium.php',
     '/manga' => 'controllers/medium.php',
     '/vn' => 'controllers/medium.php',
