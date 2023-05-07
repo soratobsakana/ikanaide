@@ -9,7 +9,7 @@ if (isset($_GET['id']) && filter_var($_GET['id'], FILTER_VALIDATE_INT)) {
     if ($Activity -> like($like)) {
         header('Location: ' . $_SERVER['HTTP_REFERER']);    
     } else {
-        // Pasar por aqui significa que validateSession() en Activity:like() ha dado falso, por lo que provoco un logout.
+        // Pasar por aqui significa que validateSession() en Activity::like() ha dado falso, por lo que provoco un logout.
         header('Location: /logout');
     }
 } else {

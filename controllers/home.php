@@ -11,7 +11,6 @@ $Following = new Following;
 
 if (isset($_COOKIE['session']) && $User -> validateSession()) {
     $followingTimeline = $Activity -> getFollowingTimeline($_COOKIE['user_id']);
-    pre($followingTimeline);
 } else {
     print 'haha';
 }

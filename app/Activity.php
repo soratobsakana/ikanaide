@@ -309,10 +309,13 @@ class Activity
      */
     public function getFollowingTimeline(int $userId): array|null
     {
-        $result = $this -> con -> db -> execute_query('SELECT * FROM `post` WHERE `user_id` IN (SELECT `followed_user` FROM `follow` WHERE `following_user` = ?) ORDER BY `date` DESC', [$userId]);
+        $result = $this -> con -> db -> execute_query('SELECT `post_id` FROM `post` WHERE `user_id` IN (SELECT `followed_user` FROM `follow` WHERE `following_user` = ?) ORDER BY `date` DESC', [$userId]);
         if ($result -> num_rows > 0) {
             for ($i = 0; $i < $result -> num_rows; $i++) {
-                $followingTimeline[] = $result -> fetch_assoc();
+                $posts[$i] = $result -> fetch_column();
+            }
+            foreach($posts as $post) {
+                $followingTimeline[] = $this -> getPost($post);
             }
             return $followingTimeline;
         } else {

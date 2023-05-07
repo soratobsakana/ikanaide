@@ -35,12 +35,12 @@ section.posts-wrapper a:hover div.post-entry {
 section.posts-wrapper div.post-entry div.top {
     display: flex;
     gap: var(--gap);
-    height: 40px;
 }
 
 section.posts-wrapper div.post-entry div.top img {
     height: 100%;
     min-width: 40px;
+    max-height: 40px;
 }
 
 div.post-info, div.post-info_user, div.post-info_relation {
