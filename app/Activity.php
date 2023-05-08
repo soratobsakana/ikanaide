@@ -39,6 +39,23 @@ class Activity
     }
 
     /**
+     * @param string $medium
+     * @param int $post_id
+     * @param int $user_id
+     * @param int $entry
+     * @return bool
+     * Añade la relación entre anime|manga y post.
+     */
+    public function setPostRelation(string $medium, int $post_id, int $user_id, int $entry): bool
+    {
+        if ($this -> con -> db -> execute_query('INSERT INTO post_'.$medium.' VALUES (?, ?)', [$post_id, $entry])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * @param array $data
      * @return bool
      * Se crea un post cuando un usuario (que permita esto en sus ajustes) actualiza su lista de anime|manga.
@@ -57,7 +74,10 @@ class Activity
                     $post['content'] = 'I have ' . $current . " " . $current2 . " " .  $current3 . ' from ' . $current4 . '.';
                     $post['user_id'] = $data['user_id'];
                     if ($this -> post($post)) {
-                        return true;
+                        $data['post_id'] = $this -> con -> db ->  insert_id;
+                        if ($this -> setPostRelation($data['medium'], $data['post_id'], $data['user_id'], $data['medium_id'])) {
+                            return true;
+                        }
                     }
                 } else {
                     return false;
@@ -121,23 +141,6 @@ class Activity
         }
 
         return $select;
-    }
-
-    /**
-     * @param string $medium
-     * @param int $post_id
-     * @param int $user_id
-     * @param int $entry
-     * @return bool
-     * Añade la relación entre anime|manga y post.
-     */
-    public function setPostRelation(string $medium, int $post_id, int $user_id, int $entry): bool
-    {
-        if ($this -> con -> db -> execute_query('INSERT INTO post_'.$medium.' VALUES (?, ?)', [$post_id, $entry])) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     /**
