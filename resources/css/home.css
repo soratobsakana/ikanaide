@@ -1,3 +1,14 @@
-div.home_timeline {
+div.home {
+    width: 100%;
+    display: flex;
+    gap: var(--gap);
+}
+
+section.home_timeline {
     width: 65%!important;
+}
+
+section.home_timeline section.posts-wrapper div.box-title {
+    display: flex;
+    justify-content: space-between;
 }

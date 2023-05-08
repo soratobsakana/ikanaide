@@ -140,6 +140,7 @@ div.container {
 .link {
     opacity: var(--font_low-opacity);
     transition: var(--transition);
+    cursor: pointer;
 }
 
 .link:hover {

@@ -50,6 +50,7 @@ class User
                                         setcookie('user_id', $user_id, strtotime('NOW+60DAYS'));
                                         setcookie('passwd', $password, strtotime('NOW+60DAYS'));
                                         setcookie('session', "Yes", strtotime('NOW+60DAYS'));
+                                        setcookie('home_timeline', 'default', strtotime('NOW+60DAYS'));
                                         return 'Ok';
                                     } else {
                                         return 'Sorry, that email is already taken';
@@ -107,6 +108,7 @@ class User
                                 setcookie('user_id', $user_id, strtotime('NOW+60DAYS'));
                                 setcookie('passwd', $password, strtotime('NOW+60DAYS'));
                                 setcookie('session', "Yes", strtotime('NOW+60DAYS'));
+                                setcookie('home_timeline', 'default', strtotime('NOW+60DAYS'));
                                 return 'Ok';
                             } else {
                                 return 'Incorrect username or password';

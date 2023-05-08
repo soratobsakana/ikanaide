@@ -323,4 +323,23 @@ class Activity
         }
     }
 
+    /**
+     * 
+     */
+    public function getGlobalTimeline(): array|null
+    {
+        $result = $this -> con -> db -> execute_query('SELECT post_id FROM post ORDER BY date DESC');
+        if ($result -> num_rows > 0) {
+            for ($i = 0; $i < $result -> num_rows; $i++) {
+                $posts[$i] = $result -> fetch_column();
+            }
+            foreach($posts as $post) {
+                $globalTimeline[] = $this -> getPost($post);
+            }
+            return $globalTimeline;
+        } else {
+            return null;
+        }
+    }
+
 }

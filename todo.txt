@@ -1,4 +1,14 @@
-230424-28
+230508-14
+[] Home pages
+    [] Main home page.
+        [] Add a post time line (following and global) if user is logged in.
+        [] Add watching animes and mangas, and make summing one episode to both possible.
+    [] User stuff
+        [] Make profile editing available. (No picture or header yet)
+        [] Support follow, post likes and replies notifications. Also PM ones.
+        [] Support post deletion.
+
+230424-230507
     [-] Resume of work left in order to public the first version of the website:
         [-] List editing
             [] Add edition form to the lists too.
@@ -18,14 +28,6 @@
             [X] Create a following system.
             [] Add a private message system.
                 Messages might need to be somewhat encrypted, but I'm not sure yet, so this will stay on hold.
-        [] Home pages
-            [] Main home page.
-                [] Add a post time line (following and global) if user is logged in.
-                [] Add watching animes and mangas, and make summing one episode to both possible.
-        [] User stuff
-             [] Make profile editing available. (No picture or header yet)
-             [] Support follow, post likes and replies notifications. Also PM ones.
-             [] Support post deletion.
 
 230417
     [-] Work on user posting and activity.
@@ -168,44 +170,3 @@
     [X] Understand how to call the conexion on multiples files (for example, through a global variable?).
             This can be investigated further, and it will be in the future. For now, I'll store credentials on a separate file and include it in .gitignore.
     [X] Complete `anime`, `manga` and `user` tables.
-
-
-
-
-
-
-
-
-index.php
-    show unlogged main page if user is not logged in
-    show ikanaide feed if logged in
-profile.php
-    show feed by default
-    show follows and followers (not sure if to make a friends system or follow, probably follow)
-    tabs: timeline, anime, manga, reviews and favorites
-anime.php
-    show each anime here (not sure if I should do a main page for this, im pretty sure I will do it)
-manga.php
-    same stuff
-rankings.php
-    show rankings for each category
-community.php
-    not sure if to call it community (maybe ill go with `explore`). show everything community related here
-
---- back-end ---
-sql
-    tables structure must allow:
-        login system and user information
-        user property for website content
-        social interaction
-database
-    ranking score calculation
-    auto-update status of shows
-
---- singles ---
-timeline feed
-
-
---- extras ---
-I would like to do something like Taiga for Ikanaide, though I feel like asking Taiga for Ikanaide implementation would be better at the start; taiga users could discover the website through the app.
-If this ends up happening, I would never develop my own and instead promote theirs on the Ikanaide website.
