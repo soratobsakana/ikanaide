@@ -2,6 +2,7 @@
 
 include_once 'Database.php';
 include_once 'User.php';
+include_once 'Listing.php';
 
 class Activity
 {

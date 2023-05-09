@@ -26,6 +26,10 @@ if ((!empty($_GET['medium']) && ($_GET['medium'] === 'anime' || $_GET['medium'] 
                     $Activity -> listUpdate($data);
                 }
 
+                if ($episodesOrChapters - $userCurrent === 1) {
+                    $User -> setListStatus($data['medium'], $data['medium_id'], 'completed', $data['user_id']);
+                }
+
                 // Si User::sumOne() devuelve true, se reenvía al usuario a la página desde la que viene mediante la variable $_SERVER['HTTP_REFERER'].
                 if (!empty($_SERVER['HTTP_REFERER'])) {
                     header('Location: ' . $_SERVER['HTTP_REFERER']);

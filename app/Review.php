@@ -49,10 +49,11 @@ class Review
                     $medium_id = $entryManga -> fetch_column();
                 }
 
-                $mediumEntry = $this -> con -> db -> execute_query('SELECT title FROM '.$medium.' WHERE '.$medium.'_id = ?', [$medium_id]);
+                $mediumEntry = $this -> con -> db -> execute_query('SELECT title, header FROM '.$medium.' WHERE '.$medium.'_id = ?', [$medium_id]);
                 if ($mediumEntry -> num_rows === 1) {
                     $row = $mediumEntry -> fetch_assoc();
                     $reviewsHome[$i]['entry'] = $row['title'];
+                    $reviewsHome[$i]['header'] = $row['header'];
                     $reviewsHome[$i]['medium'] = $medium;
                 }
                 

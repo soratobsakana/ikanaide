@@ -5,10 +5,104 @@ div.home {
 }
 
 section.home_timeline {
-    width: 65%!important;
+    width: 60%!important;
 }
 
 section.home_timeline section.posts-wrapper div.box-title {
     display: flex;
     justify-content: space-between;
+}
+
+section.home_user-info {
+    width: 40%;
+    display: flex;
+    gap: var(--gap);
+    flex-direction: column;
+}
+
+section.home_user-info section.progress-wrapper div.box-body {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: var(--gap);
+    padding: 10px;
+}
+
+section.home_user-info section.progress-wrapper div.box-body div.entry {
+    height: 121.33px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: var(--border-radius);
+    position: relative;
+}
+
+section.home_user-info section.progress-wrapper div.box-body div.entry span {
+    text-align: center;
+    background-color: var(--box-title);
+    padding: 5px;
+    border-radius: 0 0 5px 5px;
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    
+    opacity: 0;
+    transition: var(--transition);
+}
+
+section.home_user-info section.progress-wrapper div.box-body div.entry:hover span {
+    opacity: .9;
+}
+
+section.home_user-info section.latest-reviews_wrapper div.box-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+section.home_user-info section.latest-reviews_wrapper div.box-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: var(--gap);
+    padding: 10px;
+}
+
+section.home_user-info section.latest-reviews_wrapper div.box-body div.entry {
+    border-radius: var(--border-radius)!important;
+    background-color: var(--box-title);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+section.home_user-info section.latest-reviews_wrapper div.box-body div.entry:hover div.info {
+    background-color: var(--box-title-light);
+}
+
+section.home_user-info section.latest-reviews_wrapper div.box-body div.entry div.header {
+    max-height: 80px;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+section.home_user-info section.latest-reviews_wrapper div.box-body div.entry div.info {
+    height: 100%;
+    transition: var(--transition);
+}
+
+section.home_user-info section.latest-reviews_wrapper div.box-body div.entry div.info div {
+    padding: 5px;
+}
+
+section.home_user-info section.latest-reviews_wrapper div.box-body div.entry div.info div.title {
+    text-align: center;
+    font-style: italic;
+}
+
+section.home_user-info section.latest-reviews_wrapper div.box-body div.entry div.info div.user {
+    font-size: calc(var(--box-font-size) - 2px);
+}
+section.home_user-info section.latest-reviews_wrapper div.box-body div.entry div.info div.user {
+    opacity: var(--font_low-opacity);
 }

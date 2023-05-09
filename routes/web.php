@@ -70,7 +70,7 @@ $routes = array(
     '/review/new/anime' => 'controllers/review.php',
     '/review/new/manga' => 'controllers/review.php',
 
-    '/community' => 'controllers/community.php',
+    '/forum' => 'controllers/forum.php',
 
     '/terms' => 'resources/views/terms.view.php',
     '/privacy' => 'resources/views/privacy.view.php',

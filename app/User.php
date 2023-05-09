@@ -397,6 +397,15 @@ class User
         header('Location: /'.$medium.'/' . $entry);
     }
 
+    public function setListStatus(string $medium, int $medium_id, string $status, int $user_id): bool
+    {
+        if ($this -> con -> db -> execute_query('UPDATE '.$medium.'list SET status = ? WHERE '.$medium.'_id = ? AND user_id = ?', [$status, $medium_id, $user_id])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function getEpisodesOrChapters(string $medium, int $medium_id, int $user_id): int|false
     {
         $medium === 'anime' ? $current = 'episodes' : $current = 'chapters';

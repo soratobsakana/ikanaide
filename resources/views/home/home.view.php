@@ -145,17 +145,96 @@
     </section>
 
     <section class="home_user-info">
-        <a href="anime">go to anime page</a><br>
-        <a href="manga">go to manga page</a><br>
-        <a href="rankings">go to rankings page</a><br>
-        <?php
+        <section class="progress-wrapper box-wrapper">
+            <div class="box-title">
+                <h3>Watching Anime</h3>
+            </div>
+            <div class="box-body">
+            <?php
 
-        if (isset($_COOKIE['username'])) {
-            ?><a href="<?=$_COOKIE['username']?>">go to profile page</a><br><?php
-        }
+            if (isset($watchingAnimes)) {
+                foreach($watchingAnimes as $watchingAnime) {
+                    ?>
+                    <a href="/sum?medium=anime&id=<?=$watchingAnime['anime']['anime_id']?>">
+                        <div style="background-image: url('<?=$watchingAnime['anime']['cover']?>')" class="entry">
+                            <span><?=$watchingAnime['user_progress']?> / <?=$watchingAnime['anime']['episodes']?></span>
+                        </div>
+                    </a>
+                    <?php
+                }
+            } else {
+                print '<i>Currently not watching any anime...</i>';
+            }
 
-        ?>
-        <a href="submit">go to submit</a><br>
-        <a href="reviews">go to reviews</a>
+            ?>
+            </div>
+        </section>
+
+        <section class="progress-wrapper box-wrapper">
+            <div class="box-title">
+                <h3>Reading Manga</h3>
+            </div>
+            <div class="box-body">
+            <?php
+
+            if (isset($readingMangas)) {
+                foreach($readingMangas as $readingManga) {
+                    ?>
+                    <a href="/sum?medium=manga&id=<?=$readingManga['manga']['manga_id']?>">
+                        <div style="background-image: url('<?=$readingManga['manga']['cover']?>')" class="entry">
+                            <span><?=$readingManga['user_progress']?> / <?=$readingManga['manga']['chapters']?></span>
+                        </div>
+                    </a>
+                    <?php
+                }
+            } else {
+                print '<i>Currently not reading any manga...</i>';
+            }
+
+            ?>
+            </div>
+        </section>
+
+        <section class="latest-reviews_wrapper box-wrapper">
+            <div class="box-title">
+                <h3>Latest Reviews</h3>
+                <span class="link"><a href="/reviews">view all</a></span>
+            </div>
+            <div class="box-body">
+                <?php
+
+                if (isset($latestReviews)) {
+                    $i = 0;
+                    foreach($latestReviews as $latestReview) {
+                        ?>
+                        
+                        <a href="/review/<?=$latestReview['review_id']?>">
+                        <div class="entry">
+                            <div class="header">
+                                <img src="<?=$latestReview['header']?>" alt="">
+                            </div>
+                            <div class="info">
+                                <div class="user">
+                                    <p>A review of <?=$latestReview['entry']?> by <?=$latestReview['username']?>.</p>
+                                </div>
+                                <div class="title">"<?=$latestReview['title']?>"</div>
+                                
+                            </div>
+                        </div>
+                        </a>
+
+                        <?php
+                        $i++;
+                        if ($i > 3) {
+                            break;
+                        }
+                    }
+                } else {
+                    print '<i>No reviews yet</i>';
+                }
+
+                ?>
+            </div>
+        </section>
     </section>
 </div>
