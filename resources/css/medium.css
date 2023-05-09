@@ -242,10 +242,16 @@ section.mediumhome_all-medium div.mediumhome_all-medium_content {
     padding: 10px!important;
 }
 
+section.mediumhome_all-medium {
+    background: var(--box-bg);
+    overflow: hidden;
+    border-radius: var(--border-radius);
+}
+
 div.mediumhome_all-medium_content {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-gap: 5px;
+    display: flex;
+    gap: var(--gap);
+    overflow-x: auto;
 
     box-sizing: border-box;
 }

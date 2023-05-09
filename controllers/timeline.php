@@ -10,7 +10,7 @@ if ($_GET) {
     }
     
 
-    if (empty($_GET['tl']) && ($_GET['tl'] !== 'global' || $_GET['tl'] !== 'default')) {
+    if (empty($_GET['tl']) || ($_GET['tl'] !== 'global' || $_GET['tl'] !== 'default')) {
         header('Location: /404');
     }
 

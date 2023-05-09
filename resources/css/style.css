@@ -4,8 +4,8 @@
     text-decoration: none;
     list-style: none;
     box-sizing: border-box;
-    scrollbar-color: var(--box-bg) var(--body-bg);
-    scrollbar-width: 10px;
+    scrollbar-color: var(--box-bg);
+    scrollbar-width: var(--box-bg) var(--body-bg);
 }
 
 a {
@@ -101,12 +101,11 @@ background-color: var(--body-bg);
 /* Handle */
 ::-webkit-scrollbar-thumb {
 background-color: var(--box-bg);
-border-radius: var(--border-radius);
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-background: #555;
+background-color: var(--box-bg-hover);
 }
 
 /* Usado, principalmente, cuando no existe datos de algún tipo. (e.g. un anime no tiene personajes asignados en `character_anime`.) */
