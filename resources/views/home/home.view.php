@@ -18,10 +18,9 @@
                     foreach ($followingTimeline as $post) {
                         ?>
     
-                        <a href="/activity/<?=$post['post']['post_id']?>">
-                            <div class="post-entry box-wrapper box-body">
+                            <div class="post-entry box-wrapper box-body" onclick="window.location='/activity/<?=$post['post']['post_id']?>'">
                                 <div class="top">
-                                    <img src="<?=$post['user']['pfp']?>" alt="">
+                                <a href="/<?=$post['user']['username']?>"><img src="<?=$post['user']['pfp']?>" alt=""></a>
                                     <div class="post-info">
                                         <div class="post-info_user">
                                             <div class="username">
@@ -46,7 +45,7 @@
                                 </div>
                                 <div class="bottom">
                                     <div class="content"><?=htmlspecialchars($post['post']['content'])?></div>
-                                    <!--<div class="social">
+                                    <div class="social">
                                     <div class="social-icon">
                                         <span class="material-icons-outlined" id="display-reply">chat_bubble_outline</span>
                                         <p><?=$post['post']['reply_count']?></p>
@@ -61,14 +60,15 @@
                                     </a>
     
                                     <div class="social-icon">
-                                        <span class="material-icons-outlined">bookmark_border</span>
-                                        <p>0</p>
+                                        <span class="material-icons-outlined">
+                                            <?php if ($post['user']['bookmarked']) {echo "bookmark";} else {echo "bookmark_border";} ?>
+                                        </span>
+                                        <p><?=$post['post']['bookmark_count']?></p>
                                     </div>
-                                </div>-->
+                                </div>
                                 </div>
     
                             </div>
-                        </a>
     
                         <?php
                     }
@@ -77,10 +77,9 @@
                     foreach ($globalTimeline as $post) {
                         ?>
     
-                        <a href="/activity/<?=$post['post']['post_id']?>">
-                            <div class="post-entry box-wrapper box-body">
+                            <div class="post-entry box-wrapper box-body" onclick="window.location='/activity/<?=$post['post']['post_id']?>'">
                                 <div class="top">
-                                    <img src="<?=$post['user']['pfp']?>" alt="">
+                                    <a href="/<?=$post['user']['username']?>"><img src="<?=$post['user']['pfp']?>" alt=""></a>
                                     <div class="post-info">
                                         <div class="post-info_user">
                                             <div class="username">
@@ -125,7 +124,6 @@
                                 </div>
     
                             </div>
-                        </a>
     
                         <?php
                     }

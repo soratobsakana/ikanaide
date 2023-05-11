@@ -79,15 +79,22 @@
             for($i= 0; $i < count($userPosts['posts']); $i++) {
                 
                 ?>
-                <a href="/activity/<?=$userPosts['posts'][$i]['post_id']?>">
-                <div class="post-entry box-wrapper box-body">
+                
+                <div class="post-entry box-wrapper box-body" onclick="window.location='/activity/<?=$userPosts['posts'][$i]['post_id']?>'">
                     <div class="top">
                         <img src="<?=$userPosts['user']['pfp']?>" alt="">
                         <div class="post-info">
                             <div class="post-info_user">
                                 <div class="username">
                                     <div><span><?=$userPosts['user']['username']?></span><span class="post_time-ago">&nbsp;&nbsp;·&nbsp;&nbsp;<?=$userPosts['posts'][$i]['time_ago']?></span></div>
-                                    <div><span class="material-icons dots">more_horiz</span></div>
+                                    <div class="display-settings">
+                                        <div class="post-settings" id="post_settings">
+                                            <ul>
+                                                <a href="/delete?id=<?=$userPosts['posts'][$i]['post_id']?>"><li>Delete</li></a>
+                                            </ul>
+                                        </div>
+                                        <span class="material-icons dots" id="display_settings">more_horiz</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="post-info_relation">
@@ -100,7 +107,7 @@
                                 } else if (isset($userPosts['posts'][$i]['medium_id'])) {
                                     ?><span class="low-opacity">on <?=$userPosts['posts'][$i]['medium_title']?></span><?php
                                 }
-                                
+
                                 ?>
                             </div>
                         </div>
@@ -129,7 +136,7 @@
                     </div>
                     
                 </div>
-                </a>
+                
 
                 <?php
             }

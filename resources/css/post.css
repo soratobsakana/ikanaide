@@ -17,10 +17,10 @@ section.posts-wrapper div.post-entry {
     border-bottom: 1px solid var(--box-title);
 
     transition: var(--transition);
-
+    cursor: pointer;
 }
 
-section.posts-wrapper a:last-child div.post-entry {
+section.posts-wrapper div.post-entry:last-child {
     border-bottom: 0;
 }
 
@@ -28,9 +28,17 @@ section.posts-wrapper div.single-page:last-child {
     border-bottom: 0;
 }
 
-section.posts-wrapper a:hover div.post-entry {
+/****** /activity/id *******/
+section.posts-wrapper div.single-page:hover {
+    background-color: var(--box-bg)!important;
+    cursor: default!important;
+}
+
+section.posts-wrapper div.post-entry:hover {
     background: var(--box-bg-hover);
 }
+
+/**************/
 
 section.posts-wrapper div.post-entry div.top {
     display: flex;
@@ -63,9 +71,37 @@ section.posts-wrapper div.post-entry div.top div.post-info div.post-info_user di
     transition: var(--transition);
 }
 
-section.posts-wrapper a div.post-entry div.top div.post-info div.post-info_user div.username .dots:hover {
+section.posts-wrapper div.post-entry div.top div.post-info div.post-info_user div.username .dots:active {
+    background-color: var(--box-title)!important;
+    transition: none;
+}
+
+section.posts-wrapper div.post-entry div.top div.post-info div.post-info_user div.username .dots:hover {
     background-color: var(--box-bg);
     opacity: 1;
+}
+
+section.posts-wrapper div.post-entry div.top div.post-info div.post-info_user div.username div.display-settings div.post-settings {
+    min-width: 100px;
+    background-color: var(--box-bg-hover);
+    box-shadow: 0px 0px 3px rgba(0,0,0, .25);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(112, 112, 112, 0.781);
+
+    position: absolute;
+    right: 110%;
+
+    display: none;
+}
+
+section.posts-wrapper div.post-entry div.top div.post-info div.post-info_user div.username div.display-settings div.post-settings ul li {
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+section.posts-wrapper div.post-entry div.top div.post-info div.post-info_user div.username div.display-settings div.post-settings ul li:hover {
+    background: var(--box-bg-hover);
 }
 
 section.posts-wrapper div.post-entry div.top div.username span.post_time-ago {

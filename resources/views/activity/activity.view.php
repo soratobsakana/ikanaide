@@ -4,11 +4,10 @@
     if (isset($repliedPost)) {
         ?>
 
-    <section class="posts-wrapper box-wrapper">
-        <a href="/activity/<?=$repliedPost['post']['post_id']?>">
+    <section class="replied-posts posts-wrapper box-wrapper" onclick="window.location='/activity/<?=$repliedPost['post']['post_id']?>'">
             <div class="post-entry box-wrapper box-body">
                 <div class="top">
-                    <img src="<?=$repliedPost['user']['pfp']?>" alt="">
+                    <a href="/<?=$post['user']['username']?>"><img src="<?=$repliedPost['user']['pfp']?>" alt=""></a>
                     <div class="post-info">
                         <div class="post-info_user">
                             <div class="username">
@@ -54,7 +53,6 @@
                     </div>
                 
                 </div>
-            </a>
 
     </section>
     <hr class="activity_replied-reply_separator">
@@ -70,7 +68,14 @@
                     <div class="post-info_user">
                         <div class="username">
                             <div><span><?=$post['user']['username']?></span><span class="post_time-ago">&nbsp;&nbsp;·&nbsp;&nbsp;<?=$post['post']['time_ago']?></span></div>
-                            <div><span class="material-icons dots">more_horiz</span></div>
+                            <div class="display-settings">
+                                <div class="post-settings" id="post_settings">
+                                    <ul>
+                                        <a href="/delete?id=<?=$userPosts['posts'][$i]['post_id']?>"><li>Delete</li></a>
+                                    </ul>
+                                </div>
+                                <span class="material-icons dots" id="display_settings">more_horiz</span>
+                            </div>
                         </div>
                     </div>
                     <div class="post-info_relation">
@@ -158,10 +163,10 @@
         foreach ($replies as $reply) {
             ?>
 
-            <a href="/activity/<?=$reply['post']['post_id']?>">
-                <div class="post-entry box-wrapper box-body">
+            
+                <div class="post-entry box-wrapper box-body" onclick="window.location='/activity/<?=$reply['post']['post_id']?>'">
                     <div class="top">
-                        <img src="<?=$reply['user']['pfp']?>" alt="">
+                        <a href="/<?=$reply['user']['username']?>"><img src="<?=$reply['user']['pfp']?>" alt=""></a>
                         <div class="post-info">
                             <div class="post-info_user">
                                 <div class="username">
@@ -207,7 +212,7 @@
                         </div>
                     
                     </div>
-                </a>
+                
 
                 <?php
             }
@@ -224,6 +229,8 @@
     let btn = document.getElementById('display-reply');
     let icon = document.getElementById('reply-icon');
     let cancelBtn = document.getElementById('cancel-reply');
+    let settings = document.getElementById('display_settings');
+    let menu = document.getElementById('post_settings');
 
     btn.addEventListener('click', function() {
         wrapper.style.display = "block";
@@ -235,5 +242,13 @@
         wrapper.style.display = "none";
         icon.style.opacity = "var(--font_low-opacity)";
     });
+
+    settings.addEventListener('click', function() {
+        if (menu.style.display === "block") {
+            menu.style.display = "none";
+        } else {
+            menu.style.display = "block";
+        }
+    })
 
 </script>
