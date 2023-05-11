@@ -100,32 +100,32 @@
                                 } else if (isset($userPosts['posts'][$i]['medium_id'])) {
                                     ?><span class="low-opacity">on <?=$userPosts['posts'][$i]['medium_title']?></span><?php
                                 }
-
+                                
                                 ?>
                             </div>
                         </div>
                     </div>
                     <div class="bottom">
                         <div class="content"><?=htmlspecialchars($userPosts['posts'][$i]['content'])?></div>
-                        <!--<div class="social">
+                        <div class="social">
                             <div class="social-icon">
                                 <span class="material-icons-outlined" id="display-reply">chat_bubble_outline</span>
                                 <p><?=$userPosts['posts'][$i]['reply_count']?></p>
                             </div>
-                            <a href="/like?id=<?=$userPosts['posts'][$i]['post_id']?>">
                             <div class="social-icon">
                             <span class="material-icons-outlined">
-                                <?php if ($userPosts['user']['liked']) {echo "favorite";} else {echo "favorite_border";} ?>
+                                <?php if ($userPosts['posts'][$i]['liked']) {echo "favorite";} else {echo "favorite_border";} ?>
                             </span>
                                 <p><?=$userPosts['posts'][$i]['like_count']?></p>
                             </div>
-                            </a>
                             
                             <div class="social-icon">
-                                <span class="material-icons-outlined">bookmark_border</span>
-                                <p>0</p>
+                                <span class="material-icons-outlined">
+                                    <?php if ($userPosts['posts'][$i]['bookmarked']) {echo "bookmark";} else {echo "bookmark_border";} ?>
+                                </span>
+                                <p><?=$userPosts['posts'][$i]['bookmark_count']?></p>
                             </div>
-                        </div>-->
+                        </div>
                     </div>
                     
                 </div>

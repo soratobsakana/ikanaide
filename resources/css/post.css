@@ -81,6 +81,9 @@ section.posts-wrapper div.post-entry div.bottom {
 section.posts-wrapper div.post-entry div.bottom div.social {
     display: flex;
     justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    margin: -10px;
 }
 
 section.posts-wrapper div.post-entry div.social a {
@@ -90,9 +93,13 @@ section.posts-wrapper div.post-entry div.social a {
 section.posts-wrapper div.post-entry div.social div.social-icon {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: left;
     gap: var(--gap);
     cursor: pointer;
+}
+
+section.posts-wrapper div.post-entry div.social div.activity-page_icon {
+    justify-content: center;
 }
 
 section.posts-wrapper div.post-entry div.social div.social-icon span {    

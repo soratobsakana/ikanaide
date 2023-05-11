@@ -187,8 +187,10 @@ class Activity
         // Cálculo del número de respuestas y likes asociados a un post.
         $replyCount = $this -> con -> db -> execute_query('SELECT count(reply_id) FROM `post_reply` WHERE post_id = ?;', [$post['post']['post_id']]) -> fetch_column();
         $likeCount = $this -> con -> db -> execute_query('SELECT count(user_id) FROM `post_like` WHERE post_id = ?;', [$post['post']['post_id']]) -> fetch_column();
+        $bookmarkCount = $this -> con -> db -> execute_query('SELECT count(user_id) FROM `bookmark` WHERE post_id = ?;', [$post['post']['post_id']]) -> fetch_column();
         $post['post']['reply_count'] = $replyCount;
         $post['post']['like_count'] = $likeCount;
+        $post['post']['bookmark_count'] = $bookmarkCount;
 
         // Comprobación de si un post tiene relación con un anime o manga.
         $animeId = $this -> con -> db -> execute_query('SELECT anime_id FROM `post_anime` WHERE post_id = ?', [$post['post']['post_id']]);
@@ -224,6 +226,14 @@ class Activity
                 $post['user']['liked'] = false;
             }
         }
+
+        if (isset($_COOKIE['session']) && $this -> user -> validateSession()) {
+            if ($this -> con -> db -> execute_query('SELECT user_id FROM bookmark WHERE post_id = ? AND user_id = ?', [$post['post']['post_id'], $_COOKIE['user_id']]) -> num_rows === 1) {
+                $post['user']['bookmarked'] = true;
+            } else {
+                $post['user']['bookmarked'] = false;
+            }
+        }
         
         return $post;
     }
@@ -242,6 +252,18 @@ class Activity
                 $replies[] = $this -> getPost($row['reply_id']);
             }
             return $replies;
+        } else {
+            return null;
+        }
+    }
+
+    public function getRepliedPost(int $postReply): array|null
+    {
+        $result = $this -> con -> db -> execute_query('SELECT post_id FROM post_reply WHERE reply_id = ?', [$postReply]);
+        if ($result -> num_rows === 1) {
+            $column = $result -> fetch_column();
+            $repliedPost = $this -> getPost($column);
+            return $repliedPost;
         } else {
             return null;
         }

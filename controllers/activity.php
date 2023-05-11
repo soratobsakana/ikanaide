@@ -48,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-reply'])) {
     $Activity -> like($likePost);
 } else if ($Activity -> exists($postId)) {
     // $post contendrá la información de los posts a mostrar.
+    $repliedPost = $Activity -> getRepliedPost($postId);
     $post = $Activity -> getPost($postId);
     $replies = $Activity -> getPostReplies($postId);
 

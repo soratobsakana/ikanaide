@@ -666,8 +666,10 @@ class User
                 // Cálculo del número de respuestas y likes asociados a un post.
                 $replyCount = $this -> con -> db -> execute_query('SELECT count(reply_id) FROM `post_reply` WHERE post_id = ?;', [$posts[$i]['post_id']]) -> fetch_column();
                 $likeCount = $this -> con -> db -> execute_query('SELECT count(user_id) FROM `post_like` WHERE post_id = ?;', [$posts[$i]['post_id']]) -> fetch_column();
+                $bookmarkCount = $this -> con -> db -> execute_query('SELECT count(user_id) FROM `bookmark` WHERE post_id = ?;', [$posts[$i]['post_id']]) -> fetch_column();
                 $posts[$i]['reply_count'] = $replyCount;
                 $posts[$i]['like_count'] = $likeCount;
+                $posts[$i]['bookmark_count'] = $bookmarkCount;
 
                 $animeId = $this -> con -> db -> execute_query('SELECT anime_id FROM `post_anime` WHERE post_id = ?', [$posts[$i]['post_id']]);
                 $mangaId = $this -> con -> db -> execute_query('SELECT manga_id FROM `post_manga` WHERE post_id = ?', [$posts[$i]['post_id']]);
@@ -690,9 +692,17 @@ class User
 
                 if (isset($_COOKIE['session']) && $this -> validateSession()) {
                     if ($this -> con -> db -> execute_query('SELECT user_id FROM post_like WHERE post_id = ? AND user_id = ?', [$posts[$i]['post_id'], $_COOKIE['user_id']]) -> num_rows === 1) {
-                        $postsInfo['user']['liked'] = true;
+                        $posts[$i]['liked'] = true;
                     } else {
-                        $postsInfo['user']['liked'] = false;
+                        $posts[$i]['liked'] = false;
+                    }
+                }
+
+                if (isset($_COOKIE['session']) && $this -> validateSession()) {
+                    if ($this -> con -> db -> execute_query('SELECT user_id FROM bookmark WHERE post_id = ? AND user_id = ?', [$posts[$i]['post_id'], $_COOKIE['user_id']]) -> num_rows === 1) {
+                        $posts[$i]['bookmarked'] = true;
+                    } else {
+                        $posts[$i]['bookmarked'] = false;
                     }
                 }
 

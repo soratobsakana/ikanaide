@@ -1,8 +1,8 @@
 230508-14
 [] Home pages
-    [-] Main home page.
+    [X] Main home page.
         [X] Add a post timeline (following and global) if user is logged in.
-        [] Add watching animes and mangas, and make summing one episode to both possible.
+        [X] Add watching animes and mangas, and make summing one episode to both possible.
     [] User stuff
         [] Make profile editing available. (No picture or header yet)
         [] Support follow, post likes and replies notifications. Also PM ones.

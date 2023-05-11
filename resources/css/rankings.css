@@ -23,10 +23,6 @@ nav.rankings-page_menu ul li.low-opacity {
     background-color: var(--box-bg);
 }
 
-nav.rankings-page_menu ul li.low-opacity:hover li.current-ranking {
-    background-color: blue;
-}
-
 nav.rankings-page_menu ul:hover li {
     opacity: var(--font_low-opacity)!important;
     background-color: var(--box-bg);

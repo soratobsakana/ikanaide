@@ -105,25 +105,23 @@
                                 </div>
                                 <div class="bottom">
                                     <div class="content"><?=htmlspecialchars($post['post']['content'])?></div>
-                                    <!--<div class="social">
+                                    <div class="social">
                                     <div class="social-icon">
                                         <span class="material-icons-outlined" id="display-reply">chat_bubble_outline</span>
                                         <p><?=$post['post']['reply_count']?></p>
                                     </div>
-                                    <a href="/like?id=<?=$post['post']['post_id']?>">
                                     <div class="social-icon">
                                     <span class="material-icons-outlined">
                                         <?php if ($post['user']['liked']) {echo "favorite";} else {echo "favorite_border";} ?>
                                     </span>
                                         <p><?=$post['post']['like_count']?></p>
                                     </div>
-                                    </a>
     
                                     <div class="social-icon">
                                         <span class="material-icons-outlined">bookmark_border</span>
-                                        <p>0</p>
+                                        <p><?=$post['post']['bookmark_count']?></p>
                                     </div>
-                                </div>-->
+                                </div>
                                 </div>
     
                             </div>
