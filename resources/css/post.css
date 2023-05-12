@@ -81,12 +81,16 @@ section.posts-wrapper div.post-entry div.top div.post-info div.post-info_user di
     opacity: 1;
 }
 
+section.posts-wrapper div.post-entry div.top div.post-info div.post-info_user div.username div.display-settings {
+    position: relative;
+}
+
 section.posts-wrapper div.post-entry div.top div.post-info div.post-info_user div.username div.display-settings div.post-settings {
-    min-width: 100px;
-    background-color: var(--box-bg-hover);
+    min-width: 120px;
+    background-color: var(--box-title);
     box-shadow: 0px 0px 3px rgba(0,0,0, .25);
     border-radius: var(--border-radius);
-    border: 1px solid rgba(112, 112, 112, 0.781);
+    border: 1px solid var(--box-title-light);
 
     position: absolute;
     right: 110%;
@@ -101,7 +105,7 @@ section.posts-wrapper div.post-entry div.top div.post-info div.post-info_user di
 }
 
 section.posts-wrapper div.post-entry div.top div.post-info div.post-info_user div.username div.display-settings div.post-settings ul li:hover {
-    background: var(--box-bg-hover);
+    background: var(--box-title-light);
 }
 
 section.posts-wrapper div.post-entry div.top div.username span.post_time-ago {

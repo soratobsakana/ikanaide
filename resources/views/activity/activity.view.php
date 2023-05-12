@@ -38,14 +38,14 @@
                         </div>
                         <div class="social-icon">
                         <span class="material-icons-outlined">
-                            <?php if ($repliedPost['user']['liked']) {echo "favorite";} else {echo "favorite_border";} ?>
+                            <?php if (isset($repliedPost['user']['liked']) && $repliedPost['user']['liked']) {echo "favorite";} else {echo "favorite_border";} ?>
                         </span>
                             <p><?=$repliedPost['post']['like_count']?></p>
                         </div>
                         
                         <div class="social-icon">
                             <span class="material-icons-outlined">
-                                <?php if ($repliedPost['user']['bookmarked']) {echo "bookmark";} else {echo "bookmark_border";} ?>
+                                <?php if (isset($repliedPost['user']['bookmarked']) && $repliedPost['user']['bookmarked']) {echo "bookmark";} else {echo "bookmark_border";} ?>
                             </span>
                             <p><?=$repliedPost['post']['bookmark_count']?></p>
                         </div>
@@ -71,7 +71,18 @@
                             <div class="display-settings">
                                 <div class="post-settings" id="post_settings">
                                     <ul>
-                                        <a href="/delete?id=<?=$userPosts['posts'][$i]['post_id']?>"><li>Delete</li></a>
+                                        <?php
+                                        
+                                        if (isset($_COOKIE['user_id']) && $_COOKIE['user_id'] == $post['user']['user_id']) {
+                                        ?><a href="/delete?id=<?=$post['post']['post_id']?>"><li>Delete</li></a><?php
+                                        } else if (!isset($_COOKIE['session'])) {
+                                            ?><a href="/login"><li>Report</li></a><?php
+                                        } else {
+                                            ?><a href=""><li>Report</li></a><?php
+                                        }
+                                        
+                                        ?>
+                                        
                                     </ul>
                                 </div>
                                 <span class="material-icons dots" id="display_settings">more_horiz</span>
@@ -112,7 +123,7 @@
                         <a href="/like?id=<?=$post['post']['post_id']?>">
                             <div class="social-icon activity-page_icon">
                             <span class="material-icons-outlined">
-                                <?php if ($post['user']['liked']) {echo "favorite";} else {echo "favorite_border";} ?>
+                                <?php if (isset($post['user']['liked']) &&$post['user']['liked']) {echo "favorite";} else {echo "favorite_border";} ?>
                             </span>
                                 <p><?=$post['post']['like_count']?></p>
                             </div>
@@ -121,7 +132,7 @@
                         <a href="/bookmark?id=<?=$post['post']['post_id']?>">
                             <div class="social-icon activity-page_icon">
                                 <span class="material-icons-outlined">
-                                    <?php if ($post['user']['bookmarked']) {echo "bookmark";} else {echo "bookmark_border";} ?>
+                                    <?php if (isset($post['user']['bookmarked']) && $post['user']['bookmarked']) {echo "bookmark";} else {echo "bookmark_border";} ?>
                                 </span>
                                 <p><?=$post['post']['bookmark_count']?></p>
                             </div>
@@ -197,14 +208,14 @@
                             </div>
                             <div class="social-icon">
                             <span class="material-icons-outlined">
-                                <?php if ($reply['user']['liked']) {echo "favorite";} else {echo "favorite_border";} ?>
+                                <?php if (isset($reply['user']['liked']) && $reply['user']['liked']) {echo "favorite";} else {echo "favorite_border";} ?>
                             </span>
                                 <p><?=$reply['post']['like_count']?></p>
                             </div>
                             
                             <div class="social-icon">
                                 <span class="material-icons-outlined">
-                                    <?php if ($reply['user']['bookmarked']) {echo "bookmark";} else {echo "bookmark_border";} ?>
+                                    <?php if (isset($reply['user']['bookmarked']) && $reply['user']['bookmarked']) {echo "bookmark";} else {echo "bookmark_border";} ?>
                                 </span>
                                 <p><?=$reply['post']['bookmark_count']?></p>
                             </div>
@@ -229,6 +240,7 @@
     let btn = document.getElementById('display-reply');
     let icon = document.getElementById('reply-icon');
     let cancelBtn = document.getElementById('cancel-reply');
+
     let settings = document.getElementById('display_settings');
     let menu = document.getElementById('post_settings');
 

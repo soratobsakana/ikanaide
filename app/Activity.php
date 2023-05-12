@@ -368,4 +368,17 @@ class Activity
         }
     }
 
+    public function deletePost(int $postId, int $userId): bool
+    {
+        if ($this -> user -> validateSession()) {
+            if ($this -> con -> db -> execute_query('DELETE FROM `post` WHERE post_id = ? AND user_id = ?', [$postId, $userId])) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            header('Location: /logout');
+        }
+    }
+
 }

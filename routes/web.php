@@ -83,6 +83,7 @@ $routes = array(
     '/reply' => 'controllers/activity.php',
     '/like' => 'controllers/like.php',
     '/bookmark' => 'controllers/bookmark.php',
+    '/delete' => 'controllers/delete.php',
     '/follow' => 'controllers/follow.php',
     '/timeline' => 'controllers/timeline.php',
 
