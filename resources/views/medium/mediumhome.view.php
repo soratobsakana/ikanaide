@@ -1,9 +1,9 @@
 <div class="mediumhome">
     <section class="mediumhome_all-medium box-wrapper">
-        <div class="box-title">
+        <div class="box-wrapper box-title">
             <h3>All <?=ucfirst($medium)?></h3>
         </div>
-        <div class="mediumhome_all-medium_content box-body">
+        <div class="mediumhome_all-medium_content">
             <?php
 
             if ($homeInfo -> num_rows > 0) {

@@ -35,6 +35,7 @@ section.home_user-info section.progress-wrapper div.box-body div.entry {
     background-position: center;
     border-radius: var(--border-radius);
     position: relative;
+    cursor: pointer;
 }
 
 section.home_user-info section.progress-wrapper div.box-body div.entry span {
@@ -56,6 +57,11 @@ section.home_user-info section.progress-wrapper div.box-body div.entry:hover spa
     opacity: .9;
 }
 
+section.home_user-info section.progress-wrapper div.box-body div.entry span:hover {
+    opacity: .9.5;
+    background-color: var(--box-title-light);
+}
+
 section.home_user-info section.latest-reviews_wrapper div.box-title {
     display: flex;
     justify-content: space-between;
@@ -74,6 +80,7 @@ section.home_user-info section.latest-reviews_wrapper div.box-body div.entry {
     background-color: var(--box-title);
     overflow: hidden;
     cursor: pointer;
+    height: 100%;
 }
 
 section.home_user-info section.latest-reviews_wrapper div.box-body div.entry:hover div.info {

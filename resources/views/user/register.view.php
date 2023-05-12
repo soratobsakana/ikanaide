@@ -41,3 +41,7 @@
     </form>
     <p>... or <a href="login">login</a> if you already have an account.</p>
 </div>
+
+<script>
+    document.getElementById("username").focus();
+</script>

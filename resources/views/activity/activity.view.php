@@ -110,45 +110,41 @@
                     <?=timeFormat(substr($post['post']['date'], 10, 6))?>&nbsp;&nbsp;·&nbsp;&nbsp;<?=ucfirst(dateFormat(substr($post['post']['date'], 0, 10)))?>
                 </div>
                 
-                <?php 
-                
-                if (isset($_COOKIE['session']) && $_COOKIE['session'] === "Yes") {
-                    ?>
-                    <hr id="edit-list_fields-separator">
-                    <div class="social">
-                        <div class="social-icon activity-page_icon" id="display-reply">
-                            <span class="material-icons-outlined" id="reply-icon">chat_bubble_outline</span>
-                            <p><?=$post['post']['reply_count']?></p>
-                        </div>
-                        <a href="/like?id=<?=$post['post']['post_id']?>">
-                            <div class="social-icon activity-page_icon">
-                            <span class="material-icons-outlined">
-                                <?php if (isset($post['user']['liked']) &&$post['user']['liked']) {echo "favorite";} else {echo "favorite_border";} ?>
-                            </span>
-                                <p><?=$post['post']['like_count']?></p>
-                            </div>
-                        </a>
-                        
-                        <a href="/bookmark?id=<?=$post['post']['post_id']?>">
-                            <div class="social-icon activity-page_icon">
-                                <span class="material-icons-outlined">
-                                    <?php if (isset($post['user']['bookmarked']) && $post['user']['bookmarked']) {echo "bookmark";} else {echo "bookmark_border";} ?>
-                                </span>
-                                <p><?=$post['post']['bookmark_count']?></p>
-                            </div>
-                        </a>
-                        
+                <hr id="edit-list_fields-separator">
+                <div class="social">
+                    <div class="social-icon activity-page_icon" id="display-reply">
+                        <span class="material-icons-outlined" id="reply-icon">chat_bubble_outline</span>
+                        <p><?=$post['post']['reply_count']?></p>
                     </div>
-
-                    <?php
-                }
-                
-                ?>
+                    <a href="/like?id=<?=$post['post']['post_id']?>">
+                        <div class="social-icon activity-page_icon">
+                        <span class="material-icons-outlined">
+                            <?php if (isset($post['user']['liked']) && $post['user']['liked']) {echo "favorite";} else {echo "favorite_border";} ?>
+                        </span>
+                            <p><?=$post['post']['like_count']?></p>
+                        </div>
+                    </a>
+                    
+                    <a href="/bookmark?id=<?=$post['post']['post_id']?>">
+                        <div class="social-icon activity-page_icon">
+                            <span class="material-icons-outlined">
+                                <?php if (isset($post['user']['bookmarked']) && $post['user']['bookmarked']) {echo "bookmark";} else {echo "bookmark_border";} ?>
+                            </span>
+                            <p><?=$post['post']['bookmark_count']?></p>
+                        </div>
+                    </a>
+                    
+                </div>
                 
             </div>
 
         </div>
     </section>
+
+    <?php
+
+    if (isset($_COOKIE['session'])) {
+    ?>
 
     <section class="post-reply_wrapper box-wrapper" id="post-reply_wrapper">
         <form method="POST" action="<?=$page?>">
@@ -162,6 +158,11 @@
             </div>
         </form>
     </section>
+
+    <?php
+    }
+
+    ?>
 
     <?php 
     

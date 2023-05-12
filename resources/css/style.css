@@ -95,7 +95,8 @@ textarea {
 
 /* Track */
 ::-webkit-scrollbar-track {
-background-color: var(--body-bg);
+    background-color: var(--body-bg);
+    background-color: var(--box-bg);
 }
 
 /* Handle */

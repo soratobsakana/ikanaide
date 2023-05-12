@@ -111,13 +111,15 @@
                                     </div>
                                     <div class="social-icon">
                                     <span class="material-icons-outlined">
-                                        <?php if ($post['user']['liked']) {echo "favorite";} else {echo "favorite_border";} ?>
+                                        <?php if (isset($post['user']['liked']) && $post['user']['liked']) {echo "favorite";} else {echo "favorite_border";} ?>
                                     </span>
                                         <p><?=$post['post']['like_count']?></p>
                                     </div>
     
                                     <div class="social-icon">
-                                        <span class="material-icons-outlined">bookmark_border</span>
+                                        <span class="material-icons-outlined">
+                                            <?php if (isset($post['user']['liked']) && $post['user']['liked']) {echo "bookmark";} else {echo "bookmark_border";} ?>
+                                        </span>
                                         <p><?=$post['post']['bookmark_count']?></p>
                                     </div>
                                 </div>
@@ -151,11 +153,11 @@
             if (isset($watchingAnimes)) {
                 foreach($watchingAnimes as $watchingAnime) {
                     ?>
-                    <a href="/sum?medium=anime&id=<?=$watchingAnime['anime']['anime_id']?>">
-                        <div style="background-image: url('<?=$watchingAnime['anime']['cover']?>')" class="entry">
-                            <span><?=$watchingAnime['user_progress']?> / <?=$watchingAnime['anime']['episodes']?></span>
+                    
+                        <div style="background-image: url('<?=$watchingAnime['anime']['cover']?>')" class="entry" onclick="window.location='/anime/<?=str_replace(' ', '-', $watchingAnime['anime']['title'])?>'">
+                            <a href="/sum?medium=anime&id=<?=$watchingAnime['anime']['anime_id']?>"><span><?=$watchingAnime['user_progress']?> / <?=$watchingAnime['anime']['episodes']?></span></a>
                         </div>
-                    </a>
+                    
                     <?php
                 }
             } else {

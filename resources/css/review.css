@@ -102,3 +102,19 @@ section.review_new-fields textarea {
 section.review_new-fields input[type=submit] {
     margin: 10px auto;
 }
+
+/* Estilos para la página de review (/review/id) */
+div.review_entry-wrapper {
+    width: 100%;
+    display: grid;
+    grid-gap: var(--gap);
+}
+
+div.review_entry-wrapper div.box-title {
+    font-size: 22px;
+}
+
+div.review_entry-wrapper div.review_entry-content {
+    padding: 20px!important;
+    font-size: calc(var(--box-font-size) + 1px);
+}

@@ -7,14 +7,19 @@ $User = new User;
 $Bookmark = new Bookmark;
 $Activity = new Activity;
 
-if (isset($_GET['id']) && filter_var($_GET['id'], FILTER_VALIDATE_INT) && $User -> validateSession()) {
-    $bookmark['user_id'] = $_COOKIE['user_id'];
-    $bookmark['post_id'] = intval($_GET['id']);
-    if ($Bookmark -> bookmark($bookmark['post_id'], $bookmark['user_id'])) {
-        header('Location: ' . $_SERVER['HTTP_REFERER']);    
+if (isset($_COOKIE['session'])) {
+    if (isset($_GET['id']) && filter_var($_GET['id'], FILTER_VALIDATE_INT) && $User -> validateSession()) {
+        $bookmark['user_id'] = $_COOKIE['user_id'];
+        $bookmark['post_id'] = intval($_GET['id']);
+        if ($Bookmark -> bookmark($bookmark['post_id'], $bookmark['user_id'])) {
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+        } else {
+            // Pasar por aqui significa que validateSession() en Activity::like() ha dado falso, por lo que provoco un logout.
+            header('Location: /logout');
+        }
     } else {
-        header('Location: /logout');
+        header('Location: /404');
     }
 } else {
-    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    header('Location: /login');
 }

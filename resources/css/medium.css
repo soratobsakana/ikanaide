@@ -232,39 +232,6 @@ a.querypage_review-entry_title:hover {
     background: var(--box-bg-hover);
 }
 
-/* Estilos para el home de cada medio. */
-
-div.mediumhome {
-    min-width: 100%;
-}
-
-section.mediumhome_all-medium div.mediumhome_all-medium_content {
-    padding: 10px!important;
-}
-
-section.mediumhome_all-medium {
-    background: var(--box-bg);
-    overflow: hidden;
-    border-radius: var(--border-radius);
-}
-
-div.mediumhome_all-medium_content {
-    display: flex;
-    gap: var(--gap);
-    overflow-x: auto;
-
-    box-sizing: border-box;
-}
-
-div.mediumhome_all-medium_content div {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 167px;
-    min-width: 108px;
-    border-radius: var(--border-radius);
-}
-
 
 /* Estilos para el formulario de edición de entrada de lista.*/
 section#querypage_list-edit {
@@ -348,4 +315,38 @@ hr#edit-list_fields-separator {
     height: 1px;
     border: 0px!important;
     background-color: var(--box-title);
+}
+
+
+/***** Estilos para el home de cada medio. *****/
+
+div.mediumhome {
+    min-width: 100%;
+}
+
+section.mediumhome_all-medium div.mediumhome_all-medium_content {
+    padding: 10px!important;
+}
+
+section.mediumhome_all-medium {
+    background: var(--box-bg);
+    overflow: hidden;
+    border-radius: var(--border-radius);
+}
+
+div.mediumhome_all-medium_content {
+    display: flex;
+    gap: var(--gap);
+    overflow-x: auto;
+
+    box-sizing: border-box;
+}
+
+div.mediumhome_all-medium_content div {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 167px;
+    min-width: 108px;
+    border-radius: var(--border-radius);
 }

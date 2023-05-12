@@ -22,3 +22,7 @@
     </form>
     <p>... or <a href="register">register</a> if you don't have an account.</p>
 </div>
+
+<script>
+    document.getElementById("username").focus();
+</script>

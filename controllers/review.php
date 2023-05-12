@@ -2,6 +2,7 @@
 
 include_once 'app/Review.php';
 include_once 'app/Listing.php';
+include_once 'resources/functions.php';
 
 $reviewGuide = explode('/', $uri);
 

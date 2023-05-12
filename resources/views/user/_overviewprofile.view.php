@@ -121,14 +121,14 @@
                             </div>
                             <div class="social-icon">
                             <span class="material-icons-outlined">
-                                <?php if ($userPosts['posts'][$i]['liked']) {echo "favorite";} else {echo "favorite_border";} ?>
+                                <?php if (isset($userPosts['posts'][$i]['liked']) && $userPosts['posts'][$i]['liked']) {echo "favorite";} else {echo "favorite_border";} ?>
                             </span>
                                 <p><?=$userPosts['posts'][$i]['like_count']?></p>
                             </div>
                             
                             <div class="social-icon">
                                 <span class="material-icons-outlined">
-                                    <?php if ($userPosts['posts'][$i]['bookmarked']) {echo "bookmark";} else {echo "bookmark_border";} ?>
+                                    <?php if (isset($userPosts['posts'][$i]['bookmarked']) && $userPosts['posts'][$i]['bookmarked']) {echo "bookmark";} else {echo "bookmark_border";} ?>
                                 </span>
                                 <p><?=$userPosts['posts'][$i]['bookmark_count']?></p>
                             </div>
