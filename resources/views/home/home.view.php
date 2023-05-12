@@ -118,7 +118,7 @@
     
                                     <div class="social-icon">
                                         <span class="material-icons-outlined">
-                                            <?php if (isset($post['user']['liked']) && $post['user']['liked']) {echo "bookmark";} else {echo "bookmark_border";} ?>
+                                            <?php if (isset($post['user']['bookmarked']) && $post['user']['bookmarked']) {echo "bookmark";} else {echo "bookmark_border";} ?>
                                         </span>
                                         <p><?=$post['post']['bookmark_count']?></p>
                                     </div>
@@ -178,11 +178,11 @@
             if (isset($readingMangas)) {
                 foreach($readingMangas as $readingManga) {
                     ?>
-                    <a href="/sum?medium=manga&id=<?=$readingManga['manga']['manga_id']?>">
-                        <div style="background-image: url('<?=$readingManga['manga']['cover']?>')" class="entry">
-                            <span><?=$readingManga['user_progress']?> / <?=$readingManga['manga']['chapters']?></span>
+                    
+                        <div style="background-image: url('<?=$readingManga['manga']['cover']?>')" class="entry" onclick="window.location='/manga/<?=str_replace(' ', '-', $readingManga['manga']['title'])?>'">
+                            <a href="/sum?medium=manga&id=<?=$readingManga['manga']['manga_id']?>"><span><?=$readingManga['user_progress']?> / <?=$readingManga['manga']['chapters']?></span></a>
                         </div>
-                    </a>
+                    
                     <?php
                 }
             } else {

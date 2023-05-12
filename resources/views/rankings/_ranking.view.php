@@ -12,7 +12,19 @@
                     <div class="low-opacity"><a href="/<?=$medium?>/<?=str_replace(' ', '-', $ranking[$i]['title'])?>"><?=$ranking[$i]['title']?></a></div>
                     <div class="center-text"><?=$ranking[$i]['score']?></div>
                     <div class="center-text"><?=$ranking[$i]['members']?></div>
-                    <div class="list">
+                    <div class="add">
+                        <a href="">
+                            <button type="button" class="ranking-button">add</button>
+                        </a>
+                    </div>
+                    <div class="fav">
+                        <a href="">
+                            <button type="button" class="ranking-button">
+                                <span class="material-icons-outlined">
+                                    favorite
+                                </span>
+                            </button>
+                        </a>
                     </div>
                 </div>
             

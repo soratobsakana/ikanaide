@@ -55,7 +55,7 @@ section.rankings-page_anime_content img {
 
 section.rankings-page_anime_content div.rankings-page_anime_content-entry {
     display: grid;
-    grid-template-columns: 7% 5% 50% 8% 8%;
+    grid-template-columns: 7% 5% 50% 8% 8% 10% 5%;
     word-break: break-word;
 }
 
@@ -67,4 +67,34 @@ section.rankings-page_anime_content div.rankings-page_anime_content-entry div {
 
 section.rankings-page_anime_content div.rankings-page_anime_content-entry div.low-opacity:hover {
     opacity: 1;
+}
+
+section.rankings-page_anime_content div.rankings-page_anime_content-entry div a {
+    width: 90%;
+}
+
+section.rankings-page_anime_content div.rankings-page_anime_content-entry div.add button.ranking-button {
+    width: 90%;
+    background-color: var(--box-title);
+    border-radius: var(--border-radius);
+    padding: 6px 0;
+    width: 100%;
+}
+
+section.rankings-page_anime_content div.rankings-page_anime_content-entry div.fav a button {
+    padding: 7px 15px 5px;
+    background-color: var(--box-title);
+    border-radius: var(--border-radius);
+}
+
+section.rankings-page_anime_content div.rankings-page_anime_content-entry div.fav a button span {
+    font-size: 14px!important;
+}
+
+section.rankings-page_anime_content div.rankings-page_anime_content-entry div a button {
+    transition: var(--transition);
+}
+
+section.rankings-page_anime_content div.rankings-page_anime_content-entry div a button:hover {
+    background-color: var(--box-title-light)!important;
 }

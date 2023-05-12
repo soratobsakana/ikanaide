@@ -1,13 +1,16 @@
 <?php
 
 require_once 'app/Ranking.php';
+require_once 'app/User.php';
+
+$User = new User;
+$Ranking = new Ranking;
 
 if ($page === '/rankings') {
     header('Location: /rankings/anime');
 }
 
 $medium = explode('/', $uri)[2]; // anime|manga
-$Ranking = new Ranking;
 
 $ranking = $Ranking -> getRankings($medium);
 

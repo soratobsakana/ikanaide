@@ -27,42 +27,49 @@ class User
             }
         }
 
+        // Estos nombres de usuario no pueden usarse ya que se solaparian con rutas de la web.
+        $reservedUsernames = ['home', 'anime', 'manga', 'vn', 'rankings', 'reviews', 'forum', 'terms', 'privacy', 'contact', 'support', 'about', 'edit', 'sum', 'post', 'reply', 'like', 'bookmark', 'delete', 'follow', 'timeline', 'submit', 'login', 'register', 'logout', 'home', '404'];
+
         // Inspección de los datos introducidos.
         if (isset($registerInfo['username'], $registerInfo['email'], $registerInfo['password'], $registerInfo['confirm'])) {
             if (!(empty($registerInfo['username']) || empty($registerInfo['email']) || empty($registerInfo['password']) || empty($registerInfo['confirm']))) {
                 if (filter_var($registerInfo['email'], FILTER_VALIDATE_EMAIL)) {
                     if (preg_match('/^[a-zA-Z0-9]+$/', $registerInfo['username']) === 1) {
-                        if (strlen($registerInfo['username']) >= 3 && strlen($registerInfo['username']) <= 16) {
-                            if ($registerInfo['password'] === $registerInfo['confirm']) {
-                                $result = $this -> con -> db -> execute_query('SELECT user_id FROM user WHERE username = ?', [$registerInfo['username']]);
-                                if ($result -> num_rows === 0) {
-                                    $result = $this -> con -> db -> execute_query('SELECT user_id FROM user WHERE email = ?', [$registerInfo['email']]);
+                        if (in_array($registerInfo, $reservedUsernames)) {
+                            if (strlen($registerInfo['username']) >= 3 && strlen($registerInfo['username']) <= 16) {
+                                if ($registerInfo['password'] === $registerInfo['confirm']) {
+                                    $result = $this -> con -> db -> execute_query('SELECT user_id FROM user WHERE username = ?', [$registerInfo['username']]);
                                     if ($result -> num_rows === 0) {
-                                        $password = password_hash($registerInfo['password'], PASSWORD_DEFAULT);
-                                        $this -> con -> db -> execute_query('INSERT INTO `user` (`username`, `password`, `email`) VALUES (?, ?, ?)', [
-                                            $registerInfo['username'],
-                                            $password,
-                                            $registerInfo['email'],
-                                        ]);
-                                        $result = $this -> con -> db -> execute_query('SELECT user_id FROM user WHERE username = ?', [$registerInfo['username']]);
-                                        $user_id = $result -> fetch_column();
-                                        setcookie('username', $registerInfo['username'], strtotime('NOW+60DAYS'));
-                                        setcookie('user_id', $user_id, strtotime('NOW+60DAYS'));
-                                        setcookie('passwd', $password, strtotime('NOW+60DAYS'));
-                                        setcookie('session', "Yes", strtotime('NOW+60DAYS'));
-                                        setcookie('home_timeline', 'default', strtotime('NOW+60DAYS'));
-                                        return 'Ok';
+                                        $result = $this -> con -> db -> execute_query('SELECT user_id FROM user WHERE email = ?', [$registerInfo['email']]);
+                                        if ($result -> num_rows === 0) {
+                                            $password = password_hash($registerInfo['password'], PASSWORD_DEFAULT);
+                                            $this -> con -> db -> execute_query('INSERT INTO `user` (`username`, `password`, `email`) VALUES (?, ?, ?)', [
+                                                $registerInfo['username'],
+                                                $password,
+                                                $registerInfo['email'],
+                                            ]);
+                                            $result = $this -> con -> db -> execute_query('SELECT user_id FROM user WHERE username = ?', [$registerInfo['username']]);
+                                            $user_id = $result -> fetch_column();
+                                            setcookie('username', $registerInfo['username'], strtotime('NOW+60DAYS'));
+                                            setcookie('user_id', $user_id, strtotime('NOW+60DAYS'));
+                                            setcookie('passwd', $password, strtotime('NOW+60DAYS'));
+                                            setcookie('session', "Yes", strtotime('NOW+60DAYS'));
+                                            setcookie('home_timeline', 'default', strtotime('NOW+60DAYS'));
+                                            return 'Ok';
+                                        } else {
+                                            return 'Sorry, that email is already taken';
+                                        }
                                     } else {
-                                        return 'Sorry, that email is already taken';
+                                        return 'Sorry, that username is already taken.';
                                     }
                                 } else {
-                                    return 'Sorry, that username is already taken.';
+                                    return 'Password confirmation doesn\'t match';
                                 }
                             } else {
-                                return 'Password confirmation doesn\'t match';
+                                return 'The username  must be between 3 and 16 characters long.';
                             }
                         } else {
-                            return 'The username  must be between 3 and 16 characters long.';
+                            return 'Sorry, that username is reserved.';
                         }
                     } else {
                         return 'The username must only contain alphanumeric characters.';
