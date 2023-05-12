@@ -381,4 +381,22 @@ class Activity
         }
     }
 
+    /**
+     * @return array|null
+     * Devuelve los 5 animes|mangas que más aparezcan en las tablas `post_anime` y `post_manga`.
+     */
+    public function getMostPosted(): array|null
+    {
+        $mediums = ['anime', 'manga'];
+        foreach($mediums as $medium) {
+            if ($result = $this -> con -> db -> execute_query('select '.$medium.'_id, count(post_id) as posts from post_'.$medium.' group by '.$medium.'_id order by posts desc limit 3')) {
+                for ($i=0; $i < $result -> num_rows; $i++) { 
+                    $row = $result -> fetch_assoc();
+                    $mostPosted[$medium][$i]['title'] = $this -> listing -> getTitle($medium, $row[$medium.'_id']);
+                    $mostPosted[$medium][$i]['posts'] = $row['posts'];
+                }
+            }
+        }
+        return $mostPosted;
+    }
 }

@@ -62,6 +62,29 @@ section.home_user-info section.progress-wrapper div.box-body div.entry span:hove
     background-color: var(--box-title-light);
 }
 
+/* Estilos para la sección de Most posted  */
+section.most-posted_wrapper {
+    display: grid;
+    grid-gap: var(--gap);
+}
+
+section.most-posted_wrapper div div.box-body {
+    padding-left: 10px!important;
+    padding-right: 10px!important;
+}
+
+section.most-posted_wrapper div div.box-body div.entry {
+    padding: 2.5px 5px;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+section.most-posted_wrapper div div.box-body div.entry:hover {
+    background-color: var(--box-bg-hover);
+}
+
+/* Estilos para la sección de Latest reviews */
 section.home_user-info section.latest-reviews_wrapper div.box-title {
     display: flex;
     justify-content: space-between;

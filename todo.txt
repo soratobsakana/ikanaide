@@ -1,5 +1,5 @@
 230508-14
-[] Home pages
+[-] Home pages
     [X] Main home page.
         [X] Add a post timeline (following and global) if user is logged in.
         [X] Add watching animes and mangas, and make summing one episode to both possible.
@@ -7,7 +7,7 @@
         [X] Add bookmarking.
         [] Make profile editing available. (No picture or header yet)
         [] Support follow, post likes and replies notifications. Also PM ones.
-        [] Support post deletion.
+        [X] Support post deletion.
 
 230424-230507
     [-] Resume of work left in order to public the first version of the website:

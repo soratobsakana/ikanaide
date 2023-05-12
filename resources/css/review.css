@@ -110,10 +110,6 @@ div.review_entry-wrapper {
     grid-gap: var(--gap);
 }
 
-div.review_entry-wrapper div.box-title {
-    font-size: 22px;
-}
-
 div.review_entry-wrapper div.review_entry-content {
     padding: 20px!important;
     font-size: calc(var(--box-font-size) + 1px);

@@ -21,7 +21,8 @@ if (isset($_COOKIE['session']) && $User -> validateSession()) {
     }
     $watchingAnimes = $Home -> getWatchingAnimes($_COOKIE['user_id']);
     $readingMangas = $Home -> getReadingMangas($_COOKIE['user_id']);
-    $latestReviews = $Review -> getReviews();
+    $latestReviews = $Home -> getReviews();
+    $mostPosted = $Activity -> getMostPosted();
 
 } else {
     header('Location: /login');

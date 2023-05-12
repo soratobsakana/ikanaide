@@ -337,7 +337,7 @@ section.mediumhome_all-medium {
 div.mediumhome_all-medium_content {
     display: flex;
     gap: var(--gap);
-    overflow-x: auto;
+    flex-wrap: nowrap;
 
     box-sizing: border-box;
 }
@@ -347,6 +347,30 @@ div.mediumhome_all-medium_content div {
     background-repeat: no-repeat;
     background-position: center;
     height: 167px;
-    min-width: 108px;
+    width: 108px;
     border-radius: var(--border-radius);
+
+    position: relative;
+}
+
+div.mediumhome_all-medium_content div p {
+    text-align: center;
+    background-color: var(--box-title);
+    font-size: var(--box-font-size);
+    padding: 5px;
+    border-radius: 0 0 5px 5px;
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    
+    opacity: 0;
+    transition: var(--transition);
+
+    word-break: break-all;
+}
+
+div.mediumhome_all-medium_content div:hover p {
+    opacity: .9;
 }

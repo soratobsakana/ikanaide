@@ -193,6 +193,56 @@
             </div>
         </section>
 
+        <?php
+
+        if (isset($mostPosted)) {
+            ?>
+            <section class="most-posted_wrapper">
+            <?php
+
+            if (isset($mostPosted['anime'])) {
+                ?>
+                <div class="anime box-wrapper">
+                <div class="box-title"><h3>Most posted about anime</h3></div>
+                <div class="box-body">
+                <?php
+
+                foreach($mostPosted['anime'] as $entry) {
+                    ?><div class="entry">
+                        <h4><?=$entry['title']?></h4>
+                        <p class="low-opacity"><?=$entry['posts']?> posts</p>
+                    </div><?php
+                }
+
+                print '</div>';
+                print '</div>';
+            }
+
+            if (isset($mostPosted['manga'])) {
+                ?>
+                <div class="manga box-wrapper">
+                <div class="box-title"><h3>Most posted about manga</h3></div>
+                <div class="box-body">
+                <?php
+
+                foreach($mostPosted['manga'] as $entry) {
+                    ?><div class="entry">
+                        <h4><?=$entry['title']?></h4>
+                        <p class="low-opacity"><?=$entry['posts']?> posts</p>
+                    </div><?php
+                }
+
+                print '</div>';
+                print '</div>';
+            }
+
+            ?>
+            </section>
+            <?php
+        }
+
+        ?>
+
         <section class="latest-reviews_wrapper box-wrapper">
             <div class="box-title">
                 <h3>Latest Reviews</h3>
@@ -202,30 +252,25 @@
                 <?php
 
                 if (isset($latestReviews)) {
-                    $i = 0;
                     foreach($latestReviews as $latestReview) {
-                        ?>
-                        
-                        <a href="/review/<?=$latestReview['review_id']?>">
-                        <div class="entry">
-                            <div class="header">
-                                <img src="<?=$latestReview['header']?>" alt="">
-                            </div>
-                            <div class="info">
-                                <div class="user">
-                                    <p>A review of <?=$latestReview['entry']?> by <?=$latestReview['username']?>.</p>
-                                </div>
-                                <div class="title">"<?=$latestReview['title']?>"</div>
-                                
-                            </div>
+                    ?>
+                    
+                    <a href="/review/<?=$latestReview['review_id']?>">
+                    <div class="entry">
+                        <div class="header">
+                            <img src="<?=$latestReview['header']?>" alt="">
                         </div>
-                        </a>
+                        <div class="info">
+                            <div class="user">
+                                <p>A review of <?=$latestReview['entry']?> by <?=$latestReview['username']?>.</p>
+                            </div>
+                            <div class="title">"<?=$latestReview['title']?>"</div>
+                            
+                        </div>
+                    </div>
+                    </a>
 
-                        <?php
-                        $i++;
-                        if ($i > 3) {
-                            break;
-                        }
+                    <?php
                     }
                 } else {
                     print '<i>No reviews yet</i>';
