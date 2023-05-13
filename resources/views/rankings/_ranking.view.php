@@ -14,17 +14,21 @@
                     <div class="center-text"><?=$ranking[$i]['members']?></div>
                     <div class="add">
                         <a href="">
-                            <button type="button" class="ranking-button">add</button>
+                            <button type="button" class="ranking-button">delete</button>
                         </a>
                     </div>
                     <div class="fav">
                         <a href="">
                             <button type="button" class="ranking-button">
-                                <span class="material-icons-outlined">
-                                    favorite
-                                </span>
+                               unfavourite
                             </button>
                         </a>
+                    </div>
+                    <div class="options low-opacity link">
+                        <span class="material-icons-outlined">
+                            more_vert
+                        </span>
+
                     </div>
                 </div>
             

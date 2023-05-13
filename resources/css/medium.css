@@ -335,8 +335,9 @@ section.mediumhome_all-medium {
 }
 
 div.mediumhome_all-medium_content {
-    display: flex;
-    gap: var(--gap);
+    height: 180px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
     flex-wrap: nowrap;
 
     box-sizing: border-box;
@@ -346,7 +347,7 @@ div.mediumhome_all-medium_content div {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    height: 167px;
+    height: 100%;
     width: 108px;
     border-radius: var(--border-radius);
 
