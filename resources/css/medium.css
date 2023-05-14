@@ -335,9 +335,9 @@ section.mediumhome_all-medium {
 }
 
 div.mediumhome_all-medium_content {
-    height: 180px;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(8, 1fr);
+    grid-gap: var(--gap);
     flex-wrap: nowrap;
 
     box-sizing: border-box;
@@ -347,8 +347,7 @@ div.mediumhome_all-medium_content div {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    height: 100%;
-    width: 108px;
+    height: 160px;
     border-radius: var(--border-radius);
 
     position: relative;
@@ -357,19 +356,17 @@ div.mediumhome_all-medium_content div {
 div.mediumhome_all-medium_content div p {
     text-align: center;
     background-color: var(--box-title);
-    font-size: var(--box-font-size);
-    padding: 5px;
-    border-radius: 0 0 5px 5px;
+    font-size: 13px;
+    padding: 6px;
+    width: 100%;
 
     position: absolute;
-    left: 0;
-    right: 0;
     bottom: 0;
-    
+
     opacity: 0;
     transition: var(--transition);
 
-    word-break: break-all;
+    word-break: break-word;
 }
 
 div.mediumhome_all-medium_content div:hover p {

@@ -210,7 +210,7 @@
                 foreach($mostPosted['anime'] as $entry) {
                     ?><div class="entry">
                         <h4><?=$entry['title']?></h4>
-                        <p class="low-opacity"><?=$entry['posts']?> posts</p>
+                        <p class="low-opacity"><?=$entry['posts']?> <?=$entry['posts'] === 1 ? 'post' : 'posts'?></p>
                     </div><?php
                 }
 
@@ -228,7 +228,7 @@
                 foreach($mostPosted['manga'] as $entry) {
                     ?><div class="entry">
                         <h4><?=$entry['title']?></h4>
-                        <p class="low-opacity"><?=$entry['posts']?> posts</p>
+                        <p class="low-opacity"><?=$entry['posts']?> <?=$entry['posts'] === 1 ? 'post' : 'posts'?></p>
                     </div><?php
                 }
 

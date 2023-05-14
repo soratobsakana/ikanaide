@@ -1,6 +1,6 @@
 <div class="mediumhome">
     <section class="mediumhome_all-medium box-wrapper">
-        <div class="box-wrapper box-title">
+        <div class="box-title">
             <h3>All <?=ucfirst($medium)?></h3>
         </div>
         <div class="mediumhome_all-medium_content">

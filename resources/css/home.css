@@ -69,12 +69,12 @@ section.most-posted_wrapper {
 }
 
 section.most-posted_wrapper div div.box-body {
-    padding-left: 10px!important;
-    padding-right: 10px!important;
+    padding-left: 8px!important;
+    padding-right: 8px!important;
 }
 
 section.most-posted_wrapper div div.box-body div.entry {
-    padding: 2.5px 5px;
+    padding: 3px 7px;
     border-radius: var(--border-radius);
     transition: var(--transition);
     cursor: pointer;
