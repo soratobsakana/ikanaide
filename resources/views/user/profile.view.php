@@ -10,7 +10,7 @@
                      <section class="profile_left-column_buttons">
                         <form action="" method="post">
                             <button type="button" id="user-post_button" class="list-submit submit-button__colorful box">Make a post</button>
-                            <input class="list-submit box submit-button__colorful" type="submit" value="Edit profile">
+                            <button type="button" id="user_edit-profile_btn" class="list-submit submit-button__colorful box">Edit profile</button>
                         </form>
                      </section>
                     <?php
@@ -180,7 +180,7 @@
     </div>
 </div>
 
-<section id="user_post-wrapper">
+<section class="modal" id="user_post-wrapper">
     <div class="box-wrapper">
         <div class="box-title"><h3>Make a post</h3></div>
         <div class="box-body">
@@ -207,6 +207,51 @@
         </div>
     </div>
 </section>
+
+<section id="user_edit-profile" class="modal">
+    <div class="box-wrapper">
+        <div class="box-title">
+            <h3>Edit profile</h3>
+        </div>
+        <div class="box-body">
+            <form action="/ep" method="post">
+                <label for="edit-profile_bio">About me</label>
+                <textarea name="edit-profile_bio" id="edit-profile_bio" autocomplete="off" required></textarea>
+                <label for="on-medium">Is this post about any anime or manga?</label>
+                <select name="on-medium" id="on-medium">
+                    <option disabled selected>Select an anime or manga</option>
+                    <?php
+
+                    foreach ($select as $option) {
+                        ?><option value="<?=$option?>"><?=$option?></option><?php
+                    }
+
+                    ?>
+                </select>
+                <hr id="user_post_fields-separator">
+                <div class="user_post_fields-buttons">
+                    <button type="button" id="user_edit-profile_cancel" class="submit-button__colorful box">Cancel</button>
+                    <input class="submit-button__colorful box" type="submit" name='post' value="Post">
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script !src="">
+    let editBtn = document.getElementById('user_edit-profile_btn');
+    let editModal = document.getElementById('user_edit-profile');
+    let editCancelBtn = document.getElementById('user_edit-profile_cancel');
+
+    editBtn.addEventListener('click', function() {
+        editModal.style.display = "block";
+        document.getElementById("edit-profile_bio").focus();
+    })
+
+    editCancelBtn.addEventListener('click', function() {
+        editModal.style.display = "none";
+    })
+</script>
 
 <script !src="">
     let modal = document.getElementById('user_post-wrapper');

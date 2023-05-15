@@ -255,7 +255,7 @@
     </section>
 </div>
 
-<section id="querypage_list-edit">
+<section class="modal" id="querypage_list-edit">
     <div class="querypage_list-edit_wrapper box-wrapper">
         <div class="querypage_list-edit_form">
             <form action="/add" method="POST">

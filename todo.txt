@@ -5,7 +5,7 @@
         [X] Add watching animes and mangas, and make summing one episode to both possible.
     [-] User stuff
         [X] Add bookmarking.
-        [] Make profile editing available. (No picture or header yet)
+        [] Make profile editing available. (No picture or header yet).
         [] Support follow, post likes and replies notifications. Also PM ones.
         [X] Support post deletion.
 
