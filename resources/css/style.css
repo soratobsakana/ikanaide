@@ -79,7 +79,7 @@ select, option, input[type='submit'], button {
     cursor: pointer;
 }
 
-label {
+label, .label {
     opacity: calc(var(--font_low-opacity) - .2);
 }
 
@@ -166,4 +166,10 @@ div.container {
     background-color: rgba(0, 0, 0, .40);
 
     display: none;
+}
+
+.two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: calc(var(--gap) + 5px);
 }

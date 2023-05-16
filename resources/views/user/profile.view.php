@@ -44,7 +44,7 @@
             </div>
             <div class="box-body">
                 <ul class="two-column-list">
-                    <li><span class="ul_first-column">posts</span><span><?=is_null($userPosts) ? $userPostsCount = 0 : $userPostsCount = count($userPosts['posts']);?></span></li>
+                    <li><span class="ul_first-column">posts</span><span><?=is_null($postCount) ? $userPostsCount = 0 : $userPostsCount = $postCount;?></span></li>
                     <li><span class="ul_first-column">submissions</span><span>0</span></li>
                     <li><span class="ul_first-column">threads</span><span>0</span></li>
                     <li><span class="ul_first-column">following</span><span>0</span></li>
@@ -187,7 +187,7 @@
             <form action="/post" method="post">
                 <label for="post-content">This post will appear in your profile and your followers time line.</label>
                 <textarea name="post-content" id="post-content" autocomplete="off" required></textarea>
-                <label for="on-medium">Is this post about any anime or manga?</label>
+                <p class="label">Is this post about any anime or manga?</p>
                 <select name="on-medium" id="on-medium">
                     <option disabled selected>Select an anime or manga</option>
                     <?php
@@ -216,22 +216,38 @@
         <div class="box-body">
             <form action="/ep" method="post">
                 <label for="edit-profile_bio">About me</label>
-                <textarea name="edit-profile_bio" id="edit-profile_bio" autocomplete="off" required></textarea>
-                <label for="on-medium">Is this post about any anime or manga?</label>
-                <select name="on-medium" id="on-medium">
-                    <option disabled selected>Select an anime or manga</option>
-                    <?php
-
-                    foreach ($select as $option) {
-                        ?><option value="<?=$option?>"><?=$option?></option><?php
-                    }
-
-                    ?>
-                </select>
-                <hr id="user_post_fields-separator">
-                <div class="user_post_fields-buttons">
+                <textarea name="edit-profile_bio" id="edit-profile_bio" autocomplete="off"><?=$userInfo['biography']?></textarea>
+                <div class="two-column">
+                    <div>
+                        <label for="edit-profile_country">Country</label>
+                        <input value="<?=$userInfo['country']?>" type="text" name="edit-profile_country" id="edit-profile_country" autocomplete="off">
+                    </div>
+                    <div>
+                        <label for="edit-profile_birthday">Birthday</label>
+                        <input value="<?=$userInfo['born']?>" type="date" name="edit-profile_birthday" id="edit-profile_birthday" autocomplete="off">
+                    </div>
+                    <div>
+                        <label for="edit-profile_twitter">Twitter</label>
+                        <input value="<?=$userInfo['twitter']?>" type="text" name="edit-profile_twitter" placeholder="Twitter username" id="edit-profile_twitter" autocomplete="off">
+                    </div>
+                    <div>
+                        <label for="edit-profile_github">GitHub</label>
+                        <input value="<?=$userInfo['github']?>" type="text" name="edit-profile_github" placeholder="GitHub username"id="edit-profile_github" autocomplete="off">
+                    </div>
+                    <div>
+                        <label for="edit-profile_discord">Discord</label>
+                        <input value="<?=$userInfo['discord']?>" type="text" name="edit-profile_discord" placeholder="example#9999" id="edit-profile_discord" autocomplete="off">
+                    </div>
+                    <div>
+                        <label for="edit-profile_website">Website</label>
+                        <input value="<?=$userInfo['website']?>" type="text" name="edit-profile_website" placeholder="Complete URL" id="edit-profile_website" autocomplete="off">
+                    </div>
+                </div>
+                
+                <hr id="edit-profile_fields-separator">
+                <div class="edit_profile-fields_buttons">
                     <button type="button" id="user_edit-profile_cancel" class="submit-button__colorful box">Cancel</button>
-                    <input class="submit-button__colorful box" type="submit" name='post' value="Post">
+                    <input class="submit-button__colorful box" type="submit" name='edit-profile_submit' value="Submit">
                 </div>
             </form>
         </div>

@@ -1,16 +1,26 @@
 <section class="profile_user-overview">
-    <?php
-
-    if (!empty($userInfo['biography'])) {
-        ?>
+    
 
         <section class="profile_user-overview_bio box-wrapper">
             <div class="box-title">
                 <h3>About me</h3>
             </div>
+            <?php
+
+            if (!empty($userInfo['biography'])) {
+            ?>
             <div class="box-body">
                 <p><?=$userInfo['biography']?></p>
             </div>
+            <?php } ?>
+            <div class="box-body socials">
+                    <ul>
+                        <li><?=$userInfo['twitter']?></li>
+                        <li><?=$userInfo['github']?></li>
+                        <li><?=$userInfo['discord']?></li>
+                        <li><?=$userInfo['website']?></li>
+                    </ul>
+                </div>
         </section>
 
         <section class="profile_user-overview_favorites">
@@ -65,7 +75,6 @@
         </section>
 
         <?php
-    }
 
     if (isset($userPosts)) {
     ?>

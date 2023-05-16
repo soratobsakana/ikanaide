@@ -60,6 +60,7 @@ $routes = array(
     '/anime' => 'controllers/medium.php',
     '/manga' => 'controllers/medium.php',
     '/vn' => 'controllers/medium.php',
+    '/edit' => 'controllers/edit.php',
 
     '/rankings' => 'controllers/rankings.php',
     '/rankings/anime' => 'controllers/rankings.php',
@@ -77,7 +78,7 @@ $routes = array(
     '/contact' => 'resources/views/contact.view.php',
     '/support' => 'resources/views/support.view.php',
 
-    '/edit' => 'controllers/edit.php',
+    '/ep' => 'controllers/editProfile.php',
     '/sum' => 'controllers/sum.php',
     '/post' => 'controllers/post.php',
     '/reply' => 'controllers/activity.php',

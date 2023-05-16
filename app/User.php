@@ -28,7 +28,7 @@ class User
         }
 
         // Estos nombres de usuario no pueden usarse ya que se solaparian con rutas de la web.
-        $reservedUsernames = ['home', 'anime', 'manga', 'vn', 'rankings', 'reviews', 'forum', 'terms', 'privacy', 'contact', 'support', 'about', 'edit', 'sum', 'post', 'reply', 'like', 'bookmark', 'delete', 'follow', 'timeline', 'submit', 'login', 'register', 'logout', 'home', '404'];
+        $reservedUsernames = ['home', 'anime', 'manga', 'vn', 'rankings', 'profile', 'reviews', 'forum', 'terms', 'privacy', 'contact', 'support', 'about', 'edit', 'sum', 'post', 'reply', 'like', 'bookmark', 'delete', 'follow', 'timeline', 'submit', 'login', 'register', 'logout', 'home', '404'];
 
         // Inspección de los datos introducidos.
         if (isset($registerInfo['username'], $registerInfo['email'], $registerInfo['password'], $registerInfo['confirm'])) {
@@ -194,7 +194,7 @@ class User
 
     public function getInfo(int $user_id): array
     {
-        $result = $this -> con -> db -> execute_query('SELECT `user_id`, `username`, `joined_at`, `country`, `biography`, `pfp`, `header`, `github`, `twitter` FROM user WHERE user_id = ?', [$user_id]);
+        $result = $this -> con -> db -> execute_query('SELECT `user_id`, `username`, `joined_at`, `pfp`, `header`, `biography`, `born`, `country`, `twitter`, `github`, `discord`, `website` FROM user WHERE user_id = ?', [$user_id]);
         return $result -> fetch_assoc();
     }
 
@@ -363,6 +363,15 @@ class User
                             exit(header('Location: /'.$medium.'/' . $entry));
                         } else {
                             $entryInfo[$key] = $value ?? null;
+                        }
+                        break;
+                    case 'start-date':
+                    case 'end-date':
+                        $date = date_parse($value);
+                        if (checkdate($date['month'], $date['day'], $date['year'])) {
+                            $entryInfo[$key] = $value;
+                        } else {
+                            $entryInfo[$key] = null;
                         }
                         break;
                     case 'rewatches':
@@ -726,6 +735,30 @@ class User
             return $postsInfo;
         } else {
             return null;
+        }
+    }
+
+    public function getPostCount(int $userId): int|null
+    {
+        return $this -> con -> db -> execute_query('SELECT count(post_id) FROM post WHERE user_id = ?', [$userId]) -> fetch_column();
+        
+    }
+
+    public function editProfile(array $data, int $userId): bool
+    {
+        $data['user_id'] = $userId;
+        if ($this -> con -> db -> execute_query('UPDATE user SET 
+            `biography` = ?,
+            `country` = ?,
+            `born` = ?,
+            `twitter` = ?,
+            `github` = ?,
+            `discord` = ?,
+            `website` = ? WHERE user_id = ?', [$data['biography'], $data['country'], $data['birthday'], $data['twitter'], $data['github'], $data['discord'], $data['website'], $data['user_id']])) {
+            
+            return true;
+        } else {
+            return false;
         }
     }
 

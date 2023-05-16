@@ -4,7 +4,7 @@ nothing here is final, I'm making this website to learn to code, so stuff that's
 
 because of this, I don't really expect actual contributions to the repo; although, if you want to give me advice, I'd be very pleased to listen to you
 
-if you wish to contact me, please make it through discord: nabuna#0001
+if you wish to contact me, please make it through discord: nabuna#1775
 
 this project is actually part of what I'll be presenting as the final project needed to finish up my studies, so code annotations will be done in spanish
 

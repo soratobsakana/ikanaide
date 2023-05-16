@@ -108,6 +108,17 @@ section.profile_user-overview_bio {
 section.profile_user-overview_bio div.box-body {
     max-height: 350px!important;
     overflow-y: auto;
+    word-break: break-all;
+}
+
+section.profile_user-overview_bio div.socials {
+    padding: 7px 15px!important;
+    background-color: var(--box-bg);
+}
+
+section.profile_user-overview_bio div.socials ul {
+    display: flex;
+    gap: var(--gap);
 }
 
 section.profile_user-overview_stats {
@@ -274,7 +285,11 @@ section#user_post-wrapper div.box-wrapper select {
     transition: var(--transition);
 }
 
-hr#user_post_fields-separator {
+section#user_post-wrapper div.box-wrapper select:hover {
+    background-color: var(--box-title-light)!important;
+}
+
+hr#user_post_fields-separator, hr#edit-profile_fields-separator {
     margin-top: 10px;
     height: 1px;
     border: 0px!important;
@@ -282,6 +297,40 @@ hr#user_post_fields-separator {
 }
 
 /* Estilos para la sección de editar perfil */
-section.user_edit-profile {
+section#user_edit-profile div.box-wrapper {
+    width: 600px;
+    border-radius: 10px;
+    overflow: hidden;
 
+    position: fixed;
+    top: 15vh;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0px 33px rgba(0,0,0,.50);
+}
+
+section#user_edit-profile div.box-wrapper input, section#user_edit-profile div.box-wrapper textarea {
+    background-color: var(--box-title)!important;
+    border-radius: var(--border-radius);
+    padding: 10px;
+    transition: var(--transition);
+}
+
+section#user_edit-profile div.box-wrapper input:focus-within, section#user_edit-profile div.box-wrapper textarea:focus-within {
+    background-color: var(--box-title-light)!important;
+}
+
+section#user_edit-profile textarea {
+    min-height: 150px;
+    margin-bottom: 5px;
+}
+
+section#user_edit-profile div.box-wrapper form {
+    display: grid;
+    grid-gap: var(--gap);
+}
+
+section#user_edit-profile div.box-wrapper form div.two-column div {
+    display: grid;
+    grid-gap: var(--gap);
 }
