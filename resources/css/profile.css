@@ -109,16 +109,49 @@ section.profile_user-overview_bio div.box-body {
     max-height: 350px!important;
     overflow-y: auto;
     word-break: break-all;
+    padding: 15px;
 }
 
 section.profile_user-overview_bio div.socials {
-    padding: 7px 15px!important;
-    background-color: var(--box-bg);
+    padding: 5px 15px!important;
+    background-color: var(--box-bg-hover);
+    border-top: 1px solid #3f3f50da;
 }
 
 section.profile_user-overview_bio div.socials ul {
     display: flex;
-    gap: var(--gap);
+    gap: 15px;
+}
+
+section.profile_user-overview_bio div.socials ul li {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+section.profile_user-overview_bio div.socials ul li span {
+    display: flex;
+    align-items: center;
+}
+
+section.profile_user-overview_bio div.socials ul li a {
+    transition: var(--transition);
+}
+
+section.profile_user-overview_bio div.socials ul li a:hover {
+    opacity: .7;
+}
+
+section.profile_user-overview_bio div.socials ul li span svg {
+    height: 15px;
+    fill: white;
+    transition: var(--transition);
+}
+
+section.profile_user-overview_bio div.socials ul li span span {
+    font-size: 20px;
+    transform: rotate(-45deg);
+    transition: var(--transition);
 }
 
 section.profile_user-overview_stats {
@@ -309,6 +342,25 @@ section#user_edit-profile div.box-wrapper {
     box-shadow: 0 0px 33px rgba(0,0,0,.50);
 }
 
+section#user_edit-profile div.box-wrapper div.box-body {
+    padding: 20px;
+}
+
+section#user_edit-profile div.box-wrapper div.edit-profile_files {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: var(--gap);
+}
+
+section#user_edit-profile div.box-wrapper div.edit-profile_files div {
+    display: grid;
+    grid-gap: var(--gap)
+}
+
+section#user_edit-profile div.box-wrapper div.edit-profile_files input[type=file] {
+    margin-bottom: 5px;
+}
+
 section#user_edit-profile div.box-wrapper input, section#user_edit-profile div.box-wrapper textarea {
     background-color: var(--box-title)!important;
     border-radius: var(--border-radius);
@@ -333,4 +385,10 @@ section#user_edit-profile div.box-wrapper form {
 section#user_edit-profile div.box-wrapper form div.two-column div {
     display: grid;
     grid-gap: var(--gap);
+}
+
+div.edit_profile-fields_buttons {
+    display: flex;
+    gap: var(--gap);
+    justify-content: space-between;
 }

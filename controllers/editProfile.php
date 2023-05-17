@@ -12,6 +12,38 @@ if (isset($_POST['edit-profile_submit'])) {
         }
     }
 
+    $filesFields = ['edit-profile_pfp', 'edit-profile_header'];
+    foreach ($filesFields as $filesField) {
+        if (!in_array($filesField, $filesFields)) {
+            header('Location: /404');
+        }
+    }
+
+    foreach ($_FILES as $fileInput) {
+        case 'edit-profile_pfp': 
+            $file[]['path'] = $fileInput['tmp_name'];
+            if ($file[]['path'] !== '') {
+                $file[]['size'] = filesize($file['path']);
+                $file[]['info'] = finfo_open(FILEINFO_MIME_TYPE);
+                $file[]['type'] = finfo_file($file['info'], $file['path']);
+            }
+            pre($file);
+            if (!$file[]['size'] === 0) {
+                if (!$filesize > 3145728) {
+                    $allowedExtensions = [];
+                }
+            }
+            break;
+        case 'edit-profile_header':
+            $file['path'] = $_FILES['edit-profile_header']['tmp_name'];
+            if ($file['path' !== '']) {
+                $file['size'] = filesize($file['path']);
+                $file['info'] = finfo_open(FILEINFO_MIME_TYPE);
+                $file['type'] = finfo_file($file['info'], $file['path']);
+            }
+            break;
+    }
+    
     foreach ($_POST as $key => $value) {
         if ($key !== 'edit-profile_submit') {
             switch ($key) {
@@ -65,6 +97,8 @@ if (isset($_POST['edit-profile_submit'])) {
                     } else {
                         $profileEdition['website'] = null;
                     }
+                    break;
+                default:
                     break;
             }
         }

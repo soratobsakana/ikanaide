@@ -214,7 +214,17 @@
             <h3>Edit profile</h3>
         </div>
         <div class="box-body">
-            <form action="/ep" method="post">
+            <form action="/ep" method="post" enctype="multipart/form-data">
+                <div class="edit-profile_files">
+                    <div>
+                        <label for="edit-profile_pfp" class="pfp">Change your avatar</label>
+                        <input type="file" name="edit-profile_pfp" id="edit-profile_pfp">
+                    </div>
+                    <div>
+                        <label for="edit-profile_header" class="header">Change your header</label>
+                        <input type="file" name="edit-profile_header" id="edit-profile_header">
+                    </div>
+                </div>
                 <label for="edit-profile_bio">About me</label>
                 <textarea name="edit-profile_bio" id="edit-profile_bio" autocomplete="off"><?=$userInfo['biography']?></textarea>
                 <div class="two-column">

@@ -94,6 +94,13 @@ textarea {
     background-color: var(--box-bg)!important;
 }
 
+hr {
+    margin-top: 10px;
+    height: 1px;
+    border: 0px!important;
+    background-color: var(--box-title);
+}
+
 ::-webkit-scrollbar {
     width: 10px;
 }
