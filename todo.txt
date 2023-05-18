@@ -1,13 +1,27 @@
+230519-END
+    [] Finish up picture and header editing for users.
+    [] Allow for filtered post search on trending animes and mangas.
+    [] User roles table. Only work on moderator one for now, as it will be needed for actions around submissions.
+    [] A more appealing entry submission system.
+        [] Allow for image and header uploading.
+        [] Change the front-end for the form.
+        [] Make the entry visible for moderators on a /submissions page or something like that.
+        [] Make moderators be able to accept submissions. After accepted, the information of the submission will be added to the `anime` table.
+    [] Allow for review upvotes/likes.
+    [] Allow for user report system. Table columns will be `reporting_user`, `reported_user`, `reason` and `date``.
+    [] A simple search engine that works on matchs through a SQL query. A more complex one will be worked on in the future.
+    [] First making of a forum. It will be quite simple for now. It might even be removed in the future if it ends up not being very useful.
+
 230508-14
-[-] Home pages
-    [X] Main home page.
-        [X] Add a post timeline (following and global) if user is logged in.
-        [X] Add watching animes and mangas, and make summing one episode to both possible.
-    [-] User stuff
-        [X] Add bookmarking.
-        [] Make profile editing available. (No picture or header yet).
-        [] Support follow, post likes and replies notifications. Also PM ones.
-        [X] Support post deletion.
+    [-] Home pages
+        [X] Main home page.
+            [X] Add a post timeline (following and global) if user is logged in.
+            [X] Add watching animes and mangas, and make summing one episode to both possible.
+        [-] User stuff
+            [X] Add bookmarking.
+            [X] Make profile editing available. (No picture or header yet).
+            [] Support follow, post likes and replies notifications. Also PM ones.
+            [X] Support post deletion.
 
 230424-230507
     [-] Resume of work left in order to public the first version of the website:

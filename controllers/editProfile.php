@@ -19,29 +19,29 @@ if (isset($_POST['edit-profile_submit'])) {
         }
     }
 
-    foreach ($_FILES as $fileInput) {
-        case 'edit-profile_pfp': 
-            $file[]['path'] = $fileInput['tmp_name'];
-            if ($file[]['path'] !== '') {
-                $file[]['size'] = filesize($file['path']);
-                $file[]['info'] = finfo_open(FILEINFO_MIME_TYPE);
-                $file[]['type'] = finfo_file($file['info'], $file['path']);
-            }
-            pre($file);
-            if (!$file[]['size'] === 0) {
-                if (!$filesize > 3145728) {
-                    $allowedExtensions = [];
+    foreach ($_FILES as $fileInput => $values) {
+
+        switch ($fileInput) {
+            case 'edit-profile_pfp':
+                $file['pfp']['path'] = $values['tmp_name'];
+                if ($file['pfp']['path'] !== '') {
+                    $file['pfp']['size'] = filesize($file['path']);
+                    $file['pfp']['info'] = finfo_open(FILEINFO_MIME_TYPE);
+                    $file['pfp']['type'] = finfo_file($file['info'], $file['path']);
                 }
-            }
-            break;
-        case 'edit-profile_header':
-            $file['path'] = $_FILES['edit-profile_header']['tmp_name'];
-            if ($file['path' !== '']) {
-                $file['size'] = filesize($file['path']);
-                $file['info'] = finfo_open(FILEINFO_MIME_TYPE);
-                $file['type'] = finfo_file($file['info'], $file['path']);
-            }
-            break;
+                if (!($file['pfp']['size'] === 0) && !($filesize > 3145728)) {
+                   $allowedExtensions = [];
+                }
+                break;
+            case 'edit-profile_header':
+                $file['path'] = $_FILES['edit-profile_header']['tmp_name'];
+                if ($file['path' !== '']) {
+                    $file['size'] = filesize($file['path']);
+                    $file['info'] = finfo_open(FILEINFO_MIME_TYPE);
+                    $file['type'] = finfo_file($file['info'], $file['path']);
+                }
+                break;
+        }
     }
     
     foreach ($_POST as $key => $value) {
