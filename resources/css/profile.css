@@ -112,8 +112,7 @@ section.profile_user-overview_bio {
 section.profile_user-overview_bio div.box-body {
     max-height: 350px!important;
     overflow-y: auto;
-    word-break: break-all;
-    padding: 15px;
+    padding: 15px;   
 }
 
 section.profile_user-overview_bio div.socials {
@@ -125,6 +124,7 @@ section.profile_user-overview_bio div.socials {
 section.profile_user-overview_bio div.socials ul {
     display: flex;
     gap: 15px;
+    overflow: hidden;
 }
 
 section.profile_user-overview_bio div.socials ul li {
