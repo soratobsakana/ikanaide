@@ -5,7 +5,6 @@ div.activity_single-page_wrapper {
     display: flex;
     flex-direction: column;
     gap: var(--gap);
-    min-height: 100vh;
 
     overflow: hidden;
 }

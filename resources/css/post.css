@@ -142,7 +142,7 @@ section.posts-wrapper div.post-entry div.social div.activity-page_icon {
     justify-content: center;
 }
 
-section.posts-wrapper div.post-entry div.social div.social-icon span {    
+section.posts-wrapper div.post-entry div.social div.social-icon span {
     font-size: 18px;
     font-weight: bold;
     opacity: var(--font_low-opacity);

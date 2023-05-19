@@ -1,6 +1,8 @@
 230519-END
     [X] Finish up picture and header editing for users.
-    [] Allow for filtered post search on trending animes and mangas.
+    [X] Allow for filtered post search on trending animes and mangas.
+    [-] A simple search engine that works on matchs through a SQL query. A more complex one will be worked on in the future.
+        Mixed them both. Seems to work alright for posts only. Rest of data is left to do.
     [X] User roles table. Only work on moderator one for now, as it will be needed for actions around submissions.
     [] A more appealing entry submission system.
         [] Allow for image and header uploading.
@@ -10,8 +12,6 @@
     [] Allow for review upvotes/likes.
     [] Make ranking buttons work.
     [] Allow for user report system. Table columns will be `reporting_user`, `reported_user`, `reason` and `date``.
-    [] A simple search engine that works on matchs through a SQL query. A more complex one will be worked on in the future.
-    [] First making of a forum. It will be quite simple for now. It might even be removed in the future if it ends up not being very useful.
 
 230508-14
     [-] Home pages

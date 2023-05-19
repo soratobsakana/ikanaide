@@ -76,6 +76,16 @@ div.inner-header div.header-user ul.header-user-ul {
     gap: 10px;
 }
 
+div.inner-header div.header-user ul.header-user-ul a {
+    display: flex;
+    align-items: center;
+}
+div.inner-header div.header-user ul.header-user-ul a span {
+    margin-top: 2px;
+    font-size : 20px;
+    transition: var(--transition);
+}
+
 div.inner-header div.header-user ul.header-user-ul a li img {
     max-height: 25px;
     border-radius: var(--border-radius);

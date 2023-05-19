@@ -15,7 +15,7 @@ class Listing
     // Comprueba si existe mediante el título y devuelve el ID.
     public function exists(string $medium, string $entry): int|bool
     {
-        $result = $this -> con -> db -> execute_query('SELECT `'.$medium.'_id` FROM '.$medium.' WHERE title= ?', [$entry]);
+        $result = $this -> con -> db -> execute_query('SELECT `'.$medium.'_id` FROM '.$medium.' WHERE title = ?', [$entry]);
         if ($result -> num_rows === 1) {
             return $result -> fetch_column();
         } else {

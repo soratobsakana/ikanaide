@@ -208,10 +208,11 @@
                 <?php
 
                 foreach($mostPosted['anime'] as $entry) {
-                    ?><div class="entry">
+
+                    ?><a href="/search?medium=anime&id=<?=$entry['anime_id']?>"><div class="entry">
                         <h4><?=$entry['title']?></h4>
                         <p class="low-opacity"><?=$entry['posts']?> <?=$entry['posts'] === 1 ? 'post' : 'posts'?></p>
-                    </div><?php
+                    </div></a><?php
                 }
 
                 print '</div>';
@@ -226,10 +227,10 @@
                 <?php
 
                 foreach($mostPosted['manga'] as $entry) {
-                    ?><div class="entry">
+                    ?><a href="/search?medium=manga&id=<?=$entry['manga_id']?>"><div class="entry">
                         <h4><?=$entry['title']?></h4>
                         <p class="low-opacity"><?=$entry['posts']?> <?=$entry['posts'] === 1 ? 'post' : 'posts'?></p>
-                    </div><?php
+                    </div></a><?php
                 }
 
                 print '</div>';

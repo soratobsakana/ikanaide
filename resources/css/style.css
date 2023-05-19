@@ -180,3 +180,9 @@ div.container {
     grid-template-columns: 1fr 1fr;
     grid-gap: calc(var(--gap) + 5px);
 }
+
+.box-title_two-column {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

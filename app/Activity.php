@@ -393,10 +393,25 @@ class Activity
                 for ($i=0; $i < $result -> num_rows; $i++) { 
                     $row = $result -> fetch_assoc();
                     $mostPosted[$medium][$i]['title'] = $this -> listing -> getTitle($medium, $row[$medium.'_id']);
+                    $mostPosted[$medium][$i][$medium.'_id'] = $row[$medium.'_id'];
                     $mostPosted[$medium][$i]['posts'] = $row['posts'];
                 }
             }
         }
         return $mostPosted;
+    }
+
+    public function getPostRelationCount(string $medium, int $medium_id): int|null
+    {
+        if ($this -> listing -> existsWithId($medium, $medium_id)) {
+            $result = $this -> con -> db -> execute_query('SELECT count(post_id) as post_count FROM post_'.$medium.' WHERE '.$medium.'_id = ?', [$medium_id]) -> fetch_column();
+            if ($result >= 0) {
+                return $result;
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
     }
 }

@@ -4,7 +4,7 @@
         <ul class="header-links">
             <?php
             $headerGuide = explode('/', $page);
-                $nav = ['home', 'anime', 'manga', 'rankings', 'forum'];
+                $nav = ['home', 'anime', 'manga', 'rankings', 'search'];
                 for ($i=0; $i < count($nav); $i++) {
                     // $page comes from /index.php (it stores the current URI).
                     if ($nav[$i] === $headerGuide[1]) {
