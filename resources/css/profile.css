@@ -22,6 +22,10 @@ div.profile_right-column {
 
 /******** Estilos de cada sección. ********/
 /* Estilos para la columna izquierda */
+div.profile_left-column img {
+    object-fit: cover;
+    max-height: 223px;
+}
 section.profile_left-column-username {
     display: flex;
     align-items: center;

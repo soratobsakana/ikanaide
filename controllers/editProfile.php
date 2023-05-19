@@ -20,27 +20,62 @@ if (isset($_POST['edit-profile_submit'])) {
     }
 
     foreach ($_FILES as $fileInput => $values) {
+        // Extracción de la información de las imágenes
+        $file['path'] = $values['tmp_name'];
 
-        switch ($fileInput) {
-            case 'edit-profile_pfp':
-                $file['pfp']['path'] = $values['tmp_name'];
-                if ($file['pfp']['path'] !== '') {
-                    $file['pfp']['size'] = filesize($file['path']);
-                    $file['pfp']['info'] = finfo_open(FILEINFO_MIME_TYPE);
-                    $file['pfp']['type'] = finfo_file($file['info'], $file['path']);
+        // Si no se ha subido ningún archivo, $file['path'] contendrá una string vacía.
+        if ($file['path'] !== '') {
+            $file['size'] = filesize($file['path']);
+            $file['info'] = finfo_open(FILEINFO_MIME_TYPE);
+            $file['type'] = finfo_file($file['info'], $file['path']);
+
+            // Validación de la información de las imagenes
+            if (!($file['size'] <= 0 || $file['size'] > 3145728)) {
+                $allowedMIMES = [
+                    'image/png' => 'png',
+                    'image/jpeg' => 'jpg',
+                    'image/webp' => 'webp'
+                ];
+    
+                // Comprobar que el archivo es una imagen mediante la extensión del mismo.
+                if (in_array($file['type'], array_keys($allowedMIMES))) {
+                    $extension = $allowedMIMES[$file['type']];
                 }
-                if (!($file['pfp']['size'] === 0) && !($filesize > 3145728)) {
-                   $allowedExtensions = [];
-                }
-                break;
-            case 'edit-profile_header':
-                $file['path'] = $_FILES['edit-profile_header']['tmp_name'];
-                if ($file['path' !== '']) {
-                    $file['size'] = filesize($file['path']);
-                    $file['info'] = finfo_open(FILEINFO_MIME_TYPE);
-                    $file['type'] = finfo_file($file['info'], $file['path']);
-                }
-                break;
+            }
+    
+            // Asignación del nombre del archivo y la ruta absoluta donde guardar el archivo. DIRECTORY_SEPARATOR utiliza "/" o "\" dependiendo del SO en el que se esté ejecutando este archivo.
+            // DIR proviene de /index.php e indica la ruta absoluta de la raiz de esta página web.
+            switch ($fileInput) {
+                case 'edit-profile_pfp':
+                    $targetDirectory = DIR . DIRECTORY_SEPARATOR . "storage" . DIRECTORY_SEPARATOR . "users" . DIRECTORY_SEPARATOR . "pfp";
+                    $filename = "pfp_".uniqid();
+                    $newFilepath = $targetDirectory . DIRECTORY_SEPARATOR . $filename . "." . $extension;
+
+                    // $sqlFilepath será el valor introducido en la base de datos.
+                    $sqlFilepath = '/storage/users/pfp/' . $filename . "." . $extension;
+
+                    $currentImageType = 'pfp';
+                    break;
+                case 'edit-profile_header':
+                    $targetDirectory = DIR . DIRECTORY_SEPARATOR . "storage" . DIRECTORY_SEPARATOR . "users" . DIRECTORY_SEPARATOR . "header";
+                    $filename = "pfp_".uniqid();
+                    $newFilepath = $targetDirectory . DIRECTORY_SEPARATOR . $filename . "." . $extension;
+
+                    // $sqlFilepath será el valor introducido en la base de datos.
+                    $sqlFilepath = '/storage/users/header/' . $filename . "." . $extension;
+                    
+                    $currentImageType = 'header';
+                    break;
+            }
+    
+            // Copio el archivo desde la ruta temporal hacia la ruta final. Si funciona, lo elimino de dicha ruta temporal y asigno $sqlFilepath al array que hace de parámetro en User::editProfile().
+            if (!copy($file['path'], $newFilepath)) {
+                header('Location: /404');
+            } else {
+                // Elimino el archivo temporal mediante unlink().
+                unlink($file['path']);
+                $profileEdition[$currentImageType] = $sqlFilepath;
+            }
         }
     }
     

@@ -740,13 +740,57 @@ class User
 
     public function getPostCount(int $userId): int|null
     {
-        return $this -> con -> db -> execute_query('SELECT count(post_id) FROM post WHERE user_id = ?', [$userId]) -> fetch_column();
-        
+        return $this -> con -> db -> execute_query('SELECT count(post_id) FROM post WHERE user_id = ?', [$userId]) -> fetch_column();   
+    }
+
+    /**
+     * @return bool
+     * @param string $type
+     * @param int $userId
+     * Este método comprueba que la ruta de un usuario en la DB corresponde a un archivo existente en el sistema de archivos.
+     * Si esto ocurre lo elimina para, automáticamente, reemplazarlo mediante editProfile(). Esto sirve para no almacenar archivos no utilizados.
+     */
+    public function deleteImg(string $type, int $userId) {
+        $currentImg = $this -> con -> db -> execute_query('SELECT '.$type.' FROM user WHERE user_id = ?', [$userId]) -> fetch_column();
+        if (is_writable(DIR  . $currentImg)) {
+            if (unlink(DIR . $currentImg)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
     }
 
     public function editProfile(array $data, int $userId): bool
-    {
+    {   
         $data['user_id'] = $userId;
+
+        if (isset($data['pfp'])) {
+            if ($this -> deleteImg('pfp', $data['user_id'])) {
+                if ($this -> con -> db -> execute_query('UPDATE user SET pfp = ?', [$data['pfp']])) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+        
+        if (isset($data['header'])) {
+            if ($this -> deleteImg('header', $data['user_id'])) {
+                if ($this -> con -> db -> execute_query('UPDATE user SET header = ?', [$data['header']])) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+        
         if ($this -> con -> db -> execute_query('UPDATE user SET 
             `biography` = ?,
             `country` = ?,
