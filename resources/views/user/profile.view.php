@@ -47,8 +47,8 @@
                     <li><span class="ul_first-column">posts</span><span><?=is_null($postCount) ? $userPostsCount = 0 : $userPostsCount = $postCount;?></span></li>
                     <li><span class="ul_first-column">submissions</span><span>0</span></li>
                     <li><span class="ul_first-column">threads</span><span>0</span></li>
-                    <li><span class="ul_first-column">following</span><span>0</span></li>
-                    <li><span class="ul_first-column">followers</span><span>0</span></li>
+                    <li><span class="ul_first-column">following</span><span><?=is_null($followCount['following']) ? 0 : $followCount['following'];?><span></li>
+                    <li><span class="ul_first-column">followers</span><span><?=is_null($followCount['followers']) ? 0 : $followCount['followers'];?><span></li>
                 </ul>
             </div>
         </section>

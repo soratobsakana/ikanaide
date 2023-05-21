@@ -20,6 +20,7 @@ if ($user_id !== null) {
     $animelist = $Session -> getList('anime', $user_id);
     $mangalist = $Session -> getList('manga', $user_id);
     $postCount = $Session -> getPostCount($user_id);
+    $followCount = $Session -> getFollowCount($user_id);
     $animeStats = $Session -> getStats($animelist, 'anime');
     $mangaStats = $Session -> getStats($mangalist, 'manga');
     $animeScoreAvg = $Session -> getScoreAvg($animelist);
@@ -41,7 +42,7 @@ if ($user_id !== null) {
                 $favoriteMangas = $Session -> getFavorites($user_id, 'manga'); // This is an object that will be looped in _favoritesprofile.view.php
                 break;
         }
-    } else { // Si pasa por este else, siginifica que se está mostrando la ventana de overview.
+    } else { // Si pasa por este else, significa que se está mostrando la ventana de overview.
         $userPosts = $Session -> getPosts($user_id);
     }
 

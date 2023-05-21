@@ -743,6 +743,14 @@ class User
         return $this -> con -> db -> execute_query('SELECT count(post_id) FROM post WHERE user_id = ?', [$userId]) -> fetch_column();   
     }
 
+    public function getFollowCount(int $userId): array|null
+    {
+        $followCount['followers'] = $this -> con -> db -> execute_query('SELECT count(followed_user) FROM follow WHERE followed_user = ?', [$userId]) -> fetch_column();
+        $followCount['following'] = $this -> con -> db -> execute_query('SELECT count(following_user) FROM follow WHERE following_user = ?', [$userId]) -> fetch_column();
+
+        return $followCount;
+    }
+
     /**
      * @return bool
      * @param string $type
