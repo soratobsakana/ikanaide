@@ -769,7 +769,7 @@ class User
 
         if (isset($data['pfp'])) {
             if ($this -> deleteImg('pfp', $data['user_id'])) {
-                if ($this -> con -> db -> execute_query('UPDATE user SET pfp = ?', [$data['pfp']])) {
+                if ($this -> con -> db -> execute_query('UPDATE user SET pfp = ? WHERE `user_id` = ?', [$data['pfp'], $data['user_id']])) {
                     return true;
                 } else {
                     return false;
@@ -781,7 +781,7 @@ class User
         
         if (isset($data['header'])) {
             if ($this -> deleteImg('header', $data['user_id'])) {
-                if ($this -> con -> db -> execute_query('UPDATE user SET header = ?', [$data['header']])) {
+                if ($this -> con -> db -> execute_query('UPDATE user SET header = ? WHERE `user_id` = ?', [$data['header'], $data['user_id']])) {
                     return true;
                 } else {
                     return false;
