@@ -6,12 +6,13 @@ if ($_GET) {
     foreach ($_GET as $field => $value) {
         if (!in_array($field, $fields)) {
             header('Location: /404');
+            die();
         }
     }
-    
 
-    if (empty($_GET['tl']) || ($_GET['tl'] !== 'global' || $_GET['tl'] !== 'default')) {
+    if ($_GET['tl'] !== 'global' && $_GET['tl'] !== 'default') {
         header('Location: /404');
+        die();
     }
 
     setcookie('home_timeline', $_GET['tl'], strtotime('NOW+60DAYS'));

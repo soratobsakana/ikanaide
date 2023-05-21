@@ -33,18 +33,23 @@ if ((!empty($_GET['medium']) && ($_GET['medium'] === 'anime' || $_GET['medium'] 
                 // Si User::sumOne() devuelve true, se reenvía al usuario a la página desde la que viene mediante la variable $_SERVER['HTTP_REFERER'].
                 if (!empty($_SERVER['HTTP_REFERER'])) {
                     header('Location: ' . $_SERVER['HTTP_REFERER']);
+                    die();
                 }
             } else {
                 header('Location: /404');
+                die();
             }
         } else {
             if (!empty($_SERVER['HTTP_REFERER'])) {
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
+                die();
             }
         }
     } else {
         header('Location: /404');
+        die();
     }
 } else {
     header('Location: /404');
+    die();
 }

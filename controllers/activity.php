@@ -15,10 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-reply'])) {
     foreach ($_POST as $key => $value) {
         if (!in_array($key, $fields)) {
             header('Location: /404');
+            die();
         }
     }
 
-    if (isset($_POST['submit-reply']) && $User -> validateSession()) {
+    if ($User -> validateSession()) {
         $submitPost['content'] = $_POST['post-reply'];
         $submitPost['user_id'] = $_COOKIE['user_id'];
         $relation = $Activity -> getRelation($postId);
@@ -30,9 +31,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-reply'])) {
             }
             $Activity -> postReply($postId, $postReplyId);
             header('Location: '. $page);
+            die();
         }
     } else {
         header('Location: /404');
+        die();
     }
 } else if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like-post'])) {
     // Comprobación de que los campos del formulario no han sido alterados por el usuario.
@@ -40,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-reply'])) {
     foreach ($_POST as $key => $value) {
         if (!in_array($key, $fields)) {
             header('Location: /404');
+            die();
         }
     }
 
@@ -60,4 +64,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-reply'])) {
     require 'resources/views/activity/activity.view.php';
 } else {
     header('Location: /404');
+    die();
 }

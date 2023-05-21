@@ -15,6 +15,7 @@ if ($_POST) {
     // Si la información es correcta, se envía un header hacia su perfil.
     if (($message = $login -> login($loginInfo)) === 'Ok') {
         header('Location: /home');
+        die();
     }
 }
 

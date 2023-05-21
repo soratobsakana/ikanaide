@@ -11,9 +11,12 @@ if (isset($_COOKIE['session'])) {
         $deletePost['user_id'] = $_COOKIE['user_id'];
         $Activity -> deletePost($deletePost['post_id'], $deletePost['user_id']);
         header('Location: /' . $_COOKIE['username']);
+        die();
     } else {
         header('Location: /404');
+        die();
     }
 } else {
     header('Location: /404');
+    die();
 }

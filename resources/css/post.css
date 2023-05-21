@@ -152,3 +152,13 @@ section.posts-wrapper div.post-entry div.social div.social-icon span {
 section.posts-wrapper div.post-entry div.social div.social-icon:hover span {
     opacity: 1!important;
 }
+
+/**/
+a.post-relation_link {
+    opacity: var(--font_low-opacity);
+    transition: .4s;
+}
+
+a.post-relation_link:hover {
+    opacity: 1;
+}

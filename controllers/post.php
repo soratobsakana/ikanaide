@@ -13,6 +13,7 @@ if (isset($_POST)) {
         // Comprobación de que el formulario no ha sido alterado mediante las herramientas de navegador.
         if (!in_array($key, $fields)) {
             header('Location: /404');
+            die();
         } else {
             if ($key === 'post-content' && !empty($key)) {
                 $post['content'] = $value;
@@ -39,14 +40,17 @@ if (isset($_POST)) {
                     if ($entryId = $Listing -> exists($medium, $entry)) {
                         if ($Activity -> setPostRelation($medium, $post_id, $post['user_id'], $entryId)) {
                             header('Location: /' . $_COOKIE['username']);
+                            die();
                         }
                     }
                 }
             }
             if (isset($_COOKIE['username'])) {
                 header('Location: /' . $_COOKIE['username']);
+                die();
             } else {
                 header('Location: /logout');
+                die();
             }
         }
     }

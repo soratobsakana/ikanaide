@@ -9,6 +9,7 @@ if (isset($_POST['edit-profile_submit'])) {
     foreach ($postFields as $postField) {
         if (!in_array($postField, $postFields)) {
             header('Location: /404');
+            die();
         }
     }
 
@@ -16,6 +17,7 @@ if (isset($_POST['edit-profile_submit'])) {
     foreach ($filesFields as $filesField) {
         if (!in_array($filesField, $filesFields)) {
             header('Location: /404');
+            die();
         }
     }
 
@@ -71,6 +73,7 @@ if (isset($_POST['edit-profile_submit'])) {
             // Copio el archivo desde la ruta temporal hacia la ruta final. Si funciona, lo elimino de dicha ruta temporal y asigno $sqlFilepath al array que hace de parámetro en User::editProfile().
             if (!copy($file['path'], $newFilepath)) {
                 header('Location: /404');
+                die();
             } else {
                 // Elimino el archivo temporal mediante unlink().
                 unlink($file['path']);
@@ -143,10 +146,12 @@ if (isset($_POST['edit-profile_submit'])) {
         $userId = $_COOKIE['user_id'];
         if ($User -> editProfile($profileEdition, $userId)) {
             header('Location: /'.$_COOKIE['username']);
+            die();
         } else {
             exit('Sorry,there was an error updating your profile. Comeback clicking <a class="low-opacity link" href="/'.$_COOKIE['username'].'">here</a>');
         }
     } else {
         header('Location: /logout');
+        die();
     }
 }

@@ -30,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // Inspección de que los nombres de campo del formulario HTML no han sido modificados en las herramientas de navegador.
         if (!in_array($key, $fields)) {
             header('Location: /404');
+            die();
         } else {
             // Validación y asignación de la información.
             if (!($key === 'submit')) {
@@ -57,6 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 } else {
                     $newReview = null;
                     header('Location: /404');
+                    die();
                 }
             }
         }
@@ -80,6 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $entryToReview = str_replace('-', ' ', $reviewGuide[4]);
             } else {
                 header('Location: /404');
+                die();
             }
         }
     }
@@ -88,5 +91,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         require('resources/views/reviews/review.view.php');
     } else {
         header('Location: /404');
+        die();
     }
 }

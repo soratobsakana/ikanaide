@@ -26,6 +26,7 @@ if (isset($_COOKIE['session']) && $User -> validateSession()) {
 
 } else {
     header('Location: /login');
+    die();
 }
 
 require 'resources/views/home/home.view.php';

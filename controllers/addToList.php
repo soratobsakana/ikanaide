@@ -19,4 +19,5 @@ if ((isset($_POST['add']) || isset($_POST['delete']) || isset($_POST['favourite'
     }
 } else {
     header('Location: /404');
+    die();
 }

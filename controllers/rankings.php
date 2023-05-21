@@ -8,6 +8,7 @@ $Ranking = new Ranking;
 
 if ($page === '/rankings') {
     header('Location: /rankings/anime');
+    die();
 }
 
 $medium = explode('/', $uri)[2]; // anime|manga

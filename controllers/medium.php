@@ -59,7 +59,7 @@ if (isset($guide[2])) {
 
             require('resources/views/medium/mediumpage.view.php');
         } else {
-            header('Location: /404');
+            exit(header('Location: /404'));
         }
     } else {
         exit(header('Location: /404'));

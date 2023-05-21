@@ -32,11 +32,11 @@
                                             <?php
     
                                             if (isset($post['post']['replying_to']) && isset($post['post']['medium_id'])) {
-                                                ?><span class="low-opacity">replying to <?=$post['post']['replying_to']?> on <?=$post['post']['medium_title']?></span><?php
+                                                ?><span class="low-opacity">replying to</span> <a class="post-relation_link" href="/<?=$post['post']['replying_to']?>"><?=$post['post']['replying_to']?></a> <span class="low-opacity">on</span> <a class="post-relation_link" href="/anime/<?=str_replace(' ', '-', $post['post']['medium_title'])?>"><?=$post['post']['medium_title']?></a><?php
                                             } else if (isset($post['post']['replying_to'])) {
-                                                ?><span class="low-opacity">replying to <?=$post['post']['replying_to']?></span><?php
+                                                ?><span class="low-opacity">replying to</span> <a class="post-relation_link" href="/<?=$post['post']['replying_to']?>"><?=$post['post']['replying_to']?></a><?php
                                             } else if (isset($post['post']['medium_id'])) {
-                                                ?><span class="low-opacity">on <?=$post['post']['medium_title']?></span><?php
+                                                ?><span class="low-opacity">on </span> <a class="post-relation_link" href="/anime/<?=str_replace(' ', '-', $post['post']['medium_title'])?>"><?=$post['post']['medium_title']?></a><?php
                                             }
     
                                             ?>
@@ -89,13 +89,13 @@
                                         </div>
                                         <div class="post-info_relation">
                                             <?php
-    
+
                                             if (isset($post['post']['replying_to']) && isset($post['post']['medium_id'])) {
-                                                ?><span class="low-opacity">replying to <?=$post['post']['replying_to']?> on <?=$post['post']['medium_title']?></span><?php
+                                                ?><span class="low-opacity">replying to</span> <a class="post-relation_link" href="/<?=$post['post']['replying_to']?>"><?=$post['post']['replying_to']?></a> <span class="low-opacity">on</span> <a class="post-relation_link" href="/anime/<?=str_replace(' ', '-', $post['post']['medium_title'])?>"><?=$post['post']['medium_title']?></a><?php
                                             } else if (isset($post['post']['replying_to'])) {
-                                                ?><span class="low-opacity">replying to <?=$post['post']['replying_to']?></span><?php
+                                                ?><span class="low-opacity">replying to</span> <a class="post-relation_link" href="/<?=$post['post']['replying_to']?>"><?=$post['post']['replying_to']?></a><?php
                                             } else if (isset($post['post']['medium_id'])) {
-                                                ?><span class="low-opacity">on <?=$post['post']['medium_title']?></span><?php
+                                                ?><span class="low-opacity">on </span> <a class="post-relation_link" href="/anime/<?=str_replace(' ', '-', $post['post']['medium_title'])?>"><?=$post['post']['medium_title']?></a><?php
                                             }
     
                                             ?>

@@ -134,6 +134,7 @@ class Review
                 if (is_int($medium_id)) {
                     if ($this -> con -> db -> execute_query('INSERT INTO review_'.$medium.' VALUES (?, ?)', [$review_id, $medium_id])) {
                         header('Location: /review/'.$review_id);
+                        die();
                     }
                 }
             }

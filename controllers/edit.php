@@ -56,6 +56,7 @@ if (isset($_POST['submit'])) {
                 } else {
                     // Si ninguna entrada de la base de datos coincide con $_GET['aid'], manda un 404.
                     header('Location: /404');
+                    die();
                 }
 
                 foreach ($animeInfo as $key => $value) {
@@ -73,6 +74,7 @@ if (isset($_POST['submit'])) {
             break;
         default:
             header('Location: /404');
+            die();
     }
     require('resources/views/edit/edit.view.php');
 }
