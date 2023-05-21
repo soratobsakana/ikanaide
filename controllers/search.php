@@ -13,7 +13,7 @@ if (isset($_GET['medium'], $_GET['id']) && ($_GET['medium'] === 'anime' || $_GET
 if (isset($_GET['keyword'])) {
     $keyword = $_GET['keyword'];
 
-    if (!empty($keyword) && ($Search -> exists('anime', $keyword) || $Search -> exists('manga', $keyword))) {
+    if (!empty($keyword)) {
         $searchResults = $Search -> getKeywordResults($keyword);
     }
 }

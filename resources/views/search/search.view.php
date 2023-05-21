@@ -23,9 +23,9 @@
     <?php
 
     if (isset($postResults)) {
-        ?>
-
-        <section class="search-page_results">
+        if (isset($postResults[0]['user'])) {
+            ?>
+            <section class="search-page_results">
             <section class="posts-wrapper box-wrapper">
                 <div class="box-title box-title_two-column">
                     <h3>Showing last posts about <?=$postResults['title']?> </h3>
@@ -33,7 +33,6 @@
                 </div>
                 <div class="box-body">
                 <?php
-
                 for ($i = 0; $i < count($postResults) - 2; $i++) {
                     ?>
 
@@ -92,14 +91,21 @@
                     </div>
 
                     <?php
+
                 }
 
                 ?>
                 </div>
             </section>
-        </section>
+            </section>
 
-        <?php
+            <?php
+        } else {
+            ?><div class="box-wrapper box-body">
+                <p>There doesn't seem to be an entry for that in the database...</p>
+            </div>
+            <?php
+        }
     } else if (isset($searchResults)) {
         ?>
 
@@ -107,16 +113,42 @@
 
         <?php
 
-        if (isset($searchResults['anime'])) {
+        if (isset($searchResults['users'])) {
+            ?>
+            <div class="box-wrapper">
+                <div class="box-title">
+                    <h3><?=count($searchResults['users'])?> user <?=count($searchResults['users']) === 1 ? 'result' : 'results' ?> matching with "<?=$keyword?>"</h3>
+                </div>
+                <div class="box-body user-results_wrapper">
+
+                    <?php
+                    foreach ($searchResults['users'] as $userResult) {
+                        ?>
+
+                        <a href="/<?=$userResult['username']?>">
+                            <div class="result">
+                                <h4><?=$userResult['username']?></h4>
+                            </div>
+                        </a>
+
+                        <?php
+                    }
+                    ?>
+                </div>
+            </div>
+            <?php
+        }
+
+        if (isset($searchResults['medium']['anime'])) {
             ?>
             <div class="box-wrapper">
             <div class="box-title">
-                <h3><?=count($searchResults['anime'])?> search <?=count($searchResults['anime']) === 1 ? 'result' : 'results' ?> on posts about "<?=$keyword?>"</h3>
+                <h3><?=count($searchResults['medium']['anime'])?> search <?=count($searchResults['medium']['anime']) === 1 ? 'result' : 'results' ?> on posts about "<?=$keyword?>"</h3>
             </div>
             <div class="box-body">
 
             <?php
-            foreach ($searchResults['anime'] as $animeResult) {
+            foreach ($searchResults['medium']['anime'] as $animeResult) {
                 ?>
 
                 <a href="/search?medium=anime&id=<?=$animeResult['anime_id']?>">
@@ -134,16 +166,16 @@
             <?php
         }
 
-        if (isset($searchResults['manga'])) {
+        if (isset($searchResults['medium']['manga'])) {
             ?>
             <div class="box-wrapper">
             <div class="box-title">
-                <h3><?=count($searchResults['manga'])?> search <?=count($searchResults['manga']) === 1 ? 'result' : 'results' ?> on posts about "<?=$keyword?>"</h3>
+                <h3><?=count($searchResults['medium']['manga'])?> search <?=count($searchResults['medium']['manga']) === 1 ? 'result' : 'results' ?> on posts about "<?=$keyword?>"</h3>
             </div>
             <div class="box-body">
 
             <?php
-            foreach ($searchResults['manga'] as $mangaResult) {
+            foreach ($searchResults['medium']['manga'] as $mangaResult) {
                 ?>
 
                 <a href="/search?medium=manga&id=<?=$mangaResult['manga_id']?>">

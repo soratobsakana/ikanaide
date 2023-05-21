@@ -25,6 +25,18 @@ form.search-page_form input[type=submit]:hover {
     background: var(--box-title-light);
 }
 
+/* Estilos para la sección de resultados de usuarios */
+section.search-page_keyword-results div.user-results_wrapper {
+    display: grid;
+    grid-gap: var(--gap);
+    grid-template-columns: repeat(5, 1fr);
+}
+
+section.search-page_keyword-results div.user-results_wrapper a div {
+    padding: 6px!important;
+}
+
+/* Estilos para la sección de resultados de entradas de anime|manga */
 section.search-page_keyword-results {
     display: grid;
     grid-gap: var(--gap);
