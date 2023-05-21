@@ -45,7 +45,14 @@
                                     <?=$animes[$group][$i]['score']?>
                                 </div>
                                 <div class="profile_user-list_entry-progress center-text">
-                                    <a href="/sum?medium=<?=$medium?>&id=<?=$animes[$group][$i]['anime_id']?>"><?=$animes[$group][$i]['progress']?>/<?=$animes[$group][$i]['episodes']?></a>
+                                    <?php
+                                    if (isset($_COOKIE['session']) && $_COOKIE['username'] === $userInfo['username']) {
+                                        ?><a href="/sum?medium=<?=$medium?>&id=<?=$animes[$group][$i]['anime_id']?>"><?=$animes[$group][$i]['progress']?>/<?=$animes[$group][$i]['episodes']?></a><?php
+                                    } else {
+                                        print $animes[$group][$i]['progress'].'/'.$animes[$group][$i]['episodes'];
+                                    }
+                                    ?>
+
                                 </div>
                                 <div class="profile_user-list_entry-type center-text">
                                     <?=$animes[$group][$i]['type']?>

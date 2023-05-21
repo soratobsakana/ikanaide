@@ -153,13 +153,13 @@
                             </div>
                             <div class="post-info_relation">
                                 <?php
-                                
+
                                 if (isset($userPosts['posts'][$i]['replying_to']) && isset($userPosts['posts'][$i]['medium_id'])) {
-                                    ?><span class="low-opacity">replying to <?=$userPosts['posts'][$i]['replying_to']?> on <?=$userPosts['posts'][$i]['medium_title']?></span><?php
+                                    ?><span class="low-opacity">replying to</span> <a class="post-relation_link" href="/<?=$userPosts['posts'][$i]['replying_to']?>"><?=$userPosts['posts'][$i]['replying_to']?></a> <span class="low-opacity">on</span> <a class="post-relation_link" href="/anime/<?=str_replace(' ', '-', $userPosts['posts'][$i]['medium_title'])?>"><?=$userPosts['posts'][$i]['medium_title']?></a><?php
                                 } else if (isset($userPosts['posts'][$i]['replying_to'])) {
-                                ?><span class="low-opacity">replying to <?=$userPosts['posts'][$i]['replying_to']?></span><?php
+                                    ?><span class="low-opacity">replying to</span> <a class="post-relation_link" href="/<?=$userPosts['posts'][$i]['replying_to']?>"><?=$userPosts['posts'][$i]['replying_to']?></a><?php
                                 } else if (isset($userPosts['posts'][$i]['medium_id'])) {
-                                    ?><span class="low-opacity">on <?=$userPosts['posts'][$i]['medium_title']?></span><?php
+                                    ?><span class="low-opacity">on </span> <a class="post-relation_link" href="/anime/<?=str_replace(' ', '-', $userPosts['posts'][$i]['medium_title'])?>"><?=$userPosts['posts'][$i]['medium_title']?></a><?php
                                 }
 
                                 ?>

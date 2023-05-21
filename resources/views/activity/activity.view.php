@@ -7,7 +7,7 @@
     <section class="replied-posts posts-wrapper box-wrapper" onclick="window.location='/activity/<?=$repliedPost['post']['post_id']?>'">
             <div class="post-entry box-wrapper box-body">
                 <div class="top">
-                    <a href="/<?=$post['user']['username']?>"><img src="<?=$repliedPost['user']['pfp']?>" alt=""></a>
+                    <a href="/<?=$repliedPost['user']['username']?>"><img src="<?=$repliedPost['user']['pfp']?>" alt=""></a>
                     <div class="post-info">
                         <div class="post-info_user">
                             <div class="username">
@@ -18,12 +18,11 @@
                         <div class="post-info_relation">
                             <?php
 
-                            if (isset($post['post']['medium_id'])) {
-                                ?><span class="low-opacity">replying to <?=$post['user']['username']?> on <?=$post['post']['medium_title']?></span><?php
-                            } else {
-                                ?><span class="low-opacity">replying to <?=$post['user']['username']?></span><?php
+                            if (isset($repliedPost['post']['replying_to'], $repliedPost['post']['medium_id'])) {
+                                ?><span class="low-opacity">replying to <?=$repliedPost['user']['username']?> on <?=$repliedPost['post']['medium_title']?></span><?php
+                            } else if (isset($repliedPost['post']['medium_id'])) {
+                                ?><span class="low-opacity">on <?=$repliedPost['post']['medium_title']?></span><?php
                             }
-                            
 
                             ?>
                         </div>
