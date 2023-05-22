@@ -159,7 +159,7 @@
                                 } else if (isset($userPosts['posts'][$i]['replying_to'])) {
                                     ?><span class="low-opacity">replying to</span> <a class="post-relation_link" href="/<?=$userPosts['posts'][$i]['replying_to']?>"><?=$userPosts['posts'][$i]['replying_to']?></a><?php
                                 } else if (isset($userPosts['posts'][$i]['medium_id'])) {
-                                    ?><span class="low-opacity">on </span> <a class="post-relation_link" href="/anime/<?=str_replace(' ', '-', $userPosts['posts'][$i]['medium_title'])?>"><?=$userPosts['posts'][$i]['medium_title']?></a><?php
+                                    ?><span class="low-opacity">on </span> <a class="post-relation_link" href="/<?=$userPosts['posts'][$i]['medium']?>/<?=str_replace(' ', '-', $userPosts['posts'][$i]['medium_title'])?>"><?=$userPosts['posts'][$i]['medium_title']?></a><?php
                                 }
 
                                 ?>

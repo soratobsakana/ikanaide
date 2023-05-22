@@ -17,11 +17,13 @@
                         </div>
                         <div class="post-info_relation">
                             <?php
-
+                            
                             if (isset($repliedPost['post']['replying_to'], $repliedPost['post']['medium_id'])) {
-                                ?><span class="low-opacity">replying to <?=$repliedPost['user']['username']?> on <?=$repliedPost['post']['medium_title']?></span><?php
+                                ?><span class="low-opacity">replying to </span><a class="post-relation_link" href="/<?=$repliedPost['post']['replying_to']?>"><?=$repliedPost['post']['replying_to']?></a> <span class="low-opacity">on</span> <a class="post-relation_link" href="/<?=$repliedPost['post']['medium']?>/<?=str_replace(' ', '-', $repliedPost['post']['medium_title'])?>"><?=$repliedPost['post']['medium_title']?></a><?php
                             } else if (isset($repliedPost['post']['medium_id'])) {
-                                ?><span class="low-opacity">on <?=$repliedPost['post']['medium_title']?></span><?php
+                                ?><span class="low-opacity">on </span><a class="post-relation_link" href="/<?=$repliedPost['post']['medium']?>/<?=str_replace(' ', '-', $repliedPost['post']['medium_title'])?>"><?=$repliedPost['post']['medium_title']?></a><?php
+                            } else if (isset($repliedPost['post']['replying_to'])) {
+                                ?><span class="low-opacity">replying to </span><a class="post-relation_link" href="/<?=$repliedPost['post']['replying_to']?>"><?=$repliedPost['post']['replying_to']?></a><?php
                             }
 
                             ?>
@@ -91,12 +93,12 @@
                     <div class="post-info_relation">
                         <?php
 
-                        if (isset($post['post']['replying_to']) && isset($post['post']['medium_id'])) {
-                            ?><span class="low-opacity">replying to <?=$post['post']['replying_to']?> on <?=$post['post']['medium_title']?></span><?php
-                        } else if (isset($post['post']['replying_to'])) {
-                        ?><span class="low-opacity">replying to <?=$post['post']['replying_to']?></span><?php
+                        if (isset($post['post']['replying_to'], $post['post']['medium_id'])) {
+                            ?><span class="low-opacity">replying to </span><a class="post-relation_link" href="/<?=$post['post']['replying_to']?>"><?=$post['post']['replying_to']?></a> <span class="low-opacity">on</span> <a class="post-relation_link" href="/<?=$post['post']['medium']?>/<?=str_replace(' ', '-', $post['post']['medium_title'])?>"><?=$post['post']['medium_title']?></a><?php
                         } else if (isset($post['post']['medium_id'])) {
-                            ?><span class="low-opacity">on <?=$post['post']['medium_title']?></span><?php
+                            ?><span class="low-opacity">on </span><a class="post-relation_link" href="/<?=$post['post']['medium']?>/<?=str_replace(' ', '-', $post['post']['medium_title'])?>"><?=$post['post']['medium_title']?></a><?php
+                        } else if (isset($post['post']['replying_to'])) {
+                            ?><span class="low-opacity">replying to </span><a class="post-relation_link" href="/<?=$post['post']['replying_to']?>"><?=$post['post']['replying_to']?></a><?php
                         }
 
                         ?>
@@ -188,10 +190,12 @@
                             <div class="post-info_relation">
                                 <?php
 
-                                if (isset($post['post']['medium_id'])) {
-                                    ?><span class="low-opacity">replying to <?=$post['user']['username']?> on <?=$post['post']['medium_title']?></span><?php
-                                } else {
-                                    ?><span class="low-opacity">replying to <?=$post['user']['username']?></span><?php
+                                if (isset($reply['post']['replying_to'], $reply['post']['medium_id'])) {
+                                    ?><span class="low-opacity">replying to </span><a class="post-relation_link" href="/<?=$reply['post']['replying_to']?>"><?=$reply['post']['replying_to']?></a> <span class="low-opacity">on</span> <a class="post-relation_link" href="/<?=$reply['post']['medium']?>/<?=str_replace(' ', '-', $reply['post']['medium_title'])?>"><?=$reply['post']['medium_title']?></a><?php
+                                } else if (isset($reply['post']['medium_id'])) {
+                                    ?><span class="low-opacity">on </span><a class="post-relation_link" href="/<?=$reply['post']['medium']?>/<?=str_replace(' ', '-', $reply['post']['medium_title'])?>"><?=$reply['post']['medium_title']?></a><?php
+                                } else if (isset($reply['post']['replying_to'])) {
+                                    ?><span class="low-opacity">replying to </span><a class="post-relation_link" href="/<?=$reply['post']['replying_to']?>"><?=$reply['post']['replying_to']?></a><?php
                                 }
                                 
 
