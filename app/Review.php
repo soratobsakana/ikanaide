@@ -142,4 +142,50 @@ class Review
             return null;
         }
     }
+
+    public function likeReview(int $reviewId, string $action, int $userId): bool
+    {
+        switch ($action) {
+            case 'up':
+                if ($this -> con -> db -> execute_query('INSERT INTO `review_vote` VALUES(?, ?, true, default) ON DUPLICATE KEY UPDATE `vote` = true', [$userId, $reviewId])) {
+                    return true;
+                } else {
+                    return false;
+                }
+                break;
+            case 'down';
+                if ($this -> con -> db -> execute_query('INSERT INTO `review_vote` VALUES(?, ?, false, default) ON DUPLICATE KEY UPDATE `vote` = false', [$userId, $reviewId])) {
+                    return true;
+                } else {
+                    return false;
+                }
+                break;
+            default:
+                header('Location: /404');
+        }
+    }
+
+    public function getReviewVotes(int $reviewId): array|null
+    {
+        $reviewVotes['upvotes'] = $this -> con -> db -> execute_query('SELECT count(review_id) FROM `review_vote` WHERE `vote` = true AND `review_id` = ?', [$reviewId]) -> fetch_column();
+        $reviewVotes['downvotes'] = $this -> con -> db -> execute_query('SELECT count(review_id) FROM `review_vote` WHERE `vote` = false AND `review_id` = ?', [$reviewId]) -> fetch_column();
+        $reviewVotes['difference'] = $reviewVotes['upvotes'] - $reviewVotes['downvotes'];
+        
+        return $reviewVotes;
+    }
+
+    public function userVote(int $reviewId, int $userId): bool
+    {
+        $result = $this -> con -> db -> execute_query('SELECT vote FROM `review_vote` WHERE `review_id` = ? AND `user_id` = ?', [$reviewId, $userId]);
+        if ($result -> num_rows === 1) {
+            $vote = $result -> fetch_column();
+            if ($vote === 1) {
+                return true;
+            } else if ($vote === 0) {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
 }

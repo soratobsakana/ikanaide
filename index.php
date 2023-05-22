@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <?php define("DIR", __DIR__); // Defino el directorio raíz de la página web para usarlo en cualquier archivo ?>
     <?php require_once 'routes/titles.php' ?>
     <title><?=$tabTitle?> / ikanaide</title>

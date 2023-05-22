@@ -2,12 +2,14 @@
 
 include_once 'app/Review.php';
 include_once 'app/Listing.php';
+include_once 'app/User.php';
 include_once 'resources/functions.php';
 
 $reviewGuide = explode('/', $uri);
 
 $Review = new Review;
 $Listing = new Listing;
+$User = new User;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     
@@ -72,6 +74,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } else if (($reviewGuide[1] === 'review' && is_numeric($reviewGuide[2])) && !isset($reviewGuide[3])) {
         $review_id = $reviewGuide[2];
         $review = $Review -> getReview($review_id);
+        $reviewVotes = $Review -> getReviewVotes($review_id);
+        if ($User -> validateSession()) {
+            $userVote = $Review -> userVote($review_id, $_COOKIE['user_id']);
+        }
     } else if (($reviewGuide[1] === 'review' && $reviewGuide[2] === 'new') && (isset($reviewGuide[3]) && !isset($reviewGuide[4]))) {
         if ($reviewGuide[3] === 'anime' || $reviewGuide[3] === 'manga') {
             $titles = $Review -> getTitles($reviewGuide[3]);

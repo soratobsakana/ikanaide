@@ -69,6 +69,7 @@ $routes = array(
     '/review/new' => 'controllers/review.php',
     '/review/new/anime' => 'controllers/review.php',
     '/review/new/manga' => 'controllers/review.php',
+    '/likeReview' => 'controllers/likeReview.php',
 
     '/search' => 'controllers/search.php',
 

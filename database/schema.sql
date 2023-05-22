@@ -184,7 +184,22 @@ CREATE TABLE `review_vn` (
     FOREIGN KEY (`vn_id`) REFERENCES `vn`(`vn_id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `review_likes` (
+CREATE TABLE `review_vote` (
+    `user_id` INT UNSIGNED NOT NULL,
+    `review_id` SMALLINT UNSIGNED NOT NULL,
+    `vote` BIT(1) NOT NULL DEFAULT 0,
+    `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT review_vote UNIQUE(user_id, review_id)
+) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `review_like` (
+    `user_id` INT UNSIGNED NOT NULL,
+    `review_id` SMALLINT UNSIGNED NOT NULL,
+    `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT review_likes UNIQUE(user_id, review_id)
+) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `review_dislike` (
     `user_id` INT UNSIGNED NOT NULL,
     `review_id` SMALLINT UNSIGNED NOT NULL,
     `date` DATETIME DEFAULT CURRENT_TIMESTAMP,

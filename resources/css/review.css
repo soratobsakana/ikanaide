@@ -114,3 +114,27 @@ div.review_entry-wrapper div.review_entry-content {
     padding: 20px!important;
     font-size: calc(var(--box-font-size) + 1px);
 }
+
+div.review_entry-votes {  
+    display: flex;
+    align-items: center;
+    gap: calc(var(--gap) + 4px);
+    margin: 0 auto;
+}
+
+div.review_entry-votes div {
+    background-color: var(--box-bg);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+div.review_entry-votes span {
+    transition: var(--transition);
+    padding: 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+div.review_entry-votes span:hover {
+    background-color: var(--box-bg-hover);
+}
