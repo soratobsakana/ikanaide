@@ -192,20 +192,6 @@ CREATE TABLE `review_vote` (
     CONSTRAINT review_vote UNIQUE(user_id, review_id)
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `review_like` (
-    `user_id` INT UNSIGNED NOT NULL,
-    `review_id` SMALLINT UNSIGNED NOT NULL,
-    `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT review_likes UNIQUE(user_id, review_id)
-) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE `review_dislike` (
-    `user_id` INT UNSIGNED NOT NULL,
-    `review_id` SMALLINT UNSIGNED NOT NULL,
-    `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT review_likes UNIQUE(user_id, review_id)
-) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
-
 CREATE TABLE `edit_anime` (
     `edit_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `anime_id` INT UNSIGNED NOT NULL,

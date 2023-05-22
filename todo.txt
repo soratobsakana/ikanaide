@@ -10,7 +10,7 @@
         [] Make the entry visible for moderators on a /submissions page or something like that.
         [] Make moderators be able to accept submissions. After accepted, the information of the submission will be added to the `anime` table.
     [X] Allow for review upvotes/likes.
-    [] Make ranking buttons work.
+    [X] Make ranking buttons work.
     [] Allow for user report system. Table columns will be `reporting_user`, `reported_user`, `reason` and `date``.
 
 230508-14
