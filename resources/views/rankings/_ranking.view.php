@@ -13,16 +13,27 @@
                     <div class="center-text"><?=$ranking[$i]['score']?></div>
                     <div class="center-text"><?=$ranking[$i]['members']?></div>
                     <div class="add">
-                        <a href="">
-                            <button type="button" class="ranking-button">delete</button>
-                        </a>
+                        <?php
+
+                        if ($ranking[$i]['userList'] === TRUE) {
+                            ?><a class="ranking-list_button" href="/rankingList?medium=<?=$medium?>&id=<?=$ranking[$i][$medium.'_id']?>&action=delete">delete from list</a><?php
+                        } else {
+                            ?><a class="ranking-list_button" href="/rankingList?medium=<?=$medium?>&id=<?=$ranking[$i][$medium.'_id']?>&action=add">add to list</a><?php
+                        }
+
+                        ?>
+                        
                     </div>
                     <div class="fav">
-                        <a href="">
-                            <button type="button" class="ranking-button">
-                               unfavourite
-                            </button>
-                        </a>
+                        <?php
+
+                        if ($ranking[$i]['userList'] === TRUE && $ranking[$i]['userFav'] === TRUE) {
+                            ?><a class="ranking-list_button" href="/rankingList?medium=<?=$medium?>&id=<?=$ranking[$i][$medium.'_id']?>&action=unfav"><span class="material-icons-outlined">favorite</span></a><?php
+                        } else if ($ranking[$i]['userList'] === TRUE && $ranking[$i]['userFav'] === FALSE) {
+                            ?><a class="ranking-list_button" href="/rankingList?medium=<?=$medium?>&id=<?=$ranking[$i][$medium.'_id']?>&action=fav"><span class="material-icons-outlined">favorite_border</span></a><?php
+                        }
+
+                        ?>
                     </div>
                     <div class="options low-opacity link">
                         <span class="material-icons-outlined">

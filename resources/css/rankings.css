@@ -55,7 +55,7 @@ section.rankings-page_anime_content img {
 
 section.rankings-page_anime_content div.rankings-page_anime_content-entry {
     display: grid;
-    grid-template-columns: 7% 5% 45% 8% 10% 10% 12% 4%;
+    grid-template-columns: 7% 5% 45% 8% 10% 18% 4% 4%;
     word-break: break-word;
 }
 
@@ -73,36 +73,30 @@ section.rankings-page_anime_content div.rankings-page_anime_content-entry div a 
     width: 100%;
 }
 
-section.rankings-page_anime_content div.rankings-page_anime_content-entry div.add button.ranking-button {
-    width: 90%;
+div.rankings-page_anime_content-entry div.add a.ranking-list_button, div.rankings-page_anime_content-entry div.fav a.ranking-list_button {
+    width: 95%;
+    height: 29px;
     background-color: var(--box-title);
     border-radius: var(--border-radius);
-    padding: 5px 0;
+    padding: 6px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-section.rankings-page_anime_content div.rankings-page_anime_content-entry div.fav a button {
-    /*padding: 7px 15px 5px;*/
-    width: 100%;
-    padding: 5px 0;
-    background-color: var(--box-title);
-    border-radius: var(--border-radius);
-    font-size: 14px!important;
-
-}
-
-section.rankings-page_anime_content div.rankings-page_anime_content-entry div.fav a button span {
+section.rankings-page_anime_content div.rankings-page_anime_content-entry div.fav a.ranking-list_button span {
     font-size: 14px!important;
 }
 
-section.rankings-page_anime_content div.rankings-page_anime_content-entry div a button {
+div.rankings-page_anime_content-entry div a.ranking-list_button {
     transition: var(--transition);
 }
 
-section.rankings-page_anime_content div.rankings-page_anime_content-entry div a button:hover {
+div.rankings-page_anime_content-entry div a.ranking-list_button:hover {
     background-color: var(--box-title-light)!important;
 }
 
-div.options {
-    justify-content: right;
-    font-size: 14px!important;
+div.options span {
+    margin: 0 auto;
+    font-size: 20px!important;
 }

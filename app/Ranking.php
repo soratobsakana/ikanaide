@@ -2,16 +2,19 @@
 
 include_once 'Database.php';
 include_once 'Listing.php';
+include_once 'User.php';
 
 class Ranking
 {
     private object $con;
     private object $listing;
+    private object $user;
 
     public function __construct()
     {
         $this -> con = new Database;
         $this -> listing = new Listing;
+        $this -> user = new User;
     }
 
     /**
@@ -26,14 +29,68 @@ class Ranking
         if ($result -> num_rows > 0) {
             for ($i=0; $i < $result -> num_rows; $i++) {
                 $row = $result -> fetch_assoc();
-                $anime[$i] = $this -> con -> db -> execute_query('select title, cover from '.$medium.' where '.$medium.'_id='.$row[$medium.'_id']) -> fetch_assoc();
-                $anime[$i]['members'] = $this -> listing -> getMembers($medium, $row[$medium.'_id']);
-                $anime[$i]['score'] = $row['score'];
-                $anime[$i]['rank'] = $row['ranking'];
+                $entry[$i] = $this -> con -> db -> execute_query('select '.$medium.'_id, title, cover from '.$medium.' where '.$medium.'_id='.$row[$medium.'_id']) -> fetch_assoc();
+                $entry[$i]['members'] = $this -> listing -> getMembers($medium, $row[$medium.'_id']);
+                $entry[$i]['score'] = $row['score'];
+                $entry[$i]['rank'] = $row['ranking'];
+                
+                if ($this -> user -> validateSession()) {
+                    $userInfo['list'] = $this -> con -> db -> execute_query('SELECT count(user_id) FROM '.$medium.'list WHERE user_id = ? AND '.$medium.'_id = ?', [$_COOKIE['user_id'], $row[$medium.'_id']]) -> fetch_column();
+                    if ($userInfo['list'] === 1) {
+                        $entry[$i]['userList'] = true; 
+                    } else {
+                        $entry[$i]['userList'] = false;
+                    }
+
+                    $userInfo['list'] = $this -> con -> db -> execute_query('SELECT favorite FROM '.$medium.'list WHERE user_id = ? AND '.$medium.'_id = ?', [$_COOKIE['user_id'], $row[$medium.'_id']]) -> fetch_column();
+                    if ($userInfo['list'] === 1) {
+                        $entry[$i]['userFav'] = true; 
+                    } else {
+                        $entry[$i]['userFav'] = false;
+                    }
+                }
+                
             }
-            return $anime;
+
+            return $entry;
         } else {
             return null;
+        }
+    }
+
+    public function add(string $medium, int $medium_id, $userId): bool
+    {
+        if ($this -> con -> db -> execute_query('INSERT INTO `'.$medium.'list` (`user_id`, `'.$medium.'_id`, `progress`) VALUES (?, ?, default)',[$userId, $medium_id])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function delete(string $medium, int $medium_id, $userId): bool
+    {
+        if ($this -> con -> db -> execute_query('DELETE FROM `'.$medium.'list` WHERE '.$medium.'_id = ? AND user_id = ?',[$medium_id, $userId])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function favorite(string $medium, int $medium_id, $userId): bool
+    {
+        if ($this -> con -> db -> execute_query('UPDATE '.$medium.'list SET favorite = true WHERE '.$medium.'_id = ? AND user_id = ?', [$medium_id, $userId])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function unfavorite(string $medium, int $medium_id, $userId): bool
+    {
+        if ($this -> con -> db -> execute_query('UPDATE '.$medium.'list SET favorite = false WHERE '.$medium.'_id = ? AND user_id = ?', [$medium_id, $userId])) {
+            return true;
+        } else {
+            return false;
         }
     }
 }
