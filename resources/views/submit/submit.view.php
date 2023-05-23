@@ -4,7 +4,7 @@
     <nav class="submit-form_selector">
         <ul class="box">
             <?php
-                $nav = ['anime', 'manga', 'vn', 'character', 'staff'];
+                $nav = ['anime', 'manga', 'character', 'staff'];
                 highlightNav($nav, 8);
             ?>
         </ul>
@@ -12,19 +12,19 @@
     <?php
     switch ($page) {
         case '/submit/anime':
-            readfile('resources/views/submit/_submit_anime.view.html');
+            require('resources/views/submit/_submit_anime.view.php');
             break;
         case '/submit/manga':
-            readfile('resources/views/submit/_submit_manga.view.html');
+            require('resources/views/submit/_submit_manga.view.php');
             break;
         case '/submit/vn':
-            readfile('resources/views/submit/_submit_vn.view.html');
+            require('resources/views/submit/_submit_vn.view.php');
             break;
         case '/submit/character':
-            readfile('resources/views/submit/_submit_character.view.html');
+            require('resources/views/submit/_submit_character.view.php');
             break;
         case '/submit/staff':
-            readfile('resources/views/submit/_submit_staff.view.html');
+            require('resources/views/submit/_submit_staff.view.php');
             break;
         default:
             header('Location: /submit/anime');

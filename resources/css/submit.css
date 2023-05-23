@@ -63,6 +63,10 @@ form.submit-form div.submit-form_wrapper label {
     font-size: var(--box-font-size);
 }
 
+form.submit-form div.submit-form_wrapper input[type=text] {
+    padding: 5px 0;
+}
+
 form.submit-form div.wrapper {
     display: flex;
     gap: 5px;
