@@ -396,3 +396,43 @@ div.edit_profile-fields_buttons {
     gap: var(--gap);
     justify-content: space-between;
 }
+
+/******** Estilos para el modal de report ********/
+section#user-report_modal div.box-wrapper {
+    width: 600px;
+    border-radius: 10px;
+    overflow: hidden;
+
+    position: fixed;
+    top: 15vh;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 33px rgba(0,0,0,.50);
+}
+
+section#user-report_modal div.box-wrapper div.box-body {
+    padding: 20px;
+}
+
+section#user-report_modal div.box-wrapper div.box-body form {
+    display: grid;
+    grid-gap: var(--gap);
+}
+
+section#user-report_modal div.box-wrapper textarea {
+    min-height: 150px;
+    padding: 10px;
+    border-radius: var(--border-radius);
+    background-color: var(--box-title)!important;
+    width: 100%;
+    transition: filter var(--transition);
+}
+
+section#user-report_modal div.box-wrapper textarea:focus-within {
+    filter: brightness(1.15);
+}
+
+section#user-report_modal div.box-wrapper div.box-body div.buttons {
+    display: flex;
+    justify-content: space-between;
+}

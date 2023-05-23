@@ -121,9 +121,11 @@
         <?php
         }
 
-        ?>
+        if ($userInfo['user_id'] != $_COOKIE['user_id']) {
+            ?><span id="user-report_btn" class="user-report material-icons dots center-text low-opacity">more_horiz</span><?php
+        }
 
-        <span class="user-report material-icons dots center-text low-opacity">more_horiz</span>
+        ?>
 
     </div>
     <div class="profile_right-column">
@@ -264,6 +266,34 @@
     </div>
 </section>
 
+<?php
+
+if ($userInfo['user_id'] != $_COOKIE['user_id']) {
+    ?>
+    <section id="user-report_modal" class="modal">
+    <div class="box-wrapper">
+        <div class="box-title">
+            <h3>Report user</h3>
+        </div>
+        <div class="box-body">
+            <form action="/report?id=<?=$userInfo['user_id']?>" method="post">
+                <label for="user-report_reason">Reason</label>
+                <textarea name="reason" id="user-report_reason" autocomplete="off"></textarea>
+                <hr id="edit-profile_fields-separator">
+                <div class="buttons">
+                    <button type="button" id="user-report_cancel" class="submit-button__colorful box">Cancel</button>
+                    <input type="submit" class="submit-button__colorful box" value="Submit">
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<?php
+}
+
+?>
+
+
 <script !src="">
     let editBtn = document.getElementById('user_edit-profile_btn');
     let editModal = document.getElementById('user_edit-profile');
@@ -293,4 +323,19 @@
         modal.style.display = "none";
     })
 
+</script>
+
+<script !src="">
+    let reportBtn = document.getElementById('user-report_btn');
+    let reportModal = document.getElementById('user-report_modal');
+    let reportCancelBtn = document.getElementById('user-report_cancel');
+
+    reportBtn.addEventListener('click', function() {
+        reportModal.style.display = "block";
+        document.getElementById("user-report_reason").focus();
+    })
+
+    reportCancelBtn.addEventListener('click', function() {
+        reportModal.style.display = "none";
+    })
 </script>

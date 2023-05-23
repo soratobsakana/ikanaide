@@ -88,6 +88,7 @@ $routes = array(
     '/delete' => 'controllers/delete.php',
     '/follow' => 'controllers/follow.php',
     '/timeline' => 'controllers/timeline.php',
+    '/report' => 'controllers/report.php',
 
     '/submit' => 'controllers/submit.php',
     '/submit/anime' => 'controllers/submit.php',
