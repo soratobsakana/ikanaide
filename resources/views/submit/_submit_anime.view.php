@@ -13,27 +13,36 @@
     </div>
 </div>
 <div class="wrapper">
-    <div class="submit-form_wrapper box">
+    <div class="submit-form_wrapper submit-form_type box">
         <label for="type">type</label>
-        <input type="text" name="type" id="type">
+        <select name="type" id="type">
+            <option value="tv">TV</option>
+            <option value="movie">Movie</option>
+            <option value="ova">OVA</option>
+            <option value="mv">M/V</option>
+        </select>
     </div>
-    <div class="submit-form_wrapper box">
-        <label for="episodes">episodes</label>
-        <input type="text" name="episodes" id="episodes">
-    </div>
-    <div class="submit-form_wrapper box">
+    <div class="submit-form_wrapper submit-form_status box">
         <label for="status">status</label>
-        <input type="text" name="status" id="status">
+        <select name="status" id="status">
+            <option value="announced">Announced</option>
+            <option value="airing">Airing</option>
+            <option value="finished">Finished</option>
+        </select>
     </div>
 </div>
 <div class="wrapper">
     <div class="submit-form_wrapper box">
+        <label for="episodes">episodes</label>
+        <input type="text" name="episodes" id="episodes">
+    </div>
+    <div class="submit-form_wrapper submit-form_dates box">
         <label for="start_date">start date</label>
-        <input type="text" name="start_date" id="start_date">
+        <input type="date" name="start_date" id="start_date">
     </div>
     <div class="submit-form_wrapper box">
         <label for="end_date">end date</label>
-        <input type="text" name="end_date" id="end_date">
+        <input type="date" name="end_date" id="end_date">
     </div>
 </div>
 <div class="submit-form_wrapper box">
@@ -41,12 +50,12 @@
     <textarea name="desc" id="desc"></textarea>
 </div>
 <div class="wrapper">
-    <div class="submit-form_wrapper box">
+    <div class="submit-form_wrapper submit-form_file box">
         <label for="cover">cover</label>
-        <input type="text" name="cover" id="cover" placeholder="Please provide a link to your image.">
+        <input type="file" name="cover" id="cover">
     </div>
-    <div class="submit-form_wrapper box">
+    <div class="submit-form_wrapper submit-form_file box">
         <label for="header">header</label>
-        <input type="text" name="header" id="header" placeholder="Please provide a link to your image.">
+        <input type="file" name="cover" id="cover">
     </div>
 </div>

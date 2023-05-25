@@ -15,8 +15,22 @@
 <div class="wrapper">
     <div class="submit-form_wrapper box">
         <label for="format">format</label>
-        <input type="text" name="format" id="format">
+        <select name="format" id="format">
+            <option value="manga">Manga</option>
+            <option value="manhwa">Manhwa</option>
+            <option value="ln">Light novel</option>
+        </select>
     </div>
+    <div class="submit-form_wrapper box">
+        <label for="status">status</label>
+        <select name="status" id="status">
+            <option value="announced">Announced</option>
+            <option value="completed">Completed</option>
+            <option value="finished">Finished</option>
+        </select>
+    </div>
+</div>
+<div class="wrapper">
     <div class="submit-form_wrapper box">
         <label for="volumes">volumes</label>
         <input type="text" name="volumes" id="volumes">
@@ -25,19 +39,13 @@
         <label for="chapters">chapters</label>
         <input type="text" name="chapters" id="chapters">
     </div>
-</div>
-<div class="wrapper">
     <div class="submit-form_wrapper box">
         <label for="start_date">start date</label>
-        <input type="text" name="start_date" id="start_date">
+        <input type="date" name="start_date" id="start_date">
     </div>
     <div class="submit-form_wrapper box">
         <label for="end_date">end date</label>
-        <input type="text" name="end_date" id="end_date">
-    </div>
-    <div class="submit-form_wrapper box">
-        <label for="status">status</label>
-        <input type="text" name="status" id="status">
+        <input type="date" name="end_date" id="end_date">
     </div>
 </div>
 <div class="submit-form_wrapper box">

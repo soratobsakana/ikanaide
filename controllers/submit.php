@@ -12,19 +12,92 @@ if (isset($_POST['submit'])) {
                 $submissionType = parse_url($_SERVER['REQUEST_URI'])['query'];
                 switch ($submissionType) {
                     case 'anime':
-                        $animeData[$key] = $value;
+                        switch ($key) {
+                            case 'title':
+                            case 'english_title':
+                            case 'japanese_title':
+                            case 'desc':
+                                $value !== '' ? $animeData[$key] = $value : $animeData[$key] = null;
+                                break;
+                            case 'type':
+                                if ($value !== 'tv' || $value !== 'movie' || $value !== 'ova' ||$value !== 'mv') {
+                                    $animeData[$key] = $value;
+                                } else {
+                                    $animeData[$key] = 'tv'; // Valor por default
+                                }
+                                break;
+                            case 'status':
+                                if ($value !== 'announced' || $value !== 'completed' || $value !== 'finished') {
+                                    $animeData[$key] = $value;
+                                } else {
+                                    $animeData[$key] = 'announced'; // Valor por default
+                                }
+                                break;
+                            case 'episodes':
+                                if (filter_var($value, FILTER_VALIDATE_INT)) {
+                                    $animeData[$key] = intval($value);
+                                } else {
+                                    $animeData[$key] = null;
+                                }
+                                break;
+                            case 'start_date':
+                            case 'end_date':
+                                $date = date_parse($value);
+                                if (checkdate($date['month'], $date['day'], $date['year']) && strlen($date['year']) === 4) {
+                                    $animeData[$key] = $value;
+                                } else {
+                                    $animeData[$key] = null;
+                                }
+                                break;
+                        }
                         break;
                     case 'manga':
-                        $mangaData[$key] = $value;
-                        break;
-                    case 'vn':
-                        $vnData[$key] = $value;
+                        switch ($key) {
+                            case 'title':
+                            case 'english_title':
+                            case 'japanese_title':
+                            case 'desc':
+                                $value !== '' ? $mangaData[$key] = $value : $mangaData[$key] = null;
+                                break;
+                            case 'type':
+                                if ($value !== 'manga' || $value !== 'manhwa' || $value !== 'ln') {
+                                    $mangaData[$key] = $value;
+                                } else {
+                                    $mangaData[$key] = 'manga'; // Valor por default
+                                }
+                                break;
+                            case 'status':
+                                if ($value !== 'announced' || $value !== 'completed' || $value !== 'finished') {
+                                    $mangaData[$key] = $value;
+                                } else {
+                                    $mangaData[$key] = 'announced'; // Valor por default
+                                }
+                                break;
+                            case 'volumes':
+                            case 'chapters':
+                                if (filter_var($value, FILTER_VALIDATE_INT)) {
+                                    $mangaData[$key] = intval($value);
+                                } else {
+                                    $mangaData[$key] = null;
+                                }
+                                break;
+                            case 'start_date':
+                            case 'end_date':
+                                $date = date_parse($value);
+                                if (checkdate($date['month'], $date['day'], $date['year']) && strlen($date['year']) === 4) {
+                                    $mangaData[$key] = $value;
+                                } else {
+                                    $mangaData[$key] = null;
+                                }
+                                break;
+                        }
+                        $mangaData[$key] = $value ?? null;
                         break;
                     case 'character':
-                        $characterData[$key] = $value;
+                        $characterData[$key] = $value ?? null;
                         break;
                     case 'staff':
-                        $staffData[$key] = $value;
+                        $staffData[$key] = $value ?? null;
                         break;
                 }
             }
@@ -114,7 +187,7 @@ if (isset($_POST['submit'])) {
     }
     $db -> close();
     print '<p>Your '.$submissionType.' submission has been succesful. Thanks!</p>';
-    print "<a href='/submit'>Click here to go back.</a>";
+    print "<a class='low-opacity link' href='/submit'>Click here to go back.</a>";
 } else {
     require('resources/views/submit/submit.view.php');
 }

@@ -398,7 +398,7 @@ class Activity
                 }
             }
         }
-        return $mostPosted;
+        return $mostPosted ?? null;
     }
 
     public function getPostRelationCount(string $medium, int $medium_id): int|null

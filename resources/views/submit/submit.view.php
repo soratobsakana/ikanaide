@@ -1,5 +1,5 @@
 <?php $page = parse_url($_SERVER['REQUEST_URI'])['path']; ?>
-<form action="/submit?<?=substr($page, 8, strlen($page))?>" method="POST" class="submit-form">
+<form action="/submit?<?=substr($page, 8, strlen($page))?>" method="POST" class="submit-form" enctype="multipart/form-data">
     <div class="submit-form_title">Submit information to the database. A moderator will review it and inform you about any possible changes. Thanks for the effort!</div>
     <nav class="submit-form_selector">
         <ul class="box">
@@ -30,5 +30,5 @@
             header('Location: /submit/anime');
     }
     ?>
-    <input class="submit-button__colorful box" type="submit" value="Submit" name="submit">
+    <input class="submit-button__colorful box" id="submit" type="submit" value="Submit" name="submit">
 </form>

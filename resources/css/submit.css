@@ -50,21 +50,29 @@ nav.submit-form_selector ul  li.current:hover {
 form.submit-form div.submit-form_wrapper {
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    padding: 5px 12px!important;
+    gap: var(--gap);
+    padding: var(--gap) 12px!important;
 }
 
 form.submit-form div.submit-form_wrapper:focus-within {
-    background: var(--box-bg-hover);
+    background: var(--box-title);
+    opacity: .9;
 }
 
 form.submit-form div.submit-form_wrapper label {
-    margin: auto 0;
     font-size: var(--box-font-size);
 }
 
-form.submit-form div.submit-form_wrapper input[type=text] {
-    padding: 5px 0;
+form.submit-form div.submit-form_wrapper select {
+    border: 1px solid var(--box-title);
+    transition: var(--transition);
+}
+
+form.submit-form div.submit-form_wrapper select:hover {
+    background-color: var(--box-title)!important;
+}
+form.submit-form div.submit-form_wrapper select:focus-within {
+    background-color: var(--box-title)!important;
 }
 
 form.submit-form div.wrapper {
@@ -78,4 +86,19 @@ form.submit-form div.wrapper div {
 
 form.submit-form textarea {
     min-height: 10em;
+    transition: var(--transition);
+}
+
+form.submit-form textarea:focus-within {
+    background-color: var(--box-title)!important;
+}
+
+form.submit-form div.submit-form_file, form.submit-form div.submit-form_file label, form.submit-form div.submit-form_file input[type=file] {
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+form.submit-form div.submit-form_file:hover, form.submit-form div.submit-form_file label:hover, form.submit-form div.submit-form_file input[type=file]:hover {
+    cursor: pointer;
+    background-color: var(--box-title);
 }
