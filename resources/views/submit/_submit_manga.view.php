@@ -53,12 +53,12 @@
     <textarea name="desc" id="desc"></textarea>
 </div>
 <div class="wrapper">
-    <div class="submit-form_wrapper box">
+    <div class="submit-form_wrapper submit-form_file box">
         <label for="cover">cover</label>
-        <input type="text" name="cover" id="cover" placeholder="Please provide a link to your image.">
+        <input type="file" name="cover" id="cover">
     </div>
-    <div class="submit-form_wrapper box">
+    <div class="submit-form_wrapper submit-form_file box">
         <label for="header">header</label>
-        <input type="text" name="header" id="header" placeholder="Please provide a link to your image.">
+        <input type="file" name="header" id="header">
     </div>
 </div>

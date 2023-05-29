@@ -21,8 +21,8 @@
     <textarea name="biography" id="biography"></textarea>
 </div>
 <div class="wrapper">
-    <div class="submit-form_wrapper box">
+    <div class="submit-form_wrapper submit-form_file box">
         <label for="picture">picture</label>
-        <input type="text" name="picture" id="picture" placeholder="Please provide a link to your image.">
+        <input type="file" name="picture" id="picture">
     </div>
 </div>

@@ -56,6 +56,6 @@
     </div>
     <div class="submit-form_wrapper submit-form_file box">
         <label for="header">header</label>
-        <input type="file" name="cover" id="cover">
+        <input type="file" name="header" id="header">
     </div>
 </div>

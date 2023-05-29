@@ -43,6 +43,8 @@ if (isset($_POST['edit-profile_submit'])) {
                 if (in_array($file['type'], array_keys($allowedMIMES))) {
                     $extension = $allowedMIMES[$file['type']];
                 }
+            } else {
+                exit('Images size can\'t be greater than 3MB.');
             }
     
             // Asignación del nombre del archivo y la ruta absoluta donde guardar el archivo. DIRECTORY_SEPARATOR utiliza "/" o "\" dependiendo del SO en el que se esté ejecutando este archivo.

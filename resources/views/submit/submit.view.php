@@ -17,9 +17,6 @@
         case '/submit/manga':
             require('resources/views/submit/_submit_manga.view.php');
             break;
-        case '/submit/vn':
-            require('resources/views/submit/_submit_vn.view.php');
-            break;
         case '/submit/character':
             require('resources/views/submit/_submit_character.view.php');
             break;
