@@ -1,3 +1,7 @@
+Server stuff
+    [] Nginx configuration file
+    [] Make docker work (nginx, php8.2, mysql?)
+
 230519-END
     [X] Finish up picture and header editing for users.
     [X] Allow for filtered post search on trending animes and mangas.
