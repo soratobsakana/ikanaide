@@ -2,5 +2,6 @@
 .idea
 /storage/animes
 /storage/users
+/storage/submissions
 #creds.php
 #.htaccess

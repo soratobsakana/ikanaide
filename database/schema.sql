@@ -36,10 +36,10 @@ CREATE TABLE `anime` (
     `status` VARCHAR(25) NOT NULL,
     `start_date` DATE,
     `end_date` DATE,
-    `season` VARCHAR(30) NOT NULL,
     `description` VARCHAR(3000) NOT NULL,
     `cover` VARCHAR(200) NOT NULL DEFAULT '/storage/sys/default_cover.png',
     `header` VARCHAR(200) NULL DEFAULT NULL,
+    `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`anime_id`)
 ) AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 

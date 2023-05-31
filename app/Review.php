@@ -174,7 +174,14 @@ class Review
         return $reviewVotes;
     }
 
-    public function userVote(int $reviewId, int $userId): bool
+    /**
+     * @param int $reviewId
+     * @param int $userId
+     * @return bool|null
+     * Utilizo los valores true y false en caso de que exista un voto de un usuario para X review. Me sirve para mostrar el icono correcto de voto en _reviewEntry.view.php.
+     * El valor null lo añado en caso de que no exista un voto, y me sirve para lo mismo.
+     */
+    public function userVote(int $reviewId, int $userId): bool|null
     {
         $result = $this -> con -> db -> execute_query('SELECT vote FROM `review_vote` WHERE `review_id` = ? AND `user_id` = ?', [$reviewId, $userId]);
         if ($result -> num_rows === 1) {
@@ -185,7 +192,7 @@ class Review
                 return false;
             }
         } else {
-            return false;
+            return null;
         }
     }
 }

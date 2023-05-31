@@ -35,7 +35,7 @@ class User
             if (!(empty($registerInfo['username']) || empty($registerInfo['email']) || empty($registerInfo['password']) || empty($registerInfo['confirm']))) {
                 if (filter_var($registerInfo['email'], FILTER_VALIDATE_EMAIL)) {
                     if (preg_match('/^[a-zA-Z0-9]+$/', $registerInfo['username']) === 1) {
-                        if (in_array($registerInfo, $reservedUsernames)) {
+                        if (!in_array($registerInfo['username'], $reservedUsernames)) {
                             if (strlen($registerInfo['username']) >= 3 && strlen($registerInfo['username']) <= 16) {
                                 if ($registerInfo['password'] === $registerInfo['confirm']) {
                                     $result = $this -> con -> db -> execute_query('SELECT user_id FROM user WHERE username = ?', [$registerInfo['username']]);
@@ -760,12 +760,14 @@ class User
      */
     public function deleteImg(string $type, int $userId) {
         $currentImg = $this -> con -> db -> execute_query('SELECT '.$type.' FROM user WHERE user_id = ?', [$userId]) -> fetch_column();
-        if (is_writable(DIR  . $currentImg)) {
+        if (is_writable(DIR  . $currentImg) && !is_null($currentImg)) {
             if (unlink(DIR . $currentImg)) {
                 return true;
             } else {
                 return false;
             }
+        } else if (is_null($currentImg)) {
+            return true;
         } else {
             return true;
         }

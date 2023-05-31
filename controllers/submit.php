@@ -165,12 +165,20 @@ if (isset($_POST['submit'])) {
 
             // Asignación del nombre del archivo y la ruta absoluta donde guardar el archivo. DIRECTORY_SEPARATOR utiliza "/" o "\" dependiendo del SO en el que se esté ejecutando este archivo.
             // DIR proviene de /index.php e indica la ruta absoluta de la raiz de esta página web.
-            $targetDirectory = DIR . DIRECTORY_SEPARATOR . "storage" . DIRECTORY_SEPARATOR . "submissions" . DIRECTORY_SEPARATOR . $submissionType . DIRECTORY_SEPARATOR . $fileInput;
+            if ($User -> validateSession() && $_COOKIE['username'] === 'adrian') {
+                $targetDirectory = DIR . DIRECTORY_SEPARATOR . "storage" . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR . $submissionType . DIRECTORY_SEPARATOR . $fileInput;
+            } else {
+                $targetDirectory = DIR . DIRECTORY_SEPARATOR . "storage" . DIRECTORY_SEPARATOR . "submissions" . DIRECTORY_SEPARATOR . $submissionType . DIRECTORY_SEPARATOR . $fileInput;
+            }
             $filename = $submissionType."_".uniqid();
             $newFilepath = $targetDirectory . DIRECTORY_SEPARATOR . $filename . "." . $extension;
 
             // $sqlFilepath será el valor introducido en la base de datos.
-            $sqlFilepath = '/storage/submissions/' . $submissionType . '/' . $fileInput . '/' . $filename . "." . $extension;
+            if ($User -> validateSession() && $_COOKIE['username'] === 'adrian') {
+                $sqlFilepath = '/storage/public/' . $submissionType . '/' . $fileInput . '/' . $filename . "." . $extension;
+            } else {
+                $sqlFilepath = '/storage/submissions/' . $submissionType . '/' . $fileInput . '/' . $filename . "." . $extension;
+            }
 
             // Copio el archivo desde la ruta temporal hacia la ruta final. Si funciona, lo elimino de dicha ruta temporal y asigno $sqlFilepath al array que hace de parámetro en User::editProfile().
             if (!copy($file['path'], $newFilepath)) {
@@ -200,33 +208,51 @@ if (isset($_POST['submit'])) {
     // Inserción de la información.
     switch ($submissionType) {
         case 'anime':
-            if ($User -> validateSession() && $Submit -> newAnimeProposal($animeData, $_COOKIE['user_id'])) {
-                $status = true;
+            if ($User -> validateSession()) {
+                if ($_COOKIE['username'] === 'adrian') {
+                    $status = $Submit -> submitNewAnime($animeData); // True or False
+                } else {
+                    $status = $Submit -> newAnimeProposal($animeData, $_COOKIE['user_id']); // True or False
+                }
             } else {
                 $status = false;
             }
             break;
         case 'manga':
-            if ($User -> validateSession() && $Submit -> newMangaProposal($mangaData, $_COOKIE['user_id'])) {
-                $status = true;
+            if ($User -> validateSession()) {
+                if ($_COOKIE['username'] === 'adrian') {
+                    $status = $Submit -> submitNewManga($mangaData); // True or False
+                } else {
+                    $status = $Submit -> newMangaProposal($mangaData, $_COOKIE['user_id']); // True or False
+                }
             } else {
                 $status = false;
             }
             break;
         case 'character':
-            if ($User -> validateSession() && $Submit -> newCharacterProposal($characterData, $_COOKIE['user_id'])) {
-                $status = true;
+            if ($User -> validateSession()) {
+                if ($_COOKIE['username'] === 'adrian') {
+                    $status = $Submit -> submitNewCharacter($characterData); // True or False
+                } else {
+                    $status = $Submit -> newCharacterProposal($characterData, $_COOKIE['user_id']); // True or False
+                }
             } else {
                 $status = false;
             }
             break;
         case 'staff':
-            if ($User -> validateSession() && $Submit -> newStaffProposal($staffData, $_COOKIE['user_id'])) {
-                $status = true;
+            if ($User -> validateSession()) {
+                if ($_COOKIE['username'] === 'adrian') {
+                    $status = $Submit -> submitNewStaff($staffData); // True or False
+                } else {
+                    $status = $Submit -> newStaffProposal($staffData, $_COOKIE['user_id']); // True or False
+                }
             } else {
                 $status = false;
             }
             break;
+        default:
+            $status = false;
     }
     if ($status === TRUE) {
         print '<p>Your '.$submissionType.' submission has been succesful. Thanks!</p>';

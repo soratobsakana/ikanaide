@@ -62,7 +62,7 @@ if (isset($_POST['edit-profile_submit'])) {
                     break;
                 case 'edit-profile_header':
                     $targetDirectory = DIR . DIRECTORY_SEPARATOR . "storage" . DIRECTORY_SEPARATOR . "users" . DIRECTORY_SEPARATOR . "header";
-                    $filename = "pfp_".uniqid();
+                    $filename = "header_".uniqid();
                     $newFilepath = $targetDirectory . DIRECTORY_SEPARATOR . $filename . "." . $extension;
 
                     // $sqlFilepath será el valor introducido en la base de datos.

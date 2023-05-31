@@ -86,7 +86,6 @@ class Home
                     $reviewsHome[$i]['header'] = $row['header'];
                     $reviewsHome[$i]['medium'] = $medium;
                 }
-                
             }
             return $reviewsHome;
         } else {
