@@ -1,6 +1,4 @@
 .DS_store
 .idea
-/storage/users/pfp/*
-/storage/users/header/*
 #creds.php
 #.htaccess
