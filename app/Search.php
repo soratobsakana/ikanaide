@@ -132,11 +132,15 @@ class Search
             }
         }
 
-        $searchResults = [
-            'medium' => $mediumResults ?? null,
-            'users' => $userResults ?? null
-        ];
+        if (!isset($mediumResults, $userResults)) {
+            return null;
+        } else {
+            $searchResults = [
+                'medium' => $mediumResults ?? null,
+                'users' => $userResults ?? null
+            ];
 
-        return $searchResults ?? null;
+            return $searchResults;
+        }
     }
 }
