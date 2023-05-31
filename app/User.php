@@ -760,11 +760,15 @@ class User
      */
     public function deleteImg(string $type, int $userId) {
         $currentImg = $this -> con -> db -> execute_query('SELECT '.$type.' FROM user WHERE user_id = ?', [$userId]) -> fetch_column();
-        if (is_writable(DIR  . $currentImg) && !is_null($currentImg)) {
-            if (unlink(DIR . $currentImg)) {
-                return true;
+        if (isset($currentImg) && is_writable(DIR  . $currentImg)) {
+            if ($currentImg !== '/storage/sys/default.webp') {
+                if (unlink(DIR . $currentImg)) {
+                    return true;
+                } else {
+                    return false;
+                }
             } else {
-                return false;
+                return true;
             }
         } else if (is_null($currentImg)) {
             return true;
@@ -779,9 +783,7 @@ class User
 
         if (isset($data['pfp'])) {
             if ($this -> deleteImg('pfp', $data['user_id'])) {
-                if ($this -> con -> db -> execute_query('UPDATE user SET pfp = ? WHERE `user_id` = ?', [$data['pfp'], $data['user_id']])) {
-                    return true;
-                } else {
+                if (!$this -> con -> db -> execute_query('UPDATE user SET pfp = ? WHERE `user_id` = ?', [$data['pfp'], $data['user_id']])) {
                     return false;
                 }
             } else {
@@ -791,9 +793,7 @@ class User
         
         if (isset($data['header'])) {
             if ($this -> deleteImg('header', $data['user_id'])) {
-                if ($this -> con -> db -> execute_query('UPDATE user SET header = ? WHERE `user_id` = ?', [$data['header'], $data['user_id']])) {
-                    return true;
-                } else {
+                if (!$this -> con -> db -> execute_query('UPDATE user SET header = ? WHERE `user_id` = ?', [$data['header'], $data['user_id']])) {
                     return false;
                 }
             } else {

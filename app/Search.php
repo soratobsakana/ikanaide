@@ -132,7 +132,7 @@ class Search
             }
         }
 
-        if (!isset($mediumResults, $userResults)) {
+        if (!isset($mediumResults) && !isset($userResults)) {
             return null;
         } else {
             $searchResults = [

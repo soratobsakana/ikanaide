@@ -1,7 +1,6 @@
 .DS_store
 .idea
-/storage/animes
-/storage/users
-/storage/submissions
+/storage/users/pfp/*
+/storage/users/header/*
 #creds.php
 #.htaccess

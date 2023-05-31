@@ -81,7 +81,7 @@ if (isset($_POST['submit'])) {
                                     exit('There needs to be a title. <a class="low-opacity link" href="/submit/manga">Comeback</a>');
                                 }
                                 break;
-                            case 'type':
+                            case 'format':
                                 if ($value !== 'manga' || $value !== 'manhwa' || $value !== 'ln') {
                                     $mangaData[$key] = $value;
                                 } else {
@@ -113,7 +113,6 @@ if (isset($_POST['submit'])) {
                                 }
                                 break;
                         }
-                        $mangaData[$key] = $value ?? null;
                         break;
                     case 'character':
                         $value !== '' ? $characterData[$key] = $value : $characterData[$key] = null;
@@ -182,6 +181,8 @@ if (isset($_POST['submit'])) {
 
             // Copio el archivo desde la ruta temporal hacia la ruta final. Si funciona, lo elimino de dicha ruta temporal y asigno $sqlFilepath al array que hace de parámetro en User::editProfile().
             if (!copy($file['path'], $newFilepath)) {
+                print 'a';
+                die();
                 header('Location: /404');
                 die();
             } else {
