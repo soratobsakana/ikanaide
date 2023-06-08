@@ -121,7 +121,7 @@
         <?php
         }
 
-        if ($userInfo['user_id'] != $_COOKIE['user_id']) {
+        if (isset($userInfo['user_id'], $_COOKIE['user_id']) && ($userInfo['user_id'] != $_COOKIE['user_id'])) {
             ?><span id="user-report_btn" class="user-report material-icons dots center-text low-opacity">more_horiz</span><?php
         }
 
@@ -268,7 +268,7 @@
 
 <?php
 
-if ($userInfo['user_id'] != $_COOKIE['user_id']) {
+if (isset($userInfo['user_id'], $_COOKIE['user_id']) && ($userInfo['user_id'] != $_COOKIE['user_id'])) {
     ?>
     <section id="user-report_modal" class="modal">
     <div class="box-wrapper">

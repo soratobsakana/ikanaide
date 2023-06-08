@@ -1,28 +1,17 @@
-services:
-  web:
-    image: nginx:latest
-    ports:
-      - "80:80"
-    volumes:
-      - ./docker/nginx-default.conf:/etc/nginx/conf.d/default.conf
-  app:
-    build:
-      dockerfile: ./docker/Dockerfile
-    volumes:
-      - .:/app
-  db:
-    image: mysql:8.0
-    volumes:
-      - mysqldata:/var/lib/mysql
-    ports:
-      - "4306:3306"
-    restart: unless-stopped
-    environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-      MYSQL_ROOT_PASSWORD: secret
-      MYSQL_USER: user
-      MYSQL_PASSWORD: secret
-      MYSQL_DATABASE: docker-php
+version: "3.3"
 
-volumes:
-  mysqldata:
+services: # Palabra clave de Docker Compose.
+  nginx: # Palabra no clave, descriptiva de un servicio.
+    image: nginx:alpine # Imagen a extraer desde Docker Hub.
+    ports: # Mapeado de puertos entre la máquina real y el contenedor.
+      - "8080:80"
+    networks: # Este servicio pertenece a la red: internal
+      - internal
+  php:
+    image: php:fpm-alpine
+    networks:
+      - internal
+
+networks:
+  internal: # Nombre de la red.
+    driver: bridge # Modo de conexión.
