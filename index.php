@@ -2,8 +2,13 @@
 <html lang="en">
 <head>
 
-    <?php define("DIR", __DIR__); // Defino el directorio raíz de la página web para usarlo en cualquier archivo ?>
-    <?php require_once 'routes/titles.php' ?>
+    <?php
+
+    // Defino el directorio raíz de la página web para usarlo en cualquier archivo
+    define("DIR", __DIR__);
+    require_once 'routes/titles.php'
+
+    ?>
     <title><?=$tabTitle?> / ikanaide</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
