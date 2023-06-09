@@ -1,5 +1,5 @@
 <?php
-
+session_start(); // I use this to pass information about the current entry to the edit form through $_SESSION.
 require_once('resources/functions.php');
 require_once 'app/Listing.php';
 require_once 'app/User.php';
