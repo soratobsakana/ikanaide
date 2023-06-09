@@ -6,7 +6,6 @@ class Database {
     public function __construct()
     {
         // Obliga a utilizar el modo de reporte recomendado
-        include 'database/creds.php';
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
         try {

@@ -691,8 +691,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `password`, `email`, `joined_at`, `country`, `biography`, `born`, `pfp`, `header`, `twitter`, `github`, `discord`, `website`, `shares`) VALUES
-(16, 'adrian', '$2y$10$EgjUuhMWFQHcWUnOO0OR9e.VTQH.dy8M6j9z8D5sIwyMYaKUhftXy', 'adrian@adrian.adrian', '2023-05-31 11:38:15', 'sadas', 'afdadasd', '2023-05-10', '/storage/users/pfp/pfp_64772f3031816.webp', '/storage/users/header/header_647721359ab4c.jpg', 'asdasd', 'asdasd', 'asdasd#0001', NULL, b'0'),
-(17, 'usuario', '$2y$10$I0xWfnCKA.qTutvOOIlLAemMCBx8ALyUczcmaFUX3cRX8pb9XblV6', 'usuario@usuario.usuario', '2023-05-31 12:29:21', NULL, NULL, NULL, '/storage/users/pfp/pfp_6477229b91faa.png', '/storage/users/header/header_6477225c6cf84.jpg', NULL, NULL, NULL, NULL, b'0');
+(16, 'adrian', '$2y$10$EgjUuhMWFQHcWUnOO0OR9e.VTQH.dy8M6j9z8D5sIwyMYaKUhftXy', 'adrian@adrian.adrian', '2023-05-31 11:38:15', 'sadas', 'afdadasd', '2023-05-10', '/storage/sys/default.webp', '/storage/sys/banner.jpg', 'asdasd', 'asdasd', 'asdasd#0001', NULL, b'0'),
+(17, 'usuario', '$2y$10$I0xWfnCKA.qTutvOOIlLAemMCBx8ALyUczcmaFUX3cRX8pb9XblV6', 'usuario@usuario.usuario', '2023-05-31 12:29:21', NULL, NULL, NULL, '/storage/sys/default.png', '/storage/sys/banner.jpg', NULL, NULL, NULL, NULL, b'0');
 
 -- --------------------------------------------------------
 

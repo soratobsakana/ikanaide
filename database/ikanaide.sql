@@ -647,7 +647,6 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`user_id`, `username`, `password`, `email`, `joined_at`, `country`, `biography`, `born`, `pfp`, `header`, `twitter`, `github`, `discord`, `website`, `shares`, `data`) VALUES
 (1, 'user', 'pw', 'pw@pw.pw', NULL, 'spain', 'This is my biography', NULL, '/storage/sys/default.webp', '/storage/sys/banner.jpg', NULL, NULL, NULL, NULL, b'0', NULL),
 (2, 'adrian', '$2y$10$fvHVwcGLnsLCIB1Il1PYL.5veRsW8QMnWAQaL/vqg2FaP5ZvCnixO', 'a@a.com', '2023-03-24 09:17:47', NULL, 'Biografía de ejemplo', NULL, '/storage/sys/default.webp', '/storage/sys/banner.jpg', NULL, NULL, NULL, NULL, b'1', NULL),
-(3, 'bifrutas', '$2y$10$8L40t1hYHgZMAPTg638s/ejgLTccOtH0uiGlk.OUGKfVtkwF.802S', 'a@a.es', '2023-03-24 10:16:49', NULL, NULL, NULL, '/storage/sys/default.webp', '/storage/sys/banner.jpg', NULL, NULL, NULL, NULL, b'0', NULL),
 (4, 'test', '$2y$10$6bN/72/0s7iSLX9N6s/ZFurIPmFB2pRnesl0NVVg.lPVwOQBIOCKq', 'test@test.com', '2023-03-24 11:43:39', NULL, NULL, NULL, '/storage/sys/default.webp', '/storage/sys/banner.jpg', NULL, NULL, NULL, NULL, b'0', NULL),
 (5, 'test2', '$2y$10$E0pM1ofEIdug/C56lz3DxO3RryZ8JdJivSY/NkwzP4KAD6/.3xaVe', 'test2@test2.com', '2023-03-24 11:46:02', NULL, NULL, NULL, '/storage/sys/default.webp', '/storage/sys/banner.jpg', NULL, NULL, NULL, NULL, b'0', NULL),
 (6, 'test3', '$2y$10$2iSvFHLmNz35p2TZqz9woOqUeiVgFwOlpWbP1.7GnWAeFdvHbvUYa', 'test3@test3.com', '2023-03-24 11:46:31', NULL, NULL, NULL, '/storage/sys/default.webp', '/storage/sys/banner.jpg', NULL, NULL, NULL, NULL, b'0', NULL),

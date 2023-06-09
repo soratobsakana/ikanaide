@@ -1,12 +1,18 @@
+<?php ob_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 
     <?php
 
+    if ($_SERVER['REQUEST_URI'] === '/') {
+        header('Location: /home');
+    }
+
     // Defino el directorio raíz de la página web para usarlo en cualquier archivo
-    define("DIR", __DIR__);
-    require_once 'routes/titles.php'
+    const DIR = __DIR__;
+    require_once 'routes/titles.php';
 
     ?>
     <title><?=$tabTitle?> / ikanaide</title>
@@ -35,3 +41,5 @@
 
 </body>
 </html>
+
+<?php ob_end_flush(); ?>

@@ -15,10 +15,12 @@
                     <div class="add">
                         <?php
 
-                        if ($ranking[$i]['userList'] === TRUE) {
-                            ?><a class="ranking-list_button" href="/rankingList?medium=<?=$medium?>&id=<?=$ranking[$i][$medium.'_id']?>&action=delete">delete from list</a><?php
-                        } else {
-                            ?><a class="ranking-list_button" href="/rankingList?medium=<?=$medium?>&id=<?=$ranking[$i][$medium.'_id']?>&action=add">add to list</a><?php
+                        if (isset($_COOKIE['session'])) {
+                            if ($ranking[$i]['userList'] === TRUE) {
+                                ?><a class="ranking-list_button" href="/rankingList?medium=<?=$medium?>&id=<?=$ranking[$i][$medium.'_id']?>&action=delete">delete from list</a><?php
+                            } else {
+                                ?><a class="ranking-list_button" href="/rankingList?medium=<?=$medium?>&id=<?=$ranking[$i][$medium.'_id']?>&action=add">add to list</a><?php
+                            }
                         }
 
                         ?>
@@ -27,10 +29,12 @@
                     <div class="fav">
                         <?php
 
-                        if ($ranking[$i]['userList'] === TRUE && $ranking[$i]['userFav'] === TRUE) {
-                            ?><a class="ranking-list_button" href="/rankingList?medium=<?=$medium?>&id=<?=$ranking[$i][$medium.'_id']?>&action=unfav"><span class="material-icons-outlined">favorite</span></a><?php
-                        } else if ($ranking[$i]['userList'] === TRUE && $ranking[$i]['userFav'] === FALSE) {
-                            ?><a class="ranking-list_button" href="/rankingList?medium=<?=$medium?>&id=<?=$ranking[$i][$medium.'_id']?>&action=fav"><span class="material-icons-outlined">favorite_border</span></a><?php
+                        if (isset($_COOKIE['session'])) {
+                            if ($ranking[$i]['userList'] === TRUE && $ranking[$i]['userFav'] === TRUE) {
+                                ?><a class="ranking-list_button" href="/rankingList?medium=<?=$medium?>&id=<?=$ranking[$i][$medium.'_id']?>&action=unfav"><span class="material-icons-outlined">favorite</span></a><?php
+                            } else if ($ranking[$i]['userList'] === TRUE && $ranking[$i]['userFav'] === FALSE) {
+                                ?><a class="ranking-list_button" href="/rankingList?medium=<?=$medium?>&id=<?=$ranking[$i][$medium.'_id']?>&action=fav"><span class="material-icons-outlined">favorite_border</span></a><?php
+                            }
                         }
 
                         ?>
