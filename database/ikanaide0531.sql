@@ -713,6 +713,32 @@ CREATE TABLE `vn` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Estructura de tabla para la tabla `roles`
+--
+
+CREATE TABLE `roles` (
+    `user_id` INT UNSIGNED NOT NULL,
+    `role` ENUM('moderator', 'admin'),
+    `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`user_id`),
+    FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Estructura de tabla para la tabla `report`
+--
+
+CREATE TABLE `report` (
+    `reporting_user` INT UNSIGNED NOT NULL,
+    `reported_user` INT UNSIGNED NOT NULL,
+    `reason` TEXT NOT NULL,
+    `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (`reporting_user`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (`reported_user`) REFERENCES `user`(`user_id`) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT reporting_reported CHECK (`reporting_user` <> `reported_user`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+--
 -- Índices para tablas volcadas
 --
 

@@ -44,7 +44,7 @@ CREATE TABLE `anime` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `anime`
+-- Dumping certbot for table `anime`
 --
 
 LOCK TABLES `anime` WRITE;
@@ -79,7 +79,7 @@ CREATE TABLE `animelist` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `animelist`
+-- Dumping certbot for table `animelist`
 --
 
 LOCK TABLES `animelist` WRITE;
@@ -108,7 +108,7 @@ CREATE TABLE `bookmark` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `bookmark`
+-- Dumping certbot for table `bookmark`
 --
 
 LOCK TABLES `bookmark` WRITE;
@@ -136,7 +136,7 @@ CREATE TABLE `character` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `character`
+-- Dumping certbot for table `character`
 --
 
 LOCK TABLES `character` WRITE;
@@ -164,7 +164,7 @@ CREATE TABLE `character_anime` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `character_anime`
+-- Dumping certbot for table `character_anime`
 --
 
 LOCK TABLES `character_anime` WRITE;
@@ -192,7 +192,7 @@ CREATE TABLE `character_manga` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `character_manga`
+-- Dumping certbot for table `character_manga`
 --
 
 LOCK TABLES `character_manga` WRITE;
@@ -220,7 +220,7 @@ CREATE TABLE `character_vn` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `character_vn`
+-- Dumping certbot for table `character_vn`
 --
 
 LOCK TABLES `character_vn` WRITE;
@@ -260,7 +260,7 @@ CREATE TABLE `edit_anime` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `edit_anime`
+-- Dumping certbot for table `edit_anime`
 --
 
 LOCK TABLES `edit_anime` WRITE;
@@ -301,7 +301,7 @@ CREATE TABLE `edit_manga` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `edit_manga`
+-- Dumping certbot for table `edit_manga`
 --
 
 LOCK TABLES `edit_manga` WRITE;
@@ -338,7 +338,7 @@ CREATE TABLE `edit_vn` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `edit_vn`
+-- Dumping certbot for table `edit_vn`
 --
 
 LOCK TABLES `edit_vn` WRITE;
@@ -365,7 +365,7 @@ CREATE TABLE `follow` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `follow`
+-- Dumping certbot for table `follow`
 --
 
 LOCK TABLES `follow` WRITE;
@@ -403,7 +403,7 @@ CREATE TABLE `manga` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `manga`
+-- Dumping certbot for table `manga`
 --
 
 LOCK TABLES `manga` WRITE;
@@ -438,7 +438,7 @@ CREATE TABLE `mangalist` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `mangalist`
+-- Dumping certbot for table `mangalist`
 --
 
 LOCK TABLES `mangalist` WRITE;
@@ -466,7 +466,7 @@ CREATE TABLE `post` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `post`
+-- Dumping certbot for table `post`
 --
 
 LOCK TABLES `post` WRITE;
@@ -493,7 +493,7 @@ CREATE TABLE `post_anime` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `post_anime`
+-- Dumping certbot for table `post_anime`
 --
 
 LOCK TABLES `post_anime` WRITE;
@@ -520,7 +520,7 @@ CREATE TABLE `post_like` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `post_like`
+-- Dumping certbot for table `post_like`
 --
 
 LOCK TABLES `post_like` WRITE;
@@ -547,7 +547,7 @@ CREATE TABLE `post_manga` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `post_manga`
+-- Dumping certbot for table `post_manga`
 --
 
 LOCK TABLES `post_manga` WRITE;
@@ -574,7 +574,7 @@ CREATE TABLE `post_reply` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `post_reply`
+-- Dumping certbot for table `post_reply`
 --
 
 LOCK TABLES `post_reply` WRITE;
@@ -603,7 +603,7 @@ CREATE TABLE `review` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `review`
+-- Dumping certbot for table `review`
 --
 
 LOCK TABLES `review` WRITE;
@@ -630,7 +630,7 @@ CREATE TABLE `review_anime` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `review_anime`
+-- Dumping certbot for table `review_anime`
 --
 
 LOCK TABLES `review_anime` WRITE;
@@ -657,7 +657,7 @@ CREATE TABLE `review_manga` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `review_manga`
+-- Dumping certbot for table `review_manga`
 --
 
 LOCK TABLES `review_manga` WRITE;
@@ -685,7 +685,7 @@ CREATE TABLE `review_vn` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `review_vn`
+-- Dumping certbot for table `review_vn`
 --
 
 LOCK TABLES `review_vn` WRITE;
@@ -713,7 +713,7 @@ CREATE TABLE `staff` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `staff`
+-- Dumping certbot for table `staff`
 --
 
 LOCK TABLES `staff` WRITE;
@@ -741,7 +741,7 @@ CREATE TABLE `staff_anime` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `staff_anime`
+-- Dumping certbot for table `staff_anime`
 --
 
 LOCK TABLES `staff_anime` WRITE;
@@ -769,7 +769,7 @@ CREATE TABLE `staff_manga` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `staff_manga`
+-- Dumping certbot for table `staff_manga`
 --
 
 LOCK TABLES `staff_manga` WRITE;
@@ -797,7 +797,7 @@ CREATE TABLE `staff_vn` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `staff_vn`
+-- Dumping certbot for table `staff_vn`
 --
 
 LOCK TABLES `staff_vn` WRITE;
@@ -834,7 +834,7 @@ CREATE TABLE `submit_anime` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `submit_anime`
+-- Dumping certbot for table `submit_anime`
 --
 
 LOCK TABLES `submit_anime` WRITE;
@@ -867,7 +867,7 @@ CREATE TABLE `submit_character` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `submit_character`
+-- Dumping certbot for table `submit_character`
 --
 
 LOCK TABLES `submit_character` WRITE;
@@ -906,7 +906,7 @@ CREATE TABLE `submit_manga` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `submit_manga`
+-- Dumping certbot for table `submit_manga`
 --
 
 LOCK TABLES `submit_manga` WRITE;
@@ -939,7 +939,7 @@ CREATE TABLE `submit_staff` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `submit_staff`
+-- Dumping certbot for table `submit_staff`
 --
 
 LOCK TABLES `submit_staff` WRITE;
@@ -974,7 +974,7 @@ CREATE TABLE `submit_vn` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `submit_vn`
+-- Dumping certbot for table `submit_vn`
 --
 
 LOCK TABLES `submit_vn` WRITE;
@@ -1015,7 +1015,7 @@ CREATE TABLE `user` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user`
+-- Dumping certbot for table `user`
 --
 
 LOCK TABLES `user` WRITE;
@@ -1049,7 +1049,7 @@ CREATE TABLE `vn` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `vn`
+-- Dumping certbot for table `vn`
 --
 
 LOCK TABLES `vn` WRITE;
