@@ -316,7 +316,7 @@ INSERT INTO `mangalist` (`user_id`, `manga_id`, `score`, `status`, `progress`, `
 --
 
 CREATE TABLE `post` (
-  `post_id` bigint(20) UNSIGNED NOT NULL,
+  `post_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` int(10) UNSIGNED NOT NULL,
   `content` varchar(350) NOT NULL,
   `date` datetime DEFAULT current_timestamp()

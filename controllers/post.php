@@ -15,9 +15,9 @@ if (isset($_POST)) {
             header('Location: /404');
             die();
         } else {
-            if ($key === 'post-content' && !empty($key)) {
+            if ($key === 'post-content') {
                 $post['content'] = $value;
-            } else if ($key === 'on-medium' && !empty($key)) {
+            } else if ($key === 'on-medium') {
                 $post['relation'] = $value;
             }
         }
@@ -47,11 +47,10 @@ if (isset($_POST)) {
             }
             if (isset($_COOKIE['username'])) {
                 header('Location: /' . $_COOKIE['username']);
-                die();
             } else {
                 header('Location: /logout');
-                die();
             }
+            die();
         }
     }
 }

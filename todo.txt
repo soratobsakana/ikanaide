@@ -1,6 +1,10 @@
+230619
+    [] Achieve MySQL consistency on Docker
+    [] Achieve HTTPS within Docker
+
 Server stuff
-    [] Nginx configuration file
-    [] Make docker work (nginx, php8.2, mysql?)
+    [X] Nginx configuration file
+    [X] Make docker work (nginx, php8.2, mysql?)
 
 230519-END
     [X] Finish up picture and header editing for users.

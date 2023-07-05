@@ -6,15 +6,12 @@
 
     <?php
 
-    if ($_SERVER['REQUEST_URI'] === '/') {
-        header('Location: /home');
-    }
-
     // Defino el directorio raíz de la página web para usarlo en cualquier archivo
     const DIR = __DIR__;
     require_once 'routes/titles.php';
 
     ?>
+
     <title><?=$tabTitle?> / ikanaide</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
