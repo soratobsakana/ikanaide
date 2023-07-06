@@ -1,10 +1,10 @@
 <?php
 
 // This file is used to sum one single episode or chapter to a user's list entry.
-require_once 'app/User.php';
-require_once 'app/Listing.php';
-require_once 'app/Activity.php';
-require_once 'resources/functions.php';
+require_once '../app/User.php';
+require_once '../app/Listing.php';
+require_once '../app/Activity.php';
+require_once '../resources/functions.php';
 $User = new User;
 $Listing = new Listing;
 $Activity = new Activity;

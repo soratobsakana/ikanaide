@@ -8,7 +8,7 @@ if ($_POST) {
         }
     }
 
-    require 'app/User.php';
+    require '../app/User.php';
     $login = new User;
 
     // Verificación y autenticación de la coincidencia de usuario y contraseña de una entrada de la BBDD con lo introducido por el usuario.
@@ -19,4 +19,4 @@ if ($_POST) {
     }
 }
 
-require 'resources/views/user/login.view.php';
+require '../resources/views/user/login.view.php';

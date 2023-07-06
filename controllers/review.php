@@ -1,9 +1,9 @@
 <?php
 
-include_once 'app/Review.php';
-include_once 'app/Listing.php';
-include_once 'app/User.php';
-include_once 'resources/functions.php';
+include_once '../app/Review.php';
+include_once '../app/Listing.php';
+include_once '../app/User.php';
+include_once '../resources/functions.php';
 
 $reviewGuide = explode('/', $uri);
 
@@ -94,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     if (isset($reviewsHome) || isset($review) || isset($titles) || isset($entryToReview)) {
-        require('resources/views/reviews/review.view.php');
+        require('../resources/views/reviews/review.view.php');
     } else {
         header('Location: /404');
         die();

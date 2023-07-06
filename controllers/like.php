@@ -1,7 +1,7 @@
 <?php
 
-require_once 'app/Activity.php';
-require_once 'app/User.php';
+require_once '../app/Activity.php';
+require_once '../app/User.php';
 $User = new User;
 $Activity = new Activity;
 

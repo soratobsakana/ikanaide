@@ -14,7 +14,7 @@ if (($username === 'anime' || $username === 'manga') && isset($guide[2])) {
 // Este switch lo utilizo para títulos de más de una palabra o que necesitan un valor dinámico
 switch ($page) {
     case '/':
-        $tabTitle = '/home';
+        $tabTitle = 'home';
         break;
     case '/submit/anime':
         $tabTitle = 'submit a new anime';

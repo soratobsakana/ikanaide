@@ -1,6 +1,6 @@
 <?php
 
-require_once 'app/User.php';
+require_once '../app/User.php';
 $User = new User;
 
 if ((isset($_POST['add']) || isset($_POST['delete']) || isset($_POST['favourite']) || isset($_POST['unfavourite']) || isset($_POST['save'])) && $User -> validateSession() === TRUE) {

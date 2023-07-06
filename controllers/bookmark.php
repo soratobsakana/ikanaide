@@ -1,8 +1,8 @@
 <?php
 
-require_once 'app/Activity.php';
-require_once 'app/User.php';
-require_once 'app/Bookmark.php';
+require_once '../app/Activity.php';
+require_once '../app/User.php';
+require_once '../app/Bookmark.php';
 $User = new User;
 $Bookmark = new Bookmark;
 $Activity = new Activity;

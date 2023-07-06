@@ -1,7 +1,7 @@
 <?php
 
-require_once 'resources/functions.php';
-require_once 'app/Activity.php';
+require_once '../resources/functions.php';
+require_once '../app/Activity.php';
 
 $Activity = new Activity;
 $User = new User;
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-reply'])) {
         $loggedUser = $User -> getInfoLess($_COOKIE['user_id']);
     }
 
-    require 'resources/views/activity/activity.view.php';
+    require '../resources/views/activity/activity.view.php';
 } else {
     header('Location: /404');
     die();

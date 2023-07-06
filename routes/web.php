@@ -1,6 +1,6 @@
 <?php
 
-require_once 'resources/functions.php';
+require_once '../resources/functions.php';
 
 // Devuelve la URI y la parsea eliminando una posible query (ej. en /pagina?id=100 devolverá /pagina).
 $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
@@ -11,14 +11,14 @@ $medium = $guide[1]; // anime|manga
 
 // Si se indica un anime o manga por URL, significa que explode('/', $uri) va a devolver un tercer valor. Si esto pasa, creo una ruta dinámica en $mediumRoutes que utilizo abajo mediante un else if.
 // Si no existe un tercer valor, se require el controlador indicado para /anime y /manga indicado en $routes.
-// Ambos casos conducen al mismo controlador (/controllers/medium.php), que se encarga de mostrar el listado de un anime o manga, o mostrar la página predeterminada de cada medio.
+// Ambos casos conducen al mismo controlador (/../controllers/medium.php), que se encarga de mostrar el listado de un anime o manga, o mostrar la página predeterminada de cada medio.
 if (($guide[1] === 'anime' || $guide[1] === 'manga') && isset($guide[2])) {
     $entry = $guide[2];  // Nombre-de-Anime|Manga
     $mediumRoutes = [
-        '/'.$medium.'/'.$entry => 'controllers/medium.php',
-        '/'.$medium.'/'.$entry.'/characters'=> 'controllers/medium.php',
-        '/'.$medium.'/'.$entry.'/staff'=> 'controllers/medium.php',
-        '/'.$medium.'/'.$entry.'/reviews'=> 'controllers/medium.php',
+        '/'.$medium.'/'.$entry => '../controllers/medium.php',
+        '/'.$medium.'/'.$entry.'/characters'=> '../controllers/medium.php',
+        '/'.$medium.'/'.$entry.'/staff'=> '../controllers/medium.php',
+        '/'.$medium.'/'.$entry.'/reviews'=> '../controllers/medium.php',
     ];
 }
 
@@ -32,13 +32,13 @@ if (($guide[1] === 'anime' || $guide[1] === 'manga') && isset($guide[2])) {
 if ($guide[1] === 'review' && is_numeric($guide[2])) {
     $reviewEntry = $guide[2];  // Review ID
     $reviewRoutes = [
-        '/review/'.$reviewEntry => 'controllers/review.php'
+        '/review/'.$reviewEntry => '../controllers/review.php'
     ];
 } else if ($guide[1] === 'review' && isset($guide[4])) {
     $reviewMedium = $guide[3]; // anime|manga
     $reviewEntry = $guide[4];  // Nombre-de-Anime|Manga
     $reviewRoutes = [
-        '/review/new/'.$reviewMedium.'/'.$reviewEntry => 'controllers/review.php'
+        '/review/new/'.$reviewMedium.'/'.$reviewEntry => '../controllers/review.php'
     ];
 }
 
@@ -47,63 +47,63 @@ if ($guide[1] === 'activity' && isset($guide[2])) {
     if (is_numeric($guide[2])) {
         $postId = $guide[2];
         $postRoutes = [
-            '/activity/' . $postId => 'controllers/activity.php'
+            '/activity/' . $postId => '../controllers/activity.php'
         ];
     }
 }
 
 // Array con las todas las rutas de la página web.
 $routes = array(
-    '/' => 'controllers/home.php',
-    '/home' => 'controllers/home.php',
-    '/anime' => 'controllers/medium.php',
-    '/manga' => 'controllers/medium.php',
-    '/vn' => 'controllers/medium.php',
-    '/edit' => 'controllers/edit.php',
+    '/' => '../controllers/home.php',
+    '/home' => '../controllers/home.php',
+    '/anime' => '../controllers/medium.php',
+    '/manga' => '../controllers/medium.php',
+    '/vn' => '../controllers/medium.php',
+    '/edit' => '../controllers/edit.php',
 
-    '/rankings' => 'controllers/rankings.php',
-    '/rankings/anime' => 'controllers/rankings.php',
-    '/rankings/manga' => 'controllers/rankings.php',
-    '/rankingList' => 'controllers/rankingList.php',
+    '/rankings' => '../controllers/rankings.php',
+    '/rankings/anime' => '../controllers/rankings.php',
+    '/rankings/manga' => '../controllers/rankings.php',
+    '/rankingList' => '../controllers/rankingList.php',
 
-    '/reviews' => 'controllers/review.php',
-    '/review/new' => 'controllers/review.php',
-    '/review/new/anime' => 'controllers/review.php',
-    '/review/new/manga' => 'controllers/review.php',
-    '/likeReview' => 'controllers/likeReview.php',
+    '/reviews' => '../controllers/review.php',
+    '/review/new' => '../controllers/review.php',
+    '/review/new/anime' => '../controllers/review.php',
+    '/review/new/manga' => '../controllers/review.php',
+    '/likeReview' => '../controllers/likeReview.php',
 
-    '/search' => 'controllers/search.php',
+    '/search' => '../controllers/search.php',
 
     '/terms' => 'resources/views/terms.view.php',
     '/privacy' => 'resources/views/privacy.view.php',
     '/contact' => 'resources/views/contact.view.php',
     '/support' => 'resources/views/support.view.php',
 
-    '/ep' => 'controllers/editProfile.php',
-    '/sum' => 'controllers/sum.php',
-    '/post' => 'controllers/post.php',
-    '/reply' => 'controllers/activity.php',
-    '/like' => 'controllers/like.php',
-    '/bookmark' => 'controllers/bookmark.php',
-    '/delete' => 'controllers/delete.php',
-    '/follow' => 'controllers/follow.php',
-    '/timeline' => 'controllers/timeline.php',
-    '/report' => 'controllers/report.php',
+    '/ep' => '../controllers/editProfile.php',
+    '/sum' => '../controllers/sum.php',
+    '/post' => '../controllers/post.php',
+    '/reply' => '../controllers/activity.php',
+    '/like' => '../controllers/like.php',
+    '/bookmark' => '../controllers/bookmark.php',
+    '/delete' => '../controllers/delete.php',
+    '/follow' => '../controllers/follow.php',
+    '/timeline' => '../controllers/timeline.php',
+    '/report' => '../controllers/report.php',
 
-    '/submit' => 'controllers/submit.php',
-    '/submit/anime' => 'controllers/submit.php',
-    '/submit/manga' => 'controllers/submit.php',
-    '/submit/vn' => 'controllers/submit.php',
-    '/submit/character' => 'controllers/submit.php',
-    '/submit/staff' => 'controllers/submit.php',
+    '/submit' => '../controllers/submit.php',
+    '/submit/anime' => '../controllers/submit.php',
+    '/submit/manga' => '../controllers/submit.php',
+    '/submit/vn' => '../controllers/submit.php',
+    '/submit/character' => '../controllers/submit.php',
+    '/submit/staff' => '../controllers/submit.php',
 
-    '/login' => 'controllers/login.php',
-    '/register' => 'controllers/register.php',
-    '/logout' => 'controllers/logout.php',
+    '/login' => '../controllers/login.php',
+    '/register' => '../controllers/register.php',
+    '/logout' => '../controllers/logout.php',
 
-    '/add' => 'controllers/addToList.php',
+    '/add' => '../controllers/addToList.php',
 
-    '/404' => 'resources/views/404.view.php'
+    '/404' => '../resources/views/404.view.php'
 );
 
 // Filtrar la $uri a traves del array de rutas y requerir el archivo al que refiere esa URI.

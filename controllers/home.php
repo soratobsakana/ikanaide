@@ -1,11 +1,11 @@
 <?php
 
-require_once 'resources/functions.php';
-require_once 'app/User.php';
-require_once 'app/Activity.php';
-require_once 'app/Following.php';
-require_once 'app/Home.php';
-require_once 'app/Review.php';
+require_once '../resources/functions.php';
+require_once '../app/User.php';
+require_once '../app/Activity.php';
+require_once '../app/Following.php';
+require_once '../app/Home.php';
+require_once '../app/Review.php';
 
 $User = new User;
 $Activity = new Activity;
@@ -29,4 +29,4 @@ if (isset($_COOKIE['session']) && $User -> validateSession()) {
     die();
 }
 
-require 'resources/views/home/home.view.php';
+require '../resources/views/home/home.view.php';

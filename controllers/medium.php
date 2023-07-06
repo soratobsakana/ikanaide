@@ -1,8 +1,8 @@
 <?php
 session_start(); // I use this to pass information about the current entry to the edit form through $_SESSION.
-require_once('resources/functions.php');
-require_once 'app/Listing.php';
-require_once 'app/User.php';
+require_once('../resources/functions.php');
+require_once '../app/Listing.php';
+require_once '../app/User.php';
 
 
 // $uri viene de /routes/web.php
@@ -56,7 +56,7 @@ if (isset($guide[2])) {
             $medium === 'anime' ? $counter = 'episodes' : $counter = 'chapters';
             $_SESSION['counter'] = $mediumInfo[$counter];
 
-            require('resources/views/medium/mediumpage.view.php');
+            require('../resources/views/medium/mediumpage.view.php');
         } else {
             exit(header('Location: /404'));
         }
@@ -66,5 +66,5 @@ if (isset($guide[2])) {
 } else {
     // Si no se ha indicado un segundo elemento en la URI, se muestra una página de inicio predeterminada.
     $homeInfo = $Listing -> getHome($medium);
-    require('resources/views/medium/mediumhome.view.php');
+    require('../resources/views/medium/mediumhome.view.php');
 }

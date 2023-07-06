@@ -1,8 +1,8 @@
 <?php
-include_once('resources/functions.php');
-include_once('app/User.php');
-include_once('app/Activity.php');
-include_once('app/Following.php');
+include_once('../resources/functions.php');
+include_once('../app/User.php');
+include_once('../app/Activity.php');
+include_once('../app/Following.php');
 $Session = new User;
 $Activity = new Activity;
 $Following = new Following;
@@ -46,7 +46,7 @@ if ($user_id !== null) {
         $userPosts = $Session -> getPosts($user_id);
     }
 
-    require 'resources/views/user/profile.view.php';
+    require '../resources/views/user/profile.view.php';
 } else {
     exit(header("Location: /404"));
 }

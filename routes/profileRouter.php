@@ -1,6 +1,6 @@
 <?php
 
-require_once('app/User.php');
+require_once('../app/User.php');
 $Session = new User;
 
 // $uri viene de routes/web.php
@@ -10,11 +10,11 @@ $username = explode("/", $uri)[1];
 $user_id = $Session -> getUserID($username);
 
 $profileRoutes = [
-    '/'.$username => 'controllers/profile.php',
-    '/'.$username.'/animelist' => 'controllers/profile.php',
-    '/'.$username.'/mangalist' => 'controllers/profile.php',
-    '/'.$username.'/reviews' => 'controllers/profile.php',
-    '/'.$username.'/favorites' => 'controllers/profile.php'
+    '/'.$username => '../controllers/profile.php',
+    '/'.$username.'/animelist' => '../controllers/profile.php',
+    '/'.$username.'/mangalist' => '../controllers/profile.php',
+    '/'.$username.'/reviews' => '../controllers/profile.php',
+    '/'.$username.'/favorites' => '../controllers/profile.php'
 ];
 
 if (array_key_exists($uri, $profileRoutes)) {

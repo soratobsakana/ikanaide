@@ -1,9 +1,9 @@
 <?php
 
-require('database/conn.php');
-require_once 'app/Listing.php';
-require_once 'app/User.php';
-require_once 'app/Submit.php';
+require('../database/conn.php');
+require_once '../app/Listing.php';
+require_once '../app/User.php';
+require_once '../app/Submit.php';
 
 $Listing = new Listing;
 $User = new User;
@@ -263,5 +263,5 @@ if (isset($_POST['submit'])) {
         print "<a class='low-opacity link' href='/submit'>Click here to go back.</a>";
     }
 } else {
-    require('resources/views/submit/submit.view.php');
+    require('../resources/views/submit/submit.view.php');
 }

@@ -1,7 +1,7 @@
 <?php
 
-require_once 'app/Review.php';
-require_once 'app/User.php';
+require_once '../app/Review.php';
+require_once '../app/User.php';
 $User = new User;
 $Review = new Review;
 

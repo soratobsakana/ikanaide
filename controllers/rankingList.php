@@ -1,7 +1,7 @@
 <?php
 
-require_once 'app/User.php';
-require_once 'app/Ranking.php';
+require_once '../app/User.php';
+require_once '../app/Ranking.php';
 $User = new User;
 $Ranking = new Ranking;
 

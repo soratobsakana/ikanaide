@@ -1,7 +1,7 @@
 <?php
 
-require_once 'app/User.php';
-require_once 'resources/functions.php';
+require_once '../app/User.php';
+require_once '../resources/functions.php';
 $User = new User;
 
 if (isset($_POST['edit-profile_submit'])) {
@@ -32,7 +32,7 @@ if (isset($_POST['edit-profile_submit'])) {
             $file['type'] = finfo_file($file['info'], $file['path']);
 
             // Validación de la información de las imagenes
-            if (!($file['size'] <= 0 || $file['size'] > 3145728)) {
+            if (!($file['size'] <= 0 || $file['size'] > 1048576 )) {
                 $allowedMIMES = [
                     'image/png' => 'png',
                     'image/jpeg' => 'jpg',

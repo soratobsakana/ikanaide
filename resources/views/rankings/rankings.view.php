@@ -32,10 +32,10 @@
     switch($page) {
         case '/rankings':
         case '/rankings/anime':
-            require 'resources/views/rankings/_ranking.view.php';
+            require '../resources/views/rankings/_ranking.view.php';
             break;
         case '/rankings/manga':
-            require 'resources/views/rankings/_ranking.view.php';
+            require '../resources/views/rankings/_ranking.view.php';
             break;
         default:
             header('Location: /404');

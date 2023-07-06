@@ -164,17 +164,17 @@
 
         switch($uri) {
             case '/'.$username:
-                require('resources/views/user/_overviewprofile.view.php');
+                require('../resources/views/user/_overviewprofile.view.php');
                 break;
             case '/'.$username.'/animelist':
             case '/'.$username.'/mangalist':
-                require('resources/views/user/_listsprofile.view.php');
+                require('../resources/views/user/_listsprofile.view.php');
                 break;
             case '/'.$username.'/reviews':
-                require('resources/views/user/_reviewsprofile.view.php');
+                require('../resources/views/user/_reviewsprofile.view.php');
                 break;
             case '/'.$username.'/favorites':
-                require('resources/views/user/_favoritesprofile.view.php');
+                require('../resources/views/user/_favoritesprofile.view.php');
                 break;
         }
         

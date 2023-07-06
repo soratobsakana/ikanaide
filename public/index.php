@@ -8,7 +8,7 @@
 
     // Defino el directorio raíz de la página web para usarlo en cualquier archivo
     const DIR = __DIR__;
-    require_once 'routes/titles.php';
+    require_once '../routes/titles.php';
 
     ?>
 
@@ -27,14 +27,14 @@
 <div class="container">
     <!-- Este wrapper sirve para colocar el header y  cuerpo en la parte superior de la web y el footer en la inferior, mediante la propiedad flex 'space-between' en div.container -->
     <div class="wrapper">
-        <?php require 'resources/views/header.view.php' ?>
+        <?php require '../resources/views/header.view.php' ?>
 
         <main>
-            <?php require 'routes/web.php' ?>
+            <?php require '../routes/web.php' ?>
         </main>
 
     </div>
-        <?php require "resources/views/footer.view.php" ?>
+        <?php require "../resources/views/footer.view.php" ?>
 </div>
 
 </body>

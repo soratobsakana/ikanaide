@@ -1,7 +1,7 @@
 <?php
 
-require_once 'app/Report.php';
-require_once 'app/User.php';
+require_once '../app/Report.php';
+require_once '../app/User.php';
 
 $Report = new Report;
 $User = new User;

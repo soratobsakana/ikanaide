@@ -1,7 +1,7 @@
 <?php
 
-require_once 'app/User.php';
-require_once 'app/Following.php';
+require_once '../app/User.php';
+require_once '../app/Following.php';
 
 $User = new User;
 $Following = new Following;

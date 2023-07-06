@@ -1,7 +1,7 @@
 <?php
 
-require_once 'app/Ranking.php';
-require_once 'app/User.php';
+require_once '../app/Ranking.php';
+require_once '../app/User.php';
 
 $User = new User;
 $Ranking = new Ranking;
@@ -15,4 +15,4 @@ $medium = explode('/', $uri)[2]; // anime|manga
 
 $ranking = $Ranking -> getRankings($medium);
 
-require 'resources/views/rankings/rankings.view.php';
+require '../resources/views/rankings/rankings.view.php';

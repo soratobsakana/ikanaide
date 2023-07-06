@@ -1,7 +1,7 @@
 <?php
 
-require_once 'app/Search.php';
-require_once 'resources/functions.php';
+require_once '../app/Search.php';
+require_once '../resources/functions.php';
 
 $Search = new Search;
 $Listing = new Listing;
@@ -18,4 +18,4 @@ if (isset($_GET['keyword'])) {
     }
 }
 
-require 'resources/views/search/search.view.php';
+require '../resources/views/search/search.view.php';
