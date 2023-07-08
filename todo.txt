@@ -1,7 +1,6 @@
 230619
-    [] Achieve MySQL consistency on Docker
+    [] Achieve MySQL data consistency on Docker
     [X] Achieve HTTPS within Docker
-    []
 
 Server stuff
     [X] Nginx configuration file
@@ -13,9 +12,9 @@ Server stuff
     [-] A simple search engine that works on matchs through a SQL query. A more complex one will be worked on in the future.
         Mixed them both. Seems to work alright for posts only. Rest of data is left to do.
     [X] User roles table. Only work on moderator one for now, as it will be needed for actions around submissions.
-    [] A more appealing entry submission system.
-        [] Allow for image and header uploading.
-        [] Change the front-end for the form.
+    [X] A more appealing entry submission system.
+        [X] Allow for image and header uploading.
+        [X] Change the front-end for the form.
         [] Make the entry visible for moderators on a /submissions page or something like that.
         [] Make moderators be able to accept submissions. After accepted, the information of the submission will be added to the `anime` table.
     [X] Allow for review upvotes/likes.
