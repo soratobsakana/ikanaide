@@ -12,16 +12,16 @@
     <?php
     switch ($page) {
         case '/submit/anime':
-            require('resources/views/submit/_submit_anime.view.php');
+            require('../resources/views/submit/_submit_anime.view.php');
             break;
         case '/submit/manga':
-            require('resources/views/submit/_submit_manga.view.php');
+            require('../resources/views/submit/_submit_manga.view.php');
             break;
         case '/submit/character':
-            require('resources/views/submit/_submit_character.view.php');
+            require('../resources/views/submit/_submit_character.view.php');
             break;
         case '/submit/staff':
-            require('resources/views/submit/_submit_staff.view.php');
+            require('../resources/views/submit/_submit_staff.view.php');
             break;
         default:
             header('Location: /submit/anime');

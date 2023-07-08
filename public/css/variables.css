@@ -4,11 +4,13 @@
     --bold: 600;
     --font_low-opacity: 0.7;
     --box-font-size: 14px;
+    --box-title: #d9d9d9;
+    --box-title-light: #e5e5e5;
     --box-bg: #ebebeb;
     --box-bg-hover: #dedede;
-    --box-title-bg-color: #d0d0d0;
-    --box-title-bg-color-border: #969696;
+    --box-bg-light: #efefef;
+    --border-radius: 8px;
 
-    --gap: 10px;
+    --gap: 8px;
     --transition: .15s;
 }

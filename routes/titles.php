@@ -1,4 +1,5 @@
 <?php
+
 $page = parse_url($_SERVER['REQUEST_URI'])['path'];
 $username = explode("/", $page)[1];
 
@@ -52,6 +53,12 @@ switch ($page) {
         break;
     case '/review/new/manga':
         $tabTitle = 'new manga review';
+        break;
+    case '/rankings/anime':
+        $tabTitle = 'anime rankings';
+        break;
+    case '/rankings/manga':
+        $tabTitle = 'manga rankings';
         break;
     default:
         $tabTitle = $username;

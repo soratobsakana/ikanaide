@@ -1,6 +1,6 @@
 <header>
     <div class="inner-header">
-        <a href="/"><p id="header-logo">ikanaide</p></a>
+        <a href="/"><img class="header-logo" src="../brand/logo_white.png" alt=""></a>
         <ul class="header-links">
             <?php
             $headerGuide = explode('/', $page);

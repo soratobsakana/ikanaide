@@ -23,6 +23,13 @@ p#header-logo {
     left: 0;
 }
 
+img.header-logo {
+    position: absolute;
+    left: 0;
+    height: 24px;
+    transform: translateY(+57%);
+}
+
 div.inner-header ul.header-links {
     display: flex;
     gap: 40px;

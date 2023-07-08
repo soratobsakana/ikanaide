@@ -6,9 +6,12 @@
 
     <?php
 
-    // Defino el directorio raíz de la página web para usarlo en cualquier archivo
-    const DIR = __DIR__;
-    require_once '../routes/titles.php';
+    const BASE_PATH = __DIR__ . '/../';
+
+    require BASE_PATH . 'resources/functions.php';
+    require path('routes/titles.php');
+
+    
 
     ?>
 
