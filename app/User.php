@@ -1,7 +1,6 @@
 <?php
 
-require_once 'Database.php';
-require_once 'Listing.php';
+namespace App;
 
 class User
 {
@@ -434,7 +433,7 @@ class User
     public function sumOne(array $data): bool
     {
         if (isset($data['user_id']) && isset($data['medium']) && isset($data['medium_id'])) {
-            if ($this -> listing -> existsWithId($data['medium'], $data['medium_id'])) {
+            if (Listing::existsWithId($data['medium'], $data['medium_id'])) {
                 if ($this -> con -> db -> execute_query('UPDATE '.$data['medium'].'list SET progress = (progress + 1) WHERE user_id = ? and '.$data['medium'].'_id = ?', [$data['user_id'], $data['medium_id']])) {
                     return true;
                 } else {
@@ -449,6 +448,11 @@ class User
         
     }
 
+    /**
+     * @param int $user_id
+     * @return bool
+     * Manages if a user wants to automatically create a post once updating an entry of their lists (e.g. "I have watched episode X from X.")
+     */
     public function shares(int $user_id): bool
     {
         $result = $this -> con -> db -> execute_query('SELECT user_id FROM user WHERE user_id = ? AND shares = 1', [$user_id]);

@@ -1,5 +1,7 @@
 <?php
 
+namespace App;
+
 class Report
 {
     private object $con;

@@ -11,8 +11,6 @@
     require BASE_PATH . 'resources/functions.php';
     require path('routes/titles.php');
 
-
-
     ?>
 
     <title><?=$tabTitle?> / ikanaide</title>

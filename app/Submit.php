@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Database.php';
+namespace App;
 
 class Submit
 {

@@ -1,8 +1,6 @@
 <?php
 
-include_once 'Database.php';
-include_once 'Listing.php';
-include_once 'User.php';
+namespace App;
 
 class Ranking
 {

@@ -1,7 +1,6 @@
 <?php
 
-require_once 'Database.php';
-require_once 'User.php';
+namespace App;
 
 class Listing
 {
@@ -24,9 +23,9 @@ class Listing
     }
 
     // Comprueba si existe mediante el ID y devuelve un valor booleano.
-    public function existsWithId(string $medium, int $entry): bool
+    public static function existsWithId(string $medium, int $entry): bool
     {
-        $result = $this -> con -> db -> execute_query('SELECT `'.$medium.'_id` FROM '.$medium.' WHERE `'.$medium.'_id` = ?', [$entry]);
+        $result = new Database -> query('SELECT `'.$medium.'_id` FROM '.$medium.' WHERE `'.$medium.'_id` = ?', [$entry]);
         if ($result -> num_rows === 1) {
             return true;
         } else {
