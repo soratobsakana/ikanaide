@@ -5,16 +5,14 @@ namespace App;
 class User
 {
 
-    private object $con;
     private object $listing;
 
     public function __construct()
     {
-        $this -> con = new Database;
         $this -> listing = new Listing;
     }
 
-    public function register(array $registerInfo): string
+    public static function register(array $registerInfo): string|true
     {
         // Inspección de que los nombres de campo del formulario HTML no han sido modificados en las herramientas de navegador.
         $fields = ['username', 'email', 'password', 'confirm', 'register'];
@@ -35,24 +33,24 @@ class User
                         if (!in_array($registerInfo['username'], $reservedUsernames)) {
                             if (strlen($registerInfo['username']) >= 3 && strlen($registerInfo['username']) <= 16) {
                                 if ($registerInfo['password'] === $registerInfo['confirm']) {
-                                    $result = $this -> con -> db -> execute_query('SELECT user_id FROM user WHERE username = ?', [$registerInfo['username']]);
+                                    $result = DB::query('SELECT user_id FROM user WHERE username = ?', [$registerInfo['username']]);
                                     if ($result -> num_rows === 0) {
-                                        $result = $this -> con -> db -> execute_query('SELECT user_id FROM user WHERE email = ?', [$registerInfo['email']]);
+                                        $result = DB::query('SELECT user_id FROM user WHERE email = ?', [$registerInfo['email']]);
                                         if ($result -> num_rows === 0) {
                                             $password = password_hash($registerInfo['password'], PASSWORD_DEFAULT);
-                                            $this -> con -> db -> execute_query('INSERT INTO `user` (`username`, `password`, `email`) VALUES (?, ?, ?)', [
+                                            DB::query('INSERT INTO `user` (`username`, `password`, `email`) VALUES (?, ?, ?)', [
                                                 $registerInfo['username'],
                                                 $password,
                                                 $registerInfo['email'],
                                             ]);
-                                            $result = $this -> con -> db -> execute_query('SELECT user_id FROM user WHERE username = ?', [$registerInfo['username']]);
+                                            $result = DB::query('SELECT user_id FROM user WHERE username = ?', [$registerInfo['username']]);
                                             $user_id = $result -> fetch_column();
                                             setcookie('username', $registerInfo['username'], strtotime('NOW+60DAYS'));
                                             setcookie('user_id', $user_id, strtotime('NOW+60DAYS'));
                                             setcookie('passwd', $password, strtotime('NOW+60DAYS'));
                                             setcookie('session', "Yes", strtotime('NOW+60DAYS'));
                                             setcookie('home_timeline', 'default', strtotime('NOW+60DAYS'));
-                                            return 'Ok';
+                                            return true;
                                         } else {
                                             return 'Sorry, that email is already taken';
                                         }
@@ -82,7 +80,7 @@ class User
         }
     }
 
-    public function login(array $loginInfo): string
+    public static function login(array $loginInfo): string|true
     {
         // Inspección de que los nombres de campo del formulario HTML no han sido modificados en las herramientas de navegador.
         $fields = ['username', 'password', 'login'];
@@ -98,13 +96,13 @@ class User
                 if (preg_match('/^[a-zA-Z0-9]+$/', $loginInfo['username']) === 1) {
                     if (strlen($loginInfo['username']) > 3 && strlen($loginInfo['username']) < 16) {
                         // Comprobación del nombre de usuario. Si coincide se comprobará la contraseña.
-                        $result = $this -> con -> db -> execute_query('SELECT `user_id` FROM user WHERE username = ?', [$loginInfo['username']]);
+                        $result = DB::query('SELECT `user_id` FROM user WHERE username = ?', [$loginInfo['username']]);
                         if ($result -> num_rows === 1) {
                             $user_id = $result -> fetch_column();
-                            $result = $this -> con -> db -> execute_query('SELECT username FROM user WHERE user_id = ?', [$user_id]);
+                            $result = DB::query('SELECT username FROM user WHERE user_id = ?', [$user_id]);
                             $username = $result -> fetch_column();
                             // Comprobación de la contraseña. Si coincide se autenticará al usuario.
-                            $result = $this -> con -> db -> execute_query('SELECT `password` FROM user WHERE username = ?', [$loginInfo['username']]);
+                            $result = DB::query('SELECT `password` FROM user WHERE username = ?', [$loginInfo['username']]);
                             $password = $result -> fetch_column();
                             if (password_verify($loginInfo['password'], $password)) {
                                 // Todas las verificaciones han sido exitosas, por lo que se inicia una sesión al usuario autenticado.
@@ -113,7 +111,7 @@ class User
                                 setcookie('passwd', $password, strtotime('NOW+60DAYS'));
                                 setcookie('session', "Yes", strtotime('NOW+60DAYS'));
                                 setcookie('home_timeline', 'default', strtotime('NOW+60DAYS'));
-                                return 'Ok';
+                                return true;
                             } else {
                                 return 'Incorrect username or password';
                             }
@@ -136,14 +134,14 @@ class User
 
     // Este método añade seguridad al sistema de autenticación de usuario. Se compara la información actual de una cookie con la de la base de datos.
     // Si coincide, indicaría que el usuario no ha alterado la información de sus cookies y que, efectivamente, conserva la información que se generó en User::login() o User::register()).
-    public function validateSession(): bool
+    public static function validateSession(): bool
     {
         if (isset($_COOKIE['username'], $_COOKIE['passwd'], $_COOKIE['user_id'])) {
-            $result = $this -> con -> db -> execute_query('SELECT `user_id` FROM `user` WHERE username = ?', [$_COOKIE['username']]);
+            $result = DB::query('SELECT `user_id` FROM `user` WHERE username = ?', [$_COOKIE['username']]);
             if ($result -> num_rows === 1) {
                 $id = $result -> fetch_column();
                 if ($id == $_COOKIE['user_id']) {
-                    $passwd = $this -> con -> db -> execute_query('SELECT `password` FROM `user` WHERE `user_id` = ?', [$_COOKIE['user_id']]) -> fetch_column();
+                    $passwd = DB::query('SELECT `password` FROM `user` WHERE `user_id` = ?', [$_COOKIE['user_id']]) -> fetch_column();
                     if ($passwd === $_COOKIE['passwd']) {
                         return true;
                     } else {
@@ -160,18 +158,18 @@ class User
         }
     }
 
-    public function exists(int $userId): bool
+    public static function exists(int $userId): bool
     {
-        if ($this -> con -> db -> execute_query('SELECT user_id FROM `user` WHERE user_id = ?', [$userId])) {
+        if (DB::query('SELECT user_id FROM `user` WHERE user_id = ?', [$userId])) {
             return true;
         } else {
             return false;
         }
     }
 
-    public function getUserID(string $username): int|null
+    public static function getUserID(string $username): int|null
     {
-        $result = $this -> con -> db -> execute_query('SELECT `user_id` FROM `user` WHERE username = ?', [$username]);
+        $result = DB::query('SELECT `user_id` FROM `user` WHERE username = ?', [$username]);
         if ($result -> num_rows === 1) {
             return $user_id = $result -> fetch_column();
         } else {
@@ -179,9 +177,9 @@ class User
         }
     }
 
-    public function getUsername(int $user_id): string|null
+    public static function getUsername(int $user_id): string|null
     {
-        $result = $this -> con -> db -> execute_query('SELECT `username` FROM `user` WHERE user_id = ?', [$user_id]);
+        $result = DB::query('SELECT `username` FROM `user` WHERE user_id = ?', [$user_id]);
         if ($result -> num_rows === 1) {
             return $result -> fetch_column();
         } else {
@@ -189,47 +187,58 @@ class User
         }
     }
 
-    public function getInfo(int $user_id): array
+    public static function getInfo(int $user_id): array
     {
-        $result = $this -> con -> db -> execute_query('SELECT `user_id`, `username`, `joined_at`, `pfp`, `header`, `biography`, `born`, `country`, `twitter`, `github`, `discord`, `website` FROM user WHERE user_id = ?', [$user_id]);
-        return $result -> fetch_assoc();
+        return DB::query('SELECT `user_id`, `username`, `joined_at`, `pfp`, `header`, `biography`, `born`, `country`, `twitter`, `github`, `discord`, `website` FROM user WHERE user_id = ?', [$user_id]) -> fetch_assoc();
     }
 
-    public function getInfoLess(int $user_id): array
+    public static function getInfoLess(int $user_id): array
     {
-        $result = $this -> con -> db -> execute_query('SELECT `user_id`,`username`,`pfp` FROM user WHERE user_id = ?', [$user_id]);
-        return $result -> fetch_assoc();
+        return DB::query('SELECT `user_id`,`username`,`pfp` FROM user WHERE user_id = ?', [$user_id]) -> fetch_assoc();
     }
 
-    public function getList(string $medium, int $user_id): array
+    public static function getList(string $medium, int $user_id): array|null
     {
-        $result = $this -> con -> db -> execute_query('SELECT * FROM `'.$medium.'list` WHERE `user_id` = ?', [$user_id]);
-        if ($result -> num_rows > 0) {
-            $i = 0; // Esto es simplemente un contador que uso para no necesitar un for dentro del foreach.
-            while ($row = $result -> fetch_assoc()) {
-                foreach($row as $key => $value) {
-                    if ($key === 'score') {
-                        // Ya que quiero mostrar 4.5, 4.2... pero no 4.0, esta condición convierte 4.0 en 4.
-                        if ($value !== null && fmod($value, 1) === 0.0) {
-                            $list[$i][$key] = floor($value);
-                        } else {
-                            $list[$i][$key] = $value;
-                        }
+        $result = DB::query('SELECT * FROM `'.$medium.'list` WHERE `user_id` = ?', [$user_id]);
+        for ($i = 0; $i < $result -> num_rows; $i++) {
+            foreach($result -> fetch_assoc() as $key => $value) {
+                if ($key === 'score') {
+                    // Ya que quiero mostrar 4.5, 4.2... pero no 4.0, esta condición convierte 4.0 en 4.
+                    if ($value !== null && fmod($value, 1) === 0.0) {
+                        $list[$i][$key] = floor($value);
                     } else {
                         $list[$i][$key] = $value;
                     }
+                } else {
+                    $list[$i][$key] = $value;
                 }
-                $i++;
             }
-            return $list;
-        } else {
-            return $list = [];
         }
+        return $list ?? null;
     }
 
-    public function getListEntry(string $medium, int $medium_id, int $user_id): array
+    /**
+     * @param $userId
+     * @return array|null
+     * Returns number of completed|watching|stalled|planned|dropped animes/mangas registered in a user list.
+     */
+    public static function getStatusCounter($userId): array|null
     {
-        $result = $this -> con -> db -> execute_query('SELECT * FROM `'.$medium.'list` WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $medium_id]);
+        $mediums = ['anime', 'manga'];
+
+        foreach ($mediums as $medium) {
+            $result = DB::query('SELECT `status`, count(`'.$medium.'_id`) as count FROM `'.$medium.'list` WHERE `user_id` = ? GROUP BY `status`', [$userId]);
+            while ($row = $result -> fetch_assoc()) {
+                $statusCounter[$medium][$row['status']] = $row['count'];
+            }
+        }
+
+        return $statusCounter ?? null;
+    }
+
+    public static function getListEntry(string $medium, int $medium_id, int $user_id): array
+    {
+        $result = DB::query('SELECT * FROM `'.$medium.'list` WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $medium_id]);
         if ($result -> num_rows === 1) {
             $row = $result -> fetch_assoc();
             foreach ($row as $key => $value) {
@@ -251,80 +260,46 @@ class User
     }
 
     // Añadir o borrar un anime o manga a la base de datos.
-    public function addToList($medium, $medium_id, $user_id, string $entry)
+    public static function addToList(string $medium, int|string $medium_id, int $user_id, string $entry)
     {
-        foreach ($_POST as $key => $value) {
-            if ($key !== 'add') {
-                exit(header('Location: /'.$medium.'/' . $entry));
-            }
+        $result = DB::query('SELECT `user_id` FROM `'.$medium.'list` WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $medium_id]) -> num_rows;
+        if ($result === 0) {
+            DB::query('INSERT INTO `'.$medium.'list` (`user_id`, `'.$medium.'_id`, `progress`) VALUES (?, ?, default)', [$user_id, $medium_id]);
         }
-
-        if (isset($_POST['add'])) {
-            $result = $this -> con -> db -> execute_query('SELECT count(`user_id`) FROM `'.$medium.'list` WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $medium_id]);
-            $column = $result -> fetch_column();
-            if ($column === 0) {
-                $this -> con -> db -> execute_query('INSERT INTO `'.$medium.'list` (`user_id`, `'.$medium.'_id`, `progress`) VALUES (?, ?, default)', [$user_id, $medium_id]);
-            }
-            header('Location: /'.$medium.'/' . $entry);
-        }
+        header('Location: /'.$medium.'/' . $entry);
     }
 
-    public function deleteFromList(string $medium, int $medium_id, int $user_id, string $entry)
+    public static function deleteFromList(string $medium, int $medium_id, int $user_id, string $entry)
     {
-        foreach ($_POST as $key => $value) {
-            if ($key !== 'delete') {
-                exit(header('Location: /'.$medium.'/' . $entry));
-            }
+        $result = DB::query('SELECT `user_id` FROM `'.$medium.'list` WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $medium_id]) -> num_rows;
+        if ($result === 1) {
+            DB::query('DELETE FROM `'.$medium.'list` WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $medium_id]);
         }
-
-        if (isset($_POST['delete'])) {
-            $result = $this -> con -> db -> execute_query('SELECT count(`user_id`) FROM `'.$medium.'list` WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $medium_id]);
-            $column = $result -> fetch_column();
-            if ($column === 1) {
-                $this -> con -> db -> execute_query('DELETE FROM `'.$medium.'list` WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $medium_id]);
-            }
-            header('Location: /'.$medium.'/' . $entry);
-        }
+        header('Location: /'.$medium.'/' . $entry);
     }
 
-    public function favourite(string $medium, int $medium_id, int $user_id, string $entry)
+    public static function favourite(string $medium, int $medium_id, int $user_id, string $entry)
     {
-        foreach ($_POST as $key => $value) {
-            if ($key !== 'favourite') {
-                exit(header('Location: /'.$medium.'/' . $entry));
-            }
-        }
 
-        if (isset($_POST['favourite'])) {
-            $result = $this -> con -> db -> execute_query('SELECT count(`user_id`) FROM `'.$medium.'list` WHERE `user_id` = ? AND `'.$medium.'_id` = ? AND favorite = true', [$user_id, $medium_id]);
-            $column = $result -> fetch_column();
-            if ($column === 0) {
-                $this -> con -> db -> execute_query('UPDATE '.$medium.'list SET `favorite` = true WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $medium_id]);
-            }
-            header('Location: /'.$medium.'/' . $entry);
+        $result = DB::query('SELECT count(`user_id`) FROM `'.$medium.'list` WHERE `user_id` = ? AND `'.$medium.'_id` = ? AND favorite = true', [$user_id, $medium_id]);
+        $column = $result -> fetch_column();
+        if ($column === 0) {
+            DB::query('UPDATE '.$medium.'list SET `favorite` = true WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $medium_id]);
         }
+        header('Location: /'.$medium.'/' . $entry);
     }
 
-    public function unfavourite(string $medium, int $medium_id, int $user_id, string $entry)
+    public static function unfavourite(string $medium, int $medium_id, int $user_id, string $entry)
     {
-        foreach ($_POST as $key => $value) {
-            if ($key !== 'unfavourite') {
-                exit(header('Location: /'.$medium.'/' . $entry));
-            }
+        $result = DB::query('SELECT count(`user_id`) FROM `'.$medium.'list` WHERE `user_id` = ? AND `'.$medium.'_id` = ? AND favorite = false', [$user_id, $medium_id]) -> fetch_column();
+        if ($column === 0) {
+            DB::query('UPDATE '.$medium.'list SET `favorite` = false WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $medium_id]);
         }
-
-        if (isset($_POST['unfavourite'])) {
-            $result = $this -> con -> db -> execute_query('SELECT count(`user_id`) FROM `'.$medium.'list` WHERE `user_id` = ? AND `'.$medium.'_id` = ? AND favorite = false', [$user_id, $medium_id]);
-            $column = $result -> fetch_column();
-            if ($column === 0) {
-                $this -> con -> db -> execute_query('UPDATE '.$medium.'list SET `favorite` = false WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $medium_id]);
-            }
-            header('Location: /'.$medium.'/' . $entry);
-        }
+        header('Location: /'.$medium.'/' . $entry);
     }
 
     // $counter is the number of episodes|chapters.
-    public function editListEntry(string $medium, int $medium_id, int $user_id, string $entry, int $counter)
+    public static function editListEntry(string $medium, int $medium_id, int $user_id, string $entry, int $counter)
     {
         $medium === 'anime' ? $current = 'watching' : $current = 'reading';
 
@@ -394,7 +369,7 @@ class User
             $entryInfo['progress'] = $counter;
         }
 
-        $this -> con -> db -> execute_query('UPDATE '.$medium.'list SET status = ?, score = ?, progress = ?, start_date = ?, end_date = ?, rewatches = ?, notes = ? WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [
+        DB::query('UPDATE '.$medium.'list SET status = ?, score = ?, progress = ?, start_date = ?, end_date = ?, rewatches = ?, notes = ? WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [
             $entryInfo['status'],
             $entryInfo['score'],
             $entryInfo['progress'],
@@ -410,42 +385,42 @@ class User
         header('Location: /'.$medium.'/' . $entry);
     }
 
-    public function setListStatus(string $medium, int $medium_id, string $status, int $user_id): bool
+    public static function setListStatus(string $medium, int $medium_id, string $status, int $user_id): bool
     {
-        if ($this -> con -> db -> execute_query('UPDATE '.$medium.'list SET status = ? WHERE '.$medium.'_id = ? AND user_id = ?', [$status, $medium_id, $user_id])) {
+        if (DB::query('UPDATE '.$medium.'list SET status = ? WHERE '.$medium.'_id = ? AND user_id = ?', [$status, $medium_id, $user_id])) {
             return true;
         } else {
             return false;
         }
     }
 
-    public function getEpisodesOrChapters(string $medium, int $medium_id, int $user_id): int|false
+    public static function getEpisodesOrChapters(string $medium, int $medium_id, int $user_id): int|false
     {
         $medium === 'anime' ? $current = 'episodes' : $current = 'chapters';
-        $result = $this -> con -> db -> execute_query('SELECT progress FROM '.$medium.'list WHERE '.$medium.'_id = ? AND user_id = ?', [$medium_id, $user_id]) -> fetch_column();
-        if (is_numeric($result)) {
+        $result = DB::query('SELECT progress FROM '.$medium.'list WHERE '.$medium.'_id = ? AND user_id = ?', [$medium_id, $user_id]) -> fetch_column();
+        if (filter_var($result, FILTER_VALIDATE_INT)) {
             return $result;
         } else {
             return false;
         }
     }
 
-    public function sumOne(array $data): bool
+    public static function sumOne(array $data): bool
     {
         if (isset($data['user_id']) && isset($data['medium']) && isset($data['medium_id'])) {
             if (Listing::existsWithId($data['medium'], $data['medium_id'])) {
-                if ($this -> con -> db -> execute_query('UPDATE '.$data['medium'].'list SET progress = (progress + 1) WHERE user_id = ? and '.$data['medium'].'_id = ?', [$data['user_id'], $data['medium_id']])) {
+                if (DB::query('UPDATE '.$data['medium'].'list SET progress = (progress + 1) WHERE user_id = ? and '.$data['medium'].'_id = ?', [$data['user_id'], $data['medium_id']])) {
                     return true;
                 } else {
                     return false;
                 }
             } else {
                 return false;
-            }   
+            }
         } else {
             return false;
         }
-        
+
     }
 
     /**
@@ -453,9 +428,9 @@ class User
      * @return bool
      * Manages if a user wants to automatically create a post once updating an entry of their lists (e.g. "I have watched episode X from X.")
      */
-    public function shares(int $user_id): bool
+    public static function shares(int $user_id): bool
     {
-        $result = $this -> con -> db -> execute_query('SELECT user_id FROM user WHERE user_id = ? AND shares = 1', [$user_id]);
+        $result = DB::query('SELECT user_id FROM user WHERE user_id = ? AND shares = 1', [$user_id]);
         if ($result -> num_rows === 1) {
             return true;
         } else {
@@ -463,19 +438,23 @@ class User
         }
     }
 
-    public function getAnimes(array $animelist): array
+    public static function getAnimes(array $animelist): array|null
     {
         if (count($animelist) > 0) {
             for ($i=0; $i<count($animelist); $i++) {
-                $anime = $this -> con -> db -> execute_query('SELECT `anime_id`, `title`, `episodes`, `type`,  `cover` FROM `anime` WHERE `anime_id` = ?', [$animelist[$i]['anime_id']]) -> fetch_assoc();
-                $anime['score'] = $animelist[$i]['score'];
-                $animelist[$i]['progress'] === $anime['episodes'] ? $animelist[$i]['status'] = 'completed' : $animelist[$i]['status'] = $animelist[$i]['status'];
-                $anime['progress'] = $animelist[$i]['progress'];
-                $anime['start_date'] = $animelist[$i]['start_date'];
-                $anime['end_date'] = $animelist[$i]['end_date'];
-                $anime['notes'] = $animelist[$i]['notes'];
-                $anime['rewatches'] = $animelist[$i]['rewatches'];
-                $anime['favorite'] = $animelist[$i]['favorite'];
+
+                $anime = [
+                    'info' => DB::query('SELECT `anime_id`, `title`, `episodes`, `type`,  `cover` FROM `anime` WHERE `anime_id` = ?', [$animelist[$i]['anime_id']]) -> fetch_assoc(),
+                    'score' => $animelist[$i]['score'],
+                    'progress' => $animelist[$i]['progress'],
+                    'start_date' => $animelist[$i]['start_date'],
+                    'end_date' => $animelist[$i]['end_date'],
+                    'notes' => $animelist[$i]['notes'],
+                    'rewatches' => $animelist[$i]['rewatches'],
+                    'favorite' => $animelist[$i]['favorite']
+                ];
+
+                // Will be used to divide the lists in sections at /{user}/animelist
                 switch($animelist[$i]['status']) {
                     case 'watching':
                         $animes['watching'][] = $anime;
@@ -496,18 +475,27 @@ class User
             }
             return $animes;
         } else {
-            return $animes = [];
+            return null;
         }
     }
 
-    public function getMangas(array $mangalist): array
+    public static function getMangas(array $mangalist): array|null
     {
         if (count($mangalist) > 0) {
             for ($i=0; $i<count($mangalist); $i++) {
-                $manga = $this -> con -> db -> execute_query('SELECT `manga_id`, `title`, `chapters`, `format`,  `cover` FROM `manga` WHERE `manga_id` = ?', [$mangalist[$i]['manga_id']]) -> fetch_assoc();
-                $manga['score'] = $mangalist[$i]['score'];
-                $manga['progress'] = $mangalist[$i]['progress'];
-                $manga['notes'] = $mangalist[$i]['notes'];
+
+                $manga = [
+                    'info' => DB::query('SELECT `manga_id`, `title`, `chapters`, `format`,  `cover` FROM `manga` WHERE `manga_id` = ?', [$mangalist[$i]['manga_id']]) -> fetch_assoc(),
+                    'score' => $mangalist[$i]['score'],
+                    'progress' => $mangalist[$i]['progress'],
+                    'start_date' => $mangalist[$i]['start_date'],
+                    'end_date' => $mangalist[$i]['end_date'],
+                    'notes' => $mangalist[$i]['notes'],
+                    'rewatches' => $mangalist[$i]['rewatches'],
+                    'favorite' => $mangalist[$i]['favorite']
+                ];
+
+                // Will be used to divide the lists in sections at /{user}/mangalist
                 switch($mangalist[$i]['status']) {
                     case 'reading':
                         $mangas['reading'][] = $manga;
@@ -528,7 +516,7 @@ class User
             }
             return $mangas;
         } else {
-            return $mangas = [];
+            return null;
         }
     }
 
@@ -536,50 +524,50 @@ class User
      * Devuelve las estadísticas en un array asociativo de 5 campos: completed, watching|reading, planned, stalled, dropped.
      * El segundo campo es variable según el array aportado sea $animelist(en este caso, watching) o mangalist(en este caso, reading).
      */
-    public function getStats(array $list, string $medium): array|null
+    public static function getStats(array $list, string $medium): array|null
     {
-            switch($medium) {
-                case 'anime':
-                    $currently = 'watching';
-                    break;
-                case 'manga':
-                    $currently = 'reading';
-                    break;
-                default:
-                    return null;
-            }
-
-            $userStats['completed'] = 0;
-            $userStats[$currently] = 0;
-            $userStats['planned'] = 0;
-            $userStats['stalled'] = 0;
-            $userStats['dropped'] = 0;
-
-            if (!empty($list)) {
-                for ($i=0; $i<count($list); $i++) {
-                    switch($list[$i]['status']) {
-                        case 'completed':
-                            $userStats['completed']++;
-                            break;
-                        case $currently:
-                            $userStats[$currently]++;
-                            break;
-                        case 'planned':
-                            $userStats['planned']++;
-                            break;
-                        case 'stalled':
-                            $userStats['stalled']++;
-                            break;
-                        case 'dropped':
-                            $userStats['dropped']++;
-                            break;
-                    }
-                }
+        switch($medium) {
+            case 'anime':
+                $currently = 'watching';
+                break;
+            case 'manga':
+                $currently = 'reading';
+                break;
+            default:
+                return null;
         }
-        return $userStats;
+
+        $userStats['completed'] = 0;
+        $userStats[$currently] = 0;
+        $userStats['planned'] = 0;
+        $userStats['stalled'] = 0;
+        $userStats['dropped'] = 0;
+
+        if (!empty($list)) {
+            for ($i=0; $i<count($list); $i++) {
+                switch($list[$i]['status']) {
+                    case 'completed':
+                        $userStats['completed']++;
+                        break;
+                    case $currently:
+                        $userStats[$currently]++;
+                        break;
+                    case 'planned':
+                        $userStats['planned']++;
+                        break;
+                    case 'stalled':
+                        $userStats['stalled']++;
+                        break;
+                    case 'dropped':
+                        $userStats['dropped']++;
+                        break;
+                }
+            }
+        }
+        return $userStats ?? null;
     }
 
-    public function getScoreAvg(array $list): float
+    public static function getScoreAvg(array $list): float
     {
         // Cálculo de la media de puntuaciones que el usuario ha dado a los elementos de su lista
         $sum = 0;
@@ -587,16 +575,12 @@ class User
         foreach ($list as $listEntry) {
             $sum += $listEntry['score'];
             // Las puntuaciones pueden no ser asignadas, por lo que no count($animelist|mangalist) puede no ser correcto para una media.
-            if ($listEntry['score'] !== null) {
+            if (isset($listEntry['score'])) {
                 $total++;
             }
         }
-        
-        if ($sum === 0) {
-            return $scoreAvg = 0;
-        } else {
-            return $scoreAvg = round(($sum / $total), 2);
-        } 
+
+        return $sum === 0 ? 0 : round(($sum / $total), 2);
     }
 
     /**
@@ -604,9 +588,9 @@ class User
      * @return array|null
      * Devuelve la información necesaria para mostrar en /usuario/reviews (/resources/views/user/_reviewsprofile.view.php).
      */
-    public function getReviews(int $user_id): array|null
+    public static function getReviews(int $user_id): array|null
     {
-        $result = $this -> con -> db -> execute_query('SELECT * FROM `review` WHERE user_id = ? ORDER BY `date` DESC', [$user_id]);
+        $result = DB::query('SELECT * FROM `review` WHERE user_id = ? ORDER BY `date` DESC', [$user_id]);
         if ($result -> num_rows > 0) {
             for ($i = 0; $i < $result -> num_rows; $i++) {
 
@@ -619,24 +603,25 @@ class User
 
                 // Si la review actual pertenece a un anime, $entryAnime devolverá un valor, si no, lo hará $entryManga.
                 // Se devuelve el medio (anime|manga) y el ID, lo cual necesito para crear los siguientes links: /anime|manga/Nombre-De-Entrada.
-                $entryAnime = $this -> con -> db -> execute_query('SELECT `anime_id` FROM `review_anime` WHERE review_id = ?', [$userReviews[$i]['review_id']]);
-                $entryManga = $this -> con -> db -> execute_query('SELECT `manga_id` FROM `review_manga` WHERE review_id = ?', [$userReviews[$i]['review_id']]);
+                $entryAnime = DB::query('SELECT `anime_id` FROM `review_anime` WHERE review_id = ?', [$userReviews[$i]['review_id']]);
                 if ($entryAnime -> num_rows === 0) {
                     $medium = 'anime';
                     $medium_id = $entryAnime -> fetch_column();
-                } else if ($entryManga -> num_rows === 0) {
-                    $medium = 'manga';
-                    $medium_id = $entryManga -> fetch_column();
+                } else {
+                    $entryManga = DB::query('SELECT `manga_id` FROM `review_manga` WHERE review_id = ?', [$userReviews[$i]['review_id']]);
+                    if ($entryManga -> num_rows === 0) {
+                        $medium = 'manga';
+                        $medium_id = $entryManga -> fetch_column();
+                    }
                 }
 
                 // Recojo el título de la entrada correspondiente $medium_id y asigno los valores que necesito dentro de $userReviews.
-                $mediumEntry = $this -> con -> db -> execute_query('SELECT title FROM '.$medium.' WHERE '.$medium.'_id = ?', [$medium_id]);
+                $mediumEntry = DB::query('SELECT title FROM '.$medium.' WHERE '.$medium.'_id = ?', [$medium_id]);
                 if ($mediumEntry -> num_rows === 1) {
-                    $row = $mediumEntry -> fetch_assoc();
-                    $userReviews[$i]['entry'] = $row['title'];
+                    $userReviews[$i]['entry'] = $mediumEntry -> fetch_assoc()['title'];
                     $userReviews[$i]['medium'] = $medium;
                 }
-                
+
             }
             return $userReviews;
         } else {
@@ -644,9 +629,9 @@ class User
         }
     }
 
-    public function getFavorites(int $user_id, string $medium): object|null
+    public static function getFavorites(int $user_id, string $medium): object|null
     {
-        $result = $this -> con -> db -> execute_query('select '.$medium.'.'.$medium.'_id, '.$medium.'.title, '.$medium.'.cover from '.$medium.','.$medium.'list
+        $result = DB::query('select '.$medium.'.'.$medium.'_id, '.$medium.'.title, '.$medium.'.cover from '.$medium.','.$medium.'list
         where '.$medium.'.'.$medium.'_id='.$medium.'list.'.$medium.'_id
         and '.$medium.'list.favorite=true and user_id= ?', [$user_id]);
 
@@ -662,73 +647,68 @@ class User
      * @param int $user_id
      * Devuelve los posts a mostrar en la página de perfil, por lo que solo devuelve los posts de un único usuario (así como su nombre de usuario y foto de perfil).
      */
-    public function getPosts(int $user_id): array|null
+    public static function getPosts(int $user_id): array|null
     {
-        $result = $this -> con -> db -> execute_query('SELECT * FROM post WHERE user_id = ? ORDER BY `date` DESC', [$user_id]);
+        $result = DB::query('SELECT * FROM post WHERE user_id = ? ORDER BY `date` DESC', [$user_id]);
         if ($result -> num_rows > 0) {
             for($i = 0; $i < $result -> num_rows; $i++) {
                 $row = $result -> fetch_assoc();
                 foreach($row as $key => $value) {
                     if ($key === 'date') {
                         // Recogida de las fechas para crear el tiempo que ha pasado desde la creación de cada post mediante mi función timeAgo().
-                        $posts[$i]['date'] = $value;
                         $current = date('Y-m-d H:i:s');
-                        $reference = $posts[$i]['date'];
+                        $reference = $value;
                         $timeAgo = timeAgo($current, $reference);
                         $posts[$i]['time_ago'] = $timeAgo;
+                        $posts[$i]['date'] = $value;
                     } else {
                         $posts[$i][$key] = $value;
                     }
                 }
 
                 // Cálculo del número de respuestas y likes asociados a un post.
-                $replyCount = $this -> con -> db -> execute_query('SELECT count(reply_id) FROM `post_reply` WHERE post_id = ?;', [$posts[$i]['post_id']]) -> fetch_column();
-                $likeCount = $this -> con -> db -> execute_query('SELECT count(user_id) FROM `post_like` WHERE post_id = ?;', [$posts[$i]['post_id']]) -> fetch_column();
-                $bookmarkCount = $this -> con -> db -> execute_query('SELECT count(user_id) FROM `bookmark` WHERE post_id = ?;', [$posts[$i]['post_id']]) -> fetch_column();
-                $posts[$i]['reply_count'] = $replyCount;
-                $posts[$i]['like_count'] = $likeCount;
-                $posts[$i]['bookmark_count'] = $bookmarkCount;
+                $posts[$i]['reply_count'] = DB::query('SELECT count(reply_id) FROM `post_reply` WHERE post_id = ?;', [$posts[$i]['post_id']]) -> fetch_column();
+                $posts[$i]['like_count'] = DB::query('SELECT count(user_id) FROM `post_like` WHERE post_id = ?;', [$posts[$i]['post_id']]) -> fetch_column();
+                $posts[$i]['bookmark_count'] = DB::query('SELECT count(user_id) FROM `bookmark` WHERE post_id = ?;', [$posts[$i]['post_id']]) -> fetch_column();
 
-                $animeId = $this -> con -> db -> execute_query('SELECT anime_id FROM `post_anime` WHERE post_id = ?', [$posts[$i]['post_id']]);
-                $mangaId = $this -> con -> db -> execute_query('SELECT manga_id FROM `post_manga` WHERE post_id = ?', [$posts[$i]['post_id']]);
+                $animeId = DB::query('SELECT anime_id FROM `post_anime` WHERE post_id = ?', [$posts[$i]['post_id']]);
                 if ($animeId -> num_rows === 1) {
                     $posts[$i]['medium'] = 'anime';
                     $posts[$i]['medium_id'] = $animeId -> fetch_column();
-                    $posts[$i]['medium_title'] = $this -> con -> db -> execute_query('SELECT title FROM anime WHERE anime_id = ?', [$posts[$i]['medium_id']]) -> fetch_column();
-                } else if ($mangaId -> num_rows === 1) {
-                    $posts[$i]['medium'] = 'manga';
-                    $posts[$i]['medium_id'] = $mangaId -> fetch_column();
-                    $posts[$i]['medium_title'] = $this -> con -> db -> execute_query('SELECT title FROM manga WHERE manga_id = ?', [$posts[$i]['medium_id']]) -> fetch_column();
+                    $posts[$i]['medium_title'] = DB::query('SELECT title FROM anime WHERE anime_id = ?', [$posts[$i]['medium_id']]) -> fetch_column();
+                } else {
+                    $mangaId = DB::query('SELECT manga_id FROM `post_manga` WHERE post_id = ?', [$posts[$i]['post_id']]);
+                    if ($mangaId -> num_rows === 1) {
+                        $posts[$i]['medium'] = 'manga';
+                        $posts[$i]['medium_id'] = $mangaId -> fetch_column();
+                        $posts[$i]['medium_title'] = DB::query('SELECT title FROM manga WHERE manga_id = ?', [$posts[$i]['medium_id']]) -> fetch_column();
+                    }
                 }
 
-                $original = $this -> con -> db -> execute_query('SELECT post_id FROM `post_reply` WHERE reply_id = ?', [$posts[$i]['post_id']]);
+                $original = DB::query('SELECT post_id FROM `post_reply` WHERE reply_id = ?', [$posts[$i]['post_id']]);
                 if ($original -> num_rows === 1) {
                     $mainPost = $original -> fetch_column();
-                    $userId = $this -> con -> db -> execute_query('select user_id from post where post_id = ?', [$mainPost]) -> fetch_column();
-                    $posts[$i]['replying_to'] = $this -> getUsername($userId);
+                    $userId = DB::query('select user_id from post where post_id = ?', [$mainPost]) -> fetch_column();
+                    $posts[$i]['replying_to'] = self::getUsername($userId);
                 }
 
-                if (isset($_COOKIE['session']) && $this -> validateSession()) {
-                    if ($this -> con -> db -> execute_query('SELECT user_id FROM post_like WHERE post_id = ? AND user_id = ?', [$posts[$i]['post_id'], $_COOKIE['user_id']]) -> num_rows === 1) {
-                        $posts[$i]['liked'] = true;
-                    } else {
-                        $posts[$i]['liked'] = false;
-                    }
+                if (DB::query('SELECT user_id FROM post_like WHERE post_id = ? AND user_id = ?', [$posts[$i]['post_id'], $_COOKIE['user_id']]) -> num_rows === 1) {
+                    $posts[$i]['liked'] = true;
+                } else {
+                    $posts[$i]['liked'] = false;
                 }
 
-                if (isset($_COOKIE['session']) && $this -> validateSession()) {
-                    if ($this -> con -> db -> execute_query('SELECT user_id FROM bookmark WHERE post_id = ? AND user_id = ?', [$posts[$i]['post_id'], $_COOKIE['user_id']]) -> num_rows === 1) {
-                        $posts[$i]['bookmarked'] = true;
-                    } else {
-                        $posts[$i]['bookmarked'] = false;
-                    }
+                if (DB::query('SELECT user_id FROM bookmark WHERE post_id = ? AND user_id = ?', [$posts[$i]['post_id'], $_COOKIE['user_id']]) -> num_rows === 1) {
+                    $posts[$i]['bookmarked'] = true;
+                } else {
+                    $posts[$i]['bookmarked'] = false;
                 }
 
             }
 
             $postsInfo['posts'] = $posts;
 
-            if ($userInfo = $this -> getInfoLess($user_id)) {
+            if ($userInfo = self::getInfoLess($user_id)) {
                 foreach ($userInfo as $key => $value) {
                     $postsInfo['user'][$key] = $value;
                 }
@@ -740,15 +720,15 @@ class User
         }
     }
 
-    public function getPostCount(int $userId): int|null
+    public static function getPostCount(int $userId): int|null
     {
-        return $this -> con -> db -> execute_query('SELECT count(post_id) FROM post WHERE user_id = ?', [$userId]) -> fetch_column();   
+        return DB::query('SELECT count(post_id) FROM post WHERE user_id = ?', [$userId]) -> fetch_column();
     }
 
-    public function getFollowCount(int $userId): array|null
+    public static function getFollowCount(int $userId): array|null
     {
-        $followCount['followers'] = $this -> con -> db -> execute_query('SELECT count(followed_user) FROM follow WHERE followed_user = ?', [$userId]) -> fetch_column();
-        $followCount['following'] = $this -> con -> db -> execute_query('SELECT count(following_user) FROM follow WHERE following_user = ?', [$userId]) -> fetch_column();
+        $followCount['followers'] = DB::query('SELECT count(followed_user) FROM follow WHERE followed_user = ?', [$userId]) -> fetch_column();
+        $followCount['following'] = DB::query('SELECT count(following_user) FROM follow WHERE following_user = ?', [$userId]) -> fetch_column();
 
         return $followCount;
     }
@@ -760,8 +740,8 @@ class User
      * Este método comprueba que la ruta de un usuario en la DB corresponde a un archivo existente en el sistema de archivos.
      * Si esto ocurre lo elimina para, automáticamente, reemplazarlo mediante editProfile(). Esto sirve para no almacenar archivos no utilizados.
      */
-    public function deleteImg(string $type, int $userId) {
-        $currentImg = $this -> con -> db -> execute_query('SELECT '.$type.' FROM user WHERE user_id = ?', [$userId]) -> fetch_column();
+    public static function deleteImg(string $type, int $userId) {
+        $currentImg = DB::query('SELECT '.$type.' FROM user WHERE user_id = ?', [$userId]) -> fetch_column();
         if (isset($currentImg) && is_writable(DIR  . $currentImg)) {
             if ($currentImg !== '/storage/sys/default.webp') {
                 if (unlink(DIR . $currentImg)) {
@@ -779,31 +759,31 @@ class User
         }
     }
 
-    public function editProfile(array $data, int $userId): bool
-    {   
+    public static function editProfile(array $data, int $userId): bool
+    {
         $data['user_id'] = $userId;
 
         if (isset($data['pfp'])) {
-            if ($this -> deleteImg('pfp', $data['user_id'])) {
-                if (!$this -> con -> db -> execute_query('UPDATE user SET pfp = ? WHERE `user_id` = ?', [$data['pfp'], $data['user_id']])) {
+            if (User::deleteImg('pfp', $data['user_id'])) {
+                if (!DB::query('UPDATE user SET pfp = ? WHERE `user_id` = ?', [$data['pfp'], $data['user_id']])) {
                     return false;
                 }
             } else {
                 return false;
             }
         }
-        
+
         if (isset($data['header'])) {
-            if ($this -> deleteImg('header', $data['user_id'])) {
-                if (!$this -> con -> db -> execute_query('UPDATE user SET header = ? WHERE `user_id` = ?', [$data['header'], $data['user_id']])) {
+            if (User::deleteImg('header', $data['user_id'])) {
+                if (!DB::query('UPDATE user SET header = ? WHERE `user_id` = ?', [$data['header'], $data['user_id']])) {
                     return false;
                 }
             } else {
                 return false;
             }
         }
-        
-        if ($this -> con -> db -> execute_query('UPDATE user SET 
+
+        if (DB::query('UPDATE user SET 
             `biography` = ?,
             `country` = ?,
             `born` = ?,

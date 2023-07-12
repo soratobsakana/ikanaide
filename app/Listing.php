@@ -12,9 +12,9 @@ class Listing
     }
 
     // Comprueba si existe mediante el título y devuelve el ID.
-    public function exists(string $medium, string $entry): int|bool
+    public static function exists(string $medium, string $entry): int|bool
     {
-        $result = $this -> con -> db -> execute_query('SELECT `'.$medium.'_id` FROM '.$medium.' WHERE title = ?', [$entry]);
+        $result = DB::query('SELECT `'.$medium.'_id` FROM '.$medium.' WHERE title = ?', [$entry]);
         if ($result -> num_rows === 1) {
             return $result -> fetch_column();
         } else {
@@ -25,7 +25,7 @@ class Listing
     // Comprueba si existe mediante el ID y devuelve un valor booleano.
     public static function existsWithId(string $medium, int $entry): bool
     {
-        $result = new Database -> query('SELECT `'.$medium.'_id` FROM '.$medium.' WHERE `'.$medium.'_id` = ?', [$entry]);
+        $result = DB::query('SELECT `'.$medium.'_id` FROM '.$medium.' WHERE `'.$medium.'_id` = ?', [$entry]);
         if ($result -> num_rows === 1) {
             return true;
         } else {
@@ -34,9 +34,9 @@ class Listing
     }
 
     // Devuelve todos los valores de la fila de una tabla indicada por parámetro.
-    public function getInfo(string $table, string $column, array $params): array|null
+    public static function getInfo(string $table, string $column, array $params): array|null
     {
-        $result = $this -> con -> db -> execute_query("SELECT * FROM `$table` WHERE `$column` = ?", $params);
+        $result = DB::query("SELECT * FROM `$table` WHERE `$column` = ?", $params);
         if ($result -> num_rows === 1) {
             $row = $result->fetch_assoc();
             foreach ($row as $key => $value) {
@@ -49,9 +49,9 @@ class Listing
     }
 
     // Devuelve el nombre del anime|manga
-    public function getTitle(string $medium, int $medium_id): string|false
+    public static function getTitle(string $medium, int $medium_id): string|false
     {
-        $result = $this -> con -> db -> execute_query('SELECT title FROM '.$medium.' WHERE '.$medium.'_id = ?', [$medium_id]);
+        $result = DB::query('SELECT title FROM '.$medium.' WHERE '.$medium.'_id = ?', [$medium_id]);
         if ($result -> num_rows === 1) {
             return $result -> fetch_column();
         } else {
@@ -60,35 +60,35 @@ class Listing
     }
 
     // Retorno una cadena en este método porque, en caso de ser retornar un número entero, prefiero mostrar X.00 en vez de X, en este caso.
-    public function getScore(string $medium, int $medium_id): string|null
+    public static function getScore(string $medium, int $medium_id): string|null
     {
-        return $this -> con -> db -> execute_query('SELECT score FROM (
+        return DB::query('SELECT score FROM (
         SELECT '.$medium.'_id, round(avg(score), 2) AS score FROM '.$medium.'list GROUP BY '.$medium.'_id
         ) AS scores WHERE '.$medium.'_id = ?', [$medium_id]) -> fetch_column();
     }
 
-    public function getFavourites(string $medium, int $medium_id): int
+    public static function getFavourites(string $medium, int $medium_id): int
     {
-        return $this -> con -> db -> execute_query('SELECT count(favorite) FROM '.$medium.'list WHERE '.$medium.'_id = ? AND favorite=true', [$medium_id]) -> fetch_column();
+        return DB::query('SELECT count(favorite) FROM '.$medium.'list WHERE '.$medium.'_id = ? AND favorite=true', [$medium_id]) -> fetch_column();
     }
 
-    public function getMembers(string $medium, int $medium_id): int
+    public static function getMembers(string $medium, int $medium_id): int
     {
-        return $this -> con -> db -> execute_query('SELECT count(user_id) FROM '.$medium.'list WHERE '.$medium.'_id = ?', [$medium_id]) -> fetch_column();
+        return DB::query('SELECT count(user_id) FROM '.$medium.'list WHERE '.$medium.'_id = ?', [$medium_id]) -> fetch_column();
     }
 
-    public function getRank(string $medium, int $medium_id): int
+    public static function getRank(string $medium, int $medium_id): int
     {
-        return $this -> con -> db -> execute_query('SELECT score_rank FROM (
+        return DB::query('SELECT score_rank FROM (
         SELECT '.$medium.'_id, ROUND(AVG(score), 2) AS score, ROW_NUMBER() OVER(ORDER BY AVG(score)) AS score_rank
         FROM '.$medium.'list WHERE score IS NOT NULL
         GROUP BY '.$medium.'_id
         ) AS scores WHERE '.$medium.'_id = ?', [$medium_id]) -> fetch_column();
     }
 
-    public function getPopularity(string $medium, int $medium_id): int
+    public static function getPopularity(string $medium, int $medium_id): int
     {
-        return $this -> con -> db -> execute_query('SELECT pop_rank FROM (
+        return DB::query('SELECT pop_rank FROM (
         SELECT '.$medium.'_id, COUNT('.$medium.'_id) AS popularity, ROW_NUMBER() OVER(ORDER BY COUNT('.$medium.'_id) desc) AS pop_rank
         FROM '.$medium.'list
         GROUP BY '.$medium.'_id
@@ -96,11 +96,11 @@ class Listing
     }
 
     // Devuelve la información sobre los personajes asociados a una entrada de la base de datos.
-    public function getChars(string $table, array $params): array|null
+    public static function getChars(string $table, array $params): array|null
     {
         $characters = [];
         
-        $result = $this -> con -> db -> execute_query("SELECT `character`.*, `character_".$table."`.`role` FROM `character`, `character_".$table."`
+        $result = DB::query("SELECT `character`.*, `character_".$table."`.`role` FROM `character`, `character_".$table."`
         WHERE `character_".$table."`.`".$table."_id` = ?
         AND `character`.`character_id`=`character_$table`.character_id", $params);
 
@@ -119,12 +119,12 @@ class Listing
     }
 
     // Devuelve la información sobre los miembros de staff asociados a una entrada de la base de datos.
-    public function getStaff(string $table, array $params): array|null
+    public static function getStaff(string $table, array $params): array|null
     {
         
         $staff = [];
 
-        $result = $this -> con -> db -> execute_query("SELECT `staff`.*, `staff_".$table."`.`role` FROM `staff`, `staff_".$table."`
+        $result = DB::query("SELECT `staff`.*, `staff_".$table."`.`role` FROM `staff`, `staff_".$table."`
         WHERE `staff_".$table."`.`".$table."_id` = ?
         AND `staff`.`staff_id`=`staff_".$table."`.staff_id", $params);
 
@@ -142,11 +142,11 @@ class Listing
     }
 
     // Devuelve la información sobre las reviews asociadas a una entrada de la base de datos.
-    public function getReviews(string $table, array $params): array|null
+    public static function getReviews(string $table, array $params): array|null
     {
         $reviews = [];
 
-        $result = $this -> con -> db -> execute_query("SELECT `review`.* FROM `review`, `review_".$table."`
+        $result = DB::query("SELECT `review`.* FROM `review`, `review_".$table."`
         WHERE `review_".$table."`.`".$table."_id` = ?
         AND `review`.review_id = `review_".$table."`.`review_id`", $params);
 
@@ -158,7 +158,7 @@ class Listing
                     $reviewInfo[$key] = $value;
                 }
 
-                $user = $this -> con -> db -> execute_query('SELECT username, pfp FROM user WHERE user_id = ?', [$row['user_id']]);
+                $user = DB::query('SELECT username, pfp FROM user WHERE user_id = ?', [$row['user_id']]);
                 if ($user -> num_rows === 1) {
                     $row = $user -> fetch_assoc();
                     $reviewInfo['username'] = $row['username'];
@@ -174,20 +174,16 @@ class Listing
     }
 
     // 
-    public function getHome($medium): object
+    public static function getHome($medium): object
     {
         $query = 'SELECT ' . $medium . '_id, title, cover FROM ' . $medium;
-        return $this -> con -> db -> execute_query($query);
+        return DB::query($query);
     }
 
-    public function getEpisodesOrChapters(string $medium, int $id): int
+    public static function getEpisodesOrChapters(string $medium, int $id): int
     {
-        $medium === 'anime' ? $current = 'episodes' : $current = 'chapters';
-        $result = $this -> con -> db -> execute_query('SELECT '.$current.' FROM '.$medium.' WHERE '.$medium.'_id = ?', [$id]) -> fetch_column();
-        if (isset($result)) {
-            return $result;
-        } else {
-            return 0;
-        }
+        $current = $medium === 'anime' ? 'episodes' : 'chapters';
+        $result = DB::query('SELECT '.$current.' FROM '.$medium.' WHERE '.$medium.'_id = ?', [$id]) -> fetch_column();
+        return $result ?? 0;
     }
 }

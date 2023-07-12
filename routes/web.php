@@ -74,10 +74,10 @@ $routes = array(
 
     '/search' => '../controllers/search.php',
 
-    '/terms' => 'resources/views/terms.view.php',
-    '/privacy' => 'resources/views/privacy.view.php',
-    '/contact' => 'resources/views/contact.view.php',
-    '/support' => 'resources/views/support.view.php',
+    '/terms' => '../resources/views/terms.view.php',
+    '/privacy' => '../resources/views/privacy.view.php',
+    '/contact' => '../resources/views/contact.view.php',
+    '/support' => '../resources/views/support.view.php',
 
     '/ep' => '../controllers/editProfile.php',
     '/sum' => '../controllers/sum.php',
@@ -101,7 +101,7 @@ $routes = array(
     '/register' => '../controllers/register.php',
     '/logout' => '../controllers/logout.php',
 
-    '/add' => '../controllers/addToList.php',
+    '/add' => '../controllers/lists.php',
 
     '/404' => '../resources/views/404.view.php'
 );
@@ -113,19 +113,22 @@ if (array_key_exists($uri, $routes)) {
     if (array_key_exists($uri, $mediumRoutes)) {
         require $mediumRoutes[$uri];
     } else {
-        exit(header('Location: /404'));
+        header('Location: /404');
+        die();
     }
 } else if (isset($reviewRoutes)) {
    if (array_key_exists($uri, $reviewRoutes)) {
        require $reviewRoutes[$uri];
    } else {
-       exit(header('Location: /404'));
+       header('Location: /404');
+       die();
    }
 } else if (isset($postRoutes)) {
     if (array_key_exists($uri, $postRoutes)) {
         require $postRoutes[$uri];
     } else {
-        exit(header('Location: /404'));
+        header('Location: /404');
+        die();
     }
 } else {
     // En caso de no existir el URI solicitado, se procesa la información mediante profileRouter.php para encontrar un usuario.

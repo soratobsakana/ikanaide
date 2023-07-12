@@ -1,15 +1,9 @@
-<?php
+<?php // Submits replies, likes a post and shows an activity page at /activity/{post_id}
 
-require_once '../resources/functions.php';
-require_once '../app/Activity.php';
-
-$Activity = new Activity;
-$User = new User;
-
-// $guide, $page y $postId han sido declaradas en el archivo /routes/web.php
+namespace App;
 
 // Si el usuario ha escrito una respuesta a un post, se añade a la base de datos mediante el siguiente bloque:
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-reply'])) {
+if (isset($_POST['submit-reply']) && User::validateSession()) {
     // Comprobación de que los campos del formulario no han sido alterados por el usuario.
     $fields = ['post-reply', 'submit-reply'];
     foreach ($_POST as $key => $value) {
@@ -19,25 +13,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-reply'])) {
         }
     }
 
-    if ($User -> validateSession()) {
         $submitPost['content'] = $_POST['post-reply'];
         $submitPost['user_id'] = $_COOKIE['user_id'];
-        $relation = $Activity -> getRelation($postId);
-        if (!empty($_POST['post-reply']) && $Activity -> post($submitPost)) {
+        $relation = Activity::getRelation($postId);
+        if (!empty($_POST['post-reply']) && Activity::post($submitPost)) {
             // Consigo el ID del último post introducido
-            $postReplyId = $Activity -> con -> db -> insert_id;
+            $postReplyId = DB::insertedId();
             if (isset($relation)) {
-                $Activity -> setPostRelation($relation['medium'], $postReplyId, $_COOKIE['user_id'], $relation['medium_id']);
+                Activity::setPostRelation($relation['medium'], $postReplyId, $_COOKIE['user_id'], $relation['medium_id']);
             }
-            $Activity -> postReply($postId, $postReplyId);
-            header('Location: '. $page);
+            Activity::postReply($postId, $postReplyId);
+            header('Location: '. $page); // $page is declared at /routes/web.php.
             die();
         }
-    } else {
-        header('Location: /404');
-        die();
-    }
-} else if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like-post'])) {
+}
+
+if (isset($_POST['like-post']) && User::validateSession()) {
     // Comprobación de que los campos del formulario no han sido alterados por el usuario.
     $fields = ['like-replay'];
     foreach ($_POST as $key => $value) {
@@ -49,20 +40,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-reply'])) {
 
     $likePost['post_id'] = $postId;
     $likePost['user_id'] = $_COOKIE['user_id'];
-    $Activity -> like($likePost);
-} else if ($Activity -> exists($postId)) {
+    if (Activity::like($likePost)) {
+        header('Location: '. $page); // $page is declared at /routes/web.php.
+        die();
+    }
+}
+
+if (Activity::exists($postId) && User::validateSession()) {
     // $post contendrá la información de los posts a mostrar.
-    $repliedPost = $Activity -> getRepliedPost($postId);
-    $post = $Activity -> getPost($postId);
-    $replies = $Activity -> getPostReplies($postId);
+    $repliedPost = Activity::getRepliedPost($postId);
+    $post = Activity::getPost($postId);
+    $replies = Activity::getPostReplies($postId);
 
     // $loggedUser contendrá la información del usuario logeado, que se utilizará en caso de que interactue con los posts mostrados.
-    if ($User -> validateSession()) {
-        $loggedUser = $User -> getInfoLess($_COOKIE['user_id']);
-    }
+    $loggedUser = User::getInfoLess($_COOKIE['user_id']);
 
-    require '../resources/views/activity/activity.view.php';
-} else {
-    header('Location: /404');
-    die();
+    require view('activity/activity.view.php');
 }

@@ -4,24 +4,13 @@ namespace App;
 
 class Home
 {
-    public object $con;
-    private object $user;
-    private object $listing;
-
-    public function __construct()
+    public static function getWatchingAnimes(int $userId): array|null
     {
-        $this -> con = new Database;
-        $this -> user = new User;
-        $this -> listing = new Listing;
-    }
-
-    public function getWatchingAnimes(int $userId): array|null
-    {
-        $animes = $this -> con -> db -> execute_query('SELECT anime_id, progress FROM animelist WHERE user_id = ? AND status = "watching"', [$userId]);
+        $animes = DB::query('SELECT anime_id, progress FROM animelist WHERE user_id = ? AND status = "watching"', [$userId]);
         if ($animes -> num_rows > 0) {
             for ($i=0; $i < $animes -> num_rows; $i++) { 
                 $anime = $animes -> fetch_assoc();
-                $watchingAnimes[$i]['anime'] = $this -> con -> db -> execute_query('SELECT anime_id, title, episodes, cover FROM anime WHERE anime_id = ?', [$anime['anime_id']]) -> fetch_assoc();
+                $watchingAnimes[$i]['anime'] = DB::query('SELECT anime_id, title, episodes, cover FROM anime WHERE anime_id = ?', [$anime['anime_id']]) -> fetch_assoc();
                 $watchingAnimes[$i]['user_progress'] = $anime['progress'];
             }
             return $watchingAnimes;
@@ -30,13 +19,13 @@ class Home
         }
     }
 
-    public function getReadingMangas(int $userId): array|null
+    public static function getReadingMangas(int $userId): array|null
     {
-        $mangas = $this -> con -> db -> execute_query('SELECT manga_id, progress FROM mangalist WHERE user_id = ? AND status = "reading"', [$userId]);
+        $mangas = DB::query('SELECT manga_id, progress FROM mangalist WHERE user_id = ? AND status = "reading"', [$userId]);
         if ($mangas -> num_rows > 0) {
             for ($i=0; $i < $mangas -> num_rows; $i++) { 
                 $manga = $mangas -> fetch_assoc();
-                $readingMangas[$i]['manga'] = $this -> con -> db -> execute_query('SELECT manga_id, title, chapters, cover FROM manga WHERE manga_id = ?', [$manga['manga_id']]) -> fetch_assoc();
+                $readingMangas[$i]['manga'] = DB::query('SELECT manga_id, title, chapters, cover FROM manga WHERE manga_id = ?', [$manga['manga_id']]) -> fetch_assoc();
                 $readingMangas[$i]['user_progress'] = $manga['progress'];
             }
             return $readingMangas;
@@ -47,11 +36,11 @@ class Home
 
     /**
      * @return array|null
-     * Devuelve todas las reviews de la tabla `review` en orden cronológico.
+     * Returns newest four review entries.
      */
-    public function getReviews(): array|null
+    public static function getReviews(): array|null
     {
-        $result = $this -> con -> db -> execute_query('SELECT * FROM `review` ORDER BY `date` DESC LIMIT 4');
+        $result = DB::query('SELECT * FROM `review` ORDER BY `date` DESC LIMIT 4');
         if ($result -> num_rows > 0) {
             for ($i = 0; $i < $result -> num_rows; $i++) {
                 $row = $result -> fetch_assoc();
@@ -60,24 +49,26 @@ class Home
                 $reviewsHome[$i]['text'] = $row['text'];
                 $reviewsHome[$i]['user_id'] = $row['user_id'];
 
-                $user = $this -> con -> db -> execute_query('SELECT username, pfp FROM user WHERE user_id = ?', [$row['user_id']]);
+                $user = DB::query('SELECT username, pfp FROM user WHERE user_id = ?', [$row['user_id']]);
                 if ($user -> num_rows === 1) {
                     $row = $user -> fetch_assoc();
                     $reviewsHome[$i]['username'] = $row['username'];
                     $reviewsHome[$i]['pfp'] = $row['pfp'];
                 }
 
-                $entryAnime = $this -> con -> db -> execute_query('SELECT anime_id FROM review_anime WHERE review_id = ?', [$reviewsHome[$i]['review_id']]);
-                $entryManga = $this -> con -> db -> execute_query('SELECT manga_id FROM review_manga WHERE review_id = ?', [$reviewsHome[$i]['review_id']]);
+                $entryAnime = DB::query('SELECT anime_id FROM review_anime WHERE review_id = ?', [$reviewsHome[$i]['review_id']]);
                 if ($entryAnime -> num_rows === 1) {
                     $medium = 'anime';
                     $medium_id = $entryAnime -> fetch_column();
-                } else if ($entryManga -> num_rows === 1){
-                    $medium = 'manga';
-                    $medium_id = $entryManga -> fetch_column();
+                } else {
+                    $entryManga = DB::query('SELECT manga_id FROM review_manga WHERE review_id = ?', [$reviewsHome[$i]['review_id']]);
+                    if ($entryManga -> num_rows === 1){
+                        $medium = 'manga';
+                        $medium_id = $entryManga -> fetch_column();
+                    }
                 }
 
-                $mediumEntry = $this -> con -> db -> execute_query('SELECT title, header FROM '.$medium.' WHERE '.$medium.'_id = ?', [$medium_id]);
+                $mediumEntry = DB::query('SELECT title, header FROM '.$medium.' WHERE '.$medium.'_id = ?', [$medium_id]);
                 if ($mediumEntry -> num_rows === 1) {
                     $row = $mediumEntry -> fetch_assoc();
                     $reviewsHome[$i]['entry'] = $row['title'];

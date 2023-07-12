@@ -7,9 +7,17 @@
     <?php
 
     const BASE_PATH = __DIR__ . '/../';
+    const DIR = __DIR__ . '/';
 
     require BASE_PATH . 'resources/functions.php';
     require path('routes/titles.php');
+
+    spl_autoload_register(function ($class) {
+        $file = path(str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php');
+        if (file_exists($file)) {
+            require $file;
+        }
+    });
 
     ?>
 

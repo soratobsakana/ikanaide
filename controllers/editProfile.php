@@ -1,8 +1,6 @@
 <?php
 
-require_once '../app/User.php';
-require_once '../resources/functions.php';
-$User = new User;
+namespace App;
 
 if (isset($_POST['edit-profile_submit'])) {
     $postFields = ['edit-profile_bio', 'edit-profile_country', 'edit-profile_birthday', 'edit-profile_twitter', 'edit-profile_github', 'edit-profile_discord', 'edit-profile_website', 'edit-profile_submit'];
@@ -51,7 +49,7 @@ if (isset($_POST['edit-profile_submit'])) {
             // DIR proviene de /index.php e indica la ruta absoluta de la raiz de esta página web.
             switch ($fileInput) {
                 case 'edit-profile_pfp':
-                    $targetDirectory = DIR . DIRECTORY_SEPARATOR . "storage" . DIRECTORY_SEPARATOR . "users" . DIRECTORY_SEPARATOR . "pfp";
+                    $targetDirectory = DIR . "storage" . DIRECTORY_SEPARATOR . "users" . DIRECTORY_SEPARATOR . "pfp";
                     $filename = "pfp_".uniqid();
                     $newFilepath = $targetDirectory . DIRECTORY_SEPARATOR . $filename . "." . $extension;
 
@@ -61,9 +59,10 @@ if (isset($_POST['edit-profile_submit'])) {
                     $currentImageType = 'pfp';
                     break;
                 case 'edit-profile_header':
-                    $targetDirectory = DIR . DIRECTORY_SEPARATOR . "storage" . DIRECTORY_SEPARATOR . "users" . DIRECTORY_SEPARATOR . "header";
+                    $targetDirectory = DIR . "storage" . DIRECTORY_SEPARATOR . "users" . DIRECTORY_SEPARATOR . "header";
                     $filename = "header_".uniqid();
                     $newFilepath = $targetDirectory . DIRECTORY_SEPARATOR . $filename . "." . $extension;
+
 
                     // $sqlFilepath será el valor introducido en la base de datos.
                     $sqlFilepath = '/storage/users/header/' . $filename . "." . $extension;
@@ -144,9 +143,9 @@ if (isset($_POST['edit-profile_submit'])) {
         }
     }
 
-    if ($User -> validateSession()) {
+    if (User::validateSession()) {
         $userId = $_COOKIE['user_id'];
-        if ($User -> editProfile($profileEdition, $userId)) {
+        if (User::editProfile($profileEdition, $userId)) {
             header('Location: /'.$_COOKIE['username']);
             die();
         } else {

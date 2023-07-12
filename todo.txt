@@ -1,3 +1,16 @@
+Interval
+    [X] Apply `App` namespace to the app/ classes.
+    [X] Adding of autoloader on /public/index.php
+    [X] Convert methods most methods into static.
+    [X] Re-write DB class.
+    [X] Re-write some methods from most classes.
+    [X] More fixes focused on gaining performance.
+    [] Configure MySQL triggers for:
+        [] Users following.
+        [] Post likes, replies and bookmarks.
+        [] Users list stats.
+        [] Anime and manga popularity/ranking/score/favourited.
+
 230619
     [] Achieve MySQL data consistency on Docker
     [X] Achieve HTTPS within Docker

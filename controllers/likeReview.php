@@ -1,13 +1,10 @@
 <?php
 
-require_once '../app/Review.php';
-require_once '../app/User.php';
-$User = new User;
-$Review = new Review;
+namespace App;
 
 if (isset($_GET['id'], $_GET['action']) && (filter_var($_GET['id'], FILTER_VALIDATE_INT) && ($_GET['action'] === 'up' || $_GET['action'] === 'down'))) {
-    if ($User -> validateSession()) {
-        if ($Review -> likeReview($_GET['id'], $_GET['action'], $_COOKIE['user_id'])) {
+    if (User::validateSession()) {
+        if (Review::likeReview($_GET['id'], $_GET['action'], $_COOKIE['user_id'])) {
             header('Location: '.$_SERVER['HTTP_REFERER']);
             die();
         } else {

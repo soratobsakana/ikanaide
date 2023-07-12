@@ -8,14 +8,17 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 class DB {
-    private static function mysql(): mysqli
+    private static object $c;
+
+    private static function mysql()
     {
         // Obliga a utilizar el modo de reporte recomendado
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
         try {
             require(BASE_PATH . 'database/creds.php');
-            return new mysqli($DB_SERVER, $DB_USER, $DB_PASS, $DB_NAME, $DB_PORT);
+            self::$c = new mysqli($DB_SERVER, $DB_USER, $DB_PASS, $DB_NAME, $DB_PORT);
+            return true;
         } catch (mysqli_sql_exception $e) {
             throw new mysqli_sql_exception($e -> getMessage(), $e -> getCode());
         } finally {
@@ -23,8 +26,14 @@ class DB {
         }
     }
 
-    public static function query(string $query, array $param): object
+    public static function query(string $query, array $param = NULL): \mysqli_result|bool
     {
-        return self::mysql()->execute_query($query, $param);
+        self::mysql();
+        return self::$c->execute_query($query, $param);
+    }
+
+    public static function insertedId(): int
+    {
+        return self::$c->insert_id;
     }
 }

@@ -7,7 +7,7 @@ function path(string $path): string
 
 function view(string $view): string
 {
-    return base_path('resources/views/' . $view);
+    return path('resources/views/' . $view);
 }
 
 // Cambia los datos de fecha de SQL en un formato escrito: 1000-10-10 -> oct 10, 1000.

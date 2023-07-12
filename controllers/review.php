@@ -1,15 +1,8 @@
 <?php
 
-include_once '../app/Review.php';
-include_once '../app/Listing.php';
-include_once '../app/User.php';
-include_once '../resources/functions.php';
+namespace App;
 
 $reviewGuide = explode('/', $uri);
-
-$Review = new Review;
-$Listing = new Listing;
-$User = new User;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     
@@ -19,15 +12,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (isset($reviewGuide[4])) {
         $fields = ['reviewTitle', 'reviewContent', 'submit'];
-        if ($Listing -> exists($reviewMedium, str_replace('-', ' ', $reviewGuide[4]))) {
+        if (Listing::exists($reviewMedium, str_replace('-', ' ', $reviewGuide[4]))) {
             $newReview['title'] = str_replace('-', ' ', $reviewGuide[4]);
         }
     } else {
         $fields = ['title', 'reviewTitle', 'reviewContent', 'submit'];
     }
-    
-    
-   
+
     foreach ($_POST as $key => $value) {
         // Inspección de que los nombres de campo del formulario HTML no han sido modificados en las herramientas de navegador.
         if (!in_array($key, $fields)) {
@@ -39,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 if (!empty($value)) {
                     switch ($key) {
                         case 'title':
-                            if ($Listing -> exists($reviewMedium, str_replace('-', ' ', $value))) {
+                            if (Listing::exists($reviewMedium, str_replace('-', ' ', $value))) {
                                 $newReview[$key] = str_replace('-', ' ', $value);
                                 $ok = true;
                             }
@@ -66,25 +57,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
     if ($ok) {
-        $Review -> createReview($reviewMedium, $newReview);
+        Review::createReview($reviewMedium, $newReview);
     }
 } else {
     if ($reviewGuide[1] === 'reviews') {
-        $reviewsHome = $Review -> getReviews();
+        $reviewsHome = Review::getReviews();
     } else if (($reviewGuide[1] === 'review' && is_numeric($reviewGuide[2])) && !isset($reviewGuide[3])) {
         $review_id = $reviewGuide[2];
-        $review = $Review -> getReview($review_id);
-        $reviewVotes = $Review -> getReviewVotes($review_id);
-        if ($User -> validateSession()) {
-            $userVote = $Review -> userVote($review_id, $_COOKIE['user_id']);
+        $review = Review::getReview($review_id);
+        $reviewVotes = Review::getReviewVotes($review_id);
+        if (User::validateSession()) {
+            $userVote = Review::userVote($review_id, $_COOKIE['user_id']);
         }
     } else if (($reviewGuide[1] === 'review' && $reviewGuide[2] === 'new') && (isset($reviewGuide[3]) && !isset($reviewGuide[4]))) {
         if ($reviewGuide[3] === 'anime' || $reviewGuide[3] === 'manga') {
-            $titles = $Review -> getTitles($reviewGuide[3]);
+            $titles = Review::getTitles($reviewGuide[3]);
         }
     } else if (($reviewGuide[1] === 'review' && $reviewGuide[2] === 'new') && (isset($reviewGuide[3]) && isset($reviewGuide[4]))) {
         if ($reviewGuide[3] === 'anime' || $reviewGuide[3] === 'manga') {
-            if ($Listing -> exists($reviewGuide[3], str_replace('-', ' ', $reviewGuide[4]))) {
+            if (Listing::exists($reviewGuide[3], str_replace('-', ' ', $reviewGuide[4]))) {
                 $entryToReview = str_replace('-', ' ', $reviewGuide[4]);
             } else {
                 header('Location: /404');
@@ -94,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     if (isset($reviewsHome) || isset($review) || isset($titles) || isset($entryToReview)) {
-        require('../resources/views/reviews/review.view.php');
+        require view('reviews/review.view.php');
     } else {
         header('Location: /404');
         die();

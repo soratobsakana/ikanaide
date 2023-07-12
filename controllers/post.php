@@ -2,15 +2,12 @@
 
 // Este archivo es utilizado para registrar nuevos posts en la base de datos.
 
-require_once '../app/Activity.php';
-require_once '../app/Listing.php';
-$Activity = new Activity;
-$Listing = new Listing;
+namespace App;
 
 $fields = ['post-content', 'post', 'on-medium'];
-if (isset($_POST)) {
+if ($_POST && User::validateSession()) {
+    // Comprobación de que el formulario no ha sido alterado mediante las herramientas de navegador.
     foreach($_POST as $key => $value) {
-        // Comprobación de que el formulario no ha sido alterado mediante las herramientas de navegador.
         if (!in_array($key, $fields)) {
             header('Location: /404');
             die();
@@ -22,14 +19,16 @@ if (isset($_POST)) {
             }
         }
     }
+
     if (isset($_COOKIE['user_id']) && is_numeric($_COOKIE['user_id'])) {
         $post['user_id'] = intval($_COOKIE['user_id']);
     }
+
     if (isset($post['content']) && isset($post['user_id'])) {
-        if ($Activity -> post($post)) {
+        if (Activity::post($post)) {
 
             // Consigo el ID del último post introducido
-            $post_id = $Activity -> con -> db -> insert_id;
+            $post_id = DB::insertedId();
 
             // El formato es: Nombre de Anime (anime) ó Nombre de Manga (manga).
             // Mediante substr(), compruebo que los values de los option no han sido alterado mediante las herramientas de navegador.
@@ -37,8 +36,8 @@ if (isset($_POST)) {
                 $medium = substr($post['relation'], -6, 5); // anime|manga
                 if ($medium === 'anime' || $medium === 'manga') {
                     $entry = substr($post['relation'], 0, -8); // título de anime|manga
-                    if ($entryId = $Listing -> exists($medium, $entry)) {
-                        if ($Activity -> setPostRelation($medium, $post_id, $post['user_id'], $entryId)) {
+                    if ($entryId = Listing::exists($medium, $entry)) {
+                        if (Activity::setPostRelation($medium, $post_id, $post['user_id'], $entryId)) {
                             header('Location: /' . $_COOKIE['username']);
                             die();
                         }
@@ -47,10 +46,13 @@ if (isset($_POST)) {
             }
             if (isset($_COOKIE['username'])) {
                 header('Location: /' . $_COOKIE['username']);
+                die();
             } else {
                 header('Location: /logout');
             }
             die();
         }
     }
+} else {
+    header('Location: /404');
 }

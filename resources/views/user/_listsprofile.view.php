@@ -36,10 +36,10 @@
                             ?>
                             <div class="profile_user-list_entry list-grid">
                                 <div class="profile_user-list_entry-cover">
-                                    <img src="<?=$animes[$group][$i]['cover']?>">
+                                    <img src="<?=$animes[$group][$i]['info']['cover']?>">
                                 </div>
                                 <div class="profile_user-list_entry-title">
-                                    <a href="/anime/<?=str_replace(' ', '-', $animes[$group][$i]['title'])?>"><?=$animes[$group][$i]['title']?></a>
+                                    <a href="/anime/<?=str_replace(' ', '-', $animes[$group][$i]['info']['title'])?>"><?=$animes[$group][$i]['info']['title']?></a>
                                 </div>
                                 <div class="profile_user-list_entry-score center-text">
                                     <?=$animes[$group][$i]['score']?>
@@ -47,15 +47,15 @@
                                 <div class="profile_user-list_entry-progress center-text">
                                     <?php
                                     if (isset($_COOKIE['session']) && $_COOKIE['username'] === $userInfo['username']) {
-                                        ?><a href="/sum?medium=<?=$medium?>&id=<?=$animes[$group][$i]['anime_id']?>"><?=$animes[$group][$i]['progress']?>/<?=$animes[$group][$i]['episodes']?></a><?php
+                                        ?><a href="/sum?medium=<?=$medium?>&id=<?=$animes[$group][$i]['info']['anime_id']?>"><?=$animes[$group][$i]['progress']?>/<?=$animes[$group][$i]['info']['episodes']?></a><?php
                                     } else {
-                                        print $animes[$group][$i]['progress'].'/'.$animes[$group][$i]['episodes'];
+                                        print $animes[$group][$i]['progress'].'/'.$animes[$group][$i]['info']['episodes'];
                                     }
                                     ?>
 
                                 </div>
                                 <div class="profile_user-list_entry-type center-text">
-                                    <?=$animes[$group][$i]['type']?>
+                                    <?=$animes[$group][$i]['info']['type']?>
                                 </div>
                             </div>
                             <?php
@@ -73,19 +73,19 @@
                             ?>
                             <div class="profile_user-list_entry list-grid">
                                 <div class="profile_user-list_entry-cover">
-                                    <img src="<?=$mangas[$group][$i]['cover']?>">
+                                    <img src="<?=$mangas[$group][$i]['info']['cover']?>">
                                 </div>
                                 <div class="profile_user-list_entry-title">
-                                    <a href="/manga/<?=str_replace(' ', '-', $mangas[$group][$i]['title'])?>"><?=$mangas[$group][$i]['title']?></a>
+                                    <a href="/manga/<?=str_replace(' ', '-', $mangas[$group][$i]['info']['title'])?>"><?=$mangas[$group][$i]['info']['title']?></a>
                                 </div>
                                 <div class="profile_user-list_entry-score center-text">
                                     <?=$mangas[$group][$i]['score']?>
                                 </div>
                                 <div class="profile_user-list_entry-progress center-text">
-                                <a href="/sum?medium=<?=$medium?>&id=<?=$mangas[$group][$i]['manga_id']?>"><?=$mangas[$group][$i]['progress']?>/<?=$mangas[$group][$i]['chapters']?></a>
+                                <a href="/sum?medium=<?=$medium?>&id=<?=$mangas[$group][$i]['info']['manga_id']?>"><?=$mangas[$group][$i]['progress']?>/<?=$mangas[$group][$i]['info']['chapters']?></a>
                                 </div>
                                 <div class="profile_user-list_entry-type center-text">
-                                    <?=$mangas[$group][$i]['format']?>
+                                    <?=$mangas[$group][$i]['info']['format']?>
                                 </div>
                             </div>
                             <?php

@@ -8,15 +8,12 @@ if ($_POST) {
         }
     }
 
-    require '../app/User.php';
-    $login = new User;
-
     // Verificación y autenticación de la coincidencia de usuario y contraseña de una entrada de la BBDD con lo introducido por el usuario.
     // Si la información es correcta, se envía un header hacia su perfil.
-    if (($message = $login -> login($loginInfo)) === 'Ok') {
+    if (\App\User::login($loginInfo)) {
         header('Location: /home');
         die();
     }
 }
 
-require '../resources/views/user/login.view.php';
+require view('user/login.view.php');

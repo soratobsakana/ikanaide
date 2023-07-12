@@ -20,7 +20,7 @@
                         <form action="/follow?id=<?=$userInfo['user_id']?>" method="post">
                         <?php
 
-                        if ($Following -> isFollowing($_COOKIE['user_id'], $user_id) && $Session -> validateSession()) {
+                        if (\App\Following::isFollowing($_COOKIE['user_id'], $userId)) {
                             ?><input class="list-submit box submit-button__colorful" name="unfollow" type="submit" value="Unfollow"><?php
                         } else {
                             ?><input class="list-submit box submit-button__colorful" name="follow" type="submit" value="Follow"><?php
@@ -63,7 +63,7 @@
 
                     $statsRows = ['watching', 'completed', 'planned', 'stalled', 'dropped'];
                     foreach ($statsRows as $row) {
-                        isset($animes[$row]) ? $value = count($animes[$row]) : $value = 0;
+                        $value = $statusCounter['anime'][$row] ?? 0;
                         ?><li><span class="ul_first-column"><?=$row?></span><span><?=$value?></span></li><?php
                     }
 
@@ -82,7 +82,7 @@
 
                     $statsRows = ['reading', 'completed', 'planned', 'stalled', 'dropped'];
                     foreach ($statsRows as $row) {
-                        isset($mangas[$row]) ? $value = count($mangas[$row]) : $value = 0;
+                        $value = $statusCounter['manga'][$row] ?? 0;
                         ?><li><span class="ul_first-column"><?=$row?></span><span><?=$value?></span></li><?php
                     }
 

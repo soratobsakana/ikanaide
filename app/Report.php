@@ -15,9 +15,9 @@ class Report
         $this -> user = new User;
     }
 
-    public function report(int $reportingUser, int $reportedUser, string $reason): bool
+    public static function report(int $reportingUser, int $reportedUser, string $reason): bool
     {
-        if ($this -> con -> db -> execute_query('INSERT INTO `report` VALUES (?, ?, ?, default)', [$reportingUser, $reportedUser, $reason])) {
+        if (DB::query('INSERT INTO `report` VALUES (?, ?, ?, default)', [$reportingUser, $reportedUser, $reason])) {
             return true;
         } else {
             return false;

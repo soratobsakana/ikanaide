@@ -4,21 +4,10 @@ namespace App;
 
 class Search
 {
-    private object $con;
-    private object $listing;
-    private object $activity;
-
-    public function __construct()
+    public static function getPostResults(string $medium, int $entryID): array|null
     {
-        $this -> con = new Database;
-        $this -> listing = new Listing;
-        $this -> activity = new Activity;
-    }
-
-    public function getPostResults(string $medium, int $entryID): array|null
-    {
-        if ($this -> listing -> existsWithId($medium, $entryID)) {
-            $result = $this -> con -> db -> execute_query('SELECT post_id FROM post_'.$medium.' WHERE '.$medium.'_id = ? ORDER BY post_id DESC', [$entryID]);
+        if (Listing::existsWithId($medium, $entryID)) {
+            $result = DB::query('SELECT post_id FROM post_'.$medium.' WHERE '.$medium.'_id = ? ORDER BY post_id DESC', [$entryID]);
             if ($result -> num_rows > 0) {
 
                 foreach ($result as $post) {
@@ -26,17 +15,16 @@ class Search
                 }
 
                 foreach ($searchResults as $result) {
-                    $postResults[] = $this -> activity -> getPost($result);
+                    $postResults[] = Activity::getPost($result);
                 }
 
-                $postResults['title'] = $this -> listing -> getTitle($medium, $entryID);
+                $postResults['title'] = Listing::getTitle($medium, $entryID);
                 $postResults['medium'] = $medium;
 
-                return $postResults;
             } else {
-                $postResults['title'] = $this -> listing -> getTitle($medium, $entryID);
-                return $postResults;
+                $postResults['title'] = Listing::getTitle($medium, $entryID);
             }
+            return $postResults;
         } else {
             return null;
         }
@@ -48,13 +36,13 @@ class Search
      * @return array|null
      * Devuelve las ocurrencias de la DB mediante el operador LIKE '%$entrada%';
      */
-    public function exists(string $type, string $entry): array|null
+    public static function exists(string $type, string $entry): array|null
     {
         switch($type) {
             case 'anime':
             case 'manga':
                 // En este caso, $entry indicará el título (`title` en la tabla `anime` o `manga`).
-                $result = $this -> con -> db -> execute_query("SELECT title, `".$type."_id` FROM ".$type." WHERE title LIKE CONCAT ('%', ?, '%')", [$entry]);
+                $result = DB::query("SELECT title, `".$type."_id` FROM ".$type." WHERE title LIKE CONCAT ('%', ?, '%')", [$entry]);
                 if ($result -> num_rows > 0) {
                     foreach ($result as $occurrence) {
                         $mediumOccurrences[] = ['title' => $occurrence['title'], $type.'_id' => $occurrence[$type.'_id']];
@@ -66,7 +54,7 @@ class Search
                 break;
             case 'user':
                 // En este caso, $entry indicará el nombre de usuario.
-                $result = $this -> con -> db -> execute_query("SELECT `user_id`, `username`, `pfp` FROM `user` WHERE `username` LIKE CONCAT ('%', ?, '%') ORDER BY username", [$entry]);
+                $result = DB::query("SELECT `user_id`, `username`, `pfp` FROM `user` WHERE `username` LIKE CONCAT ('%', ?, '%') ORDER BY username", [$entry]);
                 if ($result -> num_rows > 0) {
                     foreach ($result as $occurrence) {
                         $userOccurrences[] = ['user_id' => $occurrence['user_id'], 'username' => $occurrence['username'], 'pfp' => $occurrence['pfp']];
@@ -81,18 +69,18 @@ class Search
         }
     }
 
-    public function getKeywordResults(string $keyword): array|null
+    public static function getKeywordResults(string $keyword): array|null
     {
-        $ifAnime = $this -> exists('anime', $keyword);
-        $ifManga = $this -> exists('manga', $keyword);
-        $ifUsers = $this -> exists('user', $keyword);
+        $ifAnime = self::exists('anime', $keyword);
+        $ifManga = self::exists('manga', $keyword);
+        $ifUsers = self::exists('user', $keyword);
 
         if (isset($ifAnime)) {
             foreach ($ifAnime as $occurrence) {
                 $mediumResults['anime'][] = [
                     'title' => $occurrence['title'],
                     'anime_id' => $occurrence['anime_id'],
-                    'post_count' => $this -> activity -> getPostRelationCount('anime', $occurrence['anime_id'])
+                    'post_count' => Activity::getPostRelationCount('anime', $occurrence['anime_id'])
                 ];
             }
         }
@@ -102,7 +90,7 @@ class Search
                 $mediumResults['manga'][] = [
                     'title' => $occurrence['title'],
                     'manga_id' => $occurrence['manga_id'],
-                    'post_count' => $this -> activity -> getPostRelationCount('manga', $occurrence['manga_id'])
+                    'post_count' => Activity::getPostRelationCount('manga', $occurrence['manga_id'])
                 ];
             }
         }

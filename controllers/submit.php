@@ -1,17 +1,15 @@
 <?php
 
-require('../database/conn.php');
-require_once '../app/Listing.php';
-require_once '../app/User.php';
-require_once '../app/Submit.php';
+namespace App;
 
-$Listing = new Listing;
-$User = new User;
-$Submit = new Submit;
+if (User::validateSession()) {
+    $id = $_COOKIE['user_id'];
+} else {
+    header('Location: /logout');
+    die();
+}
 
-$id = $_COOKIE['user_id'] ?? null;
-
-if (isset($_POST['submit'])) {
+if (isset($_POST['submit']) && isset($id)) {
     // Recolecta de datos.
     foreach ($_POST as $key => $value) {
         if ($key !== 'submit' && $key !== 'studios' && $key !== 'publisher') {
@@ -33,31 +31,27 @@ if (isset($_POST['submit'])) {
                             case 'english_title':
                             case 'japanese_title':
                             case 'desc':
-                                $value !== '' ? $animeData[$key] = $value : $animeData[$key] = null;
+                            $animeData[$key] = empty($value) ? null : $value;
                                 if (is_null($animeData['title'])) {
                                     exit('There needs to be a title. <a class="low-opacity link" href="/submit">Comeback</a>');
                                 }
                                 break;
                             case 'type':
-                                if ($value !== 'tv' || $value !== 'movie' || $value !== 'ova' ||$value !== 'mv') {
+                                if ($value === 'movie' || $value === 'ova' ||$value === 'mv') {
                                     $animeData[$key] = $value;
-                                } else {
+                                } else if ($value === 'tv') {
                                     $animeData[$key] = 'tv'; // Valor por default
                                 }
                                 break;
                             case 'status':
-                                if ($value !== 'announced' || $value !== 'completed' || $value !== 'finished') {
+                                if ($value === 'completed' || $value === 'finished') {
                                     $animeData[$key] = $value;
-                                } else {
+                                } else if ($value === 'announced') {
                                     $animeData[$key] = 'announced'; // Valor por default
                                 }
                                 break;
                             case 'episodes':
-                                if (filter_var($value, FILTER_VALIDATE_INT)) {
-                                    $animeData[$key] = intval($value);
-                                } else {
-                                    $animeData[$key] = null;
-                                }
+                                $animeData[$key] = filter_var($value, FILTER_VALIDATE_INT) ? intval($value) : null;
                                 break;
                             case 'start_date':
                             case 'end_date':
@@ -76,32 +70,28 @@ if (isset($_POST['submit'])) {
                             case 'english_title':
                             case 'japanese_title':
                             case 'desc':
-                                $value !== '' ? $mangaData[$key] = $value : $mangaData[$key] = null;
+                                $mangaData[$key] = empty($value) ? null : $value;
                                 if (is_null($mangaData['title'])) {
                                     exit('There needs to be a title. <a class="low-opacity link" href="/submit/manga">Comeback</a>');
                                 }
                                 break;
                             case 'format':
-                                if ($value !== 'manga' || $value !== 'manhwa' || $value !== 'ln') {
+                                if ($value === 'manhwa' || $value === 'ln') {
                                     $mangaData[$key] = $value;
-                                } else {
+                                } else if ($value === 'manga') {
                                     $mangaData[$key] = 'manga'; // Valor por default
                                 }
                                 break;
                             case 'status':
-                                if ($value !== 'announced' || $value !== 'completed' || $value !== 'finished') {
+                                if ($value === 'completed' || $value === 'finished') {
                                     $mangaData[$key] = $value;
-                                } else {
+                                } else if ($value === 'announced') {
                                     $mangaData[$key] = 'announced'; // Valor por default
                                 }
                                 break;
                             case 'volumes':
                             case 'chapters':
-                                if (filter_var($value, FILTER_VALIDATE_INT)) {
-                                    $mangaData[$key] = intval($value);
-                                } else {
-                                    $mangaData[$key] = null;
-                                }
+                                $mangaData[$key] = filter_var($value, FILTER_VALIDATE_INT) ? intval($value) : null;
                                 break;
                             case 'start_date':
                             case 'end_date':
@@ -115,13 +105,13 @@ if (isset($_POST['submit'])) {
                         }
                         break;
                     case 'character':
-                        $value !== '' ? $characterData[$key] = $value : $characterData[$key] = null;
+                        $characterData[$key] = empty($value) ? null : $value;
                         if (is_null($characterData['family_name']) && is_null($characterData['given_name']) && is_null($characterData['alias']) && is_null($characterData['japanese name'])) {
                             exit('The character needs to be identified with some name. <a class="low-opacity link" href="/submit/character">Comeback</a>');
                         }
                         break;
                     case 'staff':
-                        $value !== '' ? $staffData[$key] = $value : $staffData[$key] = null;
+                        $staffData[$key] = empty($value) ? $value : null;
                         if (is_null($staffData['family_name']) && is_null($staffData['given_name']) && is_null($staffData['alias']) && is_null($staffData['japanese name'])) {
                             exit('The staff needs to be identified with some name. <a class="low-opacity link" href="/submit/manga">Comeback</a>');
                         }
@@ -164,16 +154,16 @@ if (isset($_POST['submit'])) {
 
             // Asignación del nombre del archivo y la ruta absoluta donde guardar el archivo. DIRECTORY_SEPARATOR utiliza "/" o "\" dependiendo del SO en el que se esté ejecutando este archivo.
             // DIR proviene de /index.php e indica la ruta absoluta de la raiz de esta página web.
-            if ($User -> validateSession() && $_COOKIE['username'] === 'adrian') {
-                $targetDirectory = DIR . DIRECTORY_SEPARATOR . "storage" . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR . $submissionType . DIRECTORY_SEPARATOR . $fileInput;
+            if ($_COOKIE['username'] === 'adrian') {
+                $targetDirectory = DIR . "storage" . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR . $submissionType . DIRECTORY_SEPARATOR . $fileInput;
             } else {
-                $targetDirectory = DIR . DIRECTORY_SEPARATOR . "storage" . DIRECTORY_SEPARATOR . "submissions" . DIRECTORY_SEPARATOR . $submissionType . DIRECTORY_SEPARATOR . $fileInput;
+                $targetDirectory = DIR . "storage" . DIRECTORY_SEPARATOR . "submissions" . DIRECTORY_SEPARATOR . $submissionType . DIRECTORY_SEPARATOR . $fileInput;
             }
             $filename = $submissionType."_".uniqid();
             $newFilepath = $targetDirectory . DIRECTORY_SEPARATOR . $filename . "." . $extension;
 
             // $sqlFilepath será el valor introducido en la base de datos.
-            if ($User -> validateSession() && $_COOKIE['username'] === 'adrian') {
+            if ($_COOKIE['username'] === 'adrian') {
                 $sqlFilepath = '/storage/public/' . $submissionType . '/' . $fileInput . '/' . $filename . "." . $extension;
             } else {
                 $sqlFilepath = '/storage/submissions/' . $submissionType . '/' . $fileInput . '/' . $filename . "." . $extension;
@@ -181,8 +171,6 @@ if (isset($_POST['submit'])) {
 
             // Copio el archivo desde la ruta temporal hacia la ruta final. Si funciona, lo elimino de dicha ruta temporal y asigno $sqlFilepath al array que hace de parámetro en User::editProfile().
             if (!copy($file['path'], $newFilepath)) {
-                print 'a';
-                die();
                 header('Location: /404');
                 die();
             } else {
@@ -209,59 +197,42 @@ if (isset($_POST['submit'])) {
     // Inserción de la información.
     switch ($submissionType) {
         case 'anime':
-            if ($User -> validateSession()) {
-                if ($_COOKIE['username'] === 'adrian') {
-                    $status = $Submit -> submitNewAnime($animeData); // True or False
-                } else {
-                    $status = $Submit -> newAnimeProposal($animeData, $_COOKIE['user_id']); // True or False
-                }
+            if ($_COOKIE['username'] === 'adrian') {
+                $status = Submit::submitNewAnime($animeData); // True or False
             } else {
-                $status = false;
+                $status = Submit::newAnimeProposal($animeData, $_COOKIE['user_id']); // True or False
             }
             break;
         case 'manga':
-            if ($User -> validateSession()) {
-                if ($_COOKIE['username'] === 'adrian') {
-                    $status = $Submit -> submitNewManga($mangaData); // True or False
-                } else {
-                    $status = $Submit -> newMangaProposal($mangaData, $_COOKIE['user_id']); // True or False
-                }
+            if ($_COOKIE['username'] === 'adrian') {
+                $status = Submit::submitNewManga($mangaData); // True or False
             } else {
-                $status = false;
+                $status = Submit::newMangaProposal($mangaData, $_COOKIE['user_id']); // True or False
             }
             break;
         case 'character':
-            if ($User -> validateSession()) {
-                if ($_COOKIE['username'] === 'adrian') {
-                    $status = $Submit -> submitNewCharacter($characterData); // True or False
-                } else {
-                    $status = $Submit -> newCharacterProposal($characterData, $_COOKIE['user_id']); // True or False
-                }
+            if ($_COOKIE['username'] === 'adrian') {
+                $status = Submit::submitNewCharacter($characterData); // True or False
             } else {
-                $status = false;
+                $status = Submit::newCharacterProposal($characterData, $_COOKIE['user_id']); // True or False
             }
             break;
         case 'staff':
-            if ($User -> validateSession()) {
-                if ($_COOKIE['username'] === 'adrian') {
-                    $status = $Submit -> submitNewStaff($staffData); // True or False
-                } else {
-                    $status = $Submit -> newStaffProposal($staffData, $_COOKIE['user_id']); // True or False
-                }
+            if ($_COOKIE['username'] === 'adrian') {
+                $status = Submit::submitNewStaff($staffData); // True or False
             } else {
-                $status = false;
+                $status = Submit::newStaffProposal($staffData, $_COOKIE['user_id']); // True or False
             }
             break;
         default:
             $status = false;
     }
-    if ($status === TRUE) {
+    if ($status) {
         print '<p>Your '.$submissionType.' submission has been succesful. Thanks!</p>';
-        print "<a class='low-opacity link' href='/submit'>Click here to go back.</a>";
-    } else if ($status === FALSE) {
+    } else  {
         print '<p>Your '.$submissionType.' submission was not succesful. Sorry</p>';
-        print "<a class='low-opacity link' href='/submit'>Click here to go back.</a>";
     }
+    print "<a class='low-opacity link' href='/submit'>Click here to go back.</a>";
 } else {
-    require('../resources/views/submit/submit.view.php');
+    require view('submit/submit.view.php');
 }

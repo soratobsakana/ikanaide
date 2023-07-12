@@ -1,52 +1,49 @@
 <?php
-include_once('../resources/functions.php');
-include_once('../app/User.php');
-include_once('../app/Activity.php');
-include_once('../app/Following.php');
-$Session = new User;
-$Activity = new Activity;
-$Following = new Following;
 
-if (isset($_COOKIE['session'])) {
-    if ($Session -> validateSession() !== TRUE) {
-        exit(header("Location: /logout"));
-    }
+namespace App;
+
+if (!User::validateSession()) {
+    header('Location: /logout');
+    die();
 }
 
-// $user_id viene de /routes/profileRouter.php
-if ($user_id !== null) {
+// $userId is declared at /routes/profileRouter.php
+if (isset($userId)) {
     
-    $userInfo  = $Session -> getInfo($user_id);
-    $animelist = $Session -> getList('anime', $user_id);
-    $mangalist = $Session -> getList('manga', $user_id);
-    $postCount = $Session -> getPostCount($user_id);
-    $followCount = $Session -> getFollowCount($user_id);
-    $animeStats = $Session -> getStats($animelist, 'anime');
-    $mangaStats = $Session -> getStats($mangalist, 'manga');
-    $animeScoreAvg = $Session -> getScoreAvg($animelist);
-    $mangaScoreAvg = $Session -> getScoreAvg($mangalist);
-    $select = $Activity -> getSelect(); // La variable $select es asignada con los valores a mostrar en el menú HTML select del wrapper de creación de posts, en el perfil.
+    $userInfo  = User::getInfo($userId);
+    $animelist = User::getList('anime', $userId);
+    $mangalist = User::getList('manga', $userId);
+    $statusCounter = User::getStatusCounter($userId);
+    $postCount = User::getPostCount($userId);
+    $followCount = User::getFollowCount($userId);
+    $animeStats = User::getStats($animelist, 'anime');
+    $mangaStats = User::getStats($mangalist, 'manga');
+    $animeScoreAvg = User::getScoreAvg($animelist);
+    $mangaScoreAvg = User::getScoreAvg($mangalist);
+    $select = Activity::getSelect(); // La variable $select es asignada con los valores a mostrar en el menú HTML select del wrapper de creación de posts, en el perfil.
 
+    //$guide is declared at /routes/profileRouter.php
     if (isset($guide[2])) {
         switch ($guide[2]) {
             case 'animelist':
             case 'mangalist':
-                $animes = $Session -> getAnimes($animelist);
-                $mangas = $Session -> getMangas($mangalist);
+                $animes = User::getAnimes($animelist);
+                $mangas = User::getMangas($mangalist);
                 break;
             case 'reviews':
-                $userReviews = $Session -> getReviews($user_id);
+                $userReviews = User::getReviews($userId);
                 break;
             case 'favorites':
-                $favoriteAnimes = $Session -> getFavorites($user_id, 'anime'); // This is an object that will be looped in _favoritesprofile.view.php
-                $favoriteMangas = $Session -> getFavorites($user_id, 'manga'); // This is an object that will be looped in _favoritesprofile.view.php
+                $favoriteAnimes = User::getFavorites($userId, 'anime'); // This is an object that will be looped in _favoritesprofile.view.php
+                $favoriteMangas = User::getFavorites($userId, 'manga'); // This is an object that will be looped in _favoritesprofile.view.php
                 break;
         }
     } else { // Si pasa por este else, significa que se está mostrando la ventana de overview.
-        $userPosts = $Session -> getPosts($user_id);
+        $userPosts = User::getPosts($userId);
     }
 
-    require '../resources/views/user/profile.view.php';
+    require view('user/profile.view.php');
 } else {
-    exit(header("Location: /404"));
+    header("Location: /404");
+    die();
 }

@@ -1,13 +1,8 @@
 <?php
 
-require_once '../app/Activity.php';
-require_once '../app/User.php';
-require_once '../app/Bookmark.php';
-$User = new User;
-$Bookmark = new Bookmark;
-$Activity = new Activity;
+namespace App;
 
-if (isset($_COOKIE['session'])) {
+if (User::validateSession()) {
     if (isset($_GET['id']) && filter_var($_GET['id'], FILTER_VALIDATE_INT) && $User -> validateSession()) {
         $bookmark['user_id'] = $_COOKIE['user_id'];
         $bookmark['post_id'] = intval($_GET['id']);
