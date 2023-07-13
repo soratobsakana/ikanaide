@@ -1,5 +1,24 @@
 <div class="querypage_left-column">
-    <img src="<?=$mediumInfo['cover']?>" alt="<?=$mediumInfo['title']?>"/>
+    <div class="cover-header_phone">
+        <?php
+        if ($mediumInfo['header'] !== null) {
+            ?><div class="header-phone" style="background: url(<?=$mediumInfo['header']?>)">
+                <div id="gradient_header-phone"></div>
+            </div><?php
+        } else {
+            ?><div class="header-phone" style="background: grey">
+                <div id="gradient_header-phone"></div>
+            </div><?php
+        }
+        ?>
+        <div class="cover_info-phone">
+            <img class="cover-phone" src="<?=$mediumInfo['cover']?>" alt="<?=$mediumInfo['title']?>"/>
+            <h2 style="font-family: Inter!important; font-weight: 900!important"><?=$mediumInfo['title']?></h2>
+        </div>
+
+    </div>
+    <img class="cover" src="<?=$mediumInfo['cover']?>" alt="<?=$mediumInfo['title']?>"/>
+
     <!-- Compruebo si el usuario tiene anime correspondiente a $id en su lista. Si no lo tiene, muestro un botón de añadir; si lo tiene, muestro uno de borrar. -->
     <?php
 
@@ -143,7 +162,7 @@
 <div class="querypage_right-column">
     <?php
     if ($mediumInfo['header'] !== null) {
-        print "<img src=".$mediumInfo['header']." alt=".$mediumInfo['title'].">";
+        print "<img class=\"header\" src=".$mediumInfo['header']." alt=".$mediumInfo['title'].">";
     }
     ?>
     <section class="querypage_title box-wrapper">

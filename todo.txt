@@ -1,4 +1,7 @@
-Interval
+230713
+    [] Make the CSS of the whole website responsive.
+
+230810-12
     [X] Apply `App` namespace to the app/ classes.
     [X] Adding of autoloader on /public/index.php
     [X] Convert methods most methods into static.

@@ -1,5 +1,10 @@
 <?php
 
+if (\App\User::validateSession()) {
+    header('Location: /home');
+    die();
+}
+
 // Recogida de valores del formulario resources/views/user/login.view.php.
 if ($_POST) {
     foreach ($_POST as $key => $value) {

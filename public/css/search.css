@@ -57,3 +57,15 @@ section.search-page_keyword-results div.box-body div.result {
 section.search-page_keyword-results div.box-body div.result:hover {
     background-color: var(--box-bg-hover);
 }
+
+/* Media queries */
+@media (max-width: 512px) {
+    form.search-page_form {
+        display: grid;
+        grid-template-columns: 70% 30%;
+        grid-gap: var(--gap);
+    }
+    section.search-page_results section.posts-wrapper div.box-title_two-column {
+        display: block!important;
+    }
+}

@@ -14,6 +14,10 @@ div.querypage_title span.view-all:hover {
     opacity: 1;
 }
 
+.cover-header_phone {
+    display: none;
+}
+
 /* Añadir un color de fondo a las secciones de personajes, staff y reviews. */
 .querypage_bg {
     background-color: var(--box-bg);
@@ -59,6 +63,7 @@ section.querypage_edit {
     padding: 7px;
     transition: .2s;
     cursor: pointer;
+    display: none;
 }
 
 section.querypage_edit p {
@@ -355,4 +360,122 @@ div.mediumhome_all-medium_content div p {
 
 div.mediumhome_all-medium_content div:hover p {
     opacity: .9;
+}
+
+
+/* Media queries */
+@media (max-width: 905px) {
+    /* Home */
+    div.mediumhome_all-medium_content {
+        display: flex!important;
+        gap: var(--gap);
+        overflow-x: scroll;
+    }
+    div.mediumhome_all-medium_content div {
+        min-width: 105px!important;
+        max-width: 105px!important;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 160px;
+        border-radius: var(--border-radius);
+
+        position: relative;
+    }
+
+    /* Listing page */
+    section.querypage_info ul.two-column-list {
+        display: grid;
+        grid-gap: calc(var(--gap) - 2px)!important;
+    }
+
+    section.querypage_info ul.two-column-list li {
+        display: flex!important;
+        flex-direction: column!important;
+    }
+}
+
+@media (max-width: 750px) {
+    div.querypage_left-column {
+        width: 25%;
+    }
+
+    div.querypage_right-column {
+        width: 75%;
+    }
+}
+
+@media (max-width: 670px) {
+
+    div.querypage_left-column {
+        width: 27%;
+    }
+
+    div.querypage_right-column {
+        width: 73%;
+        margin-top: -8px; /* - var(--gap)*/
+    }
+}
+
+@media (max-width: 600px) {
+    div.querypage_right-column h1 {
+        display: none;
+    }
+    section.querypage_info ul.two-column-list {
+        display: block!important;
+    }
+    section.querypage_info ul.two-column-list li {
+        display: flex!important;
+        flex-direction: row!important;
+    }
+    .querypage_left-column .cover, .querypage_right-column .header {
+        display: none;
+    }
+    div.querypage_left-column {
+        width: 100%;
+    }
+
+    div.querypage_right-column {
+        width: 100%;
+    }
+
+    div.cover-header_phone {
+        display: grid!important;
+        grid-gap: var(--gap);
+
+        overflow: hidden;
+    }
+
+    div.cover-header_phone div.header-phone {
+        min-height: 140px;
+        max-height: 140px;
+        background-size: cover!important;
+        background-repeat: no-repeat!important;
+        background-position: center!important;
+        border-radius: var(--border-radius);
+        position: relative;
+        overflow: hidden
+    }
+
+    div.cover-header_phone div.cover_info-phone {
+        margin: 0 15px;
+        display: flex;
+        gap: var(--gap);
+        z-index: 1;
+        min-height: 50px;
+        align-items: center;
+    }
+    div.cover-header_phone div.cover_info-phone img.cover-phone {
+        box-shadow: 0 0 3px rgba(0,0,0,.25);
+        margin-top: -110px!important;
+        width: 100px;
+        height: 150px;
+    }
+    div#gradient_header-phone {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(to top, black, transparent);
+        opacity: .4;
+    }
 }

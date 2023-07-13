@@ -58,7 +58,7 @@ section.home_user-info section.progress-wrapper div.box-body div.entry:hover spa
 }
 
 section.home_user-info section.progress-wrapper div.box-body div.entry span:hover {
-    opacity: .9.5;
+    opacity: .95;
     background-color: var(--box-title-light);
 }
 
@@ -135,4 +135,59 @@ section.home_user-info section.latest-reviews_wrapper div.box-body div.entry div
 }
 section.home_user-info section.latest-reviews_wrapper div.box-body div.entry div.info div.user {
     opacity: var(--font_low-opacity);
+}
+
+
+/* Media queries */
+@media (max-width: 905px) {
+    div.home {
+        flex-direction: column-reverse;
+        width: 100%;
+    }
+    div.home section.home_timeline, div.home section.home_user-info {
+        width: 100%!important;
+    }
+    section.home_user-info section.progress-wrapper div.box-body {
+        width: 100%;
+        display: flex!important;
+        gap: var(--gap);
+        padding: 10px;
+        overflow-x: scroll!important;
+    }
+    section.home_user-info section.progress-wrapper div.box-body div.entry {
+        min-width: 78px!important;
+        max-width: 78px!important;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        border-radius: var(--border-radius);
+        position: relative;
+        cursor: pointer;
+    }
+    section.most-posted_wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: var(--gap);
+    }
+    section.home_user-info section.latest-reviews_wrapper div.box-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    section.home_user-info section.latest-reviews_wrapper div.box-body {
+        display: flex!important;
+        gap: var(--gap);
+        padding: 10px;
+        overflow-x: scroll!important;
+    }
+    section.home_user-info section.latest-reviews_wrapper div.box-body a {
+        min-width: 164px!important;
+        max-width: 164px!important;
+    }
+}
+
+@media (max-width: 500px) {
+    section.most-posted_wrapper {
+        grid-template-columns: 1fr!important;
+    }
 }

@@ -67,3 +67,17 @@ hr.activity_replied-reply_separator {
     border: 0px!important;
     background-color: var(--box-title);
 }
+
+
+/* Media queries */
+@media (max-width: 403px) {
+    div.activity_single-page_wrapper section.post-reply_wrapper form div.bottom {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: var(--gap);
+    }
+    div.activity_single-page_wrapper section.post-reply_wrapper form div.bottom .submit-button__colorful {
+        width: 100%!important;
+    }
+}

@@ -13,10 +13,6 @@ div.inner-header {
 }
 
 p#header-logo {
-    font-family: 'Redressed', cursive;
-    font-family: 'Berkshire Swash';
-    font-size: 26px;
-    font-size: 24px;
     font-weight: bold;
 
     position: absolute;
@@ -93,4 +89,21 @@ div.inner-header div.header-user ul.header-user-ul a span {
 div.inner-header div.header-user ul.header-user-ul a li img {
     max-height: 25px;
     border-radius: var(--border-radius);
+}
+
+
+/* Media queries */
+@media (max-width: 905px) {
+    header {
+        padding: 0 var(--gap) 0;
+    }
+}
+
+@media (max-width: 725px) {
+    header {
+        padding: 0 var(--gap) 0;
+    }
+    div.inner-header ul.header-links {
+        display: none;
+    }
 }

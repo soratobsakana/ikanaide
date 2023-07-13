@@ -100,3 +100,30 @@ div.options span {
     margin: 0 auto;
     font-size: 20px!important;
 }
+
+
+/* Media queries */
+@media (max-width: 700px) {
+    section.rankings-page_anime_content div.rankings-page_anime_content-entry {
+        display: grid;
+        grid-template-columns: 10% 7% 32% 8% 10% 23% 7% 4%;
+        word-break: break-word;
+    }
+    section.rankings-page_list-labels ul {
+        grid-template-columns: 10% 7% 32% 8% 10%;
+    }
+}
+
+@media (max-width: 544px) {
+    div.add, div.fav {
+        display: none!important;
+    }
+    section.rankings-page_anime_content div.rankings-page_anime_content-entry {
+        display: grid;
+        grid-template-columns: 15% 10% 40% 14% 16% 4%;
+        word-break: break-word;
+    }
+    section.rankings-page_list-labels ul {
+        grid-template-columns: 15% 10% 40% 14% 16%;
+    }
+}

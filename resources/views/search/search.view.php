@@ -28,7 +28,7 @@
             <section class="search-page_results">
             <section class="posts-wrapper box-wrapper">
                 <div class="box-title box-title_two-column">
-                    <h3>Showing last posts about <?=$postResults['title']?> </h3>
+                    <h3>Showing latest posts about <?=$postResults['title']?> </h3>
                     <p class="low-opacity">Showing <?=count($postResults) - 2?> posts</p> <!-- Resto 2 por los valores de $postResults['title'] y $postResults['medium'] -->
                 </div>
                 <div class="box-body">
