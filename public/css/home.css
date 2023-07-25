@@ -152,7 +152,7 @@ section.home_user-info section.latest-reviews_wrapper div.box-body div.entry div
         display: flex!important;
         gap: var(--gap);
         padding: 10px;
-        overflow-x: scroll!important;
+        overflow-x: auto!important;
     }
     section.home_user-info section.progress-wrapper div.box-body div.entry {
         min-width: 78px!important;
@@ -178,7 +178,7 @@ section.home_user-info section.latest-reviews_wrapper div.box-body div.entry div
         display: flex!important;
         gap: var(--gap);
         padding: 10px;
-        overflow-x: scroll!important;
+        overflow-x: auto!important;
     }
     section.home_user-info section.latest-reviews_wrapper div.box-body a {
         min-width: 164px!important;

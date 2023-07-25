@@ -21,10 +21,17 @@
 
     ?>
 
-    <title><?=$tabTitle?> / ikanaide</title>
+<title><?=$tabTitle?> / ikanaide</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
+
+    <meta name="twitter:site" content="@ikanaidecom">
+    <meta property="og:url" content="https://ikanaide.com">
+    <meta property="og:title" content="Ikanaide">
+    <meta property="og:description" content="Create anime and manga lists, interact with the database and post your reactions and opinions">
+
+    <base href="https://ikanaide.com/home">
 
     <link type="image/png" sizes="32x32" rel="icon" href="/storage/sys/favico2.png">
     <link rel="stylesheet" href="/app.css">

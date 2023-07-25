@@ -60,6 +60,7 @@ div.reviews_home-content div.review div.second-row {
     padding: calc(5px + 8px) var(--border-radius) 5px; /* Ese +8px pretende contrarrestar los -8px de margin-top. El padding real son 5px. */
     text-align: center;
     background-color: var(--box-bg);
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
 }
 
 
@@ -137,4 +138,16 @@ div.review_entry-votes span {
 
 div.review_entry-votes span:hover {
     background-color: var(--box-bg-hover);
+}
+
+@media (max-width: 600px) {
+    div.reviews_home-content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    div.reviews_home-header div.box-body {
+        flex-direction: column;
+    }
+    div.reviews_home-header div.box-body span.link {
+        opacity: 1!important;
+    }
 }

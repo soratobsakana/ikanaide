@@ -40,7 +40,7 @@ class Home
      */
     public static function getReviews(): array|null
     {
-        $result = DB::query('SELECT * FROM `review` ORDER BY `date` DESC LIMIT 4');
+        $result = DB::query('SELECT * FROM `review` ORDER BY `date` DESC LIMIT 6');
         if ($result -> num_rows > 0) {
             for ($i = 0; $i < $result -> num_rows; $i++) {
                 $row = $result -> fetch_assoc();

@@ -1,6 +1,25 @@
 <div class="profile-wrapper">
     <div class="profile_left-column">
-        <img src="<?=$userInfo['pfp']?>" alt="<?=$userInfo['username']?>">
+        <div class="cover-header_phone">
+            <?php
+            if ($userInfo['header'] !== null) {
+                ?><div class="header-phone" style="background: url(<?=$userInfo['header']?>)">
+                    <div id="gradient_header-phone"></div>
+                </div><?php
+            } else {
+                ?><div class="header-phone" style="background: grey">
+                    <div id="gradient_header-phone"></div>
+                </div><?php
+            }
+            ?>
+            <div class="cover_info-phone">
+                <img class="cover-phone" src="<?=$userInfo['pfp']?>" alt="<?=$userInfo['username']?>"/>
+                <h2 style="font-family: Inter!important; font-weight: 900!important"><?=$userInfo['username']?></h2>
+            </div>
+
+        </div>
+
+        <img class="cover" src="<?=$userInfo['pfp']?>" alt="<?=$userInfo['username']?>">
 
             <?php
 
@@ -131,7 +150,7 @@
     <div class="profile_right-column">
         <?php
         if (isset($userInfo['header'])) {
-            ?><img src="<?=$userInfo['header']?>" alt="<?=$userInfo['username']?>"><?php
+            ?><img class="header" src="<?=$userInfo['header']?>" alt="<?=$userInfo['username']?>"><?php
         }
 
         ?>

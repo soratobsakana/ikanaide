@@ -65,7 +65,7 @@ span.user-report:hover {
 }
 
 /* Estilos para el menú de navegación de la columna derecha. */
-div.profile_right-column img {
+div.profile_right-column img.header {
     object-fit: cover;
     max-height: 223px;
 }
@@ -435,4 +435,103 @@ section#user-report_modal div.box-wrapper textarea:focus-within {
 section#user-report_modal div.box-wrapper div.box-body div.buttons {
     display: flex;
     justify-content: space-between;
+}
+
+
+/* Media queries */
+@media (max-width: 905px) {
+    div.profile_right-column img.cover {
+        min-height: 0!important;
+    }
+}
+
+@media (max-width: 600px) {
+    .phone-hide {
+        display: none!important;
+    }
+    div.profile-wrapper {
+        width: 100%;
+        flex-direction: column;
+        padding: var(--gap);
+    }
+
+    div.querypage_right-column h1 {
+        display: none;
+    }
+    section.profile_right-column ul.two-column-list {
+        display: block!important;
+    }
+    section.profile_right-column ul.two-column-list li {
+        display: flex!important;
+        flex-direction: row!important;
+    }
+    .profile_left-column .cover, .profile_right-column .header {
+        display: none;
+    }
+    div.profile_right-column, div.profile_left-column {
+        width: 100%;
+    }
+
+    div.cover-header_phone {
+        display: grid!important;
+        grid-gap: var(--gap);
+
+        overflow: hidden;
+    }
+
+    div.cover-header_phone div.header-phone {
+        min-height: 140px;
+        max-height: 140px;
+        background-size: cover!important;
+        background-repeat: no-repeat!important;
+        background-position: center!important;
+        border-radius: var(--border-radius);
+        position: relative;
+        overflow: hidden
+    }
+
+    div.cover-header_phone div.cover_info-phone {
+        margin: 0 15px;
+        display: flex;
+        gap: var(--gap);
+        z-index: 1;
+        min-height: 50px;
+        align-items: center;
+    }
+    div.profile-wrapper div.cover-header_phone div.cover_info-phone img.cover-phone {
+        box-shadow: 0 0 3px rgba(0,0,0,.25);
+        margin-top: -80px!important;
+        width: 100px;
+        height: 100px;
+    }
+    div.cover-header_phone div.cover_info-phone h2 {
+        align-self: start;
+    }
+    div#gradient_header-phone {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(to top, black, transparent);
+        opacity: .4;
+    }
+
+
+    div.profile_right-column nav.profile_user-nav ul {
+        justify-content: start!important;
+        overflow-x: auto;
+    }
+
+    div.profile_right-column nav.profile_user-nav ul.profile_user-nav_ul a {
+        padding: 0 var(--gap);
+    }
+
+    div.profile_right-column nav.profile_user-nav ul.profile_user-nav_ul a li {
+        opacity: var(--font_low-opacity);
+        height: 100%;
+        transition: var(--transition);
+    }
+
+    .list-grid {
+        grid-template-columns: 14% 51% 10% 25%;
+    }
 }

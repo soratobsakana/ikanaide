@@ -22,7 +22,7 @@
                         </div>
                     </a>
                         <div class="second-row">
-                            <p>written by <a class="link" href="/<?=$reviewsHome[$i]['username']?>"><?=$reviewsHome[$i]['username']?></a> on <a class="link" href="/<?=$reviewsHome[$i]['medium']?>/<?=str_replace(' ', '-', $reviewsHome[$i]['entry'])?>"><?=$reviewsHome[$i]['entry']?></a>.</p>
+                            <p><a class="link" href="/<?=$reviewsHome[$i]['username']?>"><?=$reviewsHome[$i]['username']?></a> on <a class="link" href="/<?=$reviewsHome[$i]['medium']?>/<?=str_replace(' ', '-', $reviewsHome[$i]['entry'])?>"><?=$reviewsHome[$i]['entry']?></a>.</p>
                         </div>
                     </div>
 

@@ -7,8 +7,9 @@ if (\App\User::validateSession()) {
 
 // Recogida de valores del formulario resources/views/user/login.view.php.
 if ($_POST) {
+
     foreach ($_POST as $key => $value) {
-        if ($key !== 'register') {
+        if ($key !== 'login') {
             $loginInfo[$key] = $value;
         }
     }

@@ -1,5 +1,10 @@
+Interval
+    [] Fix login and register forms not showing errors up.
+
 230713
-    [] Make the CSS of the whole website responsive.
+    [-] Make the CSS of the whole website responsive.
+        [X] Home, Review, Medium, Search, Rankings, Add Data.
+        [] Profile
 
 230810-12
     [X] Apply `App` namespace to the app/ classes.
@@ -36,6 +41,7 @@ Server stuff
     [X] Allow for review upvotes/likes.
     [X] Make ranking buttons work.
     [X] Allow for user report system. Table columns will be `reporting_user`, `reported_user`, `reason` and `date``.
+    [] Fix CSS around 600px wide broken at home page
 
 230508-14
     [-] Home pages
@@ -50,7 +56,7 @@ Server stuff
 
 230424-230507
     [-] Resume of work left in order to public the first version of the website:
-        [-] List editing
+        [-] List editingf
             [] Add edition form to the lists too.
                 need JS to display it on /user/animelist. I will prob only allow edition on medium and single list entry pages.
             [X] Add posibility of summing one watched episode or read chapter

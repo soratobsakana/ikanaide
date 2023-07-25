@@ -260,7 +260,7 @@ class User
     }
 
     // Añadir o borrar un anime o manga a la base de datos.
-    public static function addToList(string $medium, int|string $medium_id, int $user_id, string $entry)
+    public static function addToList(string $medium, int|string $mediumf_id, int $user_id, string $entry)
     {
         $result = DB::query('SELECT `user_id` FROM `'.$medium.'list` WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $medium_id]) -> num_rows;
         if ($result === 0) {
@@ -385,7 +385,7 @@ class User
         header('Location: /'.$medium.'/' . $entry);
     }
 
-    public static function setListStatus(string $medium, int $medium_id, string $status, int $user_id): bool
+        public static function setListStatus(string $medium, int $medium_id, string $status, int $user_id): bool
     {
         if (DB::query('UPDATE '.$medium.'list SET status = ? WHERE '.$medium.'_id = ? AND user_id = ?', [$status, $medium_id, $user_id])) {
             return true;

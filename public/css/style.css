@@ -4,8 +4,7 @@
     text-decoration: none;
     list-style: none;
     box-sizing: border-box;
-    scrollbar-color: var(--box-bg);
-    scrollbar-width: var(--box-bg) var(--body-bg);
+
 }
 
 a {
@@ -102,17 +101,20 @@ hr {
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
+    min-height: 8px;
+    max-height: 8px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background-color: var(--body-bg);
+    background-color: var(--box-bg);
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background-color: var(--box-bg);
+    background-color: var(--box-bg-light);
+    border-radius: var(--border-radius);
 }
 
 /* Handle on hover */

@@ -11,7 +11,7 @@
                 <li class="center-text">score</li>
                 <li class="center-text">progress</li>
                 <?php $medium === 'anime' ? $type = 'type' : $type = 'format' ?>
-                <li class="center-text"><?=$type?></li>
+                <li class="center-text phone-hide"><?=$type?></li>
             </ul>
         </div>
     </div>
@@ -54,7 +54,7 @@
                                     ?>
 
                                 </div>
-                                <div class="profile_user-list_entry-type center-text">
+                                <div class="profile_user-list_entry-type center-text phone-hide">
                                     <?=$animes[$group][$i]['info']['type']?>
                                 </div>
                             </div>
@@ -84,7 +84,7 @@
                                 <div class="profile_user-list_entry-progress center-text">
                                 <a href="/sum?medium=<?=$medium?>&id=<?=$mangas[$group][$i]['info']['manga_id']?>"><?=$mangas[$group][$i]['progress']?>/<?=$mangas[$group][$i]['info']['chapters']?></a>
                                 </div>
-                                <div class="profile_user-list_entry-type center-text">
+                                <div class="profile_user-list_entry-type center-text phone-hide">
                                     <?=$mangas[$group][$i]['info']['format']?>
                                 </div>
                             </div>

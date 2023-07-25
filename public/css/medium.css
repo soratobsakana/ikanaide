@@ -369,7 +369,7 @@ div.mediumhome_all-medium_content div:hover p {
     div.mediumhome_all-medium_content {
         display: flex!important;
         gap: var(--gap);
-        overflow-x: scroll;
+        overflow-x: auto;
     }
     div.mediumhome_all-medium_content div {
         min-width: 105px!important;
@@ -413,7 +413,6 @@ div.mediumhome_all-medium_content div:hover p {
 
     div.querypage_right-column {
         width: 73%;
-        margin-top: -8px; /* - var(--gap)*/
     }
 }
 
@@ -437,6 +436,7 @@ div.mediumhome_all-medium_content div:hover p {
 
     div.querypage_right-column {
         width: 100%;
+        margin-top: -8px; /* - var(--gap)*/
     }
 
     div.cover-header_phone {
@@ -470,6 +470,9 @@ div.mediumhome_all-medium_content div:hover p {
         margin-top: -110px!important;
         width: 100px;
         height: 150px;
+    }
+    div.cover-header_phone div.cover_info-phone h2 {
+        align-self: start;
     }
     div#gradient_header-phone {
         position: absolute;
