@@ -1,7 +1,7 @@
 <div class="logreg-wrapper">
     <form action="/login" method="POST">
         <h1>Login</h1>
-        <?php if (isset($message)) print '<p class="form-mistake">'.$message.'</p>'; ?>
+        <?php if (isset($error)) print '<p class="form-mistake">'.$error.'</p>'; ?>
         <div class="logreg-input box-wrapper">
             <div class="box-title">
                 <h3><label for="username">Username</label></h3>

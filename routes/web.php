@@ -1,7 +1,5 @@
 <?php
 
-require_once '../resources/functions.php';
-
 // Devuelve la URI y la parsea eliminando una posible query (ej. en /pagina?id=100 devolverá /pagina).
 $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 

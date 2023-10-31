@@ -5,7 +5,7 @@ services: # Palabra clave de Docker Compose.
     image: nginx:alpine # Imagen a extraer desde Docker Hub.
     restart: always
     ports: # Mapeado de puertos entre la máquina real y el contenedor.
-      - "80:80"
+      - "8080:80"
     networks: # Este servicio pertenece a la red: internal
       - internal
     volumes:
@@ -30,7 +30,7 @@ services: # Palabra clave de Docker Compose.
       MYSQL_DATABASE: ikanaide
       MYSQL_ROOT_PASSWORD: 'pw123'
     ports:
-      - '3306:3306'
+      - '33060:3306'
     expose:
       - '3306'
     volumes:

@@ -4,14 +4,6 @@ namespace App;
 
 class User
 {
-
-    private object $listing;
-
-    public function __construct()
-    {
-        $this -> listing = new Listing;
-    }
-
     public static function register(array $registerInfo): string|true
     {
         // Inspección de que los nombres de campo del formulario HTML no han sido modificados en las herramientas de navegador.
@@ -22,7 +14,7 @@ class User
             }
         }
 
-        // Estos nombres de usuario no pueden usarse ya que se solaparian con rutas de la web.
+        // Estos nombres de usuario no pueden usarse, ya que se solaparían con rutas de la web.
         $reservedUsernames = ['home', 'anime', 'manga', 'vn', 'rankings', 'profile', 'reviews', 'forum', 'terms', 'privacy', 'contact', 'support', 'about', 'edit', 'sum', 'post', 'reply', 'like', 'bookmark', 'delete', 'follow', 'timeline', 'submit', 'login', 'register', 'logout', 'home', '404'];
 
         // Inspección de los datos introducidos.
@@ -92,7 +84,7 @@ class User
 
         // Inspección de los datos introducidos.
         if (isset($loginInfo['username'], $loginInfo['password'])) {
-            if (!(empty($loginInfo['username']) || empty($loginInfo['password']))) {
+            if (!empty($loginInfo['username']) && !empty($loginInfo['password'])) {
                 if (preg_match('/^[a-zA-Z0-9]+$/', $loginInfo['username']) === 1) {
                     if (strlen($loginInfo['username']) > 3 && strlen($loginInfo['username']) < 16) {
                         // Comprobación del nombre de usuario. Si coincide se comprobará la contraseña.
@@ -171,7 +163,7 @@ class User
     {
         $result = DB::query('SELECT `user_id` FROM `user` WHERE username = ?', [$username]);
         if ($result -> num_rows === 1) {
-            return $user_id = $result -> fetch_column();
+            return $result -> fetch_column();
         } else {
             return null;
         }
@@ -260,7 +252,7 @@ class User
     }
 
     // Añadir o borrar un anime o manga a la base de datos.
-    public static function addToList(string $medium, int|string $mediumf_id, int $user_id, string $entry)
+    public static function addToList(string $medium, int|string $medium_id, int $user_id, string $entry)
     {
         $result = DB::query('SELECT `user_id` FROM `'.$medium.'list` WHERE `user_id` = ? AND `'.$medium.'_id` = ?', [$user_id, $medium_id]) -> num_rows;
         if ($result === 0) {

@@ -187,3 +187,18 @@ div.container {
     align-items: center;
     justify-content: space-between;
 }
+
+.top-info {
+    max-width: 900px;
+    font-size: var(--box-font-size);
+    margin: var(--gap) auto 0;
+    background: var(--orange);
+    border-radius: var(--border-radius);
+    padding: 5px 10px;
+}
+
+@media (max-width: 905px) {
+    .top-info {
+        width: 100%;
+    }
+}

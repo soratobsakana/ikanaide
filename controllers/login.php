@@ -1,9 +1,6 @@
 <?php
 
-if (\App\User::validateSession()) {
-    header('Location: /home');
-    die();
-}
+
 
 // Recogida de valores del formulario resources/views/user/login.view.php.
 if ($_POST) {
@@ -16,7 +13,7 @@ if ($_POST) {
 
     // Verificación y autenticación de la coincidencia de usuario y contraseña de una entrada de la BBDD con lo introducido por el usuario.
     // Si la información es correcta, se envía un header hacia su perfil.
-    if (\App\User::login($loginInfo)) {
+    if (($error = \App\User::login($loginInfo)) == 1) {
         header('Location: /home');
         die();
     }

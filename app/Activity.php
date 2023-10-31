@@ -4,15 +4,6 @@ namespace App;
 
 class Activity
 {
-    private object $user;
-    private object $listing;
-
-    public function __construct()
-    {
-        $this -> user = new User;
-        $this -> listing = new Listing;
-    }
-
     /**
      * @param array $post
      * @return bool

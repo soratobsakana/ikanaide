@@ -1,6 +1,6 @@
 <?php
 
-include_once ('../resources/functions.php');
+include_once ('../resources/helpers.php');
 require_once ('../database/conn.php');
 
 // Propósito: distinguir el medio mediante la query de la URL (proveniente de los links 'Edit this page' de las views de query) y recoger el ID correspondiente.
